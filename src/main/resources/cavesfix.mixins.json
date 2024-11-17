@@ -1,9 +1,9 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "org.crimsoncrips.alexscavesexemplified.mixins",
+  "package": "org.crimsoncrips.cavesfix.mixins",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "alexscavesexemplified.refmap.json",
+  "refmap": "cavesfix.refmap.json",
   "mixins": [
   ],
   "client": [
