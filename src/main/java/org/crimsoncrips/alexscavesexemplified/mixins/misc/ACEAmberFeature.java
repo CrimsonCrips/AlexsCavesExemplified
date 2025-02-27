@@ -43,7 +43,7 @@ public abstract class ACEAmberFeature extends Feature<NoneFeatureConfiguration> 
                 case 0:
                     if (!ModList.get().isLoaded("alexsmobs"))
                         return;
-                    LivingEntity entity = AMCompat.createAmberAM(servLevel);
+                    LivingEntity entity = AMCompat.createAmberAM(servLevel,random);
                     finalizeAmberSpawn(new Vec3(fill.getCenter().x, fill.getY() + 0.4, fill.getCenter().z),entity,servLevel,random);
 
                     break;

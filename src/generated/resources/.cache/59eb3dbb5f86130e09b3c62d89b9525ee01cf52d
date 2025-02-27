@@ -1,2 +1,5 @@
-// 1.20.1	2025-02-17T09:16:51.4660148	Loot Tables
+// 1.20.1	2025-02-26T21:50:23.6031838	Loot Tables
+498abc4d1794787153d69d032c1a4252bacd182e data/alexscavesexemplified/loot_tables/blocks/acid_cauldron.json
+eb76229329fddd0ebbd287d8ef99f5d5f54e631d data/alexscavesexemplified/loot_tables/blocks/metal_cauldron.json
+25963dcc4adb4cec3532962e1caef0a481a0e6b2 data/alexscavesexemplified/loot_tables/blocks/purple_soda_cauldron.json
 fb4c3e7561a122577ec776e16f3bccd7f1d701fe data/alexscavesexemplified/loot_tables/entities/underzealot_trade.json

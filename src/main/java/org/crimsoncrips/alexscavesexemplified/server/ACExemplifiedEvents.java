@@ -70,7 +70,10 @@ import net.minecraftforge.fml.common.Mod;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
+import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEFeatures;
+import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEBlockTagGenerator;
+import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEEntityTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACEBaseInterface;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
@@ -118,7 +121,7 @@ public class ACExemplifiedEvents {
     public void onLevelJoin(EntityJoinLevelEvent event) {
         final var entity = event.getEntity();
 
-        if (entity.getType().is(ACExexmplifiedTagRegistry.CAN_RABIES) && entity instanceof Mob mob && AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get()){
+        if (entity.getType().is(ACEEntityTagGenerator.CAN_RABIES) && entity instanceof Mob mob && AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get()){
             mob.targetSelector.addGoal(2, new MobTarget3DGoal(mob, LivingEntity.class, false,10, livingEntity -> {
                 return livingEntity.getType() != entity.getType();
             }){
@@ -141,7 +144,7 @@ public class ACExemplifiedEvents {
         Player player = event.getEntity();
 
         if (AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get()) {
-            if (blockState.is(ACExexmplifiedTagRegistry.CONSUMABLE_BLOCKS)) {
+            if (blockState.is(ACEBlockTagGenerator.CONSUMABLE_BLOCKS)) {
                 ParticleOptions particle = new BlockParticleOption(ParticleTypes.BLOCK, blockState);
 
                 if (player.isCrouching()) {
@@ -384,11 +387,11 @@ public class ACExemplifiedEvents {
             }
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.FISH_MUTATION_ENABLED.get() && died.getFeetBlockState().is(ACBlockRegistry.ACID.get()) && died.getType().is(ACExexmplifiedTagRegistry.FISH)  && !died.level().isClientSide() && died.getRandom().nextDouble() < 1){
+        if (AlexsCavesExemplified.COMMON_CONFIG.FISH_MUTATION_ENABLED.get() && died.getFeetBlockState().is(ACBlockRegistry.ACID.get()) && died.getType().is(ACEEntityTagGenerator.ACID_TO_FISH)  && !died.level().isClientSide() && died.getRandom().nextDouble() < 1){
             ACEntityRegistry.RADGILL.get().spawn((ServerLevel) level, BlockPos.containing(died.getX(), died.getY(), died.getZ()), MobSpawnType.MOB_SUMMONED);
             died.discard();
         }
-        if (AlexsCavesExemplified.COMMON_CONFIG.CAT_MUTATION_ENABLED.get() && died.getFeetBlockState().is(ACBlockRegistry.ACID.get()) && died.getType().is(ACExexmplifiedTagRegistry.CAT)  && !died.level().isClientSide() && died.getRandom().nextDouble() < 1){
+        if (AlexsCavesExemplified.COMMON_CONFIG.CAT_MUTATION_ENABLED.get() && died.getFeetBlockState().is(ACBlockRegistry.ACID.get()) && died.getType().is(ACEEntityTagGenerator.ACID_TO_CAT)  && !died.level().isClientSide() && died.getRandom().nextDouble() < 1){
             ACEntityRegistry.RAYCAT.get().spawn((ServerLevel) level, BlockPos.containing(died.getX(), died.getY(), died.getZ()), MobSpawnType.MOB_SUMMONED);
             died.discard();
         }
@@ -403,7 +406,7 @@ public class ACExemplifiedEvents {
         Level level = (Level) breakEvent.getLevel();
         Player player = breakEvent.getPlayer();
         if (AlexsCavesExemplified.COMMON_CONFIG.BURST_OUT_ENABLED.get()) {
-            if (blockState.is(ACExexmplifiedTagRegistry.BURST_BLOCKS) && breakEvent.getLevel().getRandom().nextDouble() < 0.02) {
+            if (blockState.is(ACEBlockTagGenerator.BURST_BLOCKS) && breakEvent.getLevel().getRandom().nextDouble() < 0.02) {
                 if (level.getBiome(breakEvent.getPos()).is(ACBiomeRegistry.FORLORN_HOLLOWS)){
                     if (level.getRandom().nextBoolean()) {
                         ACEntityRegistry.UNDERZEALOT.get().spawn((ServerLevel) level, BlockPos.containing(breakEvent.getPos().getX(), breakEvent.getPos().getY(), breakEvent.getPos().getZ()), MobSpawnType.MOB_SUMMONED);
@@ -421,7 +424,7 @@ public class ACExemplifiedEvents {
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.ECOLOGICAL_REPUTATION_ENABLED.get()) {
-            if (blockState.is(ACExexmplifiedTagRegistry.ABYSSAL_ECOSYSTEM) && level.getBiome(breakEvent.getPos()).is(ACBiomeRegistry.ABYSSAL_CHASM)) {
+            if (blockState.is(ACEBlockTagGenerator.ABYSSAL_ECOSYSTEM) && level.getBiome(breakEvent.getPos()).is(ACBiomeRegistry.ABYSSAL_CHASM)) {
                 for (LivingEntity entity : player.level().getEntitiesOfClass(LivingEntity.class, player.getBoundingBox().inflate(50))) {
                     if (entity instanceof DeepOneBaseEntity deepOneBaseEntity && player.getRandom().nextBoolean()) {
                         deepOneBaseEntity.addReputation(player.getUUID(),-1);
@@ -492,7 +495,8 @@ public class ACExemplifiedEvents {
 
             if (level.random.nextDouble() < (0.1 - (0.020 * diving)) && !(player.getVehicle() instanceof SubmarineEntity)){
                 if (aboveWater > 50 && diving < 10){
-                    player.hurt(ACEDamageTypes.causeDepthDamage(level.registryAccess()), (float) (0.025 * (aboveWater - 40)));
+                    player.hurt(ACEDamageTypes.getDamageSource(player.level(),ACEDamageTypes.DEPTH_CRUSH), (float) (0.025 * (aboveWater - 40)));
+
                 }
             }
         }
@@ -512,7 +516,7 @@ public class ACExemplifiedEvents {
                                 ACEntityRegistry.CORRODENT.get().spawn((ServerLevel) level, pickedBlock, MobSpawnType.MOB_SUMMONED);
                             }
                         }
-                        if (AlexsCavesExemplified.COMMON_CONFIG.RADIOACTIVE_AWARENESS_ENABLED.get() && blockState.is(ACExexmplifiedTagRegistry.RADIOACTIVE) && HazmatArmorItem.getWornAmount(player) < 4 && level.random.nextDouble() < 0.5) {
+                        if (AlexsCavesExemplified.COMMON_CONFIG.RADIOACTIVE_AWARENESS_ENABLED.get() && blockState.is(ACEBlockTagGenerator.RADIOACTIVE) && HazmatArmorItem.getWornAmount(player) < 4 && level.random.nextDouble() < 0.5) {
                             player.addEffect(new MobEffectInstance(ACEffectRegistry.IRRADIATED.get(), 200, 0));
                         }
                         if (blockState.getBlock() instanceof ActivatedByAltar && livingEntity.isHolding(ACItemRegistry.PEARL.get()) && level.random.nextDouble() < 0.5) {
@@ -716,9 +720,7 @@ public class ACExemplifiedEvents {
             }
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get() && !level.isClientSide && livingEntity.isInWaterRainOrBubble() && livingEntity.hasEffect(ACEEffects.RABIAL.get())) {
-            livingEntity.hurt(ACEDamageTypes.causeRabialWaterDamage(level.registryAccess()), 1.0F);
-        }
+
     }
 
     @SubscribeEvent
@@ -789,7 +791,7 @@ public class ACExemplifiedEvents {
         LivingEntity damaged = livingDamageEvent.getEntity();
 
 
-        if(AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get() && damager instanceof LivingEntity living && living.hasEffect(ACEEffects.RABIAL.get()) && damaged.getType().is(ACExexmplifiedTagRegistry.CAN_RABIES) && !damaged.hasEffect(MobEffects.DAMAGE_RESISTANCE)){
+        if(AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get() && damager instanceof LivingEntity living && living.hasEffect(ACEEffects.RABIAL.get()) && damaged.getType().is(ACEEntityTagGenerator.CAN_RABIES) && !damaged.hasEffect(MobEffects.DAMAGE_RESISTANCE)){
             damaged.addEffect(new MobEffectInstance(ACEEffects.RABIAL.get(), 72000, 0));
         }
 
@@ -811,40 +813,6 @@ public class ACExemplifiedEvents {
         Level level = bonemealEvent.getLevel();
         BlockPos blockPos = bonemealEvent.getPos();
         BlockState blockState = level.getBlockState(blockPos);
-        RandomSource random = level.getRandom();
-
-        if (level.getBiome(blockPos).is(ACBiomeRegistry.PRIMORDIAL_CAVES) && AlexsCavesExemplified.COMMON_CONFIG.CAVIAL_BONEMEAL_ENABLED.get() && level.getBlockState(blockPos).is(Blocks.GRASS_BLOCK) && level instanceof ServerLevel serverLevel && entity == null){
-            bonemealEvent.setCanceled(true);
-
-            BlockPos $$4 = blockPos.above();
-            BlockState $$5 = Blocks.GRASS.defaultBlockState();
-            Optional<Holder.Reference<PlacedFeature>> placedFeature = level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(ACEFeatures.PLACED_PRIMORDIAL_BONEMEAL);
-
-            label49:
-            for(int $$7 = 0; $$7 < 128; ++$$7) {
-                BlockPos $$8 = $$4;
-
-                for(int $$9 = 0; $$9 < $$7 / 16; ++$$9) {
-                    $$8 = $$8.offset(random.nextInt(3) - 1, (random.nextInt(3) - 1) * random.nextInt(3) / 2, random.nextInt(3) - 1);
-                    if (!level.getBlockState($$8.below()).is(Blocks.GRASS_BLOCK) || level.getBlockState($$8).isCollisionShapeFullBlock(level, $$8)) {
-                        continue label49;
-                    }
-                }
-
-                BlockState $$10 = level.getBlockState($$8);
-                if ($$10.is($$5.getBlock()) && random.nextInt(10) == 0) {
-                    ((BonemealableBlock)$$5.getBlock()).performBonemeal(serverLevel, random, $$8, $$10);
-                }
-
-                if ($$10.isAir() && placedFeature.isPresent()) {
-                    Holder<PlacedFeature> $$12 = placedFeature.get();
-
-
-                    ($$12.value()).place(serverLevel,serverLevel.getChunkSource().getGenerator(), random, $$8);
-                }
-            }
-        }
-
 
         if (AlexsCavesExemplified.COMMON_CONFIG.ECOLOGICAL_REPUTATION_ENABLED.get()) {
             if (blockState.is(ACBlockRegistry.PING_PONG_SPONGE.get()) && level.getBiome(blockPos).is(ACBiomeRegistry.ABYSSAL_CHASM)) {

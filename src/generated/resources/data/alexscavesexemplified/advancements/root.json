@@ -15,7 +15,7 @@
     "hidden": false,
     "icon": {
       "item": "citadel:icon_item",
-      "nbt": "{IconLocation:\"alexscaves:textures/misc/advancement/icon/ride_gum_worm.png\"}"
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/item/ace_adv_icon.png\"}"
     },
     "show_toast": false,
     "title": {

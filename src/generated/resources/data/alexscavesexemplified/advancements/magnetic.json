@@ -9,7 +9,7 @@
   "display": {
     "announce_to_chat": false,
     "description": {
-      "translate": "advancement.alexscavesexemplified.magnetic.desc"
+      "translate": "advancement.alexscavesexemplified.magnetic_caves.desc"
     },
     "frame": "task",
     "hidden": false,
@@ -19,7 +19,7 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "advancement.alexscavesexemplified.magnetic"
+      "translate": "advancement.alexscavesexemplified.magnetic_caves"
     }
   },
   "requirements": [

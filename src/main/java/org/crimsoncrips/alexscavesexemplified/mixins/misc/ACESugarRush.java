@@ -7,8 +7,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
-import org.crimsoncrips.alexscavesexemplified.server.ACEDamageTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,7 +32,8 @@ public class ACESugarRush extends MobEffect {
         if (lastDuration <= 2 && AlexsCavesExemplified.COMMON_CONFIG.SUGAR_CRASH_ENABLED.get()) {
             int sugarcrashLevel = amplifier + 1;
             entity.addEffect(new MobEffectInstance(ACEEffects.SUGAR_CRASH.get(), 400, amplifier));
-            entity.hurt(ACEDamageTypes.causeSugarCrash(entity.level().registryAccess()), sugarcrashLevel * 2);
+            entity.hurt(ACEDamageTypes.getDamageSource(entity.level(),ACEDamageTypes.SUGAR_CRASH), sugarcrashLevel * 2);
+
             if (sugarcrashLevel > 3){
                 entity.level().explode(entity,entity.getX(),entity.getY(),entity.getZ(),2, Level.ExplosionInteraction.MOB);
             }

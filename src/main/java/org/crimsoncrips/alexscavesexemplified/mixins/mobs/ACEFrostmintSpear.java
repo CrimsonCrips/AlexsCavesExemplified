@@ -82,6 +82,8 @@ public abstract class ACEFrostmintSpear extends AbstractArrow {
             solidifyBlock(Blocks.LAVA,Blocks.BASALT,level,blockPos);
             solidifyBlock(ACBlockRegistry.PURPLE_SODA.get(), ACBlockRegistry.SUGAR_GLASS.get(), level,blockPos);
             solidifyBlock(ACBlockRegistry.ACID.get(), ACBlockRegistry.RADROCK.get(), level,blockPos);
+            solidifyBlock(CreateCompat.createBlockRegistry(1), ACBlockRegistry.BLOCK_OF_CHOCOLATE.get(), level,blockPos);
+            solidifyBlock(CreateCompat.createBlockRegistry(2), Blocks.HONEY_BLOCK, level,blockPos);
 
             if (ModList.get().isLoaded("create")) {
                 CreateCompat.solidifyCreateLiquid(frostmintSpear,level,blockPos);

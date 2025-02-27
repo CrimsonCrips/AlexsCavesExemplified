@@ -19,61 +19,61 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 	@Override
 	public void generate(HolderLookup.Provider registries, Consumer<Advancement> consumer, ExistingFileHelper helper) {
 		Advancement root = Advancement.Builder.advancement().display(
-				createCitadelIcon("alexscaves:textures/misc/advancement/icon/ride_gum_worm.png"),
-				Component.translatable("advancement.alexscavesexemplified.root"),
-				Component.translatable("advancement.alexscavesexemplified.root.desc"),
-				new ResourceLocation(AlexsCavesExemplified.MODID, "textures/entity/nucleeper/nucleeper_rusted_glow.png"),
-				FrameType.TASK,
+						createCitadelIcon("alexscavesexemplified:textures/item/ace_adv_icon.png"),
+						Component.translatable("advancement.alexscavesexemplified.root"),
+						Component.translatable("advancement.alexscavesexemplified.root.desc"),
+						new ResourceLocation(AlexsCavesExemplified.MODID, "textures/entity/nucleeper/nucleeper_rusted_glow.png"),
+						FrameType.TASK,
 						false, false, false)
 				.addCriterion("tick", PlayerTrigger.TriggerInstance.tick())
 				.save(consumer, "alexscavesexemplified:root");
 
 
 		Advancement magnetic = (Advancement.Builder.advancement().parent(root).display(
-				createCitadelIcon("alexscaves:textures/misc/advancement/icon/magnetic_caves.png"),
-						Component.translatable("advancement.alexscavesexemplified.magnetic"),
-						Component.translatable("advancement.alexscavesexemplified.magnetic.desc"),
+						createCitadelIcon("alexscaves:textures/misc/advancement/icon/magnetic_caves.png"),
+						Component.translatable("advancement.alexscavesexemplified.magnetic_caves"),
+						Component.translatable("advancement.alexscavesexemplified.magnetic_caves.desc"),
 						null, FrameType.TASK, false, false, false)
 				.addCriterion("tick", PlayerTrigger.TriggerInstance.tick()))
 				.save(consumer, "alexscavesexemplified:magnetic");
 
 		Advancement forlorn = (Advancement.Builder.advancement().parent(root).display(
-				createCitadelIcon("alexscaves:textures/misc/advancement/icon/forlorn_hollows.png"),
-				Component.translatable("advancement.alexscavesexemplified.forlorn_hollows"),
-				Component.translatable("advancement.alexscavesexemplified.forlorn_hollows.desc"),
-				null, FrameType.TASK, false, false, false)
+						createCitadelIcon("alexscaves:textures/misc/advancement/icon/forlorn_hollows.png"),
+						Component.translatable("advancement.alexscavesexemplified.forlorn_hollows"),
+						Component.translatable("advancement.alexscavesexemplified.forlorn_hollows.desc"),
+						null, FrameType.TASK, false, false, false)
 				.addCriterion("tick", PlayerTrigger.TriggerInstance.tick()))
 				.save(consumer, "alexscavesexemplified:forlorn");
 
-		Advancement abyssal = (Advancement.Builder.advancement().parent(root).display(
-				createCitadelIcon("alexscaves:textures/misc/advancement/icon/abyssal_chasm.png"),
-				Component.translatable("advancement.alexscavesexemplified.abyssal_chasm"),
-				Component.translatable("advancement.alexscavesexemplified.abyssal_chasm.desc"),
-				null, FrameType.TASK, false, false, false)
+		Advancement abysal = (Advancement.Builder.advancement().parent(root).display(
+						createCitadelIcon("alexscaves:textures/misc/advancement/icon/abyssal_chasm.png"),
+						Component.translatable("advancement.alexscavesexemplified.abyssal_chasm"),
+						Component.translatable("advancement.alexscavesexemplified.abyssal_chasm.desc"),
+						null, FrameType.TASK, false, false, false)
 				.addCriterion("tick", PlayerTrigger.TriggerInstance.tick()))
 				.save(consumer, "alexscavesexemplified:abyssal");
 
 		Advancement candy = (Advancement.Builder.advancement().parent(root).display(
-				createCitadelIcon("alexscaves:textures/misc/advancement/icon/candy_cavity.png"),
-				Component.translatable("advancement.alexscavesexemplified.candy_cavity"),
-				Component.translatable("advancement.alexscavesexemplified.candy_cavity.desc"),
+						createCitadelIcon("alexscaves:textures/misc/advancement/icon/candy_cavity.png"),
+						Component.translatable("advancement.alexscavesexemplified.candy_cavity"),
+						Component.translatable("advancement.alexscavesexemplified.candy_cavity.desc"),
 						null, FrameType.TASK, false, false, false)
 				.addCriterion("tick", PlayerTrigger.TriggerInstance.tick()))
 				.save(consumer, "alexscavesexemplified:candy");
 
 		Advancement primordial = (Advancement.Builder.advancement().parent(root).display(
-				createCitadelIcon("alexscaves:textures/misc/advancement/icon/primordial_caves.png"),
-				Component.translatable("advancement.alexscavesexemplified.primordial_caves"),
-				Component.translatable("advancement.alexscavesexemplified.primordial_caves.desc"),
-				null, FrameType.TASK, false, false, false)
+						createCitadelIcon("alexscaves:textures/misc/advancement/icon/primordial_caves.png"),
+						Component.translatable("advancement.alexscavesexemplified.primordial_caves"),
+						Component.translatable("advancement.alexscavesexemplified.primordial_caves.desc"),
+						null, FrameType.TASK, false, false, false)
 				.addCriterion("tick", PlayerTrigger.TriggerInstance.tick()))
 				.save(consumer, "alexscavesexemplified:primordial");
 
 		Advancement toxic = (Advancement.Builder.advancement().parent(root).display(
-				createCitadelIcon("alexscaves:textures/misc/advancement/icon/toxic_caves.png"),
-				Component.translatable("advancement.alexscavesexemplified.toxic_caves"),
-				Component.translatable("advancement.alexscavesexemplified.toxic_caves.desc"),
-				null, FrameType.TASK, false, false, false)
+						createCitadelIcon("alexscaves:textures/misc/advancement/icon/toxic_caves.png"),
+						Component.translatable("advancement.alexscavesexemplified.toxic_caves"),
+						Component.translatable("advancement.alexscavesexemplified.toxic_caves.desc"),
+						null, FrameType.TASK, false, false, false)
 				.addCriterion("tick", PlayerTrigger.TriggerInstance.tick()))
 				.save(consumer, "alexscavesexemplified:toxic");
 

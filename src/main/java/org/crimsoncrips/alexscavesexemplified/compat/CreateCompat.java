@@ -4,6 +4,8 @@ import biomesoplenty.api.block.BOPBlocks;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.FrostmintSpearEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
+import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
 import net.minecraft.core.BlockPos;
@@ -72,6 +74,18 @@ public class CreateCompat {
         }
 
         return i;
+    }
+
+    public static Block createBlockRegistry(int num){
+        return switch (num) {
+            case 1 -> AllFluids.CHOCOLATE.getBlock().get();
+            case 2 -> AllFluids.HONEY.getBlock().get();
+            case 3 -> AllBlocks.FLUID_PIPE.get();
+            case 4 -> AllBlocks.SMART_FLUID_PIPE.get();
+
+
+            default -> throw new IllegalStateException("Unexpected value: " + num);
+        };
     }
 
 }

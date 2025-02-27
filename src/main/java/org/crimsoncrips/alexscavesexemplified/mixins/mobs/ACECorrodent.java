@@ -3,7 +3,6 @@ package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ai.CorrodentAttackGoal;
 import com.github.alexmodguy.alexscaves.server.entity.ai.MobTarget3DGoal;
-import com.github.alexmodguy.alexscaves.server.entity.ai.VesperAttackGoal;
 import com.github.alexmodguy.alexscaves.server.entity.living.CorrodentEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.UnderzealotEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.TargetsDroppedItems;
@@ -24,11 +23,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.server.ACExexmplifiedTagRegistry;
 import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
+import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEItemTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEKnawingGoal;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -55,7 +53,7 @@ public abstract class ACECorrodent extends Monster implements UnderzealotSacrifi
         CorrodentEntity corrodent = (CorrodentEntity)(Object)this;
         if (AlexsCavesExemplified.COMMON_CONFIG.FORLORN_LIGHT_EFFECT_ENABLED.get()){
             corrodent.targetSelector.addGoal(2, new MobTarget3DGoal(corrodent, Player.class, false,10, livingEntity -> {
-                return !livingEntity.isHolding(Ingredient.of(ACExexmplifiedTagRegistry.LIGHT)) && (livingEntity instanceof Player player && !CuriosCompat.hasLight(player));
+                return livingEntity instanceof Player player && !CuriosCompat.hasLight(player);
             }));
         }
 
@@ -140,7 +138,7 @@ public abstract class ACECorrodent extends Monster implements UnderzealotSacrifi
 
     @Override
     public boolean canTargetItem(ItemStack itemStack) {
-        return  (itemStack.isEdible() || itemStack.is(ACExexmplifiedTagRegistry.KNAWING));
+        return  (itemStack.isEdible() || itemStack.is(ACEItemTagGenerator.KNAWING));
     }
 
     public void onGetItem(ItemEntity itemEntity) {

@@ -38,6 +38,11 @@ public abstract class ACELangProvider extends LanguageProvider {
 		this.add("enchantment.alexscavesexemplified." + effectKey + ".desc", description);
 	}
 
+	public void addAdvancementDesc(String advancementKey, String title,String description){
+		this.add("advancement.alexscavesexemplified." + advancementKey, title);
+		this.add("advancement.alexscavesexemplified." + advancementKey + ".desc", description);
+	}
+
 	public void addMisc(String subtitleKey,String name) {
 		this.add("misc.alexscavesexemplified." + subtitleKey,name);
 	}

@@ -25,7 +25,6 @@ public class ACEEnglishGenerator extends ACELangProvider {
 		this.addEffect("rabial","Rabial Infection","Deathly Nervous Disease");
 		this.addEffect("sugar_crash","Sugar Crash","Sugar Crashed");
 
-		this.addDeathMessage("rabial_water",0,"%s suffered from water with Rabies");
 		this.addDeathMessage("rabial_end",0,"%s died to Rabies");
 		this.addDeathMessage("sugar_crash",0,"%s died from a sugar overdose");
 		this.addDeathMessage("sugar_crash",1,"%s died from a chocoverdose");
@@ -54,6 +53,14 @@ public class ACEEnglishGenerator extends ACELangProvider {
 		this.addItem(ACEItemRegistry.ICE_CREAM_CONE, "Ice Cream Cone");
 
 		this.addEnchantmentDesc("magneticism","Magneticism", "Boosts Magnetic Caves related tools");
+
+		this.addAdvancementDesc("root","Alexs Caves Exemplified", "An Exemplified Universe.");
+		this.addAdvancementDesc("magnetic_caves","Magnefied Reality", "Magnetic Caves Additions");
+		this.addAdvancementDesc("forlorn_hollows","Forlornliness Syndrome", "Forlorn Hollows Additions");
+		this.addAdvancementDesc("primordial_caves","Primoredial Features", "Primordial Caves Additions");
+		this.addAdvancementDesc("abyssal_chasm","Abyssmal Pressure", "Abysmal Chasm Additions");
+		this.addAdvancementDesc("candy_cavity","Candiesz Nuts", "Candy Cavity Additions");
+		this.addAdvancementDesc("toxic_caves","Talkicity Chat", "Toxic Caves Additions");
 
 
 	}

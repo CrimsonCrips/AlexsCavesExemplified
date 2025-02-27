@@ -14,6 +14,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.random.SimpleWeightedRandomList;
 import net.minecraft.util.valueproviders.BiasedToBottomInt;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.GrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -30,18 +31,21 @@ import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import java.util.List;
 
 public class ACEFeatures {
-    //Props to Drull and TF for assistance//
-    static final RegistrySetBuilder DATA_BUILDER = new RegistrySetBuilder()
-            .add(Registries.CONFIGURED_FEATURE, ACEFeatures::generateFeatureConfigurations)
-            .add(Registries.PLACED_FEATURE, ACEFeatures::generateFeaturePlacements);
-
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> PRIMORDIAL_BONEMEAL = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(AlexsCavesExemplified.MODID, "primordial_bonemeal"));
     public static final ResourceKey<PlacedFeature> PLACED_PRIMORDIAL_BONEMEAL = ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(AlexsCavesExemplified.MODID, "placed_primordial_bonemeal"));
 
 
     static void generateFeatureConfigurations(BootstapContext<ConfiguredFeature<?, ?>> context) {
-        context.register(PRIMORDIAL_BONEMEAL, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(16, 7, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder().add(Blocks.GRASS.defaultBlockState(), 5).add(ACBlockRegistry.FLYTRAP.get().defaultBlockState(), 1))), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE)))));
+        context.register(PRIMORDIAL_BONEMEAL, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(1, 3, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
+                .add(Blocks.GRASS.defaultBlockState(), 10)
+                .add(Blocks.FERN.defaultBlockState(), 5)
+                .add(Blocks.LARGE_FERN.defaultBlockState(), 3)
+                .add(ACBlockRegistry.FLYTRAP.get().defaultBlockState(), 4)
+                .add(ACBlockRegistry.CURLY_FERN.get().defaultBlockState(), 8)
+                .add(ACBlockRegistry.FIDDLEHEAD.get().defaultBlockState(), 4)
+                .add(ACBlockRegistry.CYCAD.get().defaultBlockState(), 1)
+        )), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE)))));
     }
 
     static void generateFeaturePlacements(BootstapContext<PlacedFeature> context) {

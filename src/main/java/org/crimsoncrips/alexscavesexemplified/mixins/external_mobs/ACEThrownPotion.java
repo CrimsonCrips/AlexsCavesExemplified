@@ -9,8 +9,8 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
-import org.crimsoncrips.alexscavesexemplified.server.ACEDamageTypes;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -31,9 +31,6 @@ public abstract class ACEThrownPotion extends ThrowableItemProjectile {
         for (LivingEntity livingentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(4.0D, 2.0D, 4.0D))) {
             double d0 = this.distanceToSqr(livingentity);
             if (d0 < 16.0D) {
-                if (livingentity.hasEffect(ACEEffects.RABIAL.get()) && AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get() && !(livingentity instanceof WaterAnimal)) {
-                    livingentity.hurt(ACEDamageTypes.causeRabialWaterDamage(livingentity.level().registryAccess()), 1.0F);
-                }
 
                 if (AlexsCavesExemplified.COMMON_CONFIG.IRRADIATION_WASHOFF_ENABLED.get()){
                     MobEffectInstance irradiated = livingentity.getEffect(ACEffectRegistry.IRRADIATED.get());

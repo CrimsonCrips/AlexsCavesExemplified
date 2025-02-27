@@ -7,7 +7,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.server.ACEDamageTypes;
+import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
 
 public class ACERabial extends MobEffect {
 
@@ -32,11 +32,7 @@ public class ACERabial extends MobEffect {
     public void applyEffectTick(LivingEntity entity, int amplifier) {
         if (lastDuration <= 1) {
             int rabialLevel = amplifier + 1;
-            entity.hurt(ACEDamageTypes.causeEndRabialDamage(entity.level().registryAccess()), rabialLevel * 10);
-        }
-
-        if (AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get() && entity.isInWaterRainOrBubble() && !(entity instanceof WaterAnimal)) {
-            entity.hurt(ACEDamageTypes.causeRabialWaterDamage(entity.level().registryAccess()), 1.2F);
+            entity.hurt(ACEDamageTypes.getDamageSource(entity.level(),ACEDamageTypes.RABIAL_END), rabialLevel * 10);
         }
     }
 

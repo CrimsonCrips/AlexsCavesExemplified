@@ -20,7 +20,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.server.ACExexmplifiedTagRegistry;
+import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEBlockTagGenerator;
+import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEItemTagGenerator;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -59,7 +60,7 @@ public abstract class ACEItemEntity extends Entity {
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.BREAKING_CANDY_ENABLED.get()) {
-            if (level.getBlockState(this.blockPosition()).is(Blocks.WATER_CAULDRON) && item.is(ACExexmplifiedTagRegistry.GELATINABLE) && level.getBlockState(this.blockPosition().below()).is(ACExexmplifiedTagRegistry.GELATIN_FIRE)) {
+            if (level.getBlockState(this.blockPosition()).is(Blocks.WATER_CAULDRON) && item.is(ACEItemTagGenerator.GELATINABLE) && level.getBlockState(this.blockPosition().below()).is(ACEBlockTagGenerator.GELATIN_FIRE)) {
                 for (ItemEntity itemEntity : this.level().getEntitiesOfClass(ItemEntity.class, this.getBoundingBox().inflate(0.1))) {
                     ItemStack nearBone = itemEntity.getItem();
                     if (!nearBone.isEmpty() && timeToCook >= 200) {

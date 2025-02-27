@@ -12,13 +12,53 @@
                 "data": {
                   "Name": "minecraft:grass"
                 },
+                "weight": 10
+              },
+              {
+                "data": {
+                  "Name": "minecraft:fern"
+                },
                 "weight": 5
+              },
+              {
+                "data": {
+                  "Name": "minecraft:large_fern",
+                  "Properties": {
+                    "half": "lower"
+                  }
+                },
+                "weight": 3
               },
               {
                 "data": {
                   "Name": "alexscaves:flytrap",
                   "Properties": {
                     "open": "true"
+                  }
+                },
+                "weight": 4
+              },
+              {
+                "data": {
+                  "Name": "alexscaves:curly_fern",
+                  "Properties": {
+                    "facing": "north",
+                    "half": "lower"
+                  }
+                },
+                "weight": 8
+              },
+              {
+                "data": {
+                  "Name": "alexscaves:fiddlehead"
+                },
+                "weight": 4
+              },
+              {
+                "data": {
+                  "Name": "alexscaves:cycad",
+                  "Properties": {
+                    "top": "true"
                   }
                 },
                 "weight": 1
@@ -42,8 +82,8 @@
         }
       ]
     },
-    "tries": 16,
-    "xz_spread": 7,
+    "tries": 1,
+    "xz_spread": 3,
     "y_spread": 3
   }
 }

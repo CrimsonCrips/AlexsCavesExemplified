@@ -18,8 +18,8 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.server.ACExexmplifiedTagRegistry;
 import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
+import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEEntityTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEVesperTarget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -65,7 +65,7 @@ public abstract class ACEVesper extends Monster {
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.VESPER_HUNT_ENABLED.get()){
-            this.targetSelector.addGoal(3, new ACEVesperTarget<>(vesper, 32.0F, LivingEntity.class, buildPredicateFromTag(ACExexmplifiedTagRegistry.VESPER_HUNT)));
+            this.targetSelector.addGoal(3, new ACEVesperTarget<>(vesper, 32.0F, LivingEntity.class, buildPredicateFromTag(ACEEntityTagGenerator.VESPER_HUNT)));
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get()){

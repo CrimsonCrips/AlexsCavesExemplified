@@ -38,6 +38,7 @@
     "misc.ACESugarStaff",
     "misc.ACESugarStaffHex",
     "misc.ACEVanillaFluidTargetsMixin",
+    "misc.ACEGrassBlock",
     "misc.projector.ACEHologramProjectorEntityMixin",
     "misc.projector.ACEHologramProjectorMixin",
     "misc.projector.ACEHologramProjectorRenderMixin",
