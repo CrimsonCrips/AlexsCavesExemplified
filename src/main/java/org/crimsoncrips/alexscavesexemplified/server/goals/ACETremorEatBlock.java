@@ -38,17 +38,17 @@ public class ACETremorEatBlock extends MoveToBlockGoal {
         if (this.isReachedTarget()) {
             tremorsaurus.getNavigation().stop();
             tremorsaurus.setInSittingPose(true);
-            if (tremorsaurus.getAnimation() == TremorsaurusEntity.NO_ANIMATION && tremorsaurus.isInSittingPose() && !tickAccesor.alexsCavesExemplified$isSniffed()) {
+            if (tremorsaurus.getAnimation() == TremorsaurusEntity.NO_ANIMATION && tremorsaurus.isInSittingPose() && !tickAccesor.isSniffed()) {
                 tremorsaurus.setAnimation(TremorsaurusEntity.ANIMATION_SNIFF);
             }
 
             if (tremorsaurus.getAnimation() == TremorsaurusEntity.ANIMATION_SNIFF && tremorsaurus.getAnimationTick() >= 10 && tremorsaurus.getAnimationTick() <= 15) {
                 if (isValidTarget(tremorsaurus.level(), blockPos)){
-                    tickAccesor.alexsCavesExemplified$setSniffed(true);
+                    tickAccesor.setSniffed(true);
                 } else this.stop();
             }
 
-            if (tickAccesor.alexsCavesExemplified$isSniffed() && tremorsaurus.getAnimation() == TremorsaurusEntity.NO_ANIMATION && tremorsaurus.isInSittingPose()){
+            if (tickAccesor.isSniffed() && tremorsaurus.getAnimation() == TremorsaurusEntity.NO_ANIMATION && tremorsaurus.isInSittingPose()){
                 tremorsaurus.setAnimation(TremorsaurusEntity.ANIMATION_BITE);
             }
 
@@ -58,7 +58,7 @@ public class ACETremorEatBlock extends MoveToBlockGoal {
                     tremorsaurus.level().destroyBlock(blockPos, false);
                     tremorsaurus.playSound(ACSoundRegistry.TREMORSAURUS_BITE.get(), 1F, 1F);
                     if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && tremorsaurus.level().getRandom().nextDouble() < 0.09) {
-                        tickAccesor.alexsCavesExemplified$setSeethed(true);
+                        tickAccesor.setSeethed(true);
                     }
                 }
                 this.stop();
@@ -75,7 +75,7 @@ public class ACETremorEatBlock extends MoveToBlockGoal {
 
     public void stop() {
         super.stop();
-        ((TremorConsumption)tremorsaurus).alexsCavesExemplified$setSniffed(false);
+        ((TremorConsumption)tremorsaurus).setSniffed(false);
         tremorsaurus.setInSittingPose(false);
         this.blockPos = BlockPos.ZERO;
     }
@@ -85,6 +85,6 @@ public class ACETremorEatBlock extends MoveToBlockGoal {
     }
 
     protected int nextStartTick(PathfinderMob mob) {
-        return reducedTickDelay(200 + tremorsaurus.getRandom().nextInt(150));
+        return reducedTickDelay(100 + tremorsaurus.getRandom().nextInt(100));
     }
 }

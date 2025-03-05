@@ -27,7 +27,7 @@ public class ACEClientEvents {
                 preEvent.getPoseStack().translate(vibrate,  vibrate, vibrate);
             }
         }
-        if (preEvent.getEntity() instanceof WatcherEntity watcherEntity && watcherEntity.tickCount > 10000) {
+        if (preEvent.getEntity() instanceof WatcherEntity watcherEntity && watcherEntity.tickCount > 2000) {
             preEvent.getPoseStack().pushPose();
             vibrate = (preEvent.getEntity().getRandom().nextFloat() - 0.5F) * (Math.sin((double) preEvent.getEntity().tickCount / 50) * 0.5 + 0.5) * 0.1;
         }
@@ -60,13 +60,5 @@ public class ACEClientEvents {
 
     }
 
-    @SubscribeEvent
-    @OnlyIn(Dist.CLIENT)
-    public void layerAdd(EntityRenderersEvent.AddLayers addLayers) {
-//        LivingEntityRenderer renderer = addLayers.getRenderer(EntityType.ALLAY);
-//        if (renderer != null){
-//            renderer.addLayer()
-//        }
-    }
 
 }

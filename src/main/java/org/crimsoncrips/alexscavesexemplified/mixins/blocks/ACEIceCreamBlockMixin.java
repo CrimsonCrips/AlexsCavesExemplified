@@ -6,11 +6,14 @@ import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 
@@ -50,6 +53,9 @@ public class ACEIceCreamBlockMixin extends Block {
                 itementity.setDefaultPickUpDelay();
 
                 level.addFreshEntity(itementity);
+                for (Player player : level.getEntitiesOfClass(Player.class, new AABB(blockPos.offset(-12, -12, -12), blockPos.offset(12, 12, 12)))) {
+                    ACEUtils.awardAdvancement(player,"ice_cream","made");
+                }
                 level.playLocalSound(blockPos, ACSoundRegistry.FROSTMINT_SPEAR_HIT.get(), SoundSource.AMBIENT, 2, 1, false);
 
             }

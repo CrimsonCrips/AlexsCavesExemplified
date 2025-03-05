@@ -1,5 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.nucleeper;
 
+import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
+import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.nbt.CompoundTag;
@@ -15,8 +17,10 @@ import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACENucleeperMelee;
 import org.spongepowered.asm.mixin.Mixin;
@@ -66,9 +70,37 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
     @Inject(method = "mobInteract", at = @At("HEAD"))
     private void alexsCavesExemplified$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (player.getItemInHand(hand).is(Items.SHEARS) && !alexsCavesExemplified$isDefused() && AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get()){
+            ACEUtils.awardAdvancement(player,"defusing","defuse");
             this.setTriggered(false);
             this.playSound(SoundEvents.SHEEP_SHEAR);
             alexsCavesExemplified$setDefused(true);
+        }
+    }
+
+    @Inject(method = "explode", at = @At("HEAD"),remap = false)
+    private void alexsCavesExemplified$explode(CallbackInfo ci) {
+        Level level = this.level();
+        int amount = 0;
+        for (NucleeperEntity nucleepers : level.getEntitiesOfClass(NucleeperEntity.class, this.getBoundingBox().inflate(13))) {
+            if (AlexsCavesExemplified.COMMON_CONFIG.NUCLEAR_CHAIN_ENABLED.get() && !((NucleeperXtra)nucleepers).alexsCavesExemplified$isDefused()){
+                amount++;
+                NuclearExplosionEntity explosion = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(level);
+                explosion.copyPosition(nucleepers);
+                explosion.setSize(nucleepers.isCharged() ? 1.75F : 1F);
+                if(!level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)){
+                    explosion.setNoGriefing(true);
+                }
+                level.addFreshEntity(explosion);
+
+            }
+        }
+        for (Player players : level.getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(50))) {
+            if (amount >= 10){
+                ACEUtils.awardAdvancement(players,"nucleeper_annhilation","nuke_chained");
+            }
+            if (amount != 0){
+                ACEUtils.awardAdvancement(players,"chain_reaction","chain");
+            }
         }
     }
 

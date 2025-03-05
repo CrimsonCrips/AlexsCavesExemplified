@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -38,7 +39,11 @@ public class ACEAcidMixin extends LiquidBlock {
         if (AlexsCavesExemplified.COMMON_CONFIG.RUSTED_NUCLEEPER_ENABLED.get() && entity instanceof NucleeperEntity nucleeper && !((NucleeperXtra)nucleeper).alexsCavesExemplified$isRusted()) {
             ((NucleeperXtra)nucleeper).alexsCavesExemplified$setRusted(true);
             entity.playSound( ACSoundRegistry.ACID_BURN.get());
-
+            nucleeper.getAttribute(Attributes.ARMOR).setBaseValue(2F);
+            nucleeper.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20F);
+            nucleeper.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.05F);
+            nucleeper.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(2F);
+            nucleeper.setHealth(20F);
         }
     }
 

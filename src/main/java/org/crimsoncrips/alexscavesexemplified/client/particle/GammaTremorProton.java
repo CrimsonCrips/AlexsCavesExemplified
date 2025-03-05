@@ -15,17 +15,12 @@ import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 
 public class GammaTremorProton extends TremorzillaProtonParticle {
 
-    private static final ResourceLocation CENTER_TEXTURE = new ResourceLocation(AlexsCavesExemplified.MODID, "textures/particle/tremorzilla_gamma_proton.png");
 
     protected GammaTremorProton(ClientLevel world, double x, double y, double z, int entityId) {
         super(world, x, y, z, entityId);
         this.lifetime = 40;
         this.orbitSpeed = 20;
 
-    }
-
-    public ResourceLocation getTexture() {
-        return CENTER_TEXTURE;
     }
 
     @Override

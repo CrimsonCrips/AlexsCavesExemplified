@@ -5,6 +5,7 @@ import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.FrostmintSpearEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
 import com.github.alexmodguy.alexscaves.server.misc.ACAdvancementTriggerRegistry;
+import com.simibubi.create.AllFluids;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -19,6 +20,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.CreateCompat;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -82,8 +84,12 @@ public abstract class ACEFrostmintSpear extends AbstractArrow {
             solidifyBlock(Blocks.LAVA,Blocks.BASALT,level,blockPos);
             solidifyBlock(ACBlockRegistry.PURPLE_SODA.get(), ACBlockRegistry.SUGAR_GLASS.get(), level,blockPos);
             solidifyBlock(ACBlockRegistry.ACID.get(), ACBlockRegistry.RADROCK.get(), level,blockPos);
-            solidifyBlock(CreateCompat.createBlockRegistry(1), ACBlockRegistry.BLOCK_OF_CHOCOLATE.get(), level,blockPos);
-            solidifyBlock(CreateCompat.createBlockRegistry(2), Blocks.HONEY_BLOCK, level,blockPos);
+            if (CreateCompat.presenceCheck(true)) {
+                solidifyBlock(CreateCompat.createBlockRegistry(1), ACBlockRegistry.BLOCK_OF_CHOCOLATE.get(), level, blockPos);
+            }
+            if (CreateCompat.presenceCheck(false)) {
+                solidifyBlock(CreateCompat.createBlockRegistry(2), Blocks.HONEY_BLOCK, level,blockPos);
+            }
 
             if (ModList.get().isLoaded("create")) {
                 CreateCompat.solidifyCreateLiquid(frostmintSpear,level,blockPos);
@@ -105,10 +111,10 @@ public abstract class ACEFrostmintSpear extends AbstractArrow {
                 for (int z = -1; z < 2; z++) {
                     BlockPos icePos = new BlockPos(blockPos.getX() + x, blockPos.getY() + y , blockPos.getZ() + z);
                     BlockState blockState = level.getBlockState(icePos);
-                    if (blockState.is(block)) {
-                        level.setBlock(icePos, output.defaultBlockState(), 3);
+                    if (blockState.is(block) && level.setBlock(icePos, output.defaultBlockState(), 3)) {
                         level.scheduleTick(icePos, blockState.getBlock(), 2);
                         this.discard();
+                        ACEUtils.awardAdvancement(this.getOwner(),"frostmint_freeze","freeze");
                         explode();
                     }
 

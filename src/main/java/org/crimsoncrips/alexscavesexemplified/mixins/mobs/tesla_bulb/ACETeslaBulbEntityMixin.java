@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -25,6 +26,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.client.ACESoundRegistry;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACEBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -87,15 +89,11 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                 target = livingEntity;
             }
 
-            if (target != null && !target.getType().is(ACTagRegistry.MAGNETIC_ENTITIES)) {
+            if (target instanceof Player player && !player.isCreative()) {
 
-                if (target instanceof Player player && player.isCreative())
-                    return;
                 if (tickAccesor.getCharge() > 0) {
                     ParticleUtils.spawnParticlesAlongAxis(Direction.UP.getAxis(), level, blockPos, 0.125D, ParticleTypes.ELECTRIC_SPARK, UniformInt.of(1, 2));
                 }
-
-
                 tickAccesor.setCharge(tickAccesor.getCharge() + 1);
                 if (tickAccesor.getCharge() == 5 && AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()){
                     level.playLocalSound(blockPos, ACESoundRegistry.TESLA_POWERUP.get(), SoundSource.AMBIENT, 2, 1, false);
@@ -111,15 +109,16 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                         lightningBolt.setDamage(7);
                         target.thunderHit((ServerLevel) level, lightningBolt);
                         target.setRemainingFireTicks(30);
+                        ACEUtils.awardAdvancement(player,"tesla_shock","shock");
                     }
                 }
                 if (tickAccesor.getCharge() == 33 && AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()){
                     target.playSound( ACESoundRegistry.TESLA_FIRE.get());
                 }
                 if (tickAccesor.getCharge() > 45) {
-                    tickAccesor.setCharge(-200 + entity.getLevel().getRandom().nextInt(0,300));
+                    tickAccesor.setCharge(-30);
                 }
-            } else tickAccesor.setCharge(-20 + entity.getLevel().getRandom().nextInt(0,100));
+            } else tickAccesor.setCharge(-30);
 
 
 

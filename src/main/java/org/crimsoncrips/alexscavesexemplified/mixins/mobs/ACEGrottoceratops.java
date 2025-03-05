@@ -11,6 +11,7 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.server.goals.ACEDinosaurEggAttack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -28,14 +29,7 @@ public abstract class ACEGrottoceratops extends DinosaurEntity {
     private void registerGoals(CallbackInfo ci) {
         GrottoceratopsEntity grottoceratops = (GrottoceratopsEntity)(Object)this;
         if (AlexsCavesExemplified.COMMON_CONFIG.DINOSAUR_EGG_ANGER_ENABLED.get()){
-            grottoceratops.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(grottoceratops, LivingEntity.class, 100, true, false,livingEntity -> {
-                return livingEntity.isHolding(Ingredient.of(ACBlockRegistry.GROTTOCERATOPS_EGG.get()));
-            }){
-                @Override
-                public boolean canContinueToUse() {
-                    return super.canContinueToUse() && !grottoceratops.isTame();
-                }
-            });
+            grottoceratops.targetSelector.addGoal(4, new ACEDinosaurEggAttack<>(grottoceratops, LivingEntity.class, true));
         }
         if (AlexsCavesExemplified.COMMON_CONFIG.FEARED_ANCESTORS_ENABLED.get()){
             grottoceratops.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(grottoceratops, LivingEntity.class, 150, true, false, livingEntity -> {

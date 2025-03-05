@@ -11,6 +11,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,6 +46,7 @@ public abstract class ACEGammaroach extends PathfinderMob implements TargetsDrop
     }
 
     public void onGetItem(ItemEntity itemEntity) {
+        ACEUtils.awardAdvancement(itemEntity.getOwner(),"feed_roach","feedroach");
         if (itemEntity.getItem().isEdible()) {
             this.heal(5);
             List<Pair<MobEffectInstance, Float>> test = Objects.requireNonNull(itemEntity.getItem().getFoodProperties(this)).getEffects();
@@ -54,6 +56,7 @@ public abstract class ACEGammaroach extends PathfinderMob implements TargetsDrop
                 }
             }
         }
+        itemEntity.getItem().shrink(1);
     }
 
 

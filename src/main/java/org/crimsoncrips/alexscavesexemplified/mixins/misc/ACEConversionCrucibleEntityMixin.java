@@ -17,6 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ConversionAmplified;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -71,6 +72,7 @@ public abstract class ACEConversionCrucibleEntityMixin extends BlockEntity imple
             for(ItemEntity item : ((ConversionAmplified) entity).alexsCavesExemplified$getItemsAtAndAbove(level, pos)) {
                 if (entity.getConvertingToBiome() == null && item.getItem().is(ACItemRegistry.RADIANT_ESSENCE.get()) && !level.isClientSide && entity.getFilledLevel() <= 0){
                     entity.setFilledLevel(1);
+                    ACEUtils.awardAdvancement(item.getOwner(),"overdrived_conversion","overdrived");
                     ((ConversionAmplified) entity).alexsCavesExemplified$setStack(ACItemRegistry.BIOME_TREAT.get().getDefaultInstance());
                     item.getItem().shrink(1);
                     level.playSound(null, pos, ACSoundRegistry.CONVERSION_CRUCIBLE_ACTIVATE.get(), SoundSource.BLOCKS);

@@ -20,6 +20,7 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
@@ -95,31 +96,31 @@ public abstract class ACEGummybear extends Animal {
             return switch (this.getGummyColor().toString()) {
                 case "GREEN" -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_GREEN.get())) {
-                        boost();
+                        boost(player);
                     }
                     yield InteractionResult.SUCCESS;
                 }
                 case "BLUE" -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_BLUE.get())) {
-                        boost();
+                        boost(player);
                     }
                     yield InteractionResult.SUCCESS;
                 }
                 case "YELLOW" -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_YELLOW.get())) {
-                        boost();
+                        boost(player);
                     }
                     yield InteractionResult.SUCCESS;
                 }
                 case "PINK" -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_PINK.get())) {
-                        boost();
+                        boost(player);
                     }
                     yield InteractionResult.SUCCESS;
                 }
                 default -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_RED.get())) {
-                        boost();
+                        boost(player);
                     }
                     yield InteractionResult.SUCCESS;
                 }
@@ -138,8 +139,13 @@ public abstract class ACEGummybear extends Animal {
         }
     }
 
-    public void boost(){
-        this.sleepFor = sleepFor - 1000;
+    public void boost(Entity entity){
+        ACEUtils.awardAdvancement(entity,"feed_speedup","feed");
+        if (sleepFor >= 1000) {
+            this.sleepFor = sleepFor - 1000;
+        } else {
+            this.sleepFor = 0;
+        }
         this.playSound(SoundEvents.GENERIC_EAT, 1F, 1F);
         for(int i = 0; i < 5; ++i) {
             double d0 = this.random.nextGaussian() * 0.02D;

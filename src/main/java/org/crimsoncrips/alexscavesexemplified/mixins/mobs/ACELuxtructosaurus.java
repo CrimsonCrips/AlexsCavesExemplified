@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -27,8 +28,9 @@ public abstract class ACELuxtructosaurus extends SauropodBaseEntity {
         LuxtructosaurusEntity lux = (LuxtructosaurusEntity)(Object)this;
 
         for (LivingEntity entity : lux.level().getEntitiesOfClass(LivingEntity.class, lux.getBoundingBox().expandTowards(1, -2, 1))) {
-            if (entity != lux && entity.getBbHeight() <= 2.0F && AlexsCavesExemplified.COMMON_CONFIG.STOMP_DAMAGE_ENABLED.get()) {
+            if (entity != lux && entity.getBbHeight() <= 2.2F && AlexsCavesExemplified.COMMON_CONFIG.STOMP_DAMAGE_ENABLED.get()) {
                 entity.hurt(lux.damageSources().mobAttack(lux), 6.0F);
+                ACEUtils.awardAdvancement(entity,"splat","stepped");
             }
         }
     }

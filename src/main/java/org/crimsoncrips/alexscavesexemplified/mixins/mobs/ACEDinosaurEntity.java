@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -38,7 +39,8 @@ public abstract class ACEDinosaurEntity extends TamableAnimal {
         InteractionResult type = super.mobInteract(player, hand);
         if (!interactionresult.consumesAction() && !type.consumesAction()){
             if (this.getAltSkinForItem(itemstack) > 0) {
-                this.addEffect(new MobEffectInstance(getAltSkinForItem(itemstack) == 2 ? MobEffects.FIRE_RESISTANCE : MobEffects.DAMAGE_RESISTANCE, 300, 0));
+                ACEUtils.awardAdvancement(player,"paint_effects","paint");
+                this.addEffect(new MobEffectInstance(getAltSkinForItem(itemstack) == 2 ? MobEffects.FIRE_RESISTANCE : MobEffects.HEAL, 5000, 0));
             }
         }
     }

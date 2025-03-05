@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACEBaseInterface;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACESelfDestruct;
 import org.spongepowered.asm.mixin.Mixin;
@@ -112,6 +114,7 @@ public abstract class ACENotorMixin extends PathfinderMob implements ACEBaseInte
             setSelfDestructTime(destructTime - Math.min((destructTime / 5) + 1, Math.max(1, (int) Math.pow(2, Math.log(200 / destructTime) / Math.log(2)))));
         }
         if (destructTime == 1){
+            ACEUtils.awardAdvancement(getLastHurtByMob(),"self_destruct","explode");
             this.level().explode(this,this.getX(),this.getY(),this.getZ(),2, Level.ExplosionInteraction.NONE);
             this.discard();
         }

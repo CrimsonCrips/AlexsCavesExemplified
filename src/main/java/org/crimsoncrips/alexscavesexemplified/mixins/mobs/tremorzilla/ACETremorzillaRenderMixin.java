@@ -71,6 +71,7 @@ public abstract class ACETremorzillaRenderMixin extends MobRenderer<TremorzillaE
         return AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_BEAM_INNER : tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_BEAM_INNER : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_BEAM_INNER : TEXTURE_BEAM_INNER);
     }
 
+
     @ModifyVariable(method = "renderBeam", at = @At(value = "STORE",ordinal = 1),remap = false)
     private ResourceLocation beam2(ResourceLocation original) {
         Gammafied myAccessor = (Gammafied) tremorzilla;

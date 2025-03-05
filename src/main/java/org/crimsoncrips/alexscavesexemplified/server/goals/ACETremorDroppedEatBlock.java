@@ -5,9 +5,11 @@ import com.github.alexmodguy.alexscaves.server.entity.living.TremorsaurusEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.item.ItemEntity;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.TremorConsumption;
 
 import java.util.Collections;
@@ -41,24 +43,25 @@ public class ACETremorDroppedEatBlock extends MobTargetItemGoal {
         if (this.targetEntity != null && this.targetEntity.isAlive() && this.mob.distanceToSqr(this.targetEntity) < 4) {
             tremorsaurus.getNavigation().stop();
             tremorsaurus.setInSittingPose(true);
-            if (tremorsaurus.getAnimation() == TremorsaurusEntity.NO_ANIMATION && tremorsaurus.isInSittingPose() && !tickAccesor.alexsCavesExemplified$isSniffed()) {
+            if (tremorsaurus.getAnimation() == TremorsaurusEntity.NO_ANIMATION && tremorsaurus.isInSittingPose() && !tickAccesor.isSniffed()) {
                 tremorsaurus.setAnimation(TremorsaurusEntity.ANIMATION_SNIFF);
             }
             if (tremorsaurus.getAnimation() == TremorsaurusEntity.ANIMATION_SNIFF && tremorsaurus.getAnimationTick() >= 10 && tremorsaurus.getAnimationTick() <= 15) {
                 if (this.hunter.canTargetItem(targetEntity.getItem())){
-                    tickAccesor.alexsCavesExemplified$setSniffed(true);
+                    tickAccesor.setSniffed(true);
                 } else this.stop();
             }
-            if (tickAccesor.alexsCavesExemplified$isSniffed() && tremorsaurus.getAnimation() == TremorsaurusEntity.NO_ANIMATION && tremorsaurus.isInSittingPose()){
+            if (tickAccesor.isSniffed() && tremorsaurus.getAnimation() == TremorsaurusEntity.NO_ANIMATION && tremorsaurus.isInSittingPose()){
                 tremorsaurus.setAnimation(TremorsaurusEntity.ANIMATION_BITE);
             }
             if (tremorsaurus.getAnimation() == TremorsaurusEntity.ANIMATION_BITE && tremorsaurus.getAnimationTick() >= 10 && tremorsaurus.getAnimationTick() <= 15){
                 if (this.hunter.canTargetItem(targetEntity.getItem())){
+                    ACEUtils.awardAdvancement(targetEntity.getOwner(),"drop_food","drop");
                     tremorsaurus.heal(4);
                     tremorsaurus.playSound(ACSoundRegistry.TREMORSAURUS_BITE.get(), 1F, 1F);
                     targetEntity.kill();
                     if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && tremorsaurus.level().getRandom().nextDouble() < 0.08) {
-                        tickAccesor.alexsCavesExemplified$setSeethed(true);
+                        tickAccesor.setSeethed(true);
                     }
                 }
                 this.stop();
@@ -68,7 +71,7 @@ public class ACETremorDroppedEatBlock extends MobTargetItemGoal {
 
     public void stop() {
         super.stop();
-        ((TremorConsumption)tremorsaurus).alexsCavesExemplified$setSniffed(false);
+        ((TremorConsumption)tremorsaurus).setSniffed(false);
         tremorsaurus.setInSittingPose(false);
     }
 
@@ -111,5 +114,9 @@ public class ACETremorDroppedEatBlock extends MobTargetItemGoal {
         } else {
             return false;
         }
+    }
+
+    protected int nextStartTick(PathfinderMob mob) {
+        return reducedTickDelay(100 + tremorsaurus.getRandom().nextInt(100));
     }
 }

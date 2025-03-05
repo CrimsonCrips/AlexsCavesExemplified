@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.server.effect;
 
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
@@ -8,6 +9,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.WaterAnimal;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 
 public class ACERabial extends MobEffect {
 
@@ -33,6 +35,9 @@ public class ACERabial extends MobEffect {
         if (lastDuration <= 1) {
             int rabialLevel = amplifier + 1;
             entity.hurt(ACEDamageTypes.getDamageSource(entity.level(),ACEDamageTypes.RABIAL_END), rabialLevel * 10);
+        }
+        if (entity instanceof ServerPlayer serverPlayer){
+            ACEUtils.awardAdvancement(serverPlayer,"rabial","has_rabies");
         }
     }
 

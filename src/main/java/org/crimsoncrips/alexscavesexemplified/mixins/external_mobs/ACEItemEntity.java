@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEItemTagGenerator;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -53,28 +54,32 @@ public abstract class ACEItemEntity extends Entity {
         Level level = this.level();
         ItemStack item = this.getItem();
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.PURPLE_LEATHERED_ENABLED.get()) {
-            if (item.getItem() instanceof DyeableLeatherItem dyeableLeatherItem && this.isInFluidType(ACFluidRegistry.PURPLE_SODA_FLUID_TYPE.get())) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.PURPLE_LEATHERED_ENABLED.get() && item.getItem() instanceof DyeableLeatherItem dyeableLeatherItem && this.isInFluidType(ACFluidRegistry.PURPLE_SODA_FLUID_TYPE.get())) {
+            if (!dyeableLeatherItem.hasCustomColor(item)){
                 dyeableLeatherItem.setColor(item, 0Xb839e6);
+                ACEUtils.awardAdvancement(this.getOwner(), "purple_coloring", "colored");
             }
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.BREAKING_CANDY_ENABLED.get()) {
             if (level.getBlockState(this.blockPosition()).is(Blocks.WATER_CAULDRON) && item.is(ACEItemTagGenerator.GELATINABLE) && level.getBlockState(this.blockPosition().below()).is(ACEBlockTagGenerator.GELATIN_FIRE)) {
-                for (ItemEntity itemEntity : this.level().getEntitiesOfClass(ItemEntity.class, this.getBoundingBox().inflate(0.1))) {
+                for (ItemEntity itemEntity : this.level().getEntitiesOfClass(ItemEntity.class, this.getBoundingBox().inflate(0.2))) {
                     ItemStack nearBone = itemEntity.getItem();
-                    if (!nearBone.isEmpty() && timeToCook >= 200) {
+                    if (nearBone.getItem() instanceof DyeItem && timeToCook >= 50) {
                         ItemStack gelatinColor = switch (checkDye(nearBone)) {
-                            case 1 -> ACItemRegistry.GELATIN_GREEN.get().asItem().getDefaultInstance();
-                            case 2 -> ACItemRegistry.GELATIN_BLUE.get().asItem().getDefaultInstance();
-                            case 3 -> ACItemRegistry.GELATIN_YELLOW.get().asItem().getDefaultInstance();
-                            case 4 -> ACItemRegistry.GELATIN_PINK.get().asItem().getDefaultInstance();
+                            case 2 -> ACItemRegistry.GELATIN_PINK.get().asItem().getDefaultInstance();
+                            case 3 -> ACItemRegistry.GELATIN_GREEN.get().asItem().getDefaultInstance();
+                            case 4 -> ACItemRegistry.GELATIN_YELLOW.get().asItem().getDefaultInstance();
+                            case 5 -> ACItemRegistry.GELATIN_BLUE.get().asItem().getDefaultInstance();
                             default -> ACItemRegistry.GELATIN_RED.get().asItem().getDefaultInstance();
                         };
+                        this.getItem().shrink(1);
 
                         newGelatin(gelatinColor.getItem(),nearBone,item);
 
                         level.addParticle(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 1, this.getZ(), 0,0,0);
+
+                        ACEUtils.awardAdvancement(this.getOwner(),"breaking_candy","bake");
 
                     } else timeToCook++;
                 }
@@ -92,6 +97,7 @@ public abstract class ACEItemEntity extends Entity {
 
                     this.discard();
                 }
+                ACEUtils.awardAdvancement(this.getOwner(),"frostmint_explode","explode");
             }
         }
 
@@ -114,7 +120,7 @@ public abstract class ACEItemEntity extends Entity {
                         } else foodAmount = 0;
 
                         setHunger(stack, getHunger(stack) + foodAmount);
-
+                        ACEUtils.awardAdvancement(player,"dropped_consumption","consumed");
                         nearItemStack.setCount(0);
                         this.playSound(SoundEvents.GENERIC_EAT, 1F, 1F);
                     }
@@ -129,20 +135,17 @@ public abstract class ACEItemEntity extends Entity {
 
     public int checkDye(ItemStack possibleDye){
         int dyeDeterminer = 0;
-        if (possibleDye.is(Items.RED_DYE)){
-            dyeDeterminer = dyeDeterminer + 1;
-        }
-        if (possibleDye.is(Items.LIME_DYE)){
-            dyeDeterminer = dyeDeterminer + 2;
-        }
-        if (possibleDye.is(Items.YELLOW_DYE)){
+        if (possibleDye.is(Items.LIME_DYE) || possibleDye.is(Items.GREEN_DYE)){
             dyeDeterminer = dyeDeterminer + 3;
         }
-        if (possibleDye.is(Items.LIGHT_BLUE_DYE)){
+        if (possibleDye.is(Items.YELLOW_DYE) || possibleDye.is(Items.ORANGE_DYE)){
             dyeDeterminer = dyeDeterminer + 4;
         }
-        if (possibleDye.is(Items.PINK_DYE)){
+        if (possibleDye.is(Items.BLUE_DYE) || possibleDye.is(Items.LIGHT_BLUE_DYE) || possibleDye.is(Items.CYAN_DYE)){
             dyeDeterminer = dyeDeterminer + 5;
+        }
+        if (possibleDye.is(Items.PINK_DYE) || possibleDye.is(Items.PURPLE_DYE) || possibleDye.is(Items.MAGENTA_DYE)){
+            dyeDeterminer = dyeDeterminer + 2;
         }
 
 

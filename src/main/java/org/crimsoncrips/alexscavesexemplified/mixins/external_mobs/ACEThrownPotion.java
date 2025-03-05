@@ -10,6 +10,7 @@ import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -32,13 +33,7 @@ public abstract class ACEThrownPotion extends ThrowableItemProjectile {
             double d0 = this.distanceToSqr(livingentity);
             if (d0 < 16.0D) {
 
-                if (AlexsCavesExemplified.COMMON_CONFIG.IRRADIATION_WASHOFF_ENABLED.get()){
-                    MobEffectInstance irradiated = livingentity.getEffect(ACEffectRegistry.IRRADIATED.get());
-                    if (irradiated != null) {
-                        livingentity.removeEffect(irradiated.getEffect());
-                        livingentity.addEffect(new MobEffectInstance(irradiated.getEffect(), irradiated.getDuration() - 100, irradiated.getAmplifier()));
-                    }
-                }
+                ACEUtils.irradiationWash(livingentity,80);
             }
         }
 

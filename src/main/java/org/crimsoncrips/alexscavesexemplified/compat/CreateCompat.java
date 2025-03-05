@@ -21,12 +21,6 @@ import net.minecraftforge.fluids.FluidType;
 import org.spongepowered.asm.mixin.Unique;
 
 public class CreateCompat {
-    public static boolean isHoney(){
-       return AllFluids.CHOCOLATE.getBlock().isPresent();
-    }
-    public static boolean isChocolate(){
-       return AllFluids.HONEY.getBlock().isPresent();
-    }
 
 
     public static void solidifyCreateLiquid(FrostmintSpearEntity frostmintSpear, Level level, BlockPos blockPos){
@@ -74,6 +68,14 @@ public class CreateCompat {
         }
 
         return i;
+    }
+
+    public static boolean presenceCheck(boolean chocolate){
+        if (chocolate){
+            return AllFluids.CHOCOLATE.getBlock().isPresent();
+        } else {
+            return AllFluids.HONEY.getBlock().isPresent();
+        }
     }
 
     public static Block createBlockRegistry(int num){

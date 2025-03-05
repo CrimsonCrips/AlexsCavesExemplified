@@ -18,12 +18,14 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 
 public class ACECauldron extends Block {
@@ -68,8 +70,11 @@ public class ACECauldron extends Block {
         while (pLevel.getBlockState(blockAbove).isAir() && blockAbove.getY() < pLevel.getMaxBuildHeight()) {
             blockAbove = blockAbove.above();
         }
-        if (pLevel.getBlockState(blockAbove).is(ACBlockRegistry.ACIDIC_RADROCK.get())) {
+        if (pLevel.getBlockState(blockAbove).is(ACBlockRegistry.ACIDIC_RADROCK.get()) && pRandom.nextDouble() < 0.5) {
             pLevel.setBlockAndUpdate(pPos, ACEBlockRegistry.ACID_CAULDRON.get().defaultBlockState());
+            for (Player player : pLevel.getEntitiesOfClass(Player.class, new AABB(pPos.offset(-12, -12, -12), pPos.offset(12, 12, 12)))) {
+                ACEUtils.awardAdvancement(player,"acidic_replication","replicate");
+            }
         }
     }
 

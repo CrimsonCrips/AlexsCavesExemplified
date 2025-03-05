@@ -41,14 +41,6 @@ public abstract class ACELivingEntity extends Entity {
         super(pEntityType, pLevel);
     }
 
-    @WrapOperation(method = "causeFallDamage", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;calculateFallDamage(FF)I"))
-    private int alexsCavesExemplified$causeFallDamage(LivingEntity instance, float f, float v, Operation<Integer> original) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.HEAVY_GRAVITY_ENABLED.get()) {
-            return original.call(instance, f, v * 1.5F);
-        } else {
-            return original.call(instance, f, v);
-        }
-    }
 
     @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getAirSupply()I"))
     private void alexsCavesExemplified$baseTick(CallbackInfo ci) {

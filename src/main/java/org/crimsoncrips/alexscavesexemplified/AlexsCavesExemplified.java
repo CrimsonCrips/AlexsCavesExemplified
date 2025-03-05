@@ -17,6 +17,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.commons.lang3.tuple.Pair;
 import org.crimsoncrips.alexscavesexemplified.client.ACEClientConfig;
 import org.crimsoncrips.alexscavesexemplified.client.ACEClientEvents;
+import org.crimsoncrips.alexscavesexemplified.client.ACEClientProxy;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACEParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDatagen;
 import org.crimsoncrips.alexscavesexemplified.server.ACEServerConfig;
@@ -82,6 +83,7 @@ public class AlexsCavesExemplified {
 
 
     private void setup(final FMLCommonSetupEvent event) {
+
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
         if (AlexsCavesExemplified.COMMON_CONFIG.ADDITIONAL_FLAMMABILITY_ENABLED.get()){
             //Primordial Caves

@@ -6,9 +6,13 @@ import com.github.alexmodguy.alexscaves.server.entity.item.MagneticWeaponEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.GingerbreadManEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.TeletorEntity;
 import com.github.alexmodguy.alexscaves.server.item.GalenaGauntletItem;
+import com.github.alexmodguy.alexscaves.server.misc.ACAdvancementTriggerRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.PlayerAdvancements;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,7 +26,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.Gammafied;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
+
 import org.crimsoncrips.alexscavesexemplified.server.enchantment.ACEEnchants;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
@@ -32,7 +37,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Iterator;
 
-@Debug(export = true)
+
 @Mixin(GalenaGauntletItem.class)
 public abstract class ACEGauntletItemMixin extends Item {
 
@@ -45,7 +50,7 @@ public abstract class ACEGauntletItemMixin extends Item {
     private boolean onlyFlyIfAllowed(boolean original, @Local Player player, @Local InteractionHand interactionHand) {
         ItemStack itemstack = player.getItemInHand(interactionHand);
         Entity itemLook = getClosestLookingAtEntityFor(player);
-        return original || ((itemLook instanceof ItemEntity item && item.getItem().is(ACTagRegistry.MAGNETIC_ITEMS) || (itemLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity)) && AlexsCavesExemplified.COMMON_CONFIG.GALENA_GRAB_ENABLED.get() && itemstack.getEnchantmentLevel(ACEEnchants.MAGNETICISM.get()) > 0);
+        return original || ((itemLook instanceof ItemEntity item && item.getItem().is(ACTagRegistry.MAGNETIC_ITEMS) || (itemLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity)) && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && itemstack.getEnchantmentLevel(ACEEnchants.MAGNETICISM.get()) > 0);
     }
 
     @Inject(method = "onUseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getEnchantmentLevel(Lnet/minecraft/world/item/enchantment/Enchantment;)I"))
@@ -63,10 +68,15 @@ public abstract class ACEGauntletItemMixin extends Item {
             }
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.GALENA_GRAB_ENABLED.get() && !otherMagneticWeaponsInUse && stack.getEnchantmentLevel(ACEEnchants.MAGNETICISM.get()) > 0) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && !otherMagneticWeaponsInUse && stack.getEnchantmentLevel(ACEEnchants.MAGNETICISM.get()) > 0) {
             if (itemlook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity teletor && !otherStack.is(ACTagRegistry.TELETOR_SPAWNS_WITH)){
                 magneticWeaponEntity.setControllerUUID(living.getUUID());
                 teletor.setWeaponUUID(null);
+                ItemStack itemStack = magneticWeaponEntity.getItemStack();
+                if (itemStack.isDamageableItem()) {
+                    itemStack.setDamageValue(itemStack.getMaxDamage() - teletor.getRandom().nextInt(1 + teletor.getRandom().nextInt(Math.max(itemStack.getMaxDamage() - 3, 1))));
+                }
+                ACEUtils.awardAdvancement(living,"galena_steal","steal");
             } else if (itemlook instanceof ItemEntity item && grabableItems(item.getItem(),stack) && !grabableItems(otherStack,stack)) {
                 ItemStack copy = item.getItem().copy();
                 item.discard();

@@ -40,6 +40,8 @@ public abstract class ACETremorzillaRenderGlowMixin extends RenderLayer<Tremorzi
 
 
 
+
+
     public void render(PoseStack matrixStackIn, MultiBufferSource bufferIn, int packedLightIn, TremorzillaEntity tremorzilla, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         Gammafied myAccessor = (Gammafied) tremorzilla;
         float normalAlpha = (float)Math.sin((double)(ageInTicks * 0.2F)) * 0.15F + 0.5F;

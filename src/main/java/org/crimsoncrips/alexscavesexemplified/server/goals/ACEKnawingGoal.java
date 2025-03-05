@@ -2,8 +2,10 @@ package org.crimsoncrips.alexscavesexemplified.server.goals;
 
 import com.github.alexmodguy.alexscaves.server.entity.ai.MobTargetItemGoal;
 import com.github.alexmodguy.alexscaves.server.entity.living.CorrodentEntity;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.PathfinderMob;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 
 public class ACEKnawingGoal extends MobTargetItemGoal {
 
@@ -16,7 +18,7 @@ public class ACEKnawingGoal extends MobTargetItemGoal {
 
     @Override
     public void tick() {
-        if (this.targetEntity != null && (this.targetEntity == null || this.targetEntity.isAlive())) {
+        if (this.targetEntity != null && this.targetEntity.isAlive()) {
             this.moveTo();
         } else {
             this.stop();
@@ -33,6 +35,9 @@ public class ACEKnawingGoal extends MobTargetItemGoal {
             }
             if (corrodent.getAnimation() == CorrodentEntity.ANIMATION_BITE && corrodent.getAnimationTick() >= 5) {
                 this.hunter.onGetItem(this.targetEntity);
+                if (targetEntity.getOwner() instanceof ServerPlayer serverPlayer){
+                    ACEUtils.awardAdvancement(serverPlayer,"knawing","knaw");
+                }
                 this.stop();
             }
         }

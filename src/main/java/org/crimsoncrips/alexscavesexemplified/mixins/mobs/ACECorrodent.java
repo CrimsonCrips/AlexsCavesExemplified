@@ -10,6 +10,7 @@ import com.github.alexmodguy.alexscaves.server.entity.util.UnderzealotSacrifice;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEItemTagGenerator;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEKnawingGoal;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -117,6 +119,7 @@ public abstract class ACECorrodent extends Monster implements UnderzealotSacrifi
         if (AlexsCavesExemplified.COMMON_CONFIG.FORLORN_LIGHT_EFFECT_ENABLED.get() && target != null && target != getLastHurtByMob()){
             if (CuriosCompat.hasLight(target)) {
                 this.setTarget(null);
+                ACEUtils.awardAdvancement(target,"light_repel","repelled");
             }
         }
 

@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.List;
 import java.util.function.Predicate;
 
-@Debug(export = true)
+
 @Mixin(HullbreakerInspectMobGoal.class)
 public abstract class ACEHullbreakerGoalMixin extends Goal {
 

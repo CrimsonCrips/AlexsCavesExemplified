@@ -6,6 +6,7 @@ import com.github.alexmodguy.alexscaves.server.entity.living.*;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.Gammafied;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
@@ -28,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.getEntityMagneticDelta;
 import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.setEntityMagneticDelta;
 
-@Debug(export = true)
+
 @Mixin(TeletorEntity.class)
 public abstract class ACETeletorMixin extends Monster {
 
@@ -55,6 +57,8 @@ public abstract class ACETeletorMixin extends Monster {
                     level().addFreshEntity(magneticWeapon);
                     magneticWeapon.setPos(item.position());
                     item.discard();
+
+                    ACEUtils.awardAdvancement(item.getOwner(),"teletor_rearm","rearm");
                 }
             }
         }

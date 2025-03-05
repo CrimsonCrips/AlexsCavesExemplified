@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 
 public interface ACECauldronInteraction {
@@ -54,6 +55,7 @@ public interface ACECauldronInteraction {
                     p_175735_.setItemInHand(p_175736_, ItemUtils.createFilledResult(p_175737_, p_175735_, new ItemStack(Items.GLASS_BOTTLE)));
                     p_175735_.awardStat(Stats.USE_CAULDRON);
                     p_175735_.awardStat(Stats.ITEM_USED.get(p_175737_.getItem()));
+                    ACEUtils.awardAdvancement(p_175735_,"soda_replication","replicate");
                     p_175733_.setBlockAndUpdate(p_175734_, ACEBlockRegistry.PURPLE_SODA_CAULDRON.get().defaultBlockState());
                     p_175733_.playSound((Player) null, p_175734_, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
                     p_175733_.gameEvent((Entity) null, GameEvent.FLUID_PLACE, p_175734_);

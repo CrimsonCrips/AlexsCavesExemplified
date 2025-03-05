@@ -5,6 +5,7 @@ import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntity;
+import com.github.alexmodguy.alexscaves.server.entity.living.DeepOneBaseEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.MineGuardianEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEMineGuardianHurtBy;
 import org.spongepowered.asm.mixin.Debug;
@@ -88,6 +90,9 @@ public abstract class ACEMineGuardian extends Monster implements MineGuardianXtr
         if (AlexsCavesExemplified.COMMON_CONFIG.NOON_GUARDIAN_ENABLED.get()){
             if (this.getName().getString().equals("Noon") && alexsCavesExemplified$getVariant() == 0){
                 this.alexsCavesExemplified$setVariant(-1);
+                for (Player deepOne : this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(10))) {
+                    ACEUtils.awardAdvancement(deepOne,"noon_guardian","noon");
+                }
             }
         } else if (alexsCavesExemplified$getVariant() == -1){
             alexsCavesExemplified$setVariant(1);
@@ -183,6 +188,8 @@ public abstract class ACEMineGuardian extends Monster implements MineGuardianXtr
                 itemHeld.shrink(1);
             }
             playSound(SoundEvents.SMITHING_TABLE_USE, 8.0F, 1.0F);
+            ACEUtils.awardAdvancement(pPlayer,"nuclear_mines","nuke_mine");
+
             return InteractionResult.SUCCESS;
         }
         return super.mobInteract(pPlayer, pHand);

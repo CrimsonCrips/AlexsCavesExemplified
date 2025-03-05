@@ -35,7 +35,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Debug(export = true)
+
 @Mixin(CommonEvents.class)
 public class ACECommonEventsMixin {
 

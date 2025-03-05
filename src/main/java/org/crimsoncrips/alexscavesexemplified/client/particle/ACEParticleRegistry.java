@@ -1,9 +1,5 @@
 package org.crimsoncrips.alexscavesexemplified.client.particle;
 
-import com.github.alexmodguy.alexscaves.AlexsCaves;
-import com.mojang.serialization.Codec;
-import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,5 +15,12 @@ public class ACEParticleRegistry {
     public static final RegistryObject<SimpleParticleType> TREMORZILLA_GAMMA_LIGHTNING = DEF_REG.register("tremorzilla_gamma_lightning", () -> new SimpleParticleType(false));
 
     public static final RegistryObject<SimpleParticleType> GAMMA_PROTON = DEF_REG.register("gamma_proton", () -> new SimpleParticleType(false));
+
+
+    public static final RegistryObject<SimpleParticleType> GAMMA_MUSHROOM_CLOUD = DEF_REG.register("gamma_mushroom_cloud", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> GAMMA_TEPHRA = DEF_REG.register("gamma_tephra", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> GAMMA_TEPHRA_SMALL = DEF_REG.register("gamma_tephra_small", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> GAMMA_TEPHRA_FLAME = DEF_REG.register("gamma_tephra_flame", () -> new SimpleParticleType(false));
+
 
 }

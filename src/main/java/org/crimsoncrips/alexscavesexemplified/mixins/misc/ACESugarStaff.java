@@ -31,6 +31,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 
 
@@ -51,8 +52,6 @@ public abstract class ACESugarStaff extends Item {
             if (player.getItemInHand(InteractionHand.OFF_HAND).is(ACItemRegistry.RADIANT_ESSENCE.get()) && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()){
                 if(hex){
                     int humunguous = itemstack.getEnchantmentLevel(ACEnchantmentRegistry.HUMUNGOUS_HEX.get());
-
-
                     float maxDist = 128;
                     HitResult realHitResult = ProjectileUtil.getHitResultOnViewVector(player, Entity::canBeHitByProjectile, maxDist);
                     if(realHitResult.getType() == HitResult.Type.MISS){
@@ -69,22 +68,24 @@ public abstract class ACESugarStaff extends Item {
                     int maxSpears = 20 + (humunguous <= 0 ? 0 : 10 * humunguous);
                     for(int j = 0; j < maxSpears; j++){
                         FrostmintSpearEntity frostmintSpearEntity = ACEntityRegistry.FROSTMINT_SPEAR.get().spawn((ServerLevel) level, BlockPos.containing(0, 0, 0), MobSpawnType.MOB_SUMMONED);
-                        frostmintSpearEntity.pickup = FrostmintSpearEntity.Pickup.CREATIVE_ONLY;
-                        frostmintSpearEntity.setBaseDamage(frostmintSpearEntity.getBaseDamage() * 2);
+                        if(frostmintSpearEntity != null){
+                            frostmintSpearEntity.pickup = FrostmintSpearEntity.Pickup.CREATIVE_ONLY;
+                            frostmintSpearEntity.setBaseDamage(frostmintSpearEntity.getBaseDamage() * 2);
 
-                        Vec3 vec3 = mutableSkyPos.getCenter().add(level.random.nextFloat() * 16 - 8, level.random.nextFloat() * 4 - 2, level.random.nextFloat() * 16 - 8);
-                        int clearTries = 0;
-                        while (clearTries < 6 && !level.isEmptyBlock(BlockPos.containing(vec3)) && level.getFluidState(BlockPos.containing(vec3)).isEmpty()){
-                            clearTries++;
-                            vec3 = mutableSkyPos.getCenter().add(level.random.nextFloat() * 16 - 8, level.random.nextFloat() * 4 - 2, level.random.nextFloat() * 16 - 8);
+                            Vec3 vec3 = mutableSkyPos.getCenter().add(level.random.nextFloat() * 16 - 8, level.random.nextFloat() * 4 - 2, level.random.nextFloat() * 16 - 8);
+                            int clearTries = 0;
+                            while (clearTries < 6 && !level.isEmptyBlock(BlockPos.containing(vec3)) && level.getFluidState(BlockPos.containing(vec3)).isEmpty()) {
+                                clearTries++;
+                                vec3 = mutableSkyPos.getCenter().add(level.random.nextFloat() * 16 - 8, level.random.nextFloat() * 4 - 2, level.random.nextFloat() * 16 - 8);
+                            }
+                            if (!level.isEmptyBlock(BlockPos.containing(vec3)) && level.getFluidState(BlockPos.containing(vec3)).isEmpty()) {
+                                vec3 = mutableSkyPos.getCenter();
+                            }
+                            frostmintSpearEntity.setPos(vec3);
+                            Vec3 vec31 = realHitResult.getLocation().subtract(vec3);
+                            frostmintSpearEntity.shoot(vec31.x, vec31.y, vec31.z, 0.5F + 1.5F * level.random.nextFloat(), level.random.nextFloat() * 10);
+                            frostmintSpearEntity.getPersistentData().putBoolean("FrostRadiant", true);
                         }
-                        if(!level.isEmptyBlock(BlockPos.containing(vec3)) && level.getFluidState(BlockPos.containing(vec3)).isEmpty()){
-                            vec3 = mutableSkyPos.getCenter();
-                        }
-                        frostmintSpearEntity.setPos(vec3);
-                        Vec3 vec31 = realHitResult.getLocation().subtract(vec3);
-                        frostmintSpearEntity.shoot(vec31.x, vec31.y, vec31.z, 0.5F + 1.5F * level.random.nextFloat(),  level.random.nextFloat() * 10);
-                        frostmintSpearEntity.getPersistentData().putBoolean("FrostRadiant", true);
                     }
 
                     SugarStaffHexEntity sugarStaffHexEntity = ACEntityRegistry.SUGAR_STAFF_HEX.get().create(player.level());
@@ -103,14 +104,14 @@ public abstract class ACESugarStaff extends Item {
 
                     level.playSound((Player) null, player.blockPosition(), (SoundEvent) ACSoundRegistry.SUGAR_STAFF_CAST_HEX.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
-
+                    ACEUtils.awardAdvancement(player,"radiant_wrath","powered");
                 }else{
 
                     boolean seeking = itemstack.getEnchantmentLevel(ACEnchantmentRegistry.SEEKCANDY.get()) > 0;
                     boolean straight = itemstack.getEnchantmentLevel(ACEnchantmentRegistry.PEPPERMINT_PUNTING.get()) > 0;
                     int multipleMint = itemstack.getEnchantmentLevel(ACEnchantmentRegistry.MULTIPLE_MINT.get());
 
-                    for (int layers = 1; layers < (multipleMint != 0 ? multipleMint : 2);layers++){
+                    for (int layers = 1; layers < (multipleMint != 0 ? multipleMint + 2 : 2);layers++){
                         for (int l = 0; l < 5 * (2 + layers); l++) {
                             makeRadiantPeppermint(5 * (2 + layers), l, level, player, 12 / layers  != 0 ? (float) 12 / layers  : 1, 2.5F + layers - 1, 200, straight,seeking,lookingAtEntity);
                         }
@@ -120,6 +121,7 @@ public abstract class ACESugarStaff extends Item {
                     }
                     player.getCooldowns().addCooldown(this, seeking ? (multipleMint >= 2 ? 800 : (multipleMint == 1 ? 700 : 600)) : (multipleMint >= 2 ? 600 : (multipleMint == 1 ? 500 : 400)));
                     level.playSound((Player) null, player.blockPosition(), (SoundEvent) ACSoundRegistry.SUGAR_STAFF_CAST_PEPPERMINT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                    ACEUtils.awardAdvancement(player,"radiant_wrath","powered");
                 }
             } else {
 
@@ -203,9 +205,7 @@ public abstract class ACESugarStaff extends Item {
                 pAttacker.getOffhandItem().shrink(1);
                 player.getCooldowns().addCooldown(this, 400);
             }
-
         }
-
         return super.hurtEnemy(pStack, pTarget, pAttacker);
     }
 }

@@ -19,6 +19,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.ACEReflectionUtil;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -41,10 +42,12 @@ public abstract class ACEVolcanicCoreBlockEntity extends BlockEntity{
 
 
     @Inject(method = "tick", at = @At("HEAD"),remap = false)
-    private static void registerGoals(Level level, BlockPos blockPos, BlockState state, VolcanicCoreBlockEntity entity, CallbackInfo ci) {
+    private static void tick(Level level, BlockPos blockPos, BlockState state, VolcanicCoreBlockEntity entity, CallbackInfo ci) {
+
+        int bossCooldown = (int) ACEReflectionUtil.getField(entity, "bossSpawnCooldown");
 
 
-        if ((int) ACEReflectionUtil.getField(entity, "bossSpawnCooldown") > 0 && AlexsCavesExemplified.COMMON_CONFIG.VOLCANIC_SACRIFICE_ENABLED.get()) {
+        if (bossCooldown > 0 && AlexsCavesExemplified.COMMON_CONFIG.VOLCANIC_SACRIFICE_ENABLED.get()) {
 
             Vec3 vec3 = Vec3.atCenterOf(blockPos);
             AABB itemAABB = new AABB(vec3.subtract(20, 100, 20), vec3.add(20, 100, 20));
@@ -63,29 +66,30 @@ public abstract class ACEVolcanicCoreBlockEntity extends BlockEntity{
                     item.getItem().shrink(1);
                     if (level.getRandom().nextDouble() < 1) {
                         spawnTephra(level, entity);
-                        ACEReflectionUtil.setField(entity, "bossSpawnCooldown", 0);
+                        ACEReflectionUtil.setField(entity, "bossSpawnCooldown", bossCooldown / 2);
+                        ACEUtils.awardAdvancement(item.getOwner(),"egg_sacrifice","egg_sacrifice");
                     }
                 }
             }
 
-            AABB atlaAABB = new AABB(vec3.subtract(10, 100, 10), vec3.add(10, 100, 10));
-            for (AtlatitanEntity atlatitan : level.getEntitiesOfClass(AtlatitanEntity.class, atlaAABB)) {
-                if (!atlatitan.isBaby())
-                    return;
-                if (!atlatitan.isAlive())
-                    return;
 
-                double dist = Mth.sqrt((float) atlatitan.distanceToSqr(vec3));
-                if (dist < maxDist) {
-                    Vec3 sub = vec3.subtract(atlatitan.position()).normalize().scale(0.2F);
-                    Vec3 delta = atlatitan.getDeltaMovement().scale(0.8F);
-                    atlatitan.setDeltaMovement(sub.add(delta));
-                }
-                if (dist < 0.66F) {
-                    atlatitan.kill();
-                    if (level.getRandom().nextDouble() < 1) {
-                        spawnTephra(level, entity);
-                        ACEReflectionUtil.setField(entity, "bossSpawnCooldown", 0);
+            for (AtlatitanEntity atlatitan : level.getEntitiesOfClass(AtlatitanEntity.class, new AABB(blockPos.offset(-12, -12, -12), blockPos.offset(12, 32, 12)))) {
+                if (atlatitan.isBaby()){
+                    double dist = Mth.sqrt((float) atlatitan.distanceToSqr(vec3));
+                    if (dist < maxDist) {
+                        Vec3 sub = vec3.subtract(atlatitan.position()).normalize().scale(0.2F);
+                        Vec3 delta = atlatitan.getDeltaMovement().scale(1F);
+                        atlatitan.setDeltaMovement(sub.add(delta));
+                    }
+                    if (dist < 0.66F) {
+                        atlatitan.kill();
+                        if (level.getRandom().nextDouble() < 1) {
+                            spawnTephra(level, entity);
+                            for (Player player : level.getEntitiesOfClass(Player.class, atlatitan.getBoundingBox().inflate(40))) {
+                                ACEUtils.awardAdvancement(player, "volcanic_sacrifice", "live_sacrifice");
+                            }
+                            ACEReflectionUtil.setField(entity, "bossSpawnCooldown", 0);
+                        }
                     }
                 }
             }

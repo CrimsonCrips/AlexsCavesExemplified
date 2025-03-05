@@ -2,12 +2,12 @@ package org.crimsoncrips.alexscavesexemplified.misc.interfaces;
 
 public interface TremorConsumption {
 
-    void alexsCavesExemplified$setSeethed(boolean value);
+    void setSeethed(boolean value);
 
-    void alexsCavesExemplified$setSniffed(boolean value);
+    void setSniffed(boolean value);
 
-    boolean alexsCavesExemplified$isSeethed();
+    boolean isSeethed();
 
-    boolean alexsCavesExemplified$isSniffed();
+    boolean isSniffed();
 
 }

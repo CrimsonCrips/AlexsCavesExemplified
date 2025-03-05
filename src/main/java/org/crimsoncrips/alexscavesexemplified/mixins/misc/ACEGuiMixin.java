@@ -28,7 +28,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
-@Debug(export = true)
+
 @Mixin(Gui.class)
 public abstract class ACEGuiMixin {
 

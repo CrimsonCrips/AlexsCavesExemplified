@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -29,7 +30,7 @@ public class ACESugarRush extends MobEffect {
 
     @Inject(method = "applyEffectTick", at = @At("HEAD"))
     private void alexsCavesExemplified$applyEffectTick(LivingEntity entity, int amplifier, CallbackInfo ci) {
-        if (lastDuration <= 2 && AlexsCavesExemplified.COMMON_CONFIG.SUGAR_CRASH_ENABLED.get()) {
+        if (lastDuration <= 2 && AlexsCavesExemplified.COMMON_CONFIG.SUGAR_CRASH_ENABLED.get() && (entity.getRandom().nextDouble() < 0.3 || amplifier >= 2)) {
             int sugarcrashLevel = amplifier + 1;
             entity.addEffect(new MobEffectInstance(ACEEffects.SUGAR_CRASH.get(), 400, amplifier));
             entity.hurt(ACEDamageTypes.getDamageSource(entity.level(),ACEDamageTypes.SUGAR_CRASH), sugarcrashLevel * 2);
@@ -37,6 +38,7 @@ public class ACESugarRush extends MobEffect {
             if (sugarcrashLevel > 3){
                 entity.level().explode(entity,entity.getX(),entity.getY(),entity.getZ(),2, Level.ExplosionInteraction.MOB);
             }
+            ACEUtils.awardAdvancement(entity,"sugar_crashed","crashed");
         }
     }
 

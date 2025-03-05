@@ -6,6 +6,7 @@ import com.github.alexmodguy.alexscaves.server.entity.living.VesperEntity;
 import com.google.common.base.Predicates;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEEntityTagGenerator;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEVesperTarget;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -84,6 +86,7 @@ public abstract class ACEVesper extends Monster {
         if (AlexsCavesExemplified.COMMON_CONFIG.FORLORN_LIGHT_EFFECT_ENABLED.get() && target != null && target != getLastHurtByMob()){
             if (CuriosCompat.hasLight(target)) {
                 this.setTarget(null);
+                ACEUtils.awardAdvancement(target,"light_repel","repelled");
             }
         }
 
@@ -104,6 +107,7 @@ public abstract class ACEVesper extends Monster {
         if (pSource.is(DamageTypes.ARROW) && AlexsCavesExemplified.COMMON_CONFIG.VESPER_SHOTDOWN_ENABLED.get()){
             this.setHanging(false);
             groundedFor = 1000;
+            ACEUtils.awardAdvancement(pSource.getEntity(),"shot_down","shot");
         }
         return super.hurt(pSource, pAmount);
     }

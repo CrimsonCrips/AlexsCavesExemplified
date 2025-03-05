@@ -28,6 +28,9 @@ public class AMCompat {
             fly.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1, false, false));
         }
     }
+    public static void vineLassoTo(LivingEntity lassoer,LivingEntity lassoed) {
+        VineLassoUtil.lassoTo(lassoer, lassoed);
+    }
     public static LivingEntity createAmberAM(Level level, RandomSource randomSource){
         if (randomSource.nextBoolean()){
             EntityCockroach cockroach = AMEntityRegistry.COCKROACH.get().create(level);
@@ -120,6 +123,7 @@ public class AMCompat {
         return switch (num) {
             case 1 -> AMItemRegistry.SKELEWAG_SWORD.get();
             case 2 -> AMItemRegistry.FISH_BONES.get();
+            case 3 -> AMItemRegistry.VINE_LASSO.get();
 
             default -> throw new IllegalStateException("Unexpected value: " + num);
         };

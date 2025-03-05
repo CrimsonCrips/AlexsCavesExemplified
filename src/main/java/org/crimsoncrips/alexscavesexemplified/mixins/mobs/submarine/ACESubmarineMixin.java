@@ -44,7 +44,7 @@ public abstract class ACESubmarineMixin extends Entity {
                 if (entity != passenger && entity.getBbHeight() <= 1.6F && AlexsCavesExemplified.COMMON_CONFIG.SUBMARINE_BUMP_ENABLED.get()) {
                     entity.hurt(submarineEntity.damageSources().mobAttack(entity), 6.0F);
                     entity.knockback(1.5D, submarineEntity.getX() - entity.getX(), submarineEntity.getZ() - entity.getZ());
-
+                    ACEUtils.awardAdvancement(submarineEntity.getFirstPassenger(),"submarine_bump","bump");
                 }
             }
         }
