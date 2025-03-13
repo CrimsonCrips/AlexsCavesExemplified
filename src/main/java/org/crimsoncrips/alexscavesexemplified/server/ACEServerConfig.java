@@ -245,7 +245,7 @@ public class ACEServerConfig {
         this.KIROV_REPORTING_ENABLED = buildBoolean(builder, "KIROV_REPORTING_ENABLED", " ", true, "Allows lighting of explosives, including nuclear bombs with a flint and steel off-hand during flight");
         this.HAZMAT_AMPLIFIED_ENABLED = buildBoolean(builder, "HAZMAT_AMPLIFIED_ENABLED", " ", true, "Hazmat reduces amount of irradiation recieved from rayguns");
         this.RADIOACTIVE_AWARENESS_ENABLED = buildBoolean(builder, "RADIOACTIVE_AWARENESS_ENABLED", " ", true, "Radioactive blocks emit irradiation to nearby players");
-        this.RERAYGUNNED_ENABLED = buildBoolean(builder, "RERAYGUNNED_ENABLED", " ", true, "Amplifies raygun effects,Such as block destruction and item annihilation");
+        this.RERAYGUNNED_ENABLED = buildBoolean(builder, "RERAYGUNNED_ENABLED", " ", true, "Amplifies raygun effects,Such as block destruction");
         this.GROUNDED_NUKE_ENABLED = buildBoolean(builder, "GROUNDED_NUKE_ENABLED", " ", false, "Explosions only progress when in ground (primarily used for midair nuking)");
         builder.comment("--Compatible with Soap from Supplementaries--");
         this.IRRADIATION_WASHOFF_ENABLED = buildBoolean(builder, "IRRADIATION_WASHOFF_ENABLED", " ", true, "Whether Irradiation wears off faster when in water");

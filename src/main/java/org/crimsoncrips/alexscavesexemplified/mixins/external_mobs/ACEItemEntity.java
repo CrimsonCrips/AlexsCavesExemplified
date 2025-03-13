@@ -95,7 +95,7 @@ public abstract class ACEItemEntity extends Entity {
 
                     ACAdvancementTriggerRegistry.FROSTMINT_EXPLOSION.triggerForEntity(this.getOwner());
 
-                    this.discard();
+                    item.shrink(1);
                 }
                 ACEUtils.awardAdvancement(this.getOwner(),"frostmint_explode","explode");
             }
@@ -130,7 +130,7 @@ public abstract class ACEItemEntity extends Entity {
     }
 
     public boolean fireImmune() {
-        return this.getItem().getItem().isFireResistant() || super.fireImmune() || this.getPersistentData().getBoolean("DraggedProtection");
+        return super.fireImmune() || this.getPersistentData().getBoolean("DraggedProtection");
     }
 
     public int checkDye(ItemStack possibleDye){

@@ -42,7 +42,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
-@Debug (export = true)
+
 @Mixin(MineGuardianEntity.class)
 public abstract class ACEMineGuardian extends Monster implements MineGuardianXtra {
 

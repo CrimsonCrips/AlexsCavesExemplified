@@ -54,8 +54,8 @@ public class AlexsCavesExemplified {
     }
 
     public AlexsCavesExemplified() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_CONFIG_SPEC, "ace-general.toml");
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG_SPEC, "ace-client.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_CONFIG_SPEC, "alexscavesexemplified-general.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG_SPEC, "alexscavesexemplified-client.toml");
 
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();

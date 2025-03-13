@@ -62,51 +62,6 @@ public class AMCompat {
         return livingEntity instanceof EntityCockroach;
     }
 
-    public static EntityType amEntityType(int num){
-        return switch (num) {
-            case 1 -> AMEntityRegistry.FLYING_FISH.get();
-            case 2 -> AMEntityRegistry.BLOBFISH.get();
-            case 3 -> AMEntityRegistry.COSMIC_COD.get();
-            case 4 -> AMEntityRegistry.DEVILS_HOLE_PUPFISH.get();
-            case 5 -> AMEntityRegistry.CATFISH.get();
-            case 6 -> AMEntityRegistry.ANTEATER.get();
-            case 7 -> AMEntityRegistry.BISON.get();
-            case 8 -> AMEntityRegistry.CACHALOT_WHALE.get();
-            case 9 -> AMEntityRegistry.CAPUCHIN_MONKEY.get();
-            case 10 -> AMEntityRegistry.DROPBEAR.get();
-            case 11 -> AMEntityRegistry.ELEPHANT.get();
-            case 12 -> AMEntityRegistry.ENDERGRADE.get();
-            case 13 -> AMEntityRegistry.FROSTSTALKER.get();
-            case 14 -> AMEntityRegistry.GAZELLE.get();
-            case 15 -> AMEntityRegistry.GELADA_MONKEY.get();
-            case 16 -> AMEntityRegistry.GORILLA.get();
-            case 17 -> AMEntityRegistry.GRIZZLY_BEAR.get();
-            case 18 -> AMEntityRegistry.JERBOA.get();
-            case 19 -> AMEntityRegistry.KANGAROO.get();
-            case 20 -> AMEntityRegistry.MANED_WOLF.get();
-            case 21 -> AMEntityRegistry.MOOSE.get();
-            case 22 -> AMEntityRegistry.BUNFUNGUS.get();
-            case 23 -> AMEntityRegistry.MURMUR.get();
-            case 24 -> AMEntityRegistry.ORCA.get();
-            case 25 -> AMEntityRegistry.PLATYPUS.get();
-            case 26 -> AMEntityRegistry.RACCOON.get();
-            case 27 -> AMEntityRegistry.RHINOCEROS.get();
-            case 28 -> AMEntityRegistry.SEA_BEAR.get();
-            case 29 -> AMEntityRegistry.SEAL.get();
-            case 30 -> AMEntityRegistry.SKUNK.get();
-            case 31 -> AMEntityRegistry.MANED_WOLF.get();
-            case 32 -> AMEntityRegistry.SNOW_LEOPARD.get();
-            case 33 -> AMEntityRegistry.SUGAR_GLIDER.get();
-            case 34 -> AMEntityRegistry.TASMANIAN_DEVIL.get();
-            case 35 -> AMEntityRegistry.TIGER.get();
-            case 36 -> AMEntityRegistry.TUSKLIN.get();
-            case 37 -> AMEntityRegistry.FLY.get();
-            case 38 -> AMEntityRegistry.COCKROACH.get();
-
-
-            default -> throw new IllegalStateException("Unexpected value: " + num);
-        };
-    }
 
     public static Class amMob(int num){
         return switch (num) {
@@ -121,9 +76,7 @@ public class AMCompat {
 
     public static Item amItemRegistry(int num){
         return switch (num) {
-            case 1 -> AMItemRegistry.SKELEWAG_SWORD.get();
-            case 2 -> AMItemRegistry.FISH_BONES.get();
-            case 3 -> AMItemRegistry.VINE_LASSO.get();
+            case 1 -> AMItemRegistry.VINE_LASSO.get();
 
             default -> throw new IllegalStateException("Unexpected value: " + num);
         };

@@ -39,25 +39,14 @@ public class ACEEntityTagGenerator extends EntityTypeTagsProvider {
 				EntityType.SALMON,
 				EntityType.TROPICAL_FISH,
 				EntityType.PUFFERFISH,
-				AMCompat.amEntityType(1),
-				AMCompat.amEntityType(2),
-				AMCompat.amEntityType(3),
-				AMCompat.amEntityType(4),
-				AMCompat.amEntityType(5)
-		);
-
-		tag(ACID_TO_FISH).add(
-				EntityType.COD,
-				EntityType.SALMON,
-				EntityType.TROPICAL_FISH,
-				EntityType.PUFFERFISH,
-				AMCompat.amEntityType(1),
-				AMCompat.amEntityType(2),
-				AMCompat.amEntityType(3),
-				AMCompat.amEntityType(4),
-				AMCompat.amEntityType(5),
 				ACEntityRegistry.TRIPODFISH.get()
-		);
+		)
+				.addOptional(new ResourceLocation("alexsmobs:flying_fish"))
+				.addOptional(new ResourceLocation("alexsmobs:blob_fish"))
+				.addOptional(new ResourceLocation("alexsmobs:cosmic_cod"))
+				.addOptional(new ResourceLocation("alexsmobs:devils_hole_pupfish"))
+				.addOptional(new ResourceLocation("alexsmobs:catfish"));
+
 
 		tag(CAN_RABIES).add(
 				EntityType.BAT,
@@ -86,37 +75,6 @@ public class ACEEntityTagGenerator extends EntityTypeTagsProvider {
 				EntityType.WOLF,
 				EntityType.HOGLIN,
 				EntityType.PIGLIN_BRUTE,
-				AMCompat.amEntityType(6),
-				AMCompat.amEntityType(7),
-				AMCompat.amEntityType(8),
-				AMCompat.amEntityType(9),
-				AMCompat.amEntityType(10),
-				AMCompat.amEntityType(11),
-				AMCompat.amEntityType(12),
-				AMCompat.amEntityType(13),
-				AMCompat.amEntityType(14),
-				AMCompat.amEntityType(15),
-				AMCompat.amEntityType(16),
-				AMCompat.amEntityType(17),
-				AMCompat.amEntityType(18),
-				AMCompat.amEntityType(19),
-				AMCompat.amEntityType(20),
-				AMCompat.amEntityType(21),
-				AMCompat.amEntityType(22),
-				AMCompat.amEntityType(23),
-				AMCompat.amEntityType(24),
-				AMCompat.amEntityType(25),
-				AMCompat.amEntityType(26),
-				AMCompat.amEntityType(27),
-				AMCompat.amEntityType(28),
-				AMCompat.amEntityType(29),
-				AMCompat.amEntityType(30),
-				AMCompat.amEntityType(31),
-				AMCompat.amEntityType(32),
-				AMCompat.amEntityType(33),
-				AMCompat.amEntityType(34),
-				AMCompat.amEntityType(35),
-				AMCompat.amEntityType(36),
 				ACEntityRegistry.CORRODENT.get(),
 				ACEntityRegistry.VESPER.get(),
 				ACEntityRegistry.UNDERZEALOT.get(),
@@ -129,15 +87,45 @@ public class ACEEntityTagGenerator extends EntityTypeTagsProvider {
 				ACEntityRegistry.SUBTERRANODON.get(),
 				ACEntityRegistry.TREMORSAURUS.get(),
 				ACEntityRegistry.VALLUMRAPTOR.get()
-		).addTag(EntityTypeTags.RAIDERS);
+		).addTag(EntityTypeTags.RAIDERS)
+				.addOptional(new ResourceLocation("alexsmobs:anteater"))
+				.addOptional(new ResourceLocation("alexsmobs:bison"))
+				.addOptional(new ResourceLocation("alexsmobs:cachalot_whale"))
+				.addOptional(new ResourceLocation("alexsmobs:capuchin_monkey"))
+				.addOptional(new ResourceLocation("alexsmobs:dropbear"))
+				.addOptional(new ResourceLocation("alexsmobs:elephant"))
+				.addOptional(new ResourceLocation("alexsmobs:froststalker"))
+				.addOptional(new ResourceLocation("alexsmobs:gazelle"))
+				.addOptional(new ResourceLocation("alexsmobs:gelada_monkey"))
+				.addOptional(new ResourceLocation("alexsmobs:gorilla"))
+				.addOptional(new ResourceLocation("alexsmobs:grizzly_bear"))
+				.addOptional(new ResourceLocation("alexsmobs:jerboa"))
+				.addOptional(new ResourceLocation("alexsmobs:kangaroo"))
+				.addOptional(new ResourceLocation("alexsmobs:maned_wolf"))
+				.addOptional(new ResourceLocation("alexsmobs:moose"))
+				.addOptional(new ResourceLocation("alexsmobs:bunfungus"))
+				.addOptional(new ResourceLocation("alexsmobs:murmur"))
+				.addOptional(new ResourceLocation("alexsmobs:orca"))
+				.addOptional(new ResourceLocation("alexsmobs:platypus"))
+				.addOptional(new ResourceLocation("alexsmobs:raccoon"))
+				.addOptional(new ResourceLocation("alexsmobs:rhinoceros"))
+				.addOptional(new ResourceLocation("alexsmobs:sea_bear"))
+				.addOptional(new ResourceLocation("alexsmobs:seal"))
+				.addOptional(new ResourceLocation("alexsmobs:skunk"))
+				.addOptional(new ResourceLocation("alexsmobs:maned_wolf"))
+				.addOptional(new ResourceLocation("alexsmobs:snow_leopard"))
+				.addOptional(new ResourceLocation("alexsmobs:sugar_glider"))
+				.addOptional(new ResourceLocation("alexsmobs:tasmanian_devil"))
+				.addOptional(new ResourceLocation("alexsmobs:tiger"))
+				.addOptional(new ResourceLocation("alexsmobs:tusklin"));
 
 		tag(VESPER_HUNT).add(
-				AMCompat.amEntityType(37),
-				AMCompat.amEntityType(38),
 				EntityType.BAT,
 				EntityType.SPIDER,
 				EntityType.CAVE_SPIDER
-		);
+		)
+				.addOptional(new ResourceLocation("alexsmobs:"))
+				.addOptional(new ResourceLocation("alexsmobs:cockroach"));
 	}
 
 	private static TagKey<EntityType<?>> create(ResourceLocation rl) {

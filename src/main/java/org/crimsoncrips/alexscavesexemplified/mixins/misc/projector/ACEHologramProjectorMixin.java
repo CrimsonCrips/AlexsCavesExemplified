@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACEBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -45,6 +46,7 @@ public abstract class ACEHologramProjectorMixin extends BaseEntityBlock {
                 worldIn.playSound((Player) null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);
                 accesor.setProjectionScale(accesor.getProjectionScale() - 1);
             }
+            ACEUtils.awardAdvancement(player,"resizing","resize");
         }
     }
 

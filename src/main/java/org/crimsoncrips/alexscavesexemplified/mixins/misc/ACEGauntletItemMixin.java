@@ -49,7 +49,7 @@ public abstract class ACEGauntletItemMixin extends Item {
     @ModifyExpressionValue(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/tags/TagKey;)Z"))
     private boolean onlyFlyIfAllowed(boolean original, @Local Player player, @Local InteractionHand interactionHand) {
         ItemStack itemstack = player.getItemInHand(interactionHand);
-        Entity itemLook = getClosestLookingAtEntityFor(player);
+        Entity itemLook = ACEUtils.getClosestLookingAtEntityFor(player);
         return original || ((itemLook instanceof ItemEntity item && item.getItem().is(ACTagRegistry.MAGNETIC_ITEMS) || (itemLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity)) && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && itemstack.getEnchantmentLevel(ACEEnchants.MAGNETICISM.get()) > 0);
     }
 
@@ -58,7 +58,7 @@ public abstract class ACEGauntletItemMixin extends Item {
         Entity itemlook = null;
 
         if (living instanceof Player player){
-            itemlook = getClosestLookingAtEntityFor(player);
+            itemlook = ACEUtils.getClosestLookingAtEntityFor(player);
         }
         for(MagneticWeaponEntity magneticWeapon : level.getEntitiesOfClass(MagneticWeaponEntity.class, living.getBoundingBox().inflate(48, 48, 48))){
             Entity controller = magneticWeapon.getController();
@@ -91,17 +91,7 @@ public abstract class ACEGauntletItemMixin extends Item {
         }
     }
 
-    private static Entity getClosestLookingAtEntityFor(Player player) {
-        Entity closestValid = null;
-        HitResult hitresult = ProjectileUtil.getHitResultOnViewVector(player, Entity::isAlive, 32);
-        if (hitresult instanceof EntityHitResult) {
-            Entity entity = ((EntityHitResult) hitresult).getEntity();
-            if (!entity.equals(player) && player.hasLineOfSight(entity)) {
-                closestValid = entity;
-            }
-        }
-        return closestValid;
-    }
+
 
     public boolean grabableItems(ItemStack item, ItemStack gauntlet){
         boolean crystallization = gauntlet.getEnchantmentLevel(ACEnchantmentRegistry.CRYSTALLIZATION.get()) > 0;

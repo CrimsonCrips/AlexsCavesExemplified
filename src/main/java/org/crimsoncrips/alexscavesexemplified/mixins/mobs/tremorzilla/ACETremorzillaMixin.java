@@ -1,8 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tremorzilla;
 
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
-import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
-import com.github.alexmodguy.alexscaves.server.entity.item.TephraEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.DinosaurEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.TremorzillaEntity;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
@@ -15,15 +13,11 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.WaterAnimal;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -31,9 +25,7 @@ import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACEParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.Gammafied;
-import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -46,7 +38,7 @@ import java.util.Iterator;
 
 import static net.minecraft.world.entity.EntityType.LIGHTNING_BOLT;
 
-@Debug(export=true)
+
 @Mixin(TremorzillaEntity.class)
 public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gammafied {
 
@@ -76,11 +68,9 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
     @Shadow public abstract void setFiring(boolean firing);
 
 
-    @Shadow public abstract Vec3 getBeamShootFrom(float partialTicks);
+    @Shadow public abstract boolean isTremorzillaSwimming();
 
-    @Shadow private float beamProgress;
-
-
+    @Shadow @Final private static EntityDimensions SWIMMING_SIZE;
     boolean sound;
 
     protected ACETremorzillaMixin(EntityType<? extends Monster> pEntityType, Level pLevel) {
@@ -97,6 +87,7 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
 
     public void setGamma(boolean val) {
         this.entityData.set(GAMMA, Boolean.valueOf(val));
+        refreshDimensions();
     }
 
     public boolean is2ndPhase() {
@@ -151,7 +142,7 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
 
         float determiner = this.getMaxHealth() / 3;
 
-        if (amount > determiner && this.getHealth() > determiner && !is2ndPhase() && isGamma() && AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get()){
+        if (amount > determiner && this.getHealth() > determiner && !isBaby() && !is2ndPhase() && isGamma() && AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && source.getEntity() != null){
             setAnimationBeaming(true);
             this.beamServerTarget = createInitialBeamVec();
             this.setMaxBeamBreakLength(180F);
@@ -159,52 +150,75 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
             setTarget(null);
             setLastHurtByMob(null);
             set2ndPhase(true);
+            getAttribute(Attributes.ARMOR).setBaseValue(12F);
+            getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(75F);
             return super.hurt(source, this.getHealth() - determiner);
         }
         return super.hurt(source, amount);
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose poseIn) {
+        return this.isTremorzillaSwimming() ? SWIMMING_SIZE.scale(this.getScale()) : super.getDimensions(poseIn).scale(this.getScale());
+    }
+
+    @Override
+    public float getScale() {
+        float gammaScale = isGamma() ? 1.2F : 1F;
+        return (this.isBaby() ? 0.15F : 1.0F) * gammaScale;
+    }
+
+    @ModifyReturnValue(method = "getBeamShootFrom", at = @At("RETURN"),remap = false)
+    private Vec3 alexsCavesExemplified$getBeamShootFrom(Vec3 original) {
+        return original.add(0,isGamma() ? 5F : 0F,0);
+    }
+
+    @ModifyConstant(method = "tickBreath",constant = @Constant(floatValue = 5.0F),remap = false)
+    private float modifyAmount(float amount) {
+        return isGamma() ? 10 : amount;
     }
 
     int spitDesire = 0;
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/DinosaurEntity;tick()V"))
     private void tick(CallbackInfo ci) {
-
         if (AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get()){
-            LivingEntity prevTarget = null;
-
-            if (prevTarget != getTarget()){
-                prevTarget = getTarget();
-            }
-
-
             Level level = this.level();
             if (this.getHealth() == this.getMaxHealth()){
                 this.set2ndPhase(false);
+                getAttribute(Attributes.ARMOR).setBaseValue(18F);
+                getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(50F);
             }
+
+            LivingEntity prevTarget = null;
+
 
             LivingEntity living = getTarget();
-            if (living != null && spitDesire >= 200 && !isAnimationBeaming() && beamProgress == 0 && is2ndPhase()) {
-
-
-                if (getAnimation() == TremorzillaEntity.NO_ANIMATION){
-                    setAnimation(TremorzillaEntity.ANIMATION_SPEAK);
-                }
-
-                if (getAnimation() == TremorzillaEntity.ANIMATION_SPEAK && getAnimationTick() == 10){
-                    for (int repeat = 0; repeat < 3; repeat++) {
-                        TephraEntity tephra = ACEntityRegistry.TEPHRA.get().create(level);
-                        tephra.setPos(getBeamShootFrom(1).add(this.getLookAngle()));
-                        tephra.setMaxScale(0.5F + level.random.nextFloat());
-                        Vec3 targetVec = living.position().subtract(getBeamShootFrom(1));
-                        tephra.setArcingTowards(living.getUUID());
-                        double d4 = Math.sqrt(targetVec.x * targetVec.x + targetVec.z * targetVec.z);
-                        double d5 = 0;
-                        tephra.shoot(targetVec.x, targetVec.y + 0.5F + d4 * 0.75F + d5, targetVec.z, (float) (d4 * 0.1F + d5), 1 + level.random.nextFloat() * 0.5F);
-                        level.addFreshEntity(tephra);
-                    }
-                    spitDesire = 0;
-                }
+            if (prevTarget != living){
+                prevTarget = living;
             }
+//            if (living != null && spitDesire >= 200 && !isAnimationBeaming() && beamProgress == 0 && is2ndPhase()) {
+//
+//
+//                if (getAnimation() == TremorzillaEntity.NO_ANIMATION){
+//                    setAnimation(TremorzillaEntity.ANIMATION_SPEAK);
+//                }
+//
+//                if (getAnimation() == TremorzillaEntity.ANIMATION_SPEAK && getAnimationTick() == 10){
+//                    for (int repeat = 0; repeat < 3; repeat++) {
+//                        TephraEntity tephra = ACEntityRegistry.TEPHRA.get().create(level);
+//                        tephra.setPos(getBeamShootFrom(1).add(this.getLookAngle()));
+//                        tephra.setMaxScale(0.5F + level.random.nextFloat());
+//                        Vec3 targetVec = living.position().subtract(getBeamShootFrom(1));
+//                        tephra.setArcingTowards(living.getUUID());
+//                        double d4 = Math.sqrt(targetVec.x * targetVec.x + targetVec.z * targetVec.z);
+//                        double d5 = 0;
+//                        tephra.shoot(targetVec.x, targetVec.y + 0.5F + d4 * 0.75F + d5, targetVec.z, (float) (d4 * 0.1F + d5), 1 + level.random.nextFloat() * 0.5F);
+//                        level.addFreshEntity(tephra);
+//                    }
+//                    spitDesire = 0;
+//                }
+//            }
 
             if (getAnimation() == ANIMATION_ROAR_2 && getAnimationTick() >= 20 && getAnimationTick() <= 45 && isAnimationBeaming()){
                 setFiring(true);
@@ -217,7 +231,7 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
                     int rotate = random.nextInt(0, 361);
                     for (int i = 0;i < 7;i++) {
                         rotate = rotate + 51;
-                        Vec3 vec3 = new Vec3(this.getX() + Math.cos(rotate * 10) * 18, this.getY(), this.getZ() + Math.sin(rotate * 10) * 18);
+                        Vec3 vec3 = new Vec3(this.getX() + Math.cos(rotate * 10) * 2, this.getY(), this.getZ() + Math.sin(rotate * 10) * 2);
 
                         LightningBolt lightningBolt = LIGHTNING_BOLT.create(level);
                         if (lightningBolt != null) {
@@ -235,7 +249,7 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
             }
 
             if (!sound && getAnimation() == ANIMATION_ROAR_2 && getAnimationTick() == 15 && isAnimationBeaming()){
-                this.playSound(ACSoundRegistry.TREMORZILLA_ROAR.get(), 8.0F, 1.0F);
+                this.playSound(ACSoundRegistry.TREMORZILLA_ROAR.get(), 8.0F, isBaby() ? 2F : 1F);
                 sound = true;
             }
 
@@ -246,6 +260,11 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
             this.setGamma(false);
             this.set2ndPhase(false);
         }
+    }
+
+    @ModifyArg(method = "positionRider", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity$MoveFunction;accept(Lnet/minecraft/world/entity/Entity;DDD)V"),index = 2)
+    private double positionRider(double pY) {
+        return pY + (this.isTremorzillaSwimming() ? 0 : 4);
     }
 
 
@@ -285,6 +304,8 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
             living.setRemainingFireTicks(1000);
         }
     }
+
+
 
 
 

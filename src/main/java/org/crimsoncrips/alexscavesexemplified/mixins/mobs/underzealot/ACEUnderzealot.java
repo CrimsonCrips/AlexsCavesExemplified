@@ -35,6 +35,8 @@ import net.minecraftforge.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
+import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACELootTables;
+import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACEManualLoot;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEMobTargetClosePlayers;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEUnderzealotExtinguishCampfires;
@@ -110,7 +112,7 @@ public abstract class ACEUnderzealot extends Monster {
                         ACEUtils.awardAdvancement(player, "vesper_trade", "vesper");
                     }
                     if (lasso){
-                        leashedEntities.spawnAtLocation(new ItemStack(AMCompat.amItemRegistry(3)));
+                        leashedEntities.spawnAtLocation(new ItemStack(AMCompat.amItemRegistry(1)));
                         AMCompat.vineLassoTo(null,leashedEntities);
                     } else {
                         leashedEntities.dropLeash(true,true);
@@ -121,13 +123,7 @@ public abstract class ACEUnderzealot extends Monster {
 
                     boolean happy;
                     if (AlexsCavesExemplified.COMMON_CONFIG.UNDERZEALOT_RESPECT_ENABLED.get() && respect){
-                        if (level instanceof ServerLevel serverLevel){
-                            ResourceLocation sacrificeLocation = new ResourceLocation(AlexsCavesExemplified.MODID, "entities/underzealot_trade");
-                            LootParams ctx = new LootParams.Builder(serverLevel).withParameter(LootContextParams.THIS_ENTITY, underzealot).create(LootContextParamSets.EMPTY);
-                            ObjectArrayList<ItemStack> rewards = level.getServer().getLootData().getLootTable(sacrificeLocation).getRandomItems(ctx);
-
-                            rewards.forEach(stack -> BehaviorUtils.throwItem(underzealot, rewards.get(0), player.position().add(0.0D, 1.0D, 0.0D)));
-                        }
+                        ACEUtils.spawnLoot(ACELootTables.UNDERZEALOT_TRADE,underzealot,player,0);
                         happy = true;
                     } else {
                         happy = false;

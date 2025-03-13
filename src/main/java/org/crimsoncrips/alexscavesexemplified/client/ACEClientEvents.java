@@ -27,10 +27,6 @@ public class ACEClientEvents {
                 preEvent.getPoseStack().translate(vibrate,  vibrate, vibrate);
             }
         }
-        if (preEvent.getEntity() instanceof WatcherEntity watcherEntity && watcherEntity.tickCount > 2000) {
-            preEvent.getPoseStack().pushPose();
-            vibrate = (preEvent.getEntity().getRandom().nextFloat() - 0.5F) * (Math.sin((double) preEvent.getEntity().tickCount / 50) * 0.5 + 0.5) * 0.1;
-        }
         if (preEvent.getEntity() instanceof CaniacEntity) {
             preEvent.getPoseStack().pushPose();
             vibrate = (preEvent.getEntity().getRandom().nextFloat() - 0.5F) * (Math.sin((double) preEvent.getEntity().tickCount / 50) * 0.5 + 0.5) * 0.1;
@@ -46,19 +42,11 @@ public class ACEClientEvents {
         if (postEvent.getEntity().hasEffect(ACEEffects.RABIAL.get())) {
             postEvent.getPoseStack().popPose();
         }
-        if (postEvent.getEntity() instanceof WatcherEntity watcherEntity && watcherEntity.tickCount > 10000) {
-            postEvent.getPoseStack().popPose();
-        }
         if (postEvent.getEntity() instanceof CaniacEntity) {
             postEvent.getPoseStack().popPose();
         }
     }
 
-    @SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent event) {
-
-
-    }
 
 
 }

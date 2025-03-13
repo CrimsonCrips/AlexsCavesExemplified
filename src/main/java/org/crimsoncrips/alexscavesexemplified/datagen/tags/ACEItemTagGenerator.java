@@ -32,7 +32,8 @@ public class ACEItemTagGenerator extends ItemTagsProvider {
         super(output, future, provider, AlexsCavesExemplified.MODID, helper);
     }
 
-	@Override
+	@SuppressWarnings("unchecked")
+    @Override
 	protected void addTags(HolderLookup.Provider provider) {
 
 		tag(COLD_FOOD).add(
@@ -55,10 +56,10 @@ public class ACEItemTagGenerator extends ItemTagsProvider {
 				ACBlockRegistry.THIN_BONE.get().asItem(),
 				ACBlockRegistry.BONE_NODULE.get().asItem(),
 				ACBlockRegistry.BONE_RIBS.get().asItem(),
-				ACBlockRegistry.BALEEN_BONE.get().asItem(),
-				AMCompat.amItemRegistry(1),
-				AMCompat.amItemRegistry(2)
-		);
+				ACBlockRegistry.BALEEN_BONE.get().asItem()
+		)
+				.addOptional(new ResourceLocation("alexsmobs:fish_bones"))
+				.addOptional(new ResourceLocation("alexsmobs:skelewag_sword"));
 
 		tag(KNAWING).add(
 				Items.LEATHER,
@@ -79,26 +80,27 @@ public class ACEItemTagGenerator extends ItemTagsProvider {
 				Items.BRICK_SLAB,
 				Items.BRICK_STAIRS,
 				Items.BRICK_WALL,
-				CreateCompat.createBlockRegistry(3).asItem(),
-				CreateCompat.createBlockRegistry(4).asItem(),
 				Items.HAY_BLOCK,
 				Items.PAPER,
 				Items.PUMPKIN,
 				Items.BAMBOO
-		)
-				.addTag(ItemTags.PLANKS)
-				.addTag(ItemTags.WOODEN_TRAPDOORS)
-				.addTag(ItemTags.WOOL_CARPETS)
-				.addTag(ItemTags.WOOL)
-				.addTag(ItemTags.BANNERS)
-				.addTag(ItemTags.CANDLES)
-				.addTag(ItemTags.HANGING_SIGNS)
-				.addTag(ItemTags.LOGS)
-				.addTag(ItemTags.SAPLINGS)
-				.addTag(ItemTags.SIGNS)
-				.addTag(ItemTags.LEAVES)
-				.addTag(ItemTags.BAMBOO_BLOCKS)
-				.addTag(ItemTags.SMALL_FLOWERS);
+		).addTags(ItemTags.PLANKS,
+                ItemTags.WOODEN_TRAPDOORS,
+                ItemTags.WOOL_CARPETS,
+                ItemTags.WOOL,
+                ItemTags.BANNERS,
+                ItemTags.CANDLES,
+                ItemTags.HANGING_SIGNS,
+                ItemTags.LOGS,
+                ItemTags.SAPLINGS,
+                ItemTags.SIGNS,
+                ItemTags.LEAVES,
+                ItemTags.BAMBOO_BLOCKS,
+                ItemTags.SMALL_FLOWERS
+        )
+				.addOptional(new ResourceLocation("create:fluid_pipe"))
+				.addOptional(new ResourceLocation("create:smart_fluid_pipe"));
+
 
 		tag(LIGHT).add(
 				Items.SHROOMLIGHT,

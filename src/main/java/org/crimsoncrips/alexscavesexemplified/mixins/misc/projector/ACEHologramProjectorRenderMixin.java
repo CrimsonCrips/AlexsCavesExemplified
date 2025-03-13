@@ -3,16 +3,17 @@ package org.crimsoncrips.alexscavesexemplified.mixins.misc.projector;
 import com.github.alexmodguy.alexscaves.client.render.blockentity.HologramProjectorBlockRenderer;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.HologramProjectorBlockEntity;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACEBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 
 @Mixin(HologramProjectorBlockRenderer.class)
@@ -43,5 +44,9 @@ public abstract class ACEHologramProjectorRenderMixin <T extends HologramProject
         poseStack.translate(0,-((scale - 1) * 0.5) ,0);
     }
 
-
+    @Override
+    public boolean shouldRender(T pBlockEntity, Vec3 pCameraPos) {
+        ACEBaseInterface accesor = (ACEBaseInterface)pBlockEntity;
+        return Vec3.atCenterOf(pBlockEntity.getBlockPos()).closerThan(pCameraPos, 128 * (accesor.getProjectionScale() > 0 ? accesor.getProjectionScale() : 1));
+    }
 }

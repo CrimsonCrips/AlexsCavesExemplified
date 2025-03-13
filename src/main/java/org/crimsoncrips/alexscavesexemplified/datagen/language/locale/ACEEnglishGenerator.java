@@ -118,6 +118,7 @@ public class ACEEnglishGenerator extends ACELangProvider {
 		this.addAdvancementDesc("seethed_taming","Satisfied Dino", "Tame a Tremor by seething it with enough meat");
 		this.addAdvancementDesc("propogate","Primordial Propogation", "Propogate flora in the primordial caves");
 
+		this.addAdvancementDesc("rusting","Long-Forgotten Weapon", "Rust a nucleeper by dousing it in acid");
 		this.addAdvancementDesc("deathly_radiation","Deathly Radiation", "Have your body submit to immense radiation");
 		this.addAdvancementDesc("washing_radiation","Nuclear Wash", "Wash off radiation with water, soap is applicable");
 		this.addAdvancementDesc("kirov_reporting","Kirov, Reporting!", "Drop an explosive, during flight");
@@ -126,7 +127,7 @@ public class ACEEnglishGenerator extends ACELangProvider {
 		this.addAdvancementDesc("nucleeper_annhilation","World War Nucleeper", "Chain react 10 nucleepers");
 		this.addAdvancementDesc("convert_fish","Ocean Pollution", "Convert a fish into a radgill with acid");
 		this.addAdvancementDesc("convert_cat","+1 Braincell", "Convert a cat into a raycat with acid");
-		this.addAdvancementDesc("gamma_tremorzilla","King Of The Monsters", "Convert a tremorzilla into a gamma tremorzilla with a gamma nuclear explosion");
+		this.addAdvancementDesc("gamma_tremorzilla","Gammazilla", "Convert a tremorzilla into a gamma tremorzilla with a gamma nuclear explosion");
 		this.addAdvancementDesc("gamma_tremorzilla_kill","Legend Killer", "Kill off a gamma tremorzilla");
 		this.addAdvancementDesc("defusing","Defused Payload", "Defuse a Nucleeper");
 

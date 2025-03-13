@@ -1,23 +1,31 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
 import com.github.alexmodguy.alexscaves.server.block.AcidBlock;
+import com.github.alexmodguy.alexscaves.server.entity.item.MagneticWeaponEntity;
+import com.github.alexmodguy.alexscaves.server.entity.living.AtlatitanEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.DeepOneBaseEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
 import com.github.alexmodguy.alexscaves.server.item.MarineSnowItem;
 import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.crimsoncrips.alexscavesexemplified.ACEReflectionUtil;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -41,9 +49,12 @@ public class ACEAcidMixin extends LiquidBlock {
             entity.playSound( ACSoundRegistry.ACID_BURN.get());
             nucleeper.getAttribute(Attributes.ARMOR).setBaseValue(2F);
             nucleeper.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20F);
-            nucleeper.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.05F);
+            nucleeper.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.15F);
             nucleeper.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(2F);
             nucleeper.setHealth(20F);
+            for(Player player : level.getEntitiesOfClass(Player.class, nucleeper.getBoundingBox().inflate(6, 6, 6))){
+                ACEUtils.awardAdvancement(player,"rusting","rust");
+            }
         }
     }
 

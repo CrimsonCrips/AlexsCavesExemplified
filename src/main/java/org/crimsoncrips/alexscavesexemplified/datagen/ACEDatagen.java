@@ -11,6 +11,7 @@ import org.crimsoncrips.alexscavesexemplified.datagen.advancement.ACEAdvancement
 import org.crimsoncrips.alexscavesexemplified.datagen.language.locale.ACEEnglishGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACELootGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.recipe.ACERecipeGenerator;
+import org.crimsoncrips.alexscavesexemplified.datagen.sounds.ACESoundGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEEntityTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEItemTagGenerator;
@@ -28,7 +29,7 @@ public class ACEDatagen {
         PackOutput output = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
         ExistingFileHelper helper = event.getExistingFileHelper();
-
+        generator.addProvider(event.includeClient(), new ACESoundGenerator(output, helper));
         generator.addProvider(event.includeServer(), new ACERegistryDataGenerator(output, provider));
         generator.addProvider(event.includeServer(), new ACEAdvancementProvider(output, provider, helper));
         generator.addProvider(event.includeServer(), new ACELootGenerator(output));

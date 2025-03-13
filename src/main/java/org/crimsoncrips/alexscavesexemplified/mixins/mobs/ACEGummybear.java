@@ -84,7 +84,7 @@ public abstract class ACEGummybear extends Animal {
             this.sleepFor = 24000 * (2 + this.random.nextInt(2));
             if (AlexsCavesExemplified.COMMON_CONFIG.JELLYBEAN_CHANGES_ENABLED.get()) {
                 this.setVariable = sleepFor;
-                this.jellybeansToMake = 1 + setVariable / 4000;
+                this.jellybeansToMake = 1 + setVariable / 8000;
             } else {
                 this.jellybeansToMake = this.random.nextInt(2) + 3;
             }

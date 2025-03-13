@@ -199,10 +199,9 @@ public class ACExemplifiedEvents {
         Entity target = event.getTarget();
 
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get() && player.isCrouching()) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get() && player.isCrouching() && player.getEffect(MobEffects.HUNGER) != null) {
 
-            if (player.getEffect(MobEffects.HUNGER) == null)
-                return;
+
             if (target instanceof GingerbreadManEntity gingerbread && !gingerbread.isOvenSpawned()) {
                 ParticleOptions particle = new ItemParticleOption(ParticleTypes.ITEM, ACItemRegistry.GINGERBREAD_CRUMBS.get().asItem().getDefaultInstance());
                 Vec3 lookAngle = player.getLookAngle();
@@ -508,12 +507,9 @@ public class ACExemplifiedEvents {
 
 
         if (AlexsCavesExemplified.COMMON_CONFIG.DISORIENTED_ENABLED.get() && !level.isClientSide && livingEntity instanceof WatcherEntity watcherEntity){
-            Entity possessedEntity = watcherEntity.getPossessedEntity();
-            if (possessedEntity != null && possessedEntity.isAlive()) {
-                if (possessedEntity.getId() != watcherEntity.getId() && possessedEntity instanceof Player player) {
-                    player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 80, 0));
-                    player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 0));
-                }
+            if (watcherEntity.getPossessedEntity() instanceof Player player) {
+                player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 80, 0));
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 0));
             }
         }
 
@@ -572,7 +568,7 @@ public class ACExemplifiedEvents {
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.SOLIDIFIED_WATCHER_ENABLED.get() && livingEntity instanceof WatcherEntity watcherEntity){
-            if (watcherEntity.tickCount > 3000){
+            if (watcherEntity.tickCount > 3000 && watcherEntity.getVehicle() == null && !watcherEntity.isVehicle()){
                 BlockPos blockPos = watcherEntity.getOnPos().above();
 
                 for (int i = 0; i < 3; i++){

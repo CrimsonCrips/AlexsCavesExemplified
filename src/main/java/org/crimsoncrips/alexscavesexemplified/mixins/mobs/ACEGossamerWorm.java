@@ -14,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACELootTables;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -46,7 +47,7 @@ public abstract class ACEGossamerWorm extends WaterAnimal implements TargetsDrop
     public void onGetItem(ItemEntity itemEntity) {
         this.heal(1);
         itemEntity.getItem().shrink(1);
-        this.spawnAtLocation(ACItemRegistry.BIOLUMINESSCENCE.get());
+        ACEUtils.spawnLoot(ACELootTables.UNDERZEALOT_TRADE,this,this,0);
         ACEUtils.awardAdvancement(itemEntity.getOwner(),"gossamer_feed","fed");
     }
 

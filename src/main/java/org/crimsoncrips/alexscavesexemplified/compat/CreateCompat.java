@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidType;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.spongepowered.asm.mixin.Unique;
 
 public class CreateCompat {
@@ -40,7 +41,7 @@ public class CreateCompat {
                         frostmintSpear.discard();
                         explode(level,frostmintSpear);
                     }
-
+                    ACEUtils.awardAdvancement(frostmintSpear.getOwner(),"frostmint_freeze","freeze");
                 }
             }
         }
@@ -70,24 +71,8 @@ public class CreateCompat {
         return i;
     }
 
-    public static boolean presenceCheck(boolean chocolate){
-        if (chocolate){
-            return AllFluids.CHOCOLATE.getBlock().isPresent();
-        } else {
-            return AllFluids.HONEY.getBlock().isPresent();
-        }
-    }
-
-    public static Block createBlockRegistry(int num){
-        return switch (num) {
-            case 1 -> AllFluids.CHOCOLATE.getBlock().get();
-            case 2 -> AllFluids.HONEY.getBlock().get();
-            case 3 -> AllBlocks.FLUID_PIPE.get();
-            case 4 -> AllBlocks.SMART_FLUID_PIPE.get();
 
 
-            default -> throw new IllegalStateException("Unexpected value: " + num);
-        };
-    }
+
 
 }

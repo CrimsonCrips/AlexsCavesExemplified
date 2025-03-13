@@ -3,6 +3,7 @@ package org.crimsoncrips.alexscavesexemplified.mixins.mobs.nucleeper;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
+import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -71,6 +72,12 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
     private void alexsCavesExemplified$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (player.getItemInHand(hand).is(Items.SHEARS) && !alexsCavesExemplified$isDefused() && AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get()){
             ACEUtils.awardAdvancement(player,"defusing","defuse");
+            this.setTriggered(false);
+            this.playSound(SoundEvents.SHEEP_SHEAR);
+            alexsCavesExemplified$setDefused(true);
+        }
+        if (player.getItemInHand(hand).is(ACItemRegistry.ACID_BUCKET.get()) && !alexsCavesExemplified$isRusted() && AlexsCavesExemplified.COMMON_CONFIG.RUSTED_NUCLEEPER_ENABLED.get()){
+            ACEUtils.awardAdvancement(player,"rusting","rust");
             this.setTriggered(false);
             this.playSound(SoundEvents.SHEEP_SHEAR);
             alexsCavesExemplified$setDefused(true);
