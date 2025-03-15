@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:toxic",
+  "criteria": {
+    "convert": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.convert_fish.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/convert_fish.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.convert_fish"
+    }
+  },
+  "requirements": [
+    [
+      "convert"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

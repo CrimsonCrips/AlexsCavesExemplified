@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:abyssal",
+  "criteria": {
+    "bump": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.submarine_bump.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "alexscaves:submarine"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.submarine_bump"
+    }
+  },
+  "requirements": [
+    [
+      "bump"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

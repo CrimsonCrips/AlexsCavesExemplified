@@ -1,10 +1,12 @@
 package org.crimsoncrips.alexscavesexemplified.client;
 
+import com.github.alexmodguy.alexscaves.client.event.ClientEvents;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.client.particle.TephraParticle;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -17,6 +19,7 @@ import org.crimsoncrips.alexscavesexemplified.client.particle.*;
 public class ACEClientProxy extends ACECommonProxy {
 
     public void init() {
+        MinecraftForge.EVENT_BUS.register(new ACEClientEvents());
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         bus.addListener(this::setupParticles);
     }

@@ -1,0 +1,33 @@
+{
+  "parent": "alexscavesexemplified:nuclear_mines",
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.nuclear_kill.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/nuclear_kill.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.nuclear_kill"
+    }
+  },
+  "requirements": [
+    [
+      "killed"
+    ]
+  ],
+  "rewards": {
+    "experience": 10
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:defusing",
+  "criteria": {
+    "chain": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.chain_reaction.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/chain_reaction.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.chain_reaction"
+    }
+  },
+  "requirements": [
+    [
+      "chain"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

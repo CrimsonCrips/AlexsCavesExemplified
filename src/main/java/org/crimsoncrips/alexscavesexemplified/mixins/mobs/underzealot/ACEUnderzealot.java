@@ -7,6 +7,7 @@ import com.github.alexmodguy.alexscaves.server.entity.living.UnderzealotEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.VesperEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.UnderzealotSacrifice;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
+import com.github.alexthe666.alexsmobs.entity.*;
 import com.github.alexthe666.alexsmobs.entity.util.VineLassoUtil;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -104,11 +105,15 @@ public abstract class ACEUnderzealot extends Monster {
             for (Mob leashedEntities : level.getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(10))) {
                 boolean lasso = ModList.get().isLoaded("alexsmobs") && AMCompat.isLeashed(leashedEntities,player);
                 if ((leashedEntities.getLeashHolder() == player || lasso) && leashedEntities instanceof UnderzealotSacrifice) {
+                    int tradeDeterminer = 0;
                     if (leashedEntities instanceof GloomothEntity) {
+                        tradeDeterminer = 1;
                         ACEUtils.awardAdvancement(player, "gloomoth_trade", "gloomoth");
                     } else if (leashedEntities instanceof CorrodentEntity) {
+                        tradeDeterminer = 2;
                         ACEUtils.awardAdvancement(player, "corrodent_trade", "corrodent");
                     } else if (leashedEntities instanceof VesperEntity) {
+                        tradeDeterminer = 3;
                         ACEUtils.awardAdvancement(player, "vesper_trade", "vesper");
                     }
                     if (lasso){
@@ -123,7 +128,12 @@ public abstract class ACEUnderzealot extends Monster {
 
                     boolean happy;
                     if (AlexsCavesExemplified.COMMON_CONFIG.UNDERZEALOT_RESPECT_ENABLED.get() && respect){
-                        ACEUtils.spawnLoot(ACELootTables.UNDERZEALOT_TRADE,underzealot,player,0);
+                        ResourceLocation resourceLocation = switch (tradeDeterminer) {
+                            case 1 -> ACELootTables.GLOOMOTH_TRADE;
+                            case 2 -> ACELootTables.CORRODENT_TRADE;
+                            default -> ACELootTables.VESPER_TRADE;
+                        };
+                        ACEUtils.spawnLoot(resourceLocation,underzealot,player,0);
                         happy = true;
                     } else {
                         happy = false;

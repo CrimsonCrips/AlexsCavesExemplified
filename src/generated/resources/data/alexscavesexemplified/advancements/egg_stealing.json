@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:primordial",
+  "criteria": {
+    "stole": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.egg_stealing.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "alexscavesexemplified:dino_eggs"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.egg_stealing"
+    }
+  },
+  "requirements": [
+    [
+      "stole"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

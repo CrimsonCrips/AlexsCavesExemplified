@@ -49,7 +49,7 @@ public abstract class ACEGauntletItemMixin extends Item {
     @ModifyExpressionValue(method = "use", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;is(Lnet/minecraft/tags/TagKey;)Z"))
     private boolean onlyFlyIfAllowed(boolean original, @Local Player player, @Local InteractionHand interactionHand) {
         ItemStack itemstack = player.getItemInHand(interactionHand);
-        Entity itemLook = ACEUtils.getClosestLookingAtEntityFor(player);
+        Entity itemLook = ACEUtils.getLookingAtEntity(player);
         return original || ((itemLook instanceof ItemEntity item && item.getItem().is(ACTagRegistry.MAGNETIC_ITEMS) || (itemLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity)) && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && itemstack.getEnchantmentLevel(ACEEnchants.MAGNETICISM.get()) > 0);
     }
 
@@ -58,7 +58,7 @@ public abstract class ACEGauntletItemMixin extends Item {
         Entity itemlook = null;
 
         if (living instanceof Player player){
-            itemlook = ACEUtils.getClosestLookingAtEntityFor(player);
+            itemlook = ACEUtils.getLookingAtEntity(player);
         }
         for(MagneticWeaponEntity magneticWeapon : level.getEntitiesOfClass(MagneticWeaponEntity.class, living.getBoundingBox().inflate(48, 48, 48))){
             Entity controller = magneticWeapon.getController();

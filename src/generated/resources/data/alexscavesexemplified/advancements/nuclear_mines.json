@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:mine_ownership",
+  "criteria": {
+    "nuke_mine": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.nuclear_mines.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/nuclear_mines.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.nuclear_mines"
+    }
+  },
+  "requirements": [
+    [
+      "nuke_mine"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

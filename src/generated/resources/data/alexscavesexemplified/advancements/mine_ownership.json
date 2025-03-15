@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:abyssal",
+  "criteria": {
+    "own": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.mine_ownership.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/mine_ownership.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.mine_ownership"
+    }
+  },
+  "requirements": [
+    [
+      "own"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

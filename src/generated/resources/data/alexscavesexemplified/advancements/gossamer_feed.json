@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:abyssal",
+  "criteria": {
+    "fed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.gossamer_feed.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "alexscaves:marine_snow"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.gossamer_feed"
+    }
+  },
+  "requirements": [
+    [
+      "fed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

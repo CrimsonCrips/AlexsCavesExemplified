@@ -63,14 +63,6 @@ public abstract class ACECorrodent extends Monster implements UnderzealotSacrifi
             corrodent.targetSelector.addGoal(1, new ACEKnawingGoal(corrodent, false));
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get()){
-            this.goalSelector.addGoal(2, new CorrodentAttackGoal(corrodent){
-                @Override
-                public boolean canContinueToUse() {
-                    return super.canContinueToUse() && getHealth() <= 0.3F * getMaxHealth();
-                }
-            });
-        }
 
 
     }
@@ -82,12 +74,12 @@ public abstract class ACECorrodent extends Monster implements UnderzealotSacrifi
 
     @Override
     public boolean isValidSacrifice(int distanceFromGround) {
-        return AlexsCavesExemplified.COMMON_CONFIG.CORRODENT_CONVERSION_ENABLED.get() && this.getHealth() <= 0.30F * this.getMaxHealth() ;
+        return AlexsCavesExemplified.COMMON_CONFIG.CORRODENT_CONVERSION_ENABLED.get() && !isLeashed();
     }
 
     @Override
     public boolean canBeLeashed(Player pPlayer) {
-        return super.canBeLeashed(pPlayer) || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && getHealth() <= 0.30F * getMaxHealth());
+        return super.canBeLeashed(pPlayer) || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get());
     }
 
 
@@ -123,16 +115,9 @@ public abstract class ACECorrodent extends Monster implements UnderzealotSacrifi
             }
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && isLeashed()){
-            this.setTarget(null);
-        }
     }
 
 
-    @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 2))
-    private boolean alexsCavesExemplified$Attack(GoalSelector instance, int pPriority, Goal pGoal) {
-        return !AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get();
-    }
 
     @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 8))
     private boolean alexsCavesExemplified$nearestAttack(GoalSelector instance, int pPriority, Goal pGoal) {

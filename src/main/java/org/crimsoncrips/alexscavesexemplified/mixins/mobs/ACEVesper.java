@@ -70,14 +70,6 @@ public abstract class ACEVesper extends Monster {
             this.targetSelector.addGoal(3, new ACEVesperTarget<>(vesper, 32.0F, LivingEntity.class, buildPredicateFromTag(ACEEntityTagGenerator.VESPER_HUNT)));
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get()){
-            this.goalSelector.addGoal(1, new VesperAttackGoal(vesper){
-                @Override
-                public boolean canContinueToUse() {
-                    return super.canContinueToUse() && getHealth() <= 0.2F * getMaxHealth() && !vesper.isLeashed();
-                }
-            });
-        }
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
@@ -90,16 +82,12 @@ public abstract class ACEVesper extends Monster {
             }
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && isLeashed()){
-            this.setTarget(null);
-        }
-
 
     }
 
     @Override
     public boolean canBeLeashed(Player pPlayer) {
-        return super.canBeLeashed(pPlayer) || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && getHealth() <= 0.2F * getMaxHealth());
+        return super.canBeLeashed(pPlayer) || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get());
     }
 
     @Override
@@ -127,9 +115,5 @@ public abstract class ACEVesper extends Monster {
         return entityTag == null ? Predicates.alwaysFalse() : (e) -> e.isAlive() && e.getType().is(entityTag);
     }
 
-    @ModifyReturnValue(method = "isValidSacrifice", at = @At("RETURN"),remap = false)
-    private boolean alexsCavesExemplified$isValidSacrifice(boolean original) {
-        return original && (!AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() || !this.isLeashed());
-    }
 
 }

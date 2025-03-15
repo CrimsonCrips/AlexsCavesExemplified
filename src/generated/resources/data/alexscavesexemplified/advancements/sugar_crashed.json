@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:gluttony",
+  "criteria": {
+    "crashed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.sugar_crashed.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/mob_effect/sugar_crash.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.sugar_crashed"
+    }
+  },
+  "requirements": [
+    [
+      "crashed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

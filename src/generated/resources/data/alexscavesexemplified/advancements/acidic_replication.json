@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:magnetic",
+  "criteria": {
+    "replicate": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.acidic_replication.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "alexscaves:acidic_radrock"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.acidic_replication"
+    }
+  },
+  "requirements": [
+    [
+      "replicate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

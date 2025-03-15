@@ -16,7 +16,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.commons.lang3.tuple.Pair;
 import org.crimsoncrips.alexscavesexemplified.client.ACEClientConfig;
-import org.crimsoncrips.alexscavesexemplified.client.ACEClientEvents;
 import org.crimsoncrips.alexscavesexemplified.client.ACEClientProxy;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACEParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDatagen;
@@ -72,7 +71,6 @@ public class AlexsCavesExemplified {
         ACEEffects.EFFECT_REGISTER.register(modEventBus);
         ACESoundRegistry.DEF_REG.register(modEventBus);
         ACEEffects.POTION_REGISTER.register(modEventBus);
-        MinecraftForge.EVENT_BUS.register(new ACEClientEvents());
 
         modEventBus.addListener(this::setup);
 

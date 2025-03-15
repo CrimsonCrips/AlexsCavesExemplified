@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:toxic",
+  "criteria": {
+    "feedroach": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.feed_roach.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "alexscaves:toxic_paste"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.feed_roach"
+    }
+  },
+  "requirements": [
+    [
+      "feedroach"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

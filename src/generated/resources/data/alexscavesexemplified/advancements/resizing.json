@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:magnetic",
+  "criteria": {
+    "resize": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.resizing.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "alexscaves:holocoder"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.resizing"
+    }
+  },
+  "requirements": [
+    [
+      "resize"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

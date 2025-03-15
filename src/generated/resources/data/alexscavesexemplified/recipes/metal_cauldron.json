@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "i": {
+      "tag": "minecraft:iron_ores"
+    },
+    "s": {
+      "item": "alexscaves:scrap_metal_plate"
+    }
+  },
+  "pattern": [
+    "s s",
+    "i i",
+    "iii"
+  ],
+  "result": {
+    "count": 2,
+    "item": "alexscavesexemplified:metal_cauldron"
+  },
+  "show_notification": true
+}

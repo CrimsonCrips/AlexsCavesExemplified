@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:magnetic",
+  "criteria": {
+    "shock": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.tesla_shock.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/tesla_shock.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.tesla_shock"
+    }
+  },
+  "requirements": [
+    [
+      "shock"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:toxic",
+  "criteria": {
+    "rust": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.rusting.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "alexscaves:acid_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.rusting"
+    }
+  },
+  "requirements": [
+    [
+      "rust"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

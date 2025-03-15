@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:abyssal",
+  "criteria": {
+    "affect": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.ecological_reputation.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/ecological_reputation.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.ecological_reputation"
+    }
+  },
+  "requirements": [
+    [
+      "affect"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

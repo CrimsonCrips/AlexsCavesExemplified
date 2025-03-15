@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:candy",
+  "criteria": {
+    "consumed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.dropped_consumption.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/dropped_consumption.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.dropped_consumption"
+    }
+  },
+  "requirements": [
+    [
+      "consumed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,24 @@
+{
+  "values": [
+    "minecraft:bone_block",
+    "minecraft:bone",
+    "alexscaves:heavy_bone",
+    "alexscaves:smooth_bone",
+    "alexscaves:smooth_bone_stairs",
+    "alexscaves:smooth_bone_slab",
+    "alexscaves:smooth_bone_wall",
+    "alexscaves:hollow_bone",
+    "alexscaves:thin_bone",
+    "alexscaves:bone_nodule",
+    "alexscaves:bone_ribs",
+    "alexscaves:baleen_bone",
+    {
+      "id": "alexsmobs:fish_bones",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:skelewag_sword",
+      "required": false
+    }
+  ]
+}

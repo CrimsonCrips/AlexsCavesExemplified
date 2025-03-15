@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:sticky_soda",
+  "criteria": {
+    "colored": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.purple_coloring.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:purple_dye"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.purple_coloring"
+    }
+  },
+  "requirements": [
+    [
+      "colored"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

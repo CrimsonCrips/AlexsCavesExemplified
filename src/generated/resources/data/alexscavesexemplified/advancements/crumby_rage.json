@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:amputate",
+  "criteria": {
+    "raged": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.crumby_rage.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "alexscaves:gingerbread_crumbs"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.crumby_rage"
+    }
+  },
+  "requirements": [
+    [
+      "raged"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

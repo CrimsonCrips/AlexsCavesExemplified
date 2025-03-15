@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:acidic_replication",
+  "criteria": {
+    "replicate": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.soda_replication.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "alexscaves:purple_soda_bottle"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.soda_replication"
+    }
+  },
+  "requirements": [
+    [
+      "replicate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

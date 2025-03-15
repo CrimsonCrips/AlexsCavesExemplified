@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:candy",
+  "criteria": {
+    "bake": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.breaking_candy.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/breaking_candy.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.breaking_candy"
+    }
+  },
+  "requirements": [
+    [
+      "bake"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

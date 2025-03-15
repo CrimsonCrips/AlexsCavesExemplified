@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:candy",
+  "criteria": {
+    "stick": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.sticky_soda.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/sticky_soda.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.sticky_soda"
+    }
+  },
+  "requirements": [
+    [
+      "stick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

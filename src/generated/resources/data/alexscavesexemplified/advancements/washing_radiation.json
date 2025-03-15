@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:deathly_radiation",
+  "criteria": {
+    "wash": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.washing_radiation.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:water_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.washing_radiation"
+    }
+  },
+  "requirements": [
+    [
+      "wash"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

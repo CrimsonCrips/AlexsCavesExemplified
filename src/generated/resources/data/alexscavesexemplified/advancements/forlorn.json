@@ -1,0 +1,31 @@
+{
+  "parent": "alexscavesexemplified:root",
+  "criteria": {
+    "tick": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.forlorn_hollows.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscaves:textures/misc/advancement/icon/forlorn_hollows.png\"}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.forlorn_hollows"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

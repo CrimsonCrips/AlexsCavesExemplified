@@ -1,0 +1,31 @@
+{
+  "parent": "alexscavesexemplified:root",
+  "criteria": {
+    "tick": {
+      "conditions": {},
+      "trigger": "minecraft:tick"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.candy_cavity.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscaves:textures/misc/advancement/icon/candy_cavity.png\"}"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.candy_cavity"
+    }
+  },
+  "requirements": [
+    [
+      "tick"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

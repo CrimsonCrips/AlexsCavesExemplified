@@ -1,0 +1,163 @@
+{
+  "values": [
+    "minecraft:bat",
+    "minecraft:camel",
+    "minecraft:cat",
+    "minecraft:cow",
+    "minecraft:donkey",
+    "minecraft:horse",
+    "minecraft:mooshroom",
+    "minecraft:mule",
+    "minecraft:ocelot",
+    "minecraft:pig",
+    "minecraft:rabbit",
+    "minecraft:sheep",
+    "minecraft:villager",
+    "minecraft:wandering_trader",
+    "minecraft:dolphin",
+    "minecraft:fox",
+    "minecraft:goat",
+    "minecraft:llama",
+    "minecraft:trader_llama",
+    "minecraft:panda",
+    "minecraft:piglin",
+    "minecraft:polar_bear",
+    "minecraft:trader_llama",
+    "minecraft:wolf",
+    "minecraft:hoglin",
+    "minecraft:piglin_brute",
+    "alexscaves:corrodent",
+    "alexscaves:vesper",
+    "alexscaves:underzealot",
+    "alexscaves:atlatitan",
+    "alexscaves:forsaken",
+    "alexscaves:gloomoth",
+    "alexscaves:licowitch",
+    "alexscaves:raycat",
+    "alexscaves:relicheirus",
+    "alexscaves:subterranodon",
+    "alexscaves:tremorsaurus",
+    "alexscaves:vallumraptor",
+    "#minecraft:raiders",
+    {
+      "id": "alexsmobs:anteater",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:bison",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:cachalot_whale",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:capuchin_monkey",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:dropbear",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:elephant",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:froststalker",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:gazelle",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:gelada_monkey",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:gorilla",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:grizzly_bear",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:jerboa",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:kangaroo",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:maned_wolf",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:moose",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:bunfungus",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:murmur",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:orca",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:platypus",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:raccoon",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:rhinoceros",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:sea_bear",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:seal",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:skunk",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:maned_wolf",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:snow_leopard",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:sugar_glider",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:tasmanian_devil",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:tiger",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:tusklin",
+      "required": false
+    }
+  ]
+}

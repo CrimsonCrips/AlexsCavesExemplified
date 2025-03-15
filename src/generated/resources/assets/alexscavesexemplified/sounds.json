@@ -1,0 +1,39 @@
+{
+  "caramel_eat": {
+    "sounds": [
+      "alexscavesexemplified:entity/caramel_eat"
+    ],
+    "subtitle": "subtitles.alexsmobsinteraction.caramel_eat"
+  },
+  "pspspsps": {
+    "sounds": [
+      "alexscavesexemplified:entity/pspspsps"
+    ],
+    "subtitle": "subtitles.alexsmobsinteraction.pspspsps"
+  },
+  "sweet_punished": {
+    "sounds": [
+      "alexscavesexemplified:entity/sweet_punished"
+    ],
+    "subtitle": "subtitles.alexsmobsinteraction.sweet_punished"
+  },
+  "tesla_exploding": {
+    "sounds": [
+      "alexscavesexemplified:block/tesla_exploding"
+    ],
+    "subtitle": "subtitles.alexsmobsinteraction.tesla_exploding"
+  },
+  "tesla_fire": {
+    "sounds": [
+      "alexscavesexemplified:block/tesla_fire1",
+      "alexscavesexemplified:block/tesla_fire2"
+    ],
+    "subtitle": "subtitles.alexsmobsinteraction.tesla_fire"
+  },
+  "tesla_powerup": {
+    "sounds": [
+      "alexscavesexemplified:block/tesla_powerup"
+    ],
+    "subtitle": "subtitles.alexsmobsinteraction.tesla_powerup"
+  }
+}

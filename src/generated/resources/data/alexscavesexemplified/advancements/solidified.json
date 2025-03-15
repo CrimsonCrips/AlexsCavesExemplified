@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:forlorn",
+  "criteria": {
+    "solid": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.solidified.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/solidified.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.solidified"
+    }
+  },
+  "requirements": [
+    [
+      "solid"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

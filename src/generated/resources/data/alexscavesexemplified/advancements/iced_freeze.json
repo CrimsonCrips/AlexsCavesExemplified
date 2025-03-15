@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:candy",
+  "criteria": {
+    "freezed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.iced_freeze.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/iced_freeze.png\"}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.iced_freeze"
+    }
+  },
+  "requirements": [
+    [
+      "freezed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

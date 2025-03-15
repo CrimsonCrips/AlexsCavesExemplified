@@ -24,10 +24,13 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -83,17 +86,27 @@ public class ACEUtils {
         }
     }
 
-    public static Entity getClosestLookingAtEntityFor(Player player) {
+    public static Entity getLookingAtEntity(Player player) {
         Entity closestValid = null;
         HitResult hitresult = ProjectileUtil.getHitResultOnViewVector(player, Entity::isAlive, 32);
-        if (hitresult instanceof EntityHitResult) {
-            Entity entity = ((EntityHitResult) hitresult).getEntity();
+        if (hitresult instanceof EntityHitResult entityHitResult) {
+            Entity entity = entityHitResult.getEntity();
             if (!entity.equals(player) && player.hasLineOfSight(entity)) {
                 closestValid = entity;
             }
         }
         return closestValid;
     }
+
+//    public static Block getLookingAtBlock(Player player) {
+//        Block closestValid = null;
+//        HitResult hitresult = ProjectileUtil.getHitResultOnViewVector(player, Entity::isAlive, 32);
+//        if (hitresult instanceof BlockHitResult blockHitResult) {
+//            BlockState blockState = player.level().getBlockState(blockHitResult.getBlockPos());
+//            closestValid = blockState.getBlock();
+//        }
+//        return closestValid;
+//    }
 
     public static void spawnLoot (ResourceLocation location, LivingEntity entity, Entity owner, int loop){
         if (!entity.level().isClientSide){

@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:bat",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    {
+      "id": "alexsmobs:",
+      "required": false
+    },
+    {
+      "id": "alexsmobs:cockroach",
+      "required": false
+    }
+  ]
+}

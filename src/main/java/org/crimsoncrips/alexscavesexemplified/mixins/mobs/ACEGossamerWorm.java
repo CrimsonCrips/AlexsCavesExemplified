@@ -47,7 +47,7 @@ public abstract class ACEGossamerWorm extends WaterAnimal implements TargetsDrop
     public void onGetItem(ItemEntity itemEntity) {
         this.heal(1);
         itemEntity.getItem().shrink(1);
-        ACEUtils.spawnLoot(ACELootTables.UNDERZEALOT_TRADE,this,this,0);
+        ACEUtils.spawnLoot(ACELootTables.GOSSAMER_DROPS,this,this,0);
         ACEUtils.awardAdvancement(itemEntity.getOwner(),"gossamer_feed","fed");
     }
 
