@@ -3,6 +3,8 @@ package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 import com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -18,6 +20,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Objects;
 
 import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.*;
 
@@ -53,8 +57,8 @@ public class ACEMagnetUtilMixin {
         }
     }
 
-    @Inject(method = "isDynamicallyMagnetic", at = @At(value = "TAIL"), remap = false, cancellable = true)
-    private static void alexsCavesExemplified$isDynamicallyMagnetic(LivingEntity entity, boolean legsOnly, CallbackInfoReturnable<Boolean> cir) {
+    @ModifyReturnValue(method = "isDynamicallyMagnetic", at = @At("RETURN"),remap = false)
+    private static boolean alexsMobsInteraction$isDynamicallyMagnetic(boolean original, @Local LivingEntity entity) {
         if (AlexsCavesExemplified.COMMON_CONFIG.HARDCORE_MAGNERIP_ENABLED.get()){
             boolean hardMagnetism = false;
 
@@ -68,8 +72,9 @@ public class ACEMagnetUtilMixin {
                     }
                 }
             }
-            cir.setReturnValue(hardMagnetism);
+            return hardMagnetism;
         }
+        return original;
     }
 
 }

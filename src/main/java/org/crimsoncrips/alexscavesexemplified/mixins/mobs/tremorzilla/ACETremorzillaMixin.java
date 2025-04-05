@@ -3,7 +3,6 @@ package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tremorzilla;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.living.DinosaurEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.TremorzillaEntity;
-import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
@@ -87,7 +86,6 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
 
     public void setGamma(boolean val) {
         this.entityData.set(GAMMA, Boolean.valueOf(val));
-        refreshDimensions();
     }
 
     public boolean is2ndPhase() {
@@ -157,20 +155,14 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
         return super.hurt(source, amount);
     }
 
-    @Override
-    public EntityDimensions getDimensions(Pose poseIn) {
-        return this.isTremorzillaSwimming() ? SWIMMING_SIZE.scale(this.getScale()) : super.getDimensions(poseIn).scale(this.getScale());
-    }
-
-    @Override
-    public float getScale() {
-        float gammaScale = isGamma() ? 1.2F : 1F;
-        return (this.isBaby() ? 0.15F : 1.0F) * gammaScale;
+    @ModifyReturnValue(method = "getScale", at = @At("RETURN"))
+    private float alexsCavesExemplified$getScale(float original) {
+        return (this.isBaby() ? 0.15F : 1.0F) * (isGamma() ? 1.4F : 1F);
     }
 
     @ModifyReturnValue(method = "getBeamShootFrom", at = @At("RETURN"),remap = false)
     private Vec3 alexsCavesExemplified$getBeamShootFrom(Vec3 original) {
-        return original.add(0,isGamma() ? 5F : 0F,0);
+        return original.add(0,isGamma() ? 3D : 0,0);
     }
 
     @ModifyConstant(method = "tickBreath",constant = @Constant(floatValue = 5.0F),remap = false)
@@ -182,6 +174,7 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/DinosaurEntity;tick()V"))
     private void tick(CallbackInfo ci) {
+        refreshDimensions();
         if (AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get()){
             Level level = this.level();
             if (this.getHealth() == this.getMaxHealth()){
@@ -262,9 +255,14 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
         }
     }
 
+    @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/TremorzillaEntity;breakBlocksAround(Lnet/minecraft/world/phys/Vec3;FZZF)Z"),index = 1)
+    private float protonAddition(float radius) {
+        return radius * (isGamma() ? 1.4F : 1F);
+    }
+
     @ModifyArg(method = "positionRider", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity$MoveFunction;accept(Lnet/minecraft/world/entity/Entity;DDD)V"),index = 2)
     private double positionRider(double pY) {
-        return pY + (this.isTremorzillaSwimming() ? 0 : 4);
+        return pY + (isGamma() ? 3D : 0D);
     }
 
 

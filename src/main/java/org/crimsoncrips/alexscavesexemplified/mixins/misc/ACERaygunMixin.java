@@ -88,7 +88,7 @@ public abstract class ACERaygunMixin extends Item {
         Block[] block = {Blocks.BASALT,Blocks.NETHERRACK,Blocks.MAGMA_BLOCK, ACBlockRegistry.PRIMAL_MAGMA.get()};
 
         if (!level.getBlockState(pos).isAir() && level.random.nextDouble() < 0.2 && !level.getBlockState(pos).is(BlockTags.WITHER_IMMUNE))
-            level.setBlockAndUpdate(pos, block[level.random.nextInt(0, 4)].defaultBlockState());
+            level.setBlock(pos, block[level.random.nextInt(0, 4)].defaultBlockState(),3);
     }
 
     @Inject(method = "onUseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getType()Lnet/minecraft/world/entity/EntityType;"), cancellable = true)

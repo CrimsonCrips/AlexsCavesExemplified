@@ -74,3 +74,17 @@ versionRange="[forge_1.20-2.13.27,)"
 ordering="NONE"
 side="BOTH"
 
+[[dependencies."${mod_id}"]]
+modId="farmersdelight"
+mandatory=false
+versionRange="[1.20.1-1.2.7,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies."${mod_id}"]]
+modId="cavedelight"
+mandatory=false
+versionRange="[1.0.1,)"
+ordering="NONE"
+side="BOTH"
+

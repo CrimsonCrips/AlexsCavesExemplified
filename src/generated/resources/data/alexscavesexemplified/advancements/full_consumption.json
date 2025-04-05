@@ -1,29 +1,29 @@
 {
-  "parent": "alexscavesexemplified:metal_cauldron",
+  "parent": "alexscavesexemplified:dropped_consumption",
   "criteria": {
-    "replicate": {
+    "full_consumed": {
       "trigger": "minecraft:impossible"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.alexscavesexemplified.acidic_replication.desc"
+      "translate": "advancement.alexscavesexemplified.full_consumption.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
       "item": "citadel:icon_item",
-      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/acidic_cauldron.png\"}"
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/dropped_consumption.png\"}"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.alexscavesexemplified.acidic_replication"
+      "translate": "advancement.alexscavesexemplified.full_consumption"
     }
   },
   "requirements": [
     [
-      "replicate"
+      "full_consumed"
     ]
   ],
   "sends_telemetry_event": true

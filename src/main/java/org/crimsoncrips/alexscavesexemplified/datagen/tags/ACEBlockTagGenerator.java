@@ -5,6 +5,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -20,6 +21,7 @@ public class ACEBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 	public static final TagKey<Block> CONSUMABLE_BLOCKS = BlockTags.create(AlexsCavesExemplified.prefix("consumable_blocks"));
 	public static final TagKey<Block> GELATIN_FIRE = BlockTags.create(AlexsCavesExemplified.prefix("gelatin_fire"));
 	public static final TagKey<Block> RADIOACTIVE = BlockTags.create(AlexsCavesExemplified.prefix("radioactive"));
+	public static final TagKey<Block> DINO_SCAVENGE = BlockTags.create(AlexsCavesExemplified.prefix("dino_scavenge"));
 
 	public ACEBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> future, ExistingFileHelper helper) {
 		super(output, Registries.BLOCK, future, block -> block.builtInRegistryHolder().key(), AlexsCavesExemplified.MODID, helper);
@@ -137,6 +139,12 @@ public class ACEBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 				Blocks.CAMPFIRE,
 				Blocks.MAGMA_BLOCK
 		);
+
+		tag(DINO_SCAVENGE).add(
+				ACBlockRegistry.COOKED_DINOSAUR_CHOP.get(),
+				ACBlockRegistry.DINOSAUR_CHOP.get()
+		)
+				.addOptional(new ResourceLocation("cavedelight:roasted_dino_chop"));
 
 		tag(RADIOACTIVE).add(
 				ACBlockRegistry.RADROCK_URANIUM_ORE.get(),

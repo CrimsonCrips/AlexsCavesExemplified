@@ -47,6 +47,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.animal.Parrot;
+import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.GameRules;
@@ -80,6 +81,7 @@ import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACEBaseInterface;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 
 import net.minecraft.core.BlockPos;
@@ -145,6 +147,7 @@ public class ACExemplifiedEvents {
         Level worldIn = event.getLevel();
         RandomSource random = event.getEntity().getRandom();
         Player player = event.getEntity();
+        ItemStack itemStack = event.getItemStack();
 
         if (AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get() && blockState.is(ACEBlockTagGenerator.CONSUMABLE_BLOCKS)) {
             ParticleOptions particle = new BlockParticleOption(ParticleTypes.BLOCK, blockState);
@@ -184,6 +187,14 @@ public class ACExemplifiedEvents {
 
                 }
             }
+        }
+
+        if (AlexsCavesExemplified.COMMON_CONFIG.LIQUID_REPLICATION_ENABLED.get() && blockState.is(Blocks.CAULDRON) && (itemStack.is(ACBlockRegistry.SCRAP_METAL.get().asItem()) || itemStack.is(ACBlockRegistry.SCRAP_METAL_PLATE.get().asItem())) && player.isCrouching()){
+            event.getLevel().setBlock(pos, ACEBlockRegistry.METAL_CAULDRON.get().defaultBlockState(),3);
+            player.swing(event.getHand());
+            player.playSound(SoundEvents.SMITHING_TABLE_USE, 1F, 1F);
+            ACEUtils.awardAdvancement(player,"metal_cauldron","metal");
+            event.setCanceled(true);
         }
 
 
@@ -266,7 +277,7 @@ public class ACExemplifiedEvents {
         }
 
 
-        if(event.getTarget() instanceof Parrot parrot && AlexsCavesExemplified.COMMON_CONFIG.COOKIE_CRUMBLE_ENABLED.get()){
+        if(event.getTarget() instanceof Parrot parrot && AlexsCavesExemplified.COMMON_CONFIG.COOKIE_CRUMBLE_ENABLED.get() && itemStack.is(ACBlockRegistry.COOKIE_BLOCK.get().asItem())){
             if (!player.isCreative()) {
                 itemStack.shrink(1);
             }
@@ -742,6 +753,7 @@ public class ACExemplifiedEvents {
             }
 
         }
+
     }
 
     @SubscribeEvent

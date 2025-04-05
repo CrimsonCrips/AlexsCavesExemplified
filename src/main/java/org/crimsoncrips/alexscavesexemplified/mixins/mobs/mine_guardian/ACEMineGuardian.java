@@ -8,9 +8,11 @@ import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntit
 import com.github.alexmodguy.alexscaves.server.entity.living.DeepOneBaseEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.MineGuardianEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -28,9 +30,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEMineGuardianHurtBy;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
@@ -136,11 +140,14 @@ public abstract class ACEMineGuardian extends Monster implements MineGuardianXtr
         this.alexsCavesExemplified$setOwner(compound.getString("MineOwner"));
     }
 
-    @Inject(method = "isValidTarget", at = @At("HEAD"),cancellable = true,remap = false)
-    private void alexsCavesExemplified$isValidTarget(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+
+
+    @ModifyReturnValue(method = "isValidTarget", at = @At("RETURN"),remap = false)
+    private boolean alexsMobsInteraction$isValidTarget(boolean original, @Local Entity entity) {
         if(AlexsCavesExemplified.COMMON_CONFIG.REMINEDING_ENABLED.get() && entity instanceof Player player){
-            cir.setReturnValue(canAttack(player) && !Objects.equals(player.getUUID().toString(), alexsCavesExemplified$getOwner()));
+            return canAttack(player) && !Objects.equals(player.getUUID().toString(), alexsCavesExemplified$getOwner());
         }
+        return original;
     }
 
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/MineGuardianEntity;isExploding()Z",ordinal = 2))

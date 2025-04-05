@@ -6,10 +6,12 @@ import com.github.alexmodguy.alexscaves.server.entity.ai.MobTargetClosePlayers;
 import com.github.alexmodguy.alexscaves.server.entity.living.*;
 import com.github.alexmodguy.alexscaves.server.entity.util.TargetsDroppedItems;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -20,6 +22,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LeavesBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.TremorConsumption;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEDinosaurEggAttack;
@@ -106,6 +112,18 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
                 } else {
                     setSeethed(false);
                     tremorsaurus.getPersistentData().putInt("LoseSeethe", 0);
+                }
+            }
+        }
+
+        if (isAlive() && isVehicle() && AlexsCavesExemplified.COMMON_CONFIG.RAVAGING_TREMOR_ENABLED.get() && getRandom().nextDouble() < 0.3){
+            AABB aabb = this.getBoundingBox().inflate(0.2D);
+
+            for(BlockPos blockpos : BlockPos.betweenClosed(Mth.floor(aabb.minX), Mth.floor(aabb.minY), Mth.floor(aabb.minZ), Mth.floor(aabb.maxX), Mth.floor(aabb.maxY), Mth.floor(aabb.maxZ))) {
+                BlockState blockstate = this.level().getBlockState(blockpos);
+                Block block = blockstate.getBlock();
+                if (block instanceof LeavesBlock) {
+                    this.level().destroyBlock(blockpos, true, this);
                 }
             }
         }

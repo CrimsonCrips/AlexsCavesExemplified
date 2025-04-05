@@ -9,13 +9,13 @@ import java.util.List;
 
 public interface ConversionAmplified {
 
-    void alexsCavesExemplified$setStack(ItemStack itemStack);
+    void setStack(ItemStack itemStack);
 
-    void alexsCavesExemplified$setOverdrived(boolean val);
+    void setOverdrived(boolean val);
 
-    boolean alexsCavesExemplified$isOverdrived();
+    boolean isOverdrived();
 
 
-    List<ItemEntity> alexsCavesExemplified$getItemsAtAndAbove(Level level, BlockPos pos);
+    List<ItemEntity> getItemsAbove(Level level, BlockPos pos);
 
 }

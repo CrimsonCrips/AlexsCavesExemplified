@@ -2,16 +2,21 @@ package org.crimsoncrips.alexscavesexemplified.mixins.external_mobs;
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
+import com.github.alexmodguy.alexscaves.server.entity.living.VesperEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.item.SackOfSatingItem;
 import com.github.alexmodguy.alexscaves.server.misc.ACAdvancementTriggerRegistry;
+import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Ravager;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
@@ -19,6 +24,7 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.ForgeEventFactory;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEItemTagGenerator;
@@ -31,6 +37,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import javax.annotation.Nullable;
 
+import java.util.UUID;
+
 import static com.github.alexmodguy.alexscaves.server.item.SackOfSatingItem.*;
 
 
@@ -42,11 +50,51 @@ public abstract class ACEItemEntity extends Entity {
 
     @Shadow @Nullable public abstract Entity getOwner();
 
+    @Shadow private int pickupDelay;
+
+    @Shadow @Nullable private UUID target;
+
     public ACEItemEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
     int timeToCook = 0;
+
+    @Inject(method = "playerTouch", at = @At("TAIL"))
+    private void playerTouch(Player pEntity, CallbackInfo ci){
+        ItemEntity itemEntity = (ItemEntity)(Object)this;
+        if (!this.level().isClientSide && AlexsCavesExemplified.COMMON_CONFIG.TUNED_SATING_ENABLED.get()) {
+            ItemStack itemstack = itemEntity.getItem();
+            if (ForgeEventFactory.onItemPickup(itemEntity,pEntity) < 0)
+                return;
+            if (this.pickupDelay <= 0 && (this.target == null || this.target.equals(pEntity.getUUID()))  && !pEntity.isCreative() && itemstack.isEdible()) {
+                Inventory inv = pEntity.getInventory();
+                for (int i = 0; i < inv.getContainerSize(); i++) {
+                    ItemStack current = inv.getItem(i);
+                    if (current.getItem() instanceof SackOfSatingItem) {
+                        if(itemstack.is(ACTagRegistry.EXPLODES_SACK_OF_SATING)){
+                            setExploding(current, true);
+                        }
+
+                        int foodAmount;
+
+                        FoodProperties foodProperties = itemstack.getFoodProperties(pEntity);
+                        if(foodProperties != null && !itemstack.is(ACTagRegistry.RESTRICTED_FROM_SACK_OF_SATING)){
+                            foodAmount = foodProperties.getNutrition() * itemstack.getCount();
+                        } else foodAmount = 0;
+
+                        setChewTimestamp(current, pEntity.level().getGameTime());
+                        setHunger(current, getHunger(current) + foodAmount);
+                        ACEUtils.awardAdvancement(pEntity,"full_consumption","full_consumed");
+                        itemstack.setCount(0);
+                        this.playSound(SoundEvents.GENERIC_EAT, 1F, 1F);
+                    }
+                }
+            }
+
+
+        }
+    }
 
     @Inject(method = "tick", at = @At("TAIL"))
     private void tick(CallbackInfo ci) {
@@ -101,7 +149,7 @@ public abstract class ACEItemEntity extends Entity {
             }
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.DROPPED_SATING_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.TUNED_SATING_ENABLED.get()){
             ItemStack stack = this.getItem();
             if (stack.getItem() instanceof SackOfSatingItem){
                 for (ItemEntity itemEntity : this.level().getEntitiesOfClass(ItemEntity.class, this.getBoundingBox().inflate(1))) {
@@ -118,7 +166,6 @@ public abstract class ACEItemEntity extends Entity {
                         if(foodProperties != null && !nearItemStack.is(ACTagRegistry.RESTRICTED_FROM_SACK_OF_SATING)){
                             foodAmount = foodProperties.getNutrition() * nearItemStack.getCount();
                         } else foodAmount = 0;
-
                         setHunger(stack, getHunger(stack) + foodAmount);
                         ACEUtils.awardAdvancement(player,"dropped_consumption","consumed");
                         nearItemStack.setCount(0);
@@ -150,6 +197,8 @@ public abstract class ACEItemEntity extends Entity {
 
 
         return dyeDeterminer;
+
+
     }
 
     public void newGelatin(Item gelatinColor,ItemStack bone, ItemStack item){

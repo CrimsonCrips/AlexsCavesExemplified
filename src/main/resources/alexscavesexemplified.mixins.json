@@ -80,7 +80,8 @@
     "mobs.tesla_bulb.ACETeslaBulbEntityMixin",
     "mobs.tesla_bulb.ACETeslaBulbRenderMixin",
     "mobs.tremorzilla.ACETremorzillaMixin",
-    "mobs.underzealot.ACEUnderzealot"
+    "mobs.underzealot.ACEUnderzealot",
+    "misc.ACEClientEventsMixin"
   ],
   "client": [
     "external_mobs.preserved_amber.ACEModelCockroach",

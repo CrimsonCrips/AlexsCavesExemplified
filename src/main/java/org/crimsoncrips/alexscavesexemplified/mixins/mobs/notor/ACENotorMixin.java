@@ -81,7 +81,10 @@ public abstract class ACENotorMixin extends PathfinderMob implements ACEBaseInte
         return random.nextInt(500) + "." +
                 random.nextInt(500) + "." +
                 random.nextInt(500) + "." +
+                random.nextInt(500) + "." +
+                random.nextInt(500) + "." +
                 random.nextInt(500);
+        
     }
 
     private static final EntityDataAccessor<Integer> SELF_DESTRUCT_TIME = SynchedEntityData.defineId(NotorEntity.class, EntityDataSerializers.INT);

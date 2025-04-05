@@ -68,6 +68,7 @@ public class ACEEnglishGenerator extends ACELangProvider {
 		this.addAdvancementDesc("magnerip","Magneripped", "Have your magnetic items ripped off while with weakness");
 		this.addAdvancementDesc("self_destruct","Imperial Burst Drones", "Have a notor self-destruct");
 		this.addAdvancementDesc("resizing","Holographic Resizing", "Resize a hologram with magnetic ingots");
+		this.addAdvancementDesc("metal_cauldron","Reinforced Cauldron", "Use metal to reinforce a cauldron to allow for caves-related liquid replication");
 		this.addAdvancementDesc("soda_replication","Soda Addiction", "Use a purple soda bottle on a metal cauldron to duplicate soda");
 		this.addAdvancementDesc("acidic_replication","Acidicity", "Place a acidrock above a metal cauldron to duplicate acid");
 
@@ -101,6 +102,7 @@ public class ACEEnglishGenerator extends ACELangProvider {
 		this.addAdvancementDesc("purple_coloring","Purpled", "Recolor an uncolored dyeable armor in purple soda");
 		this.addAdvancementDesc("radiant_wrath","Radiant Wrath", "Amplify your Sugar Staff with a Radiant Essence in your offhand");
 		this.addAdvancementDesc("dropped_consumption","Drop Of Sating", "Feed your pet Sack Of Sating outside your inventory");
+		this.addAdvancementDesc("full_consumption","Filled Sating", "Sack Of Sating will eat all pickup-able foods if the food cannot be picked up");
 		this.addAdvancementDesc("iced_freeze","Yummy Snowball", "Throw ice cream");
 		this.addAdvancementDesc("breaking_candy","Breaking Candy", "Cook gelatin by heating up a filled cauldron and dropping bones and dyes");
 		this.addAdvancementDesc("ice_cream","Favorite Sweet", "Make ice cream with wafer blocks and ice cream blocks from bottom to top!");

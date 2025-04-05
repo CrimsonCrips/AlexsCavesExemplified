@@ -1,5 +1,5 @@
 {
-  "parent": "alexscavesexemplified:acidic_replication",
+  "parent": "alexscavesexemplified:metal_cauldron",
   "criteria": {
     "replicate": {
       "trigger": "minecraft:impossible"
@@ -13,7 +13,8 @@
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "alexscaves:purple_soda_bottle"
+      "item": "citadel:icon_item",
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/soda_cauldron.png\"}"
     },
     "show_toast": true,
     "title": {

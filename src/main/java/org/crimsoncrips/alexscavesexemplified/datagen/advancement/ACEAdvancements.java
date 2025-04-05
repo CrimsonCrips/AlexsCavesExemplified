@@ -100,16 +100,24 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 				.addCriterion("explode", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:self_destruct");
 
-		Advancement acidic_replication = (Advancement.Builder.advancement().parent(magnetic).display(
-						ACBlockRegistry.ACIDIC_RADROCK.get(),
+		Advancement metal_cauldron = (Advancement.Builder.advancement().parent(magnetic).display(
+						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/metal_cauldron.png"),
+						Component.translatable("advancement.alexscavesexemplified.metal_cauldron"),
+						Component.translatable("advancement.alexscavesexemplified.metal_cauldron.desc"),
+						null, FrameType.TASK, true, true, false)
+				.addCriterion("metal", new ImpossibleTrigger.TriggerInstance()))
+				.save(consumer, "alexscavesexemplified:metal_cauldron");
+
+		Advancement acidic_replication = (Advancement.Builder.advancement().parent(metal_cauldron).display(
+						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/acidic_cauldron.png"),
 						Component.translatable("advancement.alexscavesexemplified.acidic_replication"),
 						Component.translatable("advancement.alexscavesexemplified.acidic_replication.desc"),
 						null, FrameType.TASK, true, true, false)
 				.addCriterion("replicate", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:acidic_replication");
 
-		Advancement soda_replication = (Advancement.Builder.advancement().parent(acidic_replication).display(
-						ACItemRegistry.PURPLE_SODA_BOTTLE.get(),
+		Advancement soda_replication = (Advancement.Builder.advancement().parent(metal_cauldron).display(
+						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/soda_cauldron.png"),
 						Component.translatable("advancement.alexscavesexemplified.soda_replication"),
 						Component.translatable("advancement.alexscavesexemplified.soda_replication.desc"),
 						null, FrameType.TASK, true, true, false)
@@ -371,6 +379,14 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 						null, FrameType.TASK, true, true, false)
 				.addCriterion("consumed", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:dropped_consumption");
+
+		Advancement full_consumption = (Advancement.Builder.advancement().parent(dropped_consumption).display(
+						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/dropped_consumption.png"),
+						Component.translatable("advancement.alexscavesexemplified.full_consumption"),
+						Component.translatable("advancement.alexscavesexemplified.full_consumption.desc"),
+						null, FrameType.TASK, true, true, false)
+				.addCriterion("full_consumed", new ImpossibleTrigger.TriggerInstance()))
+				.save(consumer, "alexscavesexemplified:full_consumption");
 
 		Advancement iced_freeze = (Advancement.Builder.advancement().parent(candy).display(
 						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/iced_freeze.png"),

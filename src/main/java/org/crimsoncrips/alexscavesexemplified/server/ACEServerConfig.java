@@ -62,7 +62,7 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue EXTINGUISH_CAMPFIRES_ENABLED;
     public final ForgeConfigSpec.BooleanValue BEDWARS_ENABLED;
     public final ForgeConfigSpec.BooleanValue CANIAC_MANIAC_ENABLED;
-    public final ForgeConfigSpec.BooleanValue DROPPED_SATING_ENABLED;
+    public final ForgeConfigSpec.BooleanValue TUNED_SATING_ENABLED;
     public final ForgeConfigSpec.BooleanValue GUM_TRAMPLE_ENABLED;
     public final ForgeConfigSpec.BooleanValue SUGAR_CRASH_ENABLED;
     public final ForgeConfigSpec.BooleanValue ICED_CREAM_ENABLED;
@@ -122,6 +122,7 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue TELETOR_REARM_ENABLED;
     public final  ForgeConfigSpec.BooleanValue CARAMERGING_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SELF_DESTURCT_ENABLED;
+    public final  ForgeConfigSpec.BooleanValue RAVAGING_TREMOR_ENABLED;
 
 
 
@@ -146,7 +147,7 @@ public class ACEServerConfig {
         this.GLUTTONY_ENABLED = buildBoolean(builder, "GLUTTONY_ENABLED", " ", true, "Whether blocks inside candy cavity, can be eaten by right clicking");
         this.STICKY_SODA_ENABLED = buildBoolean(builder, "STICKY_SODA_ENABLED", " ", true, "Whether purple soda causes stickyness when in it");
         this.RADIANT_WRATH_ENABLED = buildBoolean(builder, "RADIANT_WRATH_ENABLED", " ", true, "Having Radiant Essence amplifies the attacks of Sugar Staff");
-        this.DROPPED_SATING_ENABLED = buildBoolean(builder, "DROPPED_SATING_ENABLED", " ", true, "Dropping foods in a dropped sack of sating will consume the dropped foods");
+        this.TUNED_SATING_ENABLED = buildBoolean(builder, "TUNED_SATING_ENABLED", " ", true, "Dropping foods in a dropped sack of sating will consume the dropped foods");
         this.SUGAR_CRASH_ENABLED = buildBoolean(builder, "SUGAR_CRASH_ENABLED", " ", true, "Sugar Rushes at the end will cause sugar crashed dealing damage and temporary slowness");
         this.ICED_CREAM_ENABLED = buildBoolean(builder, "ICED_CREAM_ENABLED", " ", true, "Thrown ice cream slightly freezes those that are hit");
         this.OVERTUNED_CONSUMPTION_ENABLED = buildBoolean(builder, "OVERTUNED_CONSUMPTION_ENABLED", " ", true, "Adds interactions when eating things from Candy Cavity");
@@ -281,6 +282,7 @@ public class ACEServerConfig {
         this.PRIMORDIAL_OXYGEN_ENABLED = buildBoolean(builder, "PRIMORDIAL_OXYGEN_ENABLED", " ", true, "Whether you have less oxygen inside Primordial Caves");
         this.FEARED_ANCESTORS_ENABLED = buildBoolean(builder, "FEARED_ANCESTORS_ENABLED", " ", true, "Whether you are attacked by some dinosaurs if seen with a limestone spear");
         this.DINOSAUR_EGG_ANGER_ENABLED = buildBoolean(builder, "DINOSAUR_EGG_ANGER_ENABLED", " ", true, "Whether untamed dinosaurs will attack any that are seen with their egg");
+        builder.comment("--Compatible with Farmers Delight and Caves Delight--");
         this.SCAVENGING_ENABLED = buildBoolean(builder, "SCAVENGING_ENABLED", " ", true, "Whether carnivores scavenge for placed dinosaur chops");
         this.AMBER_HEAL_ENABLED = buildBoolean(builder, "AMBER_HEAL_ENABLED", " ", true, "Whether stepping on amber can rarely heal you");
         this.STOMP_DAMAGE_ENABLED = buildBoolean(builder, "STOMP_DAMAGE_ENABLED", " ", true, "Whether Atlatitans/Lux stomps will cause damage");
@@ -296,6 +298,8 @@ public class ACEServerConfig {
         builder.push("Tremorsaurus");
         this.SEETHED_TAMING_ENABLED = buildBoolean(builder, "SEETHED_TAMING_ENABLED", " ", true, "Whether tremorsaurus can be tamed alternatively with meat(MUST HAVE SCAVENGING FEATURE ENABLED)");
         this.TREMOR_V_TREMOR_ENABLED = buildBoolean(builder, "TREMOR_V_TREMOR_ENABLED", " ", true, "Whether tremorsaurus fights other tremorsaurus when attacked");
+        this.RAVAGING_TREMOR_ENABLED = buildBoolean(builder, "RAVAGING_TREMOR_ENABLED", " ", true, "Whether tremorsaurus destroys blocks like a ravager when ridden");
+
         builder.pop();
         builder.pop();
 

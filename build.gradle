@@ -182,7 +182,10 @@ dependencies {
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
     implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
-    //implementation fg.deobf("com.klikli_dev:modonomicon-${minecraft_version}-forge:${modonomicon_version}"){transitive=false}
+    implementation fg.deobf("curse.maven:farmers-delight-398521:6154802")
+    implementation fg.deobf("curse.maven:cave-delight-1226620:6348847")
+
+
 
     runtimeOnly fg.deobf("maven.modrinth:glitchcore:0.0.1.1")
     runtimeOnly fg.deobf("maven.modrinth:better-advancements:NS5G3ENg")

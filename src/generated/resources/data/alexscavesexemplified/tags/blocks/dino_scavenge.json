@@ -1,0 +1,10 @@
+{
+  "values": [
+    "alexscaves:cooked_dinosaur_chop",
+    "alexscaves:dinosaur_chop",
+    {
+      "id": "cavedelight:roasted_dino_chop",
+      "required": false
+    }
+  ]
+}

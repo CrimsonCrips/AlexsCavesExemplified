@@ -1,29 +1,29 @@
 {
-  "parent": "alexscavesexemplified:metal_cauldron",
+  "parent": "alexscavesexemplified:magnetic",
   "criteria": {
-    "replicate": {
+    "metal": {
       "trigger": "minecraft:impossible"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.alexscavesexemplified.acidic_replication.desc"
+      "translate": "advancement.alexscavesexemplified.metal_cauldron.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
       "item": "citadel:icon_item",
-      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/acidic_cauldron.png\"}"
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/metal_cauldron.png\"}"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.alexscavesexemplified.acidic_replication"
+      "translate": "advancement.alexscavesexemplified.metal_cauldron"
     }
   },
   "requirements": [
     [
-      "replicate"
+      "metal"
     ]
   ],
   "sends_telemetry_event": true
