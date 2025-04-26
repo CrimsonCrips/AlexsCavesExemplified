@@ -124,6 +124,8 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue SELF_DESTURCT_ENABLED;
     public final  ForgeConfigSpec.BooleanValue RAVAGING_TREMOR_ENABLED;
 
+    public final  ForgeConfigSpec.BooleanValue DEEP_HUNTING_ENABLED;
+    public final  ForgeConfigSpec.BooleanValue SHOTNUKE_ENABLED;
 
 
 
@@ -333,6 +335,7 @@ public class ACEServerConfig {
         this.ABYSSAL_LIGHT_CHECK_ENABLED = buildBoolean(builder, "ABYSSAL_LIGHT_CHECK_ENABLED", " ", true, "Whether abyssal mobs interact with entities holding light");
         this.DEEP_WEAKENED_ENABLED = buildBoolean(builder, "DEEP_WEAKENED_ENABLED", " ", true, "Whether deep ones wilt when outside of abyssal chasm");
         this.SUBMARINE_BUMP_ENABLED = buildBoolean(builder, "SUBMARINE_BUMP_ENABLED", " ", true, "Whether submarine deals damage when moving");
+        this.DEEP_HUNTING_ENABLED = buildBoolean(builder, "DEEP_HUNTING_ENABLED", " ", true, "Whether deep ones hunt fish as well");
 
         builder.push("Mine Guardian");
         this.REMINEDING_ENABLED = buildBoolean(builder, "REMINEDING_ENABLED", " ", true, "Whether mine guardians can be made and owned");
@@ -358,6 +361,7 @@ public class ACEServerConfig {
         this.CATTASTROPHE_ENABLED = buildBoolean(builder, "CATTASTROPHE_ENABLED", " ", false, "dont pspsps the cat");
         builder.comment("--Compatible with Alexs Mobs--");
         this.TOUGH_ROACHES_ENABLED = buildBoolean(builder, "TOUGH_ROACHES_ENABLED", " ", false, "Roaches are nuke proof");
+        this.SHOTNUKE_ENABLED = buildBoolean(builder, "SHOTNUKE_ENABLED", " ", false, "Shotgum shoots nukes");
 
 
 

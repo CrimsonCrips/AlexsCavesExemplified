@@ -185,8 +185,6 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers-delight-398521:6154802")
     implementation fg.deobf("curse.maven:cave-delight-1226620:6348847")
 
-
-
     runtimeOnly fg.deobf("maven.modrinth:glitchcore:0.0.1.1")
     runtimeOnly fg.deobf("maven.modrinth:better-advancements:NS5G3ENg")
     runtimeOnly fg.deobf("maven.modrinth:terrablender:3.0.1.7")

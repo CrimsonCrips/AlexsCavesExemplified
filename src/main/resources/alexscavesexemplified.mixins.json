@@ -23,6 +23,7 @@
     "misc.ACEAcidMixin",
     "misc.ACEAmberFeature",
     "misc.ACEBoneMealItem",
+    "misc.ACEClientEventsMixin",
     "misc.ACECommonEventsMixin",
     "misc.ACEConversionCrucibleEntityMixin",
     "misc.ACEDreadbowItem",
@@ -34,6 +35,7 @@
     "misc.ACEMarineSnowMixin",
     "misc.ACERaygunMixin",
     "misc.ACEResistorShield",
+    "misc.ACEShotgumMixin",
     "misc.ACESpelunkeryTableMenu",
     "misc.ACESugarRush",
     "misc.ACESugarStaff",
@@ -69,6 +71,9 @@
     "mobs.ACEVallumraptor",
     "mobs.ACEVesper",
     "mobs.base_deep_entity.ACEBaseDeepEntityMixin",
+    "mobs.base_deep_entity.deep_knight.ACEDeepKnightMixin",
+    "mobs.base_deep_entity.deep_mage.ACEDeepMageMixin",
+    "mobs.base_deep_entity.deep_one.ACEDeepOneMixin",
     "mobs.boundroid.ACEBoundroidMixin",
     "mobs.mine_guardian.ACEMineGuardian",
     "mobs.notor.ACENotorMixin",
@@ -80,8 +85,7 @@
     "mobs.tesla_bulb.ACETeslaBulbEntityMixin",
     "mobs.tesla_bulb.ACETeslaBulbRenderMixin",
     "mobs.tremorzilla.ACETremorzillaMixin",
-    "mobs.underzealot.ACEUnderzealot",
-    "misc.ACEClientEventsMixin"
+    "mobs.underzealot.ACEUnderzealot"
   ],
   "client": [
     "external_mobs.preserved_amber.ACEModelCockroach",
