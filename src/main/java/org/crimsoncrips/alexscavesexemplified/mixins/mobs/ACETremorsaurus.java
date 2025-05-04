@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.TremorConsumption;
+import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEDinosaurEggAttack;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACETremorDroppedEatBlock;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACETremorEatBlock;
@@ -50,12 +51,7 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
     private void registerGoals(CallbackInfo ci) {
         TremorsaurusEntity tremorsaurus = (TremorsaurusEntity)(Object)this;
         if (AlexsCavesExemplified.COMMON_CONFIG.DINOSAUR_EGG_ANGER_ENABLED.get()){
-            tremorsaurus.targetSelector.addGoal(4, new ACEDinosaurEggAttack<>(tremorsaurus, LivingEntity.class, true){
-                @Override
-                public boolean canContinueToUse() {
-                    return super.canContinueToUse() && !isSeethed();
-                }
-            });
+            tremorsaurus.targetSelector.addGoal(4, new ACEDinosaurEggAttack<>(tremorsaurus, LivingEntity.class, true));
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.TREMOR_V_TREMOR_ENABLED.get()){
@@ -63,21 +59,7 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get()) {
-            this.goalSelector.addGoal(2, new ACETremorTempt(tremorsaurus, 1.1, Ingredient.of(new ItemLike[]{(ItemLike) ACBlockRegistry.COOKED_DINOSAUR_CHOP.get(), ACBlockRegistry.DINOSAUR_CHOP.get()}), false){
-                @Override
-                public boolean canUse() {
-                    return super.canUse() && isSeethed();
-                }
-            });
-
-
-            this.targetSelector.addGoal(2, new MobTargetClosePlayers(tremorsaurus, 50, 8.0F) {
-                @Override
-                public boolean canContinueToUse() {
-                    return super.canContinueToUse() && !isSeethed();
-                }
-            });
-
+            this.goalSelector.addGoal(2, new ACETremorTempt(tremorsaurus, 1.1, Ingredient.of(new ItemLike[]{ACBlockRegistry.COOKED_DINOSAUR_CHOP.get(), ACBlockRegistry.DINOSAUR_CHOP.get()}), false));
         }
 
 
@@ -102,21 +84,8 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
     @Inject(method = "tick", at = @At(value = "HEAD"))
     private void tick(CallbackInfo ci) {
         TremorsaurusEntity tremorsaurus = (TremorsaurusEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get()){
-            if (isSeethed()){
-                if (tremorsaurus.level().isClientSide){
-                    tremorsaurus.level().addParticle(ACParticleRegistry.HAPPINESS.get(), tremorsaurus.getX(), tremorsaurus.getEyeY() - (tremorsaurus.isOrderedToSit() ? 2 : 0), tremorsaurus.getZ(), ((double) this.random.nextFloat() - (double) 0.5F) * 0.2, ((double) this.random.nextFloat() - (double) 0.5F) * 0.2, ((double) this.random.nextFloat() - (double) 0.5F) * 0.2);
-                }
-                if (tremorsaurus.getPersistentData().getInt("LoseSeethe") < 2400){
-                    tremorsaurus.getPersistentData().putInt("LoseSeethe", tremorsaurus.getPersistentData().getInt("LoseSeethe") + 1);
-                } else {
-                    setSeethed(false);
-                    tremorsaurus.getPersistentData().putInt("LoseSeethe", 0);
-                }
-            }
-        }
 
-        if (isAlive() && isVehicle() && AlexsCavesExemplified.COMMON_CONFIG.RAVAGING_TREMOR_ENABLED.get() && getRandom().nextDouble() < 0.3){
+        if (isAlive() && (isVehicle() || tremorsaurus.getTarget() != null) && AlexsCavesExemplified.COMMON_CONFIG.RAVAGING_TREMOR_ENABLED.get() && getRandom().nextDouble() < 0.3){
             AABB aabb = this.getBoundingBox().inflate(0.2D);
 
             for(BlockPos blockpos : BlockPos.betweenClosed(Mth.floor(aabb.minX), Mth.floor(aabb.minY), Mth.floor(aabb.minZ), Mth.floor(aabb.maxX), Mth.floor(aabb.maxY), Mth.floor(aabb.maxZ))) {
@@ -129,14 +98,6 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
         }
     }
 
-    @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        if (pSource.getEntity() instanceof LivingEntity){
-            setSeethed(false);
-        }
-        return super.hurt(pSource, pAmount);
-    }
-
     @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 6))
     private boolean tempt(GoalSelector instance, int pPriority, Goal pGoal) {
         return !AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get();
@@ -147,10 +108,6 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
         return !AlexsCavesExemplified.COMMON_CONFIG.TREMOR_V_TREMOR_ENABLED.get();
     }
 
-    @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 11))
-    private boolean targetPlayer(GoalSelector instance, int pPriority, Goal pGoal) {
-        return !AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get();
-    }
 
 
 
@@ -161,46 +118,37 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
 
 
 
-
-    private static final EntityDataAccessor<Boolean> SEETHED = SynchedEntityData.defineId(TremorsaurusEntity.class, EntityDataSerializers.BOOLEAN);;
     private static final EntityDataAccessor<Boolean> SNIFFED = SynchedEntityData.defineId(TremorsaurusEntity.class, EntityDataSerializers.BOOLEAN);;
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     private void defineSynched(CallbackInfo ci){
-        this.entityData.define(SEETHED, false);
         this.entityData.define(SNIFFED, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void addAdditional(CompoundTag compound, CallbackInfo ci){
-        compound.putBoolean("Seethed", this.isSeethed());
         compound.putBoolean("Sniffed", this.isSniffed());
     }
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void readAdditional(CompoundTag compound, CallbackInfo ci){
-        this.setSniffed(compound.getBoolean("Seethed"));
         this.setSniffed(compound.getBoolean("Sniffed"));
     }
 
 
-    @Override
-    public boolean isSeethed() {
-        return this.entityData.get(SEETHED);
-    }
 
     @Override
     public boolean isSniffed() {
         return this.entityData.get(SNIFFED);
     }
 
-    @Override
-    public void setSeethed(boolean value) {
-        this.entityData.set(SEETHED, value);
-    }
 
     @Override
     public void setSniffed(boolean value) {
         this.entityData.set(SNIFFED,value);
+    }
+
+    public boolean isSeethed(TremorsaurusEntity tremorsaurus){
+        return tremorsaurus.hasEffect(ACEEffects.SERENED.get());
     }
 
 

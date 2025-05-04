@@ -87,7 +87,7 @@ public abstract class ACEVesper extends Monster {
 
     @Override
     public boolean canBeLeashed(Player pPlayer) {
-        return super.canBeLeashed(pPlayer) || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get());
+        return super.canBeLeashed(pPlayer) || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && !isPassenger());
     }
 
     @Override

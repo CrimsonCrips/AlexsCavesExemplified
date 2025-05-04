@@ -2,8 +2,10 @@ package org.crimsoncrips.alexscavesexemplified.server.goals;
 
 import com.github.alexmodguy.alexscaves.server.entity.living.TremorsaurusEntity;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
+import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 
 public class ACETremorTempt extends TemptGoal {
 
@@ -27,26 +29,26 @@ public class ACETremorTempt extends TemptGoal {
             }
 
             if (tremorsaurus.getAnimation() == TremorsaurusEntity.ANIMATION_BITE && tremorsaurus.getAnimationTick() >= 10 && tremorsaurus.getAnimationTick() <= 15) {
-                if (this.items.test(player.getMainHandItem())){
-                    player.getMainHandItem().shrink(1);
-                    if (player.getRandom().nextDouble() < 0.4){
-                        tremorsaurus.tame(player);
-                        ACEUtils.awardAdvancement(player,"seethed_taming","tame");
-                        tremorsaurus.level().broadcastEntityEvent(tremorsaurus, (byte)7);
-                        stop();
-                    }
-                } else if (this.items.test(player.getOffhandItem())){
-                    player.getOffhandItem().shrink(1);
-                    if (player.getRandom().nextDouble() < 0.3){
-                        tremorsaurus.tame(player);
-                        tremorsaurus.level().broadcastEntityEvent(tremorsaurus, (byte)7);
-                        stop();
-                    }
+                ItemStack heldFood = this.items.test(player.getMainHandItem()) ? player.getMainHandItem() : player.getOffhandItem();
+
+                if (!player.isCreative()){
+                    heldFood.shrink(1);
+                }
+                if (player.getRandom().nextDouble() < 0.2 || player.isCreative()){
+                    tremorsaurus.tame(player);
+                    ACEUtils.awardAdvancement(player,"seethed_taming","tame");
+                    tremorsaurus.level().broadcastEntityEvent(tremorsaurus, (byte)7);
+                    stop();
                 }
             }
         } else {
             this.tremorsaurus.getNavigation().moveTo(this.player, this.speedModifier);
         }
 
+    }
+
+    @Override
+    public boolean canUse() {
+        return super.canUse() && tremorsaurus.hasEffect(ACEEffects.SERENED.get());
     }
 }

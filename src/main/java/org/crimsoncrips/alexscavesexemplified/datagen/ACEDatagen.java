@@ -8,7 +8,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.advancement.ACEAdvancementProvider;
-import org.crimsoncrips.alexscavesexemplified.datagen.language.locale.ACEEnglishGenerator;
+import org.crimsoncrips.alexscavesexemplified.datagen.language.ACELangGen;
 import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACELootGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.recipe.ACERecipeGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.sounds.ACESoundGenerator;
@@ -35,7 +35,7 @@ public class ACEDatagen {
         generator.addProvider(event.includeServer(), new ACELootGenerator(output));
         generator.addProvider(event.includeServer(), new ACERecipeGenerator(output));
 
-        generator.addProvider(event.includeClient(), new ACEEnglishGenerator(output));
+        generator.addProvider(event.includeClient(), new ACELangGen(output));
 
         generator.addProvider(event.includeServer(), new ACEEntityTagGenerator(output, provider, helper));
         ACEBlockTagGenerator blocktags = new ACEBlockTagGenerator(output, provider, helper);

@@ -2,6 +2,7 @@ package org.crimsoncrips.alexscavesexemplified;
 
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
+import com.github.alexthe666.alexsmobs.effect.AMEffectRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
@@ -81,6 +82,7 @@ public class AlexsCavesExemplified {
 
 
     private void setup(final FMLCommonSetupEvent event) {
+        ACEEffects.init();
 
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
         if (AlexsCavesExemplified.COMMON_CONFIG.ADDITIONAL_FLAMMABILITY_ENABLED.get()){

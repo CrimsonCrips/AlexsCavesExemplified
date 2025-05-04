@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.server.effect;
 
+import com.github.alexthe666.alexsmobs.effect.EffectExsanguination;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
@@ -13,15 +14,13 @@ import net.minecraftforge.registries.RegistryObject;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 
 public class ACEEffects {
-    private static MobEffect register(int pId, String pKey, MobEffect pEffect) {
-        return (MobEffect) Registry.registerMapping(BuiltInRegistries.MOB_EFFECT, pId, pKey, pEffect);
-    }
 
     public static final DeferredRegister<MobEffect> EFFECT_REGISTER = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, AlexsCavesExemplified.MODID);
     public static final DeferredRegister<Potion> POTION_REGISTER = DeferredRegister.create(ForgeRegistries.POTIONS, AlexsCavesExemplified.MODID);
 
     public static final RegistryObject<MobEffect> SUGAR_CRASH = EFFECT_REGISTER.register("sugar_crash", ACESugarCrash::new);
     public static final RegistryObject<MobEffect> RABIAL = EFFECT_REGISTER.register("rabial", ACERabial::new);
+    public static final RegistryObject<MobEffect> SERENED = EFFECT_REGISTER.register("serened", ACESerened::new);
 
 
     public static ItemStack createPotion(Potion potion){

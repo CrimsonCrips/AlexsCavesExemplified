@@ -212,7 +212,6 @@ public class ACExemplifiedEvents {
 
         if (AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get() && player.isCrouching() && player.getEffect(MobEffects.HUNGER) != null) {
 
-
             if (target instanceof GingerbreadManEntity gingerbread && !gingerbread.isOvenSpawned()) {
                 ParticleOptions particle = new ItemParticleOption(ParticleTypes.ITEM, ACItemRegistry.GINGERBREAD_CRUMBS.get().asItem().getDefaultInstance());
                 Vec3 lookAngle = player.getLookAngle();
@@ -296,7 +295,6 @@ public class ACExemplifiedEvents {
                 player.swing(event.getHand());
             }
         }
-
     }
 
     @SubscribeEvent
@@ -420,34 +418,6 @@ public class ACExemplifiedEvents {
     }
 
     @SubscribeEvent
-    public void mobBreathe(LivingBreatheEvent breatheEvent) {
-        LivingEntity livingEntity = breatheEvent.getEntity();
-        Level level = livingEntity.level();
-        if (AlexsCavesExemplified.COMMON_CONFIG.PRIMORDIAL_OXYGEN_ENABLED.get() && livingEntity instanceof Player player && level.getBiome(player.getOnPos()).is(ACBiomeRegistry.PRIMORDIAL_CAVES)){
-            breatheEvent.setConsumeAirAmount(breatheEvent.getConsumeAirAmount() + 2);
-        }
-
-        if (AlexsCavesExemplified.COMMON_CONFIG.ABYSSAL_CRUSH_ENABLED.get() && livingEntity instanceof Player player && level.getBiome(player.blockPosition()).is(ACBiomeRegistry.ABYSSAL_CHASM)){
-            int aboveWater = 0;
-            BlockPos pos = new BlockPos(player.getBlockX(), (int) (player.getBlockY() + 2),player.getBlockZ());
-            while (level.getBlockState(pos).is(Blocks.WATER)){
-                pos = pos.above();
-                aboveWater++;
-            }
-
-            int diving = ACEUtils.getDivingAmount(livingEntity);
-            if (level.random.nextDouble() < (0.1 - (0.020 * diving)) && !(player.getVehicle() instanceof SubmarineEntity)){
-                if (aboveWater > 50 && diving < 10){
-                    breatheEvent.setConsumeAirAmount(breatheEvent.getConsumeAirAmount() + (int) (0.025 * (aboveWater - 40)));
-                }
-            }
-
-        }
-
-
-    }
-
-    @SubscribeEvent
     public void mobTickEvents(LivingEvent.LivingTickEvent livingTickEvent){
         LivingEntity livingEntity = livingTickEvent.getEntity();
         Level level = livingEntity.level();
@@ -481,7 +451,7 @@ public class ACExemplifiedEvents {
             if (level.random.nextDouble() < (0.1 - (0.020 * diving)) && !(player.getVehicle() instanceof SubmarineEntity)){
                 if (aboveWater > 50 && diving < 10){
                     player.hurt(ACEDamageTypes.getDamageSource(player.level(),ACEDamageTypes.DEPTH_CRUSH), (float) (0.025 * (aboveWater - 40)));
-
+                    player.setAirSupply(player.getAirSupply() + (int) (0.025 * (aboveWater - 100)));
                 }
             }
         }

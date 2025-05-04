@@ -1,13 +1,12 @@
-package org.crimsoncrips.alexscavesexemplified.datagen.language.locale;
+package org.crimsoncrips.alexscavesexemplified.datagen.language;
 
 import net.minecraft.data.PackOutput;
-import org.crimsoncrips.alexscavesexemplified.datagen.language.ACELangProvider;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 
-public class ACEEnglishGenerator extends ACELangProvider {
+public class ACELangGen extends ACELangProvider {
 
-	public ACEEnglishGenerator(PackOutput output) {
+	public ACELangGen(PackOutput output) {
 		super(output);
 	}
 
@@ -24,6 +23,7 @@ public class ACEEnglishGenerator extends ACELangProvider {
 
 		this.addEffect("rabial","Rabial Infection","Deathly Nervous Disease");
 		this.addEffect("sugar_crash","Sugar Crash","Sugar Crashed");
+		this.addEffect("serened","Serened","Serene");
 
 		this.addDeathMessage("rabial_end",0,"%s died to Rabies");
 		this.addDeathMessage("sugar_crash",0,"%s died from a sugar overdose");
@@ -113,14 +113,16 @@ public class ACEEnglishGenerator extends ACELangProvider {
 
 		this.addAdvancementDesc("egg_stealing","Eggnapping", "Steal a dinosaur egg, and anger its parents.");
 		this.addAdvancementDesc("splat","Splat!", "Get stepped on by a big dinosaur");
+		this.addAdvancementDesc("riding_splat","Trampling", "Control an atlatitan to stomp on puny mobs");
 		this.addAdvancementDesc("paint_effects","P2W Skins", "Paint a dinosaur, to give it specific effects");
 		this.addAdvancementDesc("egg_sacrifice","Egg Fuel", "Sacrifice an atlatitan egg to the volcanoes");
 		this.addAdvancementDesc("volcanic_sacrifice","Lux Reborn", "Sacrifice a live baby atlatitan");
 		this.addAdvancementDesc("drop_food","Feeding the Past", "Feed the carnivores some meat");
 		this.addAdvancementDesc("seethed_taming","Satisfied Dino", "Tame a Tremor by seething it with enough meat");
 		this.addAdvancementDesc("propogate","Primordial Propogation", "Propogate flora in the primordial caves");
+		this.addAdvancementDesc("serened","Serene Neutrality", "Inflict serened on yourself or another mob with serene salad, causing non-players to not attack unless attacked");
 
-		this.addAdvancementDesc("rusting","Long-Forgotten Weapon", "Rust a nucleeper by dousing it in acid");
+		this.addAdvancementDesc("rusting","The Forgotten Weapon", "Rust a nucleeper by dousing it in acid");
 		this.addAdvancementDesc("deathly_radiation","Deathly Radiation", "Have your body submit to immense radiation");
 		this.addAdvancementDesc("washing_radiation","Nuclear Wash", "Wash off radiation with water, soap is applicable");
 		this.addAdvancementDesc("kirov_reporting","Kirov, Reporting!", "Drop an explosive, during flight");

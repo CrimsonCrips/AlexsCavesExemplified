@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.Level;
@@ -22,6 +23,7 @@ import org.crimsoncrips.alexscavesexemplified.compat.CaveDelightCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.FarmersDelightCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.TremorConsumption;
+import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 
 public class ACETremorEatBlock extends MoveToBlockGoal {
 
@@ -71,8 +73,8 @@ public class ACETremorEatBlock extends MoveToBlockGoal {
                         FarmersDelightCompat.dinoEat(blockPos,level);
                     }
 
-                    if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && level.getRandom().nextDouble() < 0.09) {
-                        tickAccesor.setSeethed(true);
+                    if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && level.getRandom().nextDouble() < 0.4) {
+                        mob.addEffect(new MobEffectInstance(ACEEffects.SERENED.get(), 2400, 0));
                     }
                 }
                 if (CaveDelightCompat.roastedCheck(tremorsaurus,blockPos)){
@@ -80,8 +82,8 @@ public class ACETremorEatBlock extends MoveToBlockGoal {
                     tremorsaurus.playSound(ACSoundRegistry.TREMORSAURUS_BITE.get(), 1F, 1F);
                     CaveDelightCompat.roastedConsume(tremorsaurus,blockPos);
 
-                    if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && level.getRandom().nextDouble() < 0.3) {
-                        tickAccesor.setSeethed(true);
+                    if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && level.getRandom().nextDouble() < 0.8) {
+                        mob.addEffect(new MobEffectInstance(ACEEffects.SERENED.get(), 5400, 0));
                     }
                 }
                 this.stop();

@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -19,6 +20,7 @@ import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEItemTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACEBaseInterface;
+import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -77,6 +79,11 @@ public abstract class ACEPlayer extends LivingEntity implements ACEBaseInterface
 
         if (pFood.is(ACEItemTagGenerator.SWEETS)) {
             addSweets(1);
+        }
+
+        if (pFood.is(ACItemRegistry.SERENE_SALAD.get()) && AlexsCavesExemplified.COMMON_CONFIG.SERENED_ENABLED.get()){
+            this.addEffect(new MobEffectInstance(ACEEffects.SERENED.get(), 1200, 0));
+            ACEUtils.awardAdvancement(this,"serened","serened");
         }
     }
 

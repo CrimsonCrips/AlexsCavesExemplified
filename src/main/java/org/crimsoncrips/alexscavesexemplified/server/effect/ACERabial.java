@@ -16,8 +16,9 @@ public class ACERabial extends MobEffect {
     public ACERabial() {
         super(MobEffectCategory.HARMFUL, 0Xe6b0ac);
         
-        this.addAttributeModifier(Attributes.ATTACK_DAMAGE, "52c22265-593c-4007-a838-91593d75c690", -0.1000000596046448, AttributeModifier.Operation.MULTIPLY_TOTAL);
-        this.addAttributeModifier(Attributes.ARMOR, "7405588f-6b0b-43b9-8acf-c4f765ceccbd", -1, AttributeModifier.Operation.ADDITION);
+        this.addAttributeModifier(Attributes.ATTACK_DAMAGE, "52c22265-593c-4007-a838-91593d75c690", 0.1000000596046448, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        this.addAttributeModifier(Attributes.ARMOR, "7405588f-6b0b-43b9-8acf-c4f765ceccbd", -2, AttributeModifier.Operation.ADDITION);
+
 
     }
 
@@ -39,6 +40,7 @@ public class ACERabial extends MobEffect {
         if (entity instanceof ServerPlayer serverPlayer){
             ACEUtils.awardAdvancement(serverPlayer,"rabial","has_rabies");
         }
+
     }
 
     public boolean isDurationEffectTick(int duration, int amplifier) {

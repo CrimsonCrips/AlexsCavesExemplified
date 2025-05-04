@@ -40,7 +40,6 @@ public class ACEBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 				ACBlockRegistry.GEOTHERMAL_VENT_MEDIUM.get(),
 				ACBlockRegistry.GEOTHERMAL_VENT_THIN.get(),
 				ACBlockRegistry.TUBE_WORM.get(),
-				ACBlockRegistry.MUSSEL.get(),
 				ACBlockRegistry.DUSK_ANEMONE.get(),
 				ACBlockRegistry.BONE_WORMS.get(),
 				ACBlockRegistry.PING_PONG_SPONGE.get(),

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
@@ -26,18 +27,20 @@ public abstract class ACEAtlatitan extends SauropodBaseEntity {
     }
 
     @Inject(method = "onStep", at = @At("TAIL"),remap = false)
-    private void onStep(CallbackInfo ci) {
+    private void alexsCavesExemplified$onStep(CallbackInfo ci) {
         AtlatitanEntity atlatitan = (AtlatitanEntity)(Object)this;
-        for (LivingEntity entity : atlatitan.level().getEntitiesOfClass(LivingEntity.class, atlatitan.getBoundingBox().expandTowards(1, -2, 1))) {
+        for (LivingEntity entity : atlatitan.level().getEntitiesOfClass(LivingEntity.class, atlatitan.getBoundingBox().move(0,-2,0).inflate(0.5,0,0.5))) {
             if (entity != atlatitan && !atlatitan.isBaby() && entity.getBbHeight() <= 2.2F && AlexsCavesExemplified.COMMON_CONFIG.STOMP_DAMAGE_ENABLED.get()) {
                 entity.hurt(atlatitan.damageSources().mobAttack(atlatitan), 6.0F);
                 ACEUtils.awardAdvancement(entity,"splat","stepped");
+                ACEUtils.awardAdvancement(atlatitan.getControllingPassenger(),"riding_splat","ride_stepped");
+
             }
         }
     }
 
     @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void registerGoals(CallbackInfo ci) {
+    private void alexsCavesExemplified$registerGoals(CallbackInfo ci) {
         AtlatitanEntity atlatitan = (AtlatitanEntity)(Object)this;
         if (AlexsCavesExemplified.COMMON_CONFIG.DINOSAUR_EGG_ANGER_ENABLED.get()){
             atlatitan.targetSelector.addGoal(4, new ACEDinosaurEggAttack<>(atlatitan, LivingEntity.class, true){

@@ -3,10 +3,13 @@ package org.crimsoncrips.alexscavesexemplified.mixins.external_mobs;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
+import com.github.alexmodguy.alexscaves.server.potion.ACEffectRegistry;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -19,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -26,6 +30,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import javax.annotation.Nullable;
 
 import static org.crimsoncrips.alexscavesexemplified.compat.AMCompat.amberReset;
 
@@ -36,6 +42,10 @@ public abstract class ACELivingEntity extends Entity {
     @Shadow public abstract boolean isDeadOrDying();
 
     @Shadow public abstract boolean isSensitiveToWater();
+
+    @Shadow public abstract boolean hasEffect(MobEffect pEffect);
+
+    @Shadow @Nullable public abstract MobEffectInstance getEffect(MobEffect pEffect);
 
     public ACELivingEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -64,6 +74,21 @@ public abstract class ACELivingEntity extends Entity {
             }
         }
     }
+
+    @Inject(method = "hurt", at = @At("HEAD"))
+    private void alexsCavesExemplified$hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
+        LivingEntity livingEntity = (LivingEntity)(Object)this;
+        if (pSource.getEntity() instanceof LivingEntity && livingEntity.hasEffect(ACEEffects.SERENED.get())){
+            MobEffectInstance serene = livingEntity.getEffect(ACEEffects.SERENED.get());
+            if (serene != null) {
+                livingEntity.removeEffect(serene.getEffect());
+                if (serene.getDuration() > 100) {
+                    livingEntity.addEffect(new MobEffectInstance(serene.getEffect(), serene.getDuration() - 100, serene.getAmplifier()));
+                }
+            }
+        }
+    }
+
     //Props to Drullkus for assistance
 
     @Inject(method = "tick", at = @At("TAIL"))

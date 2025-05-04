@@ -470,6 +470,14 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 				.addCriterion("stepped", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:splat");
 
+		Advancement riding_splat = (Advancement.Builder.advancement().parent(splat).display(
+						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/riding_splat.png"),
+						Component.translatable("advancement.alexscavesexemplified.riding_splat"),
+						Component.translatable("advancement.alexscavesexemplified.riding_splat.desc"),
+						null, FrameType.TASK, true, true, false)
+				.addCriterion("ride_stepped", new ImpossibleTrigger.TriggerInstance()))
+				.save(consumer, "alexscavesexemplified:riding_splat");
+
 		Advancement propogate = (Advancement.Builder.advancement().parent(primordial).display(
 						ACBlockRegistry.FLYTRAP.get(),
 						Component.translatable("advancement.alexscavesexemplified.propogate"),
@@ -477,6 +485,14 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 						null, FrameType.TASK, true, true, false)
 				.addCriterion("bonemeal", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:propogate");
+
+		Advancement serened = (Advancement.Builder.advancement().parent(propogate).display(
+						ACItemRegistry.SERENE_SALAD.get(),
+						Component.translatable("advancement.alexscavesexemplified.serened"),
+						Component.translatable("advancement.alexscavesexemplified.serened.desc"),
+						null, FrameType.TASK, true, true, false)
+				.addCriterion("serened", new ImpossibleTrigger.TriggerInstance()))
+				.save(consumer, "alexscavesexemplified:serened");
 
 
 		Advancement paint_effects = (Advancement.Builder.advancement().parent(primordial).display(

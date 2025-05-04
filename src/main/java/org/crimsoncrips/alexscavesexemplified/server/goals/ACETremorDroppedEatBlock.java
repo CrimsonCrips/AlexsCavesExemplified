@@ -4,6 +4,7 @@ import com.github.alexmodguy.alexscaves.server.entity.ai.MobTargetItemGoal;
 import com.github.alexmodguy.alexscaves.server.entity.living.TremorsaurusEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.TamableAnimal;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.TremorConsumption;
+import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 
 import java.util.Collections;
 import java.util.List;
@@ -60,8 +62,8 @@ public class ACETremorDroppedEatBlock extends MobTargetItemGoal {
                     tremorsaurus.heal(4);
                     tremorsaurus.playSound(ACSoundRegistry.TREMORSAURUS_BITE.get(), 1F, 1F);
                     targetEntity.kill();
-                    if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && tremorsaurus.level().getRandom().nextDouble() < 0.08) {
-                        tickAccesor.setSeethed(true);
+                    if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && tremorsaurus.level().getRandom().nextDouble() < 0.4) {
+                        mob.addEffect(new MobEffectInstance(ACEEffects.SERENED.get(), 2400, 0));
                     }
                 }
                 this.stop();

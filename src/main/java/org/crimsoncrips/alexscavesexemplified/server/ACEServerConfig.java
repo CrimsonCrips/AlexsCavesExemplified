@@ -126,6 +126,7 @@ public class ACEServerConfig {
 
     public final  ForgeConfigSpec.BooleanValue DEEP_HUNTING_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SHOTNUKE_ENABLED;
+    public final  ForgeConfigSpec.BooleanValue SERENED_ENABLED;
 
 
 
@@ -281,6 +282,8 @@ public class ACEServerConfig {
         builder.pop();
 
         builder.push("Primordial Caves");
+        this.SERENED_ENABLED = buildBoolean(builder, "SERENED_ENABLED", " ", true, "Whether feeding mobs with serene salad calms them down");
+
         this.PRIMORDIAL_OXYGEN_ENABLED = buildBoolean(builder, "PRIMORDIAL_OXYGEN_ENABLED", " ", true, "Whether you have less oxygen inside Primordial Caves");
         this.FEARED_ANCESTORS_ENABLED = buildBoolean(builder, "FEARED_ANCESTORS_ENABLED", " ", true, "Whether you are attacked by some dinosaurs if seen with a limestone spear");
         this.DINOSAUR_EGG_ANGER_ENABLED = buildBoolean(builder, "DINOSAUR_EGG_ANGER_ENABLED", " ", true, "Whether untamed dinosaurs will attack any that are seen with their egg");
@@ -300,7 +303,7 @@ public class ACEServerConfig {
         builder.push("Tremorsaurus");
         this.SEETHED_TAMING_ENABLED = buildBoolean(builder, "SEETHED_TAMING_ENABLED", " ", true, "Whether tremorsaurus can be tamed alternatively with meat(MUST HAVE SCAVENGING FEATURE ENABLED)");
         this.TREMOR_V_TREMOR_ENABLED = buildBoolean(builder, "TREMOR_V_TREMOR_ENABLED", " ", true, "Whether tremorsaurus fights other tremorsaurus when attacked");
-        this.RAVAGING_TREMOR_ENABLED = buildBoolean(builder, "RAVAGING_TREMOR_ENABLED", " ", true, "Whether tremorsaurus destroys blocks like a ravager when ridden");
+        this.RAVAGING_TREMOR_ENABLED = buildBoolean(builder, "RAVAGING_TREMOR_ENABLED", " ", true, "Whether tremorsaurus destroys blocks like a ravager when ridden or chasing something");
 
         builder.pop();
         builder.pop();
