@@ -49,7 +49,7 @@ public abstract class ACEVesper extends Monster {
         VesperEntity vesper = (VesperEntity)(Object)this;
         if (AlexsCavesExemplified.COMMON_CONFIG.FORLORN_LIGHT_EFFECT_ENABLED.get()){
             this.targetSelector.addGoal(3, new ACEVesperTarget<>(vesper, 32.0F, Player.class,livingEntity -> {
-                return !CuriosCompat.hasLight(livingEntity) || !(getHealth() <= 1F * getMaxHealth());
+                return !CuriosCompat.hasLight(livingEntity);
             }));
 
             vesper.goalSelector.addGoal(1, new AvoidEntityGoal<>(vesper, LivingEntity.class, 4.0F, 1.5, 2, (livingEntity) -> {
@@ -60,9 +60,7 @@ public abstract class ACEVesper extends Monster {
 
         if (AlexsCavesExemplified.COMMON_CONFIG.ANTI_SACRIFICE_ENABLED.get()){
             this.targetSelector.addGoal(3, new ACEVesperTarget<>(vesper, 32.0F, UnderzealotEntity.class, livingEntity -> {
-                if (livingEntity instanceof UnderzealotEntity underzealot){
-                    return underzealot.getFirstPassenger() instanceof VesperEntity;
-                } else return false;
+                return livingEntity instanceof UnderzealotEntity underzealot && underzealot.getFirstPassenger() instanceof VesperEntity;
             }));
         }
 
@@ -102,11 +100,6 @@ public abstract class ACEVesper extends Monster {
 
     @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 7))
     private boolean alexsCavesExemplified$nearestAttack(GoalSelector instance, int pPriority, Goal pGoal) {
-        return !AlexsCavesExemplified.COMMON_CONFIG.FORLORN_LIGHT_EFFECT_ENABLED.get();
-    }
-
-    @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 1))
-    private boolean alexsCavesExemplified$attack(GoalSelector instance, int pPriority, Goal pGoal) {
         return !AlexsCavesExemplified.COMMON_CONFIG.FORLORN_LIGHT_EFFECT_ENABLED.get();
     }
 
