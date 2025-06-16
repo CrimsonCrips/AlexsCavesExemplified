@@ -411,16 +411,18 @@ public class ACExemplifiedEvents {
             }
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.ECOLOGICAL_REPUTATION_ENABLED.get()) {
-            ACEUtils.deepReputation(player,-1);
-        }
-
     }
 
     @SubscribeEvent
     public void mobTickEvents(LivingEvent.LivingTickEvent livingTickEvent){
         LivingEntity livingEntity = livingTickEvent.getEntity();
         Level level = livingEntity.level();
+
+        if (livingEntity instanceof Player player){
+            for (DeepOneBaseEntity deepOne : player.level().getEntitiesOfClass(DeepOneBaseEntity.class, player.getBoundingBox().inflate(40))) {
+                System.out.println(deepOne.getReputationOf(player.getUUID()));
+            }
+        }
 
         if (livingEntity.getPersistentData().getBoolean("WastePowered")){
             //taken from Dreadbow's particle making

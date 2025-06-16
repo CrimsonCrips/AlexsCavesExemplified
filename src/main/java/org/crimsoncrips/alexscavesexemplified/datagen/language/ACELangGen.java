@@ -117,7 +117,7 @@ public class ACELangGen extends ACELangProvider {
 		this.addAdvancementDesc("paint_effects","P2W Skins", "Paint a dinosaur, to give it specific effects");
 		this.addAdvancementDesc("egg_sacrifice","Egg Fuel", "Sacrifice an atlatitan egg to the volcanoes");
 		this.addAdvancementDesc("volcanic_sacrifice","Lux Reborn", "Sacrifice a live baby atlatitan");
-		this.addAdvancementDesc("drop_food","Feeding the Past", "Feed the carnivores some meat");
+		this.addAdvancementDesc("drop_food","Feeding the Past", "Drop the carnivores some meat");
 		this.addAdvancementDesc("seethed_taming","Satisfied Dino", "Tame a Tremor by seething it with enough meat");
 		this.addAdvancementDesc("propogate","Primordial Propogation", "Propogate flora in the primordial caves");
 		this.addAdvancementDesc("serened","Serene Neutrality", "Inflict serened on yourself or another mob with serene salad, causing non-players to not attack unless attacked");

@@ -1,0 +1,19 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Additional Flamability",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/additional_flamability.png"
+      ],
+      "text": "Adds flamability with AC blocks that cant be lit originally",
+      "title": "Additional Flamability"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Amber,Pewen Blocks,Stripped Pewen Blocks,Archaic Vine,Fiddlehead,Curly Fern,Flytrap,Cycad,Ancient Leaves,Fern ThatchThornwood Blocks,Stripped Thornwood Blocks,Underwood,Forsaken Idol"
+    }
+  ]
+}

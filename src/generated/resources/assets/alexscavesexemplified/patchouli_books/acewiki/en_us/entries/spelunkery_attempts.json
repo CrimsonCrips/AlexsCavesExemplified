@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Spelunkery Attempts",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/spelunkery_attempts.png"
+      ],
+      "text": "Adjustable attempts for spelunking in the spelunkery table",
+      "title": "Spelunkery Attempts"
+    }
+  ]
+}

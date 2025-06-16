@@ -54,7 +54,7 @@ public class ACECommonEventsMixin {
                         player.broadcastBreakEvent(EquipmentSlot.OFFHAND);
                         offHand.shrink(1);
                         if (!player.level().isClientSide) {
-                            player.displayClientMessage(Component.translatable("item.alexscavesexemplified.locator_protection"), true);
+                            player.displayClientMessage(Component.translatable("misc.alexscavesexemplified.locator_protection"), true);
                         }
                         ci.cancel();
                     }

@@ -77,9 +77,6 @@ public abstract class ACENuclearExplosionEntity extends Entity implements Gammaf
     private void alexsCavesExemplified$tick(CallbackInfo ci,@Local LivingEntity entity) {
         if(entity instanceof TremorzillaEntity tremorzilla && AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && !((Gammafied) tremorzilla).isGamma() && isGamma()){
             ((Gammafied) tremorzilla).setGamma(isGamma());
-            tremorzilla.getAttribute(Attributes.MAX_HEALTH).setBaseValue(750F);
-            tremorzilla.getAttribute(Attributes.ARMOR).setBaseValue(18F);
-            tremorzilla.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(50F);
             for (Player player : this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(100))) {
                 ACEUtils.awardAdvancement(player,"gamma_tremorzilla","gamma");
             }

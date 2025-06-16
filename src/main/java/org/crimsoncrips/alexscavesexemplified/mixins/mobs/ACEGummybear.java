@@ -96,31 +96,31 @@ public abstract class ACEGummybear extends Animal {
             return switch (this.getGummyColor().toString()) {
                 case "GREEN" -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_GREEN.get())) {
-                        boost(player);
+                        boost(player,itemstack);
                     }
                     yield InteractionResult.SUCCESS;
                 }
                 case "BLUE" -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_BLUE.get())) {
-                        boost(player);
+                        boost(player,itemstack);
                     }
                     yield InteractionResult.SUCCESS;
                 }
                 case "YELLOW" -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_YELLOW.get())) {
-                        boost(player);
+                        boost(player,itemstack);
                     }
                     yield InteractionResult.SUCCESS;
                 }
                 case "PINK" -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_PINK.get())) {
-                        boost(player);
+                        boost(player,itemstack);
                     }
                     yield InteractionResult.SUCCESS;
                 }
                 default -> {
                     if (itemstack.is(ACItemRegistry.SWEETISH_FISH_RED.get())) {
-                        boost(player);
+                        boost(player,itemstack);
                     }
                     yield InteractionResult.SUCCESS;
                 }
@@ -139,7 +139,8 @@ public abstract class ACEGummybear extends Animal {
         }
     }
 
-    public void boost(Entity entity){
+    public void boost(Entity entity,ItemStack itemStack){
+        itemStack.shrink(1);
         ACEUtils.awardAdvancement(entity,"feed_speedup","feed");
         if (sleepFor >= 1000) {
             this.sleepFor = sleepFor - 1000;

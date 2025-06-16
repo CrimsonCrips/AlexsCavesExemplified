@@ -17,7 +17,7 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue HIVE_MIND_ENABLED;
     public final ForgeConfigSpec.BooleanValue ANTI_SACRIFICE_ENABLED;
     public final ForgeConfigSpec.BooleanValue VESPER_HUNT_ENABLED;
-    public final ForgeConfigSpec.BooleanValue VANILLA_ADAPTIONS_ENABLED;
+    public final ForgeConfigSpec.BooleanValue DREAD_ADDAPTIONS_ENABLED;
     public final ForgeConfigSpec.BooleanValue JELLYBEAN_CHANGES_ENABLED;
     public final ForgeConfigSpec.BooleanValue SWEETISH_SPEEDUP_ENABLED;
     public final ForgeConfigSpec.BooleanValue FLY_TRAP_ENABLED;
@@ -76,7 +76,7 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue PEERING_TRIGGER_ENABLED;
     public final ForgeConfigSpec.BooleanValue RADIOACTIVE_AWARENESS_ENABLED;
     public final ForgeConfigSpec.BooleanValue BRAINDEAD_MODE_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue NON_INSTA_LOSE_ENABLED ;
+    public final ForgeConfigSpec.BooleanValue FORGIVING_SPELUKING_ENABLED ;
     public final ForgeConfigSpec.BooleanValue RERAYGUNNED_ENABLED ;
     public final ForgeConfigSpec.BooleanValue GAMMARATED_TREMORZILLA_ENABLED ;
     public final ForgeConfigSpec.BooleanValue CANDICORN_HEAL_ENABLED ;
@@ -91,7 +91,6 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue LICOWITCH_VENGEANCE_ENABLED ;
     public final ForgeConfigSpec.BooleanValue CANIACAL_EXPLOSION_ENABLED ;
     public final ForgeConfigSpec.BooleanValue REMINEDING_ENABLED ;
-    public final  ForgeConfigSpec.BooleanValue DECIPHERABLE_EXPERIENCE_ENABLED;
     public final  ForgeConfigSpec.BooleanValue ABYSSAL_LIGHT_CHECK_ENABLED;
     public final  ForgeConfigSpec.BooleanValue TESLA_COILED_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SHOCKING_THERAPY_ENABLED;
@@ -121,7 +120,7 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue SCALABLE_HOLOGRAM_ENABLED;
     public final  ForgeConfigSpec.BooleanValue TELETOR_REARM_ENABLED;
     public final  ForgeConfigSpec.BooleanValue CARAMERGING_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue SELF_DESTURCT_ENABLED;
+    public final  ForgeConfigSpec.BooleanValue SELF_DESTRUCT_ENABLED;
     public final  ForgeConfigSpec.BooleanValue RAVAGING_TREMOR_ENABLED;
 
     public final  ForgeConfigSpec.BooleanValue DEEP_HUNTING_ENABLED;
@@ -136,12 +135,10 @@ public class ACEServerConfig {
         this.ACE_WIKI_ENABLED = buildBoolean(builder, "ACE_WIKI_ENABLED", " ", true, "Gives you the ace wiki book at start");
         this.REDOABLE_SPELUNKY_ENABLED = buildBoolean(builder, "REDOABLE_SPELUNKY_ENABLED", " ", true, "Whether it gives you back the tablet when exiting the spelunky table");
          this.SPELUNKY_ATTEMPTS_AMOUNT = buildInt(builder, "SPELUNKY_ATTEMPTS_AMOUNT", " ", 5, 1, Integer.MAX_VALUE, "Amount of tries you get for the spelunky table per tablet");
-         this.VANILLA_ADAPTIONS_ENABLED = buildBoolean(builder, "VANILLA_ADAPTIONS_ENABLED", " ", true, "Whether vanilla enchantments adapts to weapons (ex.Dreadbow, etc..)");
          this.CHARGED_CAVE_CREEPER_CHANCE = buildDouble(builder, "CHARGED_CAVE_CREEPER_CHANCE", " ", 0.2,0.0,1.0, "Chances of creepers from caves to be charged (0 for disable)");
          this.ADDITIONAL_FLAMMABILITY_ENABLED = buildBoolean(builder, "ADDITIONAL_FLAMMABILITY_ENABLED", " ", true, "Adds flammability to blocks that should be flammable");
-        this.NON_INSTA_LOSE_ENABLED = buildBoolean(builder, "NON_INSTA_LOSE_ENABLED", " ", true, "Reduces level instead of insta-losing in spelunkery minigame");
+        this.FORGIVING_SPELUKING_ENABLED = buildBoolean(builder, "FORGIVING_SPELUKING_ENABLED", " ", true, "Reduces level instead of insta-losing in spelunkery minigame");
         this.CAVIAL_BONEMEAL_ENABLED = buildBoolean(builder, "CAVIAL_BONEMEAL_ENABLED", " ", true, "Whether it adds new interactions of bone meal with Alex's Cave's flora");
-        this.DECIPHERABLE_EXPERIENCE_ENABLED = buildBoolean(builder, "DECIPHERABLE_EXPERIENCE_ENABLED", " ", true, "Whether deciphering tablets give decent xp");
         this.LIQUID_REPLICATION_ENABLED = buildBoolean(builder, "LIQUID_REPLICATION_ENABLED", " ", true, "Whether AC liquids can be renewable");
         this.POWERED_LOCATORS_ENABLED = buildBoolean(builder, "POWERED_LOCATORS_ENABLED", " ", true, "Using a wither star to nullify godly interventions.To allow you to use natures compass and alike to find biomes");
 
@@ -216,6 +213,7 @@ public class ACEServerConfig {
         this.GUANO_SLOW_ENABLED = buildBoolean(builder, "GUANO_SLOW_ENABLED", " ", true, "Whether guano slows you down");
         this.PEERING_TRIGGER_ENABLED = buildBoolean(builder, "PEERING_TRIGGER_ENABLED", " ", true, "Whether peering coprolith interact with players holding light in different ways");
         this.BEHOLDENT_STALKING_ENABLED = buildBoolean(builder, "BEHOLDENT_STALKING_ENABLED", " ", true, "Whether beholders stalk nearby players when unused");
+        this.DREAD_ADDAPTIONS_ENABLED = buildBoolean(builder, "DREAD_ADDAPTIONS_ENABLED", " ", true, "Whether vanilla enchantments adapts to Dreadbow");
 
         builder.push("Corrodent");
         this.KNAWING_ENABLED = buildBoolean(builder, "KNAWING_ENABLED", " ", true, "Whether corrodents knaw on dropped items");
@@ -326,7 +324,7 @@ public class ACEServerConfig {
         this.TELETOR_REARM_ENABLED = buildBoolean(builder, "TELETOR_REARM_ENABLED", " ", true, "Teletors rearm their magnetic weapons when unavailable with nearby magnetic weapons");
         builder.pop();
         builder.push("Notor");
-        this.SELF_DESTURCT_ENABLED = buildBoolean(builder, "SELF_DESTURCT_ENABLED", " ", true, "Notors self destruct when attacked");
+        this.SELF_DESTRUCT_ENABLED = buildBoolean(builder, "SELF_DESTRUCT_ENABLED", " ", true, "Notors self destruct when attacked");
         builder.pop();
         builder.pop();
 

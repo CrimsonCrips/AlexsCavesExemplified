@@ -1,0 +1,33 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Liquid Replication",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Allows the replication of AC liquids with a special cauldron with special methods (with compatibility with create's fluid piping system)",
+      "title": "Liquid Replication"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/liquid_replication/metal_cauldron.png"
+      ],
+      "text": "Right click a normal cauldron while sneaking with a metal block in hand"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/liquid_replication/acidic_cauldron.png"
+      ],
+      "text": "Place an acidrock on top of the metal cauldron"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/liquid_replication/soda_cauldron.png"
+      ],
+      "text": "Right click with a soda bottle to be able to bucket it freely"
+    }
+  ]
+}

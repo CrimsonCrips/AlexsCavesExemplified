@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Forgiving Spelunking",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/forgiving_spelunking.png"
+      ],
+      "text": "Spelunking is more forgiving when you fail deciphering a tablet",
+      "title": "Forgiving Spelunking"
+    }
+  ]
+}

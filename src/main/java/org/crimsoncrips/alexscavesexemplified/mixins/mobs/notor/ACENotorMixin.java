@@ -57,7 +57,7 @@ public abstract class ACENotorMixin extends PathfinderMob implements ACEBaseInte
     private void alexsCavesExemplified$registerGoals(CallbackInfo ci) {
         NotorEntity notor = (NotorEntity)(Object)this;
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTURCT_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTRUCT_ENABLED.get()){
             this.goalSelector.addGoal(1, new NotorHologramGoal(notor){
                 @Override
                 public boolean canUse() {
@@ -125,8 +125,10 @@ public abstract class ACENotorMixin extends PathfinderMob implements ACEBaseInte
 
     @Override
     public boolean hurt(DamageSource pSource, float pAmount) {
-        if (getSelfDestructTime() <= 0 ) {
-            setSelfDestructTime(200);
+        if (AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTRUCT_ENABLED.get()) {
+            if (getSelfDestructTime() <= 0) {
+                setSelfDestructTime(200);
+            }
         }
         return super.hurt(pSource, pAmount);
     }
@@ -142,12 +144,12 @@ public abstract class ACENotorMixin extends PathfinderMob implements ACEBaseInte
 
     @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 1))
     private boolean alexsCavesExemplified$registerGoals1(GoalSelector instance, int pPriority, Goal pGoal) {
-        return !AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTURCT_ENABLED.get();
+        return !AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTRUCT_ENABLED.get();
     }
 
     @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 2))
     private boolean alexsCavesExemplified$registerGoals2(GoalSelector instance, int pPriority, Goal pGoal) {
-        return !AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTURCT_ENABLED.get();
+        return !AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTRUCT_ENABLED.get();
     }
 
 

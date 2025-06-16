@@ -82,7 +82,7 @@ public abstract class ACESpelunkeryScreenMixin extends AbstractContainerScreen<S
             this.level = 0;
             this.fullResetWords();
         } else if (this.finishedLevel && this.passLevelProgress >= 10.0F && this.attemptsLeft <= 0) {
-            if (AlexsCavesExemplified.COMMON_CONFIG.NON_INSTA_LOSE_ENABLED.get()) {
+            if (AlexsCavesExemplified.COMMON_CONFIG.FORGIVING_SPELUKING_ENABLED.get()) {
                 if (level <= 0) {
                     AlexsCaves.NETWORK_WRAPPER.sendToServer(new SpelunkeryTableChangeMessage(false));
                     fullResetWords();

@@ -33,7 +33,7 @@ public abstract class ACEDarkArrow extends AbstractArrow {
 
             }
 
-            if (AlexsCavesExemplified.COMMON_CONFIG.VANILLA_ADAPTIONS_ENABLED.get()){
+            if (AlexsCavesExemplified.COMMON_CONFIG.DREAD_ADDAPTIONS_ENABLED.get()){
                 if (this.isOnFire()) {
                     livingEntity.setSecondsOnFire(5);
                 }

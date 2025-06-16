@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Powered Locators",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/powered_locators.png"
+      ],
+      "text": "Sacrifice a held wither star to empower a locating item to prevent godly intervention",
+      "title": "Powered Locators"
+    }
+  ]
+}

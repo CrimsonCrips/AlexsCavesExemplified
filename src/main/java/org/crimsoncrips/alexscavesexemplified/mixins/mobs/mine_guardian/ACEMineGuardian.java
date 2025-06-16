@@ -21,6 +21,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -64,6 +65,14 @@ public abstract class ACEMineGuardian extends Monster implements MineGuardianXtr
     private void alexsCavesExemplified$registerGoals(CallbackInfo ci) {
         MineGuardianEntity mineGuardian = (MineGuardianEntity)(Object)this;
         mineGuardian.targetSelector.addGoal(1, new ACEMineGuardianHurtBy(mineGuardian, new Class[0]));
+    }
+
+    @Override
+    public boolean hurt(DamageSource pSource, float pAmount) {
+        if (pSource.getEntity() instanceof Player player && player.getUUID().toString().equals(alexsCavesExemplified$getOwner())){
+            alexsCavesExemplified$setOwner("-1");
+        }
+        return super.hurt(pSource, pAmount);
     }
 
     @Inject(method = "tick", at = @At("TAIL"))

@@ -1,0 +1,19 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Cavial Bonemeal",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/cavial_bonemeal.png"
+      ],
+      "text": "Bonemealing compatible flora to improve or populate the area with flora when bonemealing",
+      "title": "Cavial Bonemeal"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ping-Pong Sponges to improve length \nPrimordial Caves to propagate flora"
+    }
+  ]
+}

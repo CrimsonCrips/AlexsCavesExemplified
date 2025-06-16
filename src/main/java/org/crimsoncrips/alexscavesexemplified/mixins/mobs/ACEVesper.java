@@ -49,7 +49,7 @@ public abstract class ACEVesper extends Monster {
         VesperEntity vesper = (VesperEntity)(Object)this;
         if (AlexsCavesExemplified.COMMON_CONFIG.FORLORN_LIGHT_EFFECT_ENABLED.get()){
             this.targetSelector.addGoal(3, new ACEVesperTarget<>(vesper, 32.0F, Player.class,livingEntity -> {
-                return !CuriosCompat.hasLight(livingEntity);
+                return !CuriosCompat.hasLight(livingEntity) || vesper.getLastAttacker() == livingEntity;
             }));
 
             vesper.goalSelector.addGoal(1, new AvoidEntityGoal<>(vesper, LivingEntity.class, 4.0F, 1.5, 2, (livingEntity) -> {

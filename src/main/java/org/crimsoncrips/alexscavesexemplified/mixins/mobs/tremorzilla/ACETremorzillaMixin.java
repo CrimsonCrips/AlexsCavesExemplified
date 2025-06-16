@@ -85,6 +85,9 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
     }
 
     public void setGamma(boolean val) {
+        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(750F);
+        this.getAttribute(Attributes.ARMOR).setBaseValue(18F);
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(50F);
         this.entityData.set(GAMMA, Boolean.valueOf(val));
     }
 
