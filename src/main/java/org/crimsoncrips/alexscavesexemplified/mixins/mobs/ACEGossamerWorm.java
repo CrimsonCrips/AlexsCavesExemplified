@@ -39,6 +39,16 @@ public abstract class ACEGossamerWorm extends WaterAnimal implements TargetsDrop
         }
     }
 
+    @Inject(method = "mobInteract", at = @At("TAIL"))
+    private void alexsCavesExemplified$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.GOSSAMER_FEEDING_ENABLED.get() && player.getItemInHand(hand).is(ACItemRegistry.MARINE_SNOW.get())){
+            this.heal(1);
+            player.getItemInHand(hand).shrink(1);
+            ACEUtils.spawnLoot(ACELootTables.GOSSAMER_DROPS,this,this,0);
+            ACEUtils.awardAdvancement(player,"gossamer_feed","fed");
+        }
+    }
+
     @Override
     public boolean canTargetItem(ItemStack itemStack) {
         return AlexsCavesExemplified.COMMON_CONFIG.GOSSAMER_FEEDING_ENABLED.get() && itemStack.is(ACItemRegistry.MARINE_SNOW.get());

@@ -32,8 +32,7 @@ public abstract class ACEBrainiac extends Monster implements ACEBaseInterface, T
     protected ACEBrainiac(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
-    private static final EntityDataAccessor<Boolean> POWERED = SynchedEntityData.defineId(BrainiacEntity.class, EntityDataSerializers.BOOLEAN);;
-
+    
     @Inject(method = "registerGoals", at = @At("TAIL"))
     private void registerGoals(CallbackInfo ci) {
         BrainiacEntity brainiac = (BrainiacEntity)(Object)this;
@@ -52,47 +51,4 @@ public abstract class ACEBrainiac extends Monster implements ACEBaseInterface, T
         return 8;
     }
 
-    @Override
-    public boolean isPowered() {
-        return this.entityData.get(POWERED);
-    }
-
-    public void setPowered(boolean powered) {
-        this.entityData.set(POWERED, powered);
-    }
-
-
-    @Inject(method = "postAttackEffect", at = @At("HEAD"),cancellable = true,remap = false)
-    private void postAttack(LivingEntity entity, CallbackInfo ci) {
-        ci.cancel();
-        if (entity != null && entity.isAlive()) {
-            entity.addEffect(new MobEffectInstance(ACEffectRegistry.IRRADIATED.get(), 400,AlexsCavesExemplified.COMMON_CONFIG.WASTE_POWERUP_ENABLED.get() && isPowered() ? 1 : 0));
-        }
-        if (AlexsCavesExemplified.COMMON_CONFIG.WASTE_POWERUP_ENABLED.get() && isPowered()){
-            setPowered(false);
-        }
-    }
-
-    @Inject(method = "tick", at = @At("TAIL"))
-    private void tick(CallbackInfo ci) {
-        BrainiacEntity brainiac = (BrainiacEntity)(Object)this;
-        Level level = brainiac.level();
-        if (AlexsCavesExemplified.COMMON_CONFIG.WASTE_POWERUP_ENABLED.get()){
-            if (isPowered()){
-                Vec3 particlePos = brainiac.position().add((level.random.nextFloat() - 0.5F) * 2.5F, 0F, (level.random.nextFloat() - 0.5F) * 2.5F);
-                level.addParticle(ACParticleRegistry.PROTON.get(), particlePos.x, particlePos.y, particlePos.z, brainiac.getX(), brainiac.getY(0.5F), brainiac.getZ());
-            }
-            if (!level.isClientSide && brainiac.hasBarrel()) {
-                if (brainiac.getAnimation() == ANIMATION_DRINK_BARREL && brainiac.getAnimationTick() >= 60) {
-                    setPowered(true);
-                }
-            }
-        }
-
-    }
-
-    @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void defineSynched(CallbackInfo ci){
-        this.entityData.define(POWERED, false);
-    }
 }

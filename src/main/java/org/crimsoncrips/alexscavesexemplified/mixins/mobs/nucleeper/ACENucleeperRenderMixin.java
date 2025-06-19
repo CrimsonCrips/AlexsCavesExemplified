@@ -27,12 +27,12 @@ public abstract class ACENucleeperRenderMixin extends MobRenderer<NucleeperEntit
 
     @Override
     public ResourceLocation getTextureLocation(NucleeperEntity entity) {
-        return ((NucleeperXtra)entity).alexsCavesExemplified$isRusted() ? TEXTURE_RUSTED : TEXTURE;
+        return ((NucleeperXtra)entity).isRusted() ? TEXTURE_RUSTED : TEXTURE;
     }
 
     @Inject(method = "render(Lcom/github/alexmodguy/alexscaves/server/entity/living/NucleeperEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;"), cancellable = true)
     private void alexsCavesExemplified$render(NucleeperEntity entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn, CallbackInfo ci) {
-        if (((NucleeperXtra)entityIn).alexsCavesExemplified$isDefused()){
+        if (((NucleeperXtra)entityIn).isDefused()){
             ci.cancel();
             poseStack.popPose();
             poseStack.popPose();

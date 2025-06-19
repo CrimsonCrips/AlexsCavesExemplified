@@ -64,7 +64,7 @@ public abstract class ACEVesper extends Monster {
             }));
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.VESPER_HUNT_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){
             this.targetSelector.addGoal(3, new ACEVesperTarget<>(vesper, 32.0F, LivingEntity.class, buildPredicateFromTag(ACEEntityTagGenerator.VESPER_HUNT)));
         }
 

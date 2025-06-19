@@ -10,6 +10,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -73,6 +74,18 @@ public class ACEManualLoot implements LootTableSubProvider {
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(1))
                         .add(LootItem.lootTableItem(ACItemRegistry.BIOLUMINESSCENCE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))))
+                ));
+
+        consumer.accept(ACELootTables.NUCLEEPER_DEFUSION, LootTable.lootTable()
+                .withPool(LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(5))
+                        .add(LootItem.lootTableItem(Items.IRON_INGOT).apply(SetItemCountFunction.setCount(UniformGenerator.between(2, 3))).setWeight(60))
+                        .add(LootItem.lootTableItem(ACItemRegistry.URANIUM_SHARD.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(5, 10))).setWeight(80))
+                        .add(LootItem.lootTableItem(ACItemRegistry.URANIUM.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))).setWeight(50))
+                        .setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(ACItemRegistry.FISSILE_CORE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1))).setWeight(10))
+                        .add(LootItem.lootTableItem(Blocks.IRON_BLOCK).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1))).setWeight(1))
+
                 ));
 
     }

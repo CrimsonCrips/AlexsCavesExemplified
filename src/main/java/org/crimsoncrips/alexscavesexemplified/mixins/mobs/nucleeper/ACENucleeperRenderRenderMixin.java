@@ -41,9 +41,9 @@ public abstract class ACENucleeperRenderRenderMixin extends RenderLayer<Nucleepe
     public void render(PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn, NucleeperEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         float alpha = (float)((double)1.0F + Math.sin((double)(ageInTicks * 0.3F))) * 0.25F + 0.5F;
         float explodeProgress = entitylivingbaseIn.getExplodeProgress(partialTicks);
-        VertexConsumer ivertexbuilder1 = bufferIn.getBuffer(ACRenderTypes.getEyesAlphaEnabled(((NucleeperXtra)entitylivingbaseIn).alexsCavesExemplified$isRusted() ? TEXTURE_RUSTED_GLOW : TEXTURE_GLOW));
+        VertexConsumer ivertexbuilder1 = bufferIn.getBuffer(ACRenderTypes.getEyesAlphaEnabled(((NucleeperXtra)entitylivingbaseIn).isRusted() ? TEXTURE_RUSTED_GLOW : TEXTURE_GLOW));
         ((NucleeperModel)this.getParentModel()).renderToBuffer(poseStack, ivertexbuilder1, packedLightIn, LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F), 1.0F, 1.0F, 1.0F, alpha);
-        VertexConsumer ivertexbuilder2 = bufferIn.getBuffer(ForgeRenderTypes.getUnlitTranslucent(((NucleeperXtra)entitylivingbaseIn).alexsCavesExemplified$isRusted() ? TEXTURE_BROKEN_GLASS : TEXTURE_GLASS));
+        VertexConsumer ivertexbuilder2 = bufferIn.getBuffer(ForgeRenderTypes.getUnlitTranslucent(((NucleeperXtra)entitylivingbaseIn).isRusted() ? TEXTURE_BROKEN_GLASS : TEXTURE_GLASS));
         ((NucleeperModel)this.getParentModel()).renderToBuffer(poseStack, ivertexbuilder2, packedLightIn, LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
         int buttonDiv = entitylivingbaseIn.tickCount / 5 % 6;
         if (entitylivingbaseIn.isCharged()) {
@@ -51,7 +51,7 @@ public abstract class ACENucleeperRenderRenderMixin extends RenderLayer<Nucleepe
         }
 
         ResourceLocation buttons;
-        if (!((NucleeperXtra)entitylivingbaseIn).alexsCavesExemplified$isDefused()){
+        if (!((NucleeperXtra)entitylivingbaseIn).isDefused()){
             if (buttonDiv < 2) {
                 buttons = TEXTURE_BUTTONS_0;
             } else if (buttonDiv < 4) {

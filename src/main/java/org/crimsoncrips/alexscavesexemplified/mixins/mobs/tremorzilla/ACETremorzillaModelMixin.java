@@ -21,7 +21,7 @@ public abstract class ACETremorzillaModelMixin extends AdvancedEntityModel<Tremo
     @ModifyExpressionValue(method = "setupAnim(Lcom/github/alexmodguy/alexscaves/server/entity/living/TremorzillaEntity;FFFFF)V", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/TremorzillaEntity;getBeamProgress(F)F"),remap = false)
     private float onlyFlyIfAllowed(float original, @Local TremorzillaEntity tremorzilla) {
         Gammafied myAccessor = (Gammafied) tremorzilla;
-        return AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && myAccessor.isAnimationBeaming() ? (float) (original * 0.1) : original;
+        return AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && myAccessor.isAnimationBeaming() ? (float) (original * 0.1) : original;
     }
 
 

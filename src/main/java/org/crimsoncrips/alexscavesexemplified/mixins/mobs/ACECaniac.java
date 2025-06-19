@@ -27,24 +27,10 @@ public abstract class ACECaniac extends Monster {
         super(pEntityType, pLevel);
     }
 
-    @Override
-    public boolean isSensitiveToWater() {
-        return AlexsCavesExemplified.COMMON_CONFIG.CANIAC_SENSITIVITY_ENABLED.get();
-    }
-
     @Inject(method = "registerGoals", at = @At("TAIL"))
     private void registerGoals(CallbackInfo ci) {
         CaniacEntity caniac = (CaniacEntity)(Object)this;
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.CANIAC_SENSITIVITY_ENABLED.get()){
-            caniac.goalSelector.addGoal(1, new WaterAvoidingRandomStrollGoal(this, 1.5, 1.0000001E-5F));
-        }
-        if (AlexsCavesExemplified.COMMON_CONFIG.BEDWARS_ENABLED.get()){
-            caniac.goalSelector.addGoal(2, new ACECaniacBedwars(caniac, 24));
-        }
-        if (AlexsCavesExemplified.COMMON_CONFIG.CANIACAL_EXPLOSION_ENABLED.get()){
-            caniac.goalSelector.addGoal(2, new ACECaniacExplode(caniac, 24));
-        }
         if (AlexsCavesExemplified.COMMON_CONFIG.CANIAC_MANIAC_ENABLED.get()){
             caniac.goalSelector.addGoal(2, new NearestAttackableTargetGoal<>(caniac, LivingEntity.class,5000,false,false, Objects::nonNull){
                 @Override
@@ -53,15 +39,13 @@ public abstract class ACECaniac extends Monster {
                     super.start();
                 }
             });
+            caniac.goalSelector.addGoal(2, new ACECaniacBedwars(caniac, 24));
+            caniac.goalSelector.addGoal(2, new ACECaniacExplode(caniac, 24));
         }
     }
 
     @ModifyExpressionValue(method = "hurtMobsFromArmSwing", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/CaniacEntity;getType()Lnet/minecraft/world/entity/EntityType;"))
-    private EntityType onlyFlyIfAllowed(EntityType original) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.CANIAC_MANIAC_ENABLED.get()){
-            return null;
-        } else {
-            return original;
-        }
+    private EntityType alexsCavesExemplified$hurtMobsFromArmSwing(EntityType original) {
+        return AlexsCavesExemplified.COMMON_CONFIG.CANIAC_MANIAC_ENABLED.get() ? null : original;
     }
 }

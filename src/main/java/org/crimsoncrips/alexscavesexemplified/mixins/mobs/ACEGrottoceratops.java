@@ -31,7 +31,7 @@ public abstract class ACEGrottoceratops extends DinosaurEntity {
         if (AlexsCavesExemplified.COMMON_CONFIG.DINOSAUR_EGG_ANGER_ENABLED.get()){
             grottoceratops.targetSelector.addGoal(4, new ACEDinosaurEggAttack<>(grottoceratops, LivingEntity.class, true));
         }
-        if (AlexsCavesExemplified.COMMON_CONFIG.FEARED_ANCESTORS_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){
             grottoceratops.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(grottoceratops, LivingEntity.class, 150, true, false, livingEntity -> {
                 return livingEntity.isHolding(Ingredient.of(ACItemRegistry.LIMESTONE_SPEAR.get()));
             }){

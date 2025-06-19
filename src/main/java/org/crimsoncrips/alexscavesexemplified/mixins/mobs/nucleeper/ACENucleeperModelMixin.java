@@ -22,10 +22,10 @@ public abstract class ACENucleeperModelMixin extends AdvancedEntityModel<Nucleep
 
     @Inject(method = "setupAnim(Lcom/github/alexmodguy/alexscaves/server/entity/living/NucleeperEntity;FFFFF)V", at = @At(value = "TAIL"),remap = false)
     private void alexsCavesExemplified$add(NucleeperEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci) {
-        if (((NucleeperXtra)entity).alexsCavesExemplified$isDefused()){
+        if (((NucleeperXtra)entity).isDefused()){
             this.lpupil.setPos(lpupil.defaultPositionX,lpupil.defaultPositionY,lpupil.defaultPositionZ + 2);
             this.rpupil.setPos(rpupil.defaultPositionX,rpupil.defaultPositionY,rpupil.defaultPositionZ + 2);
-        } else if (((NucleeperXtra)entity).alexsCavesExemplified$isRusted()) {
+        } else if (((NucleeperXtra)entity).isRusted()) {
             this.lpupil.setPos(lpupil.defaultPositionX,lpupil.defaultPositionY,lpupil.defaultPositionZ + 2);
         }
     }

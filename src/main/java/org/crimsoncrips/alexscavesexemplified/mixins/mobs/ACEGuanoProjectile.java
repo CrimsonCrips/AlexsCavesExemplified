@@ -17,7 +17,7 @@ public class ACEGuanoProjectile {
 
     @Inject(method = "onHitEntity", at = @At("HEAD"))
     private void getMaxLoadTime(EntityHitResult hitResult, CallbackInfo ci) {
-        if (hitResult.getEntity() instanceof LivingEntity living && AlexsCavesExemplified.COMMON_CONFIG.GUANO_SLOW_ENABLED.get()){
+        if (hitResult.getEntity() instanceof LivingEntity living && AlexsCavesExemplified.COMMON_CONFIG.GUASLOWPOKE_ENABLED.get()){
             living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
         }
     }

@@ -61,6 +61,7 @@ public abstract class ACEGummybear extends Animal {
             if (entity != null && isBearSleeping()) {
                 this.jellybeansToMake = setVariable / 4000 - sleepFor / 4000;
                 this.sleepFor = 0;
+                ACEUtils.awardAdvancement(entity,"interrupt","interrupt");
 
             }
         }

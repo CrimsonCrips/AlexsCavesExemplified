@@ -29,7 +29,7 @@ public abstract class ACEDeepKnightMixin extends DeepOneBaseEntity {
 
     @Inject(method = "registerGoals", at = @At("HEAD"))
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.DEEP_HUNTING_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){
             this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, TripodfishEntity.class, true, true));
             this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LanternfishEntity.class, true, true));
         }

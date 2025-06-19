@@ -110,10 +110,10 @@ public class ACEUtils {
 
     public static void spawnLoot (ResourceLocation location, LivingEntity entity, Entity owner, int loop){
         if (!entity.level().isClientSide){
-            LootParams ctx = new LootParams.Builder((ServerLevel) entity.level()).withParameter(LootContextParams.THIS_ENTITY, entity).create(LootContextParamSets.EMPTY);
-            ObjectArrayList<ItemStack> rewards = entity.level().getServer().getLootData().getLootTable(location).getRandomItems(ctx);
-            if (!rewards.isEmpty()) {
-                for (int i = 0; i <= loop; i++) {
+            for (int i = 0; i <= loop; i++) {
+                LootParams ctx = new LootParams.Builder((ServerLevel) entity.level()).withParameter(LootContextParams.THIS_ENTITY, entity).create(LootContextParamSets.EMPTY);
+                ObjectArrayList<ItemStack> rewards = entity.level().getServer().getLootData().getLootTable(location).getRandomItems(ctx);
+                if (!rewards.isEmpty()) {
                     rewards.forEach(stack -> BehaviorUtils.throwItem(entity, rewards.get(0), owner.position().add(0.0D, 1.0D, 0.0D)));
                 }
             }

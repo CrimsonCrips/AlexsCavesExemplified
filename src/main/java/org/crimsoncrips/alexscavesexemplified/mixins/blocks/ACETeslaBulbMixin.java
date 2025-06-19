@@ -53,14 +53,14 @@ public abstract class ACETeslaBulbMixin extends BaseEntityBlock {
 
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/block/blockentity/TeslaBulbBlockEntity;explode()V"))
     private void alexsCavesExemplified$attack(BlockState blockState, Level level, BlockPos blockPos, Player player, CallbackInfo ci) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()) {
             level.playLocalSound(blockPos, ACESoundRegistry.TESLA_EXPLODING.get(), SoundSource.AMBIENT, 2, 1, false);
         }
     }
 
     @Inject(method = "onProjectileHit", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/block/blockentity/TeslaBulbBlockEntity;explode()V"))
     private void alexsCavesExemplified$projectileHit(Level level, BlockState blockState, BlockHitResult hitResult, Projectile projectile, CallbackInfo ci) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()) {
             level.playLocalSound(Objects.requireNonNull(level.getBlockEntity(hitResult.getBlockPos())).getBlockPos(), ACESoundRegistry.TESLA_EXPLODING.get(), SoundSource.AMBIENT, 2, 1, false);
         }
     }

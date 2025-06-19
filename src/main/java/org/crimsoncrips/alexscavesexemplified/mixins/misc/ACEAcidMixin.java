@@ -44,14 +44,8 @@ public class ACEAcidMixin extends LiquidBlock {
 
     @Inject(method = "entityInside", at = @At(value = "TAIL"))
     private void alexsCavesExemplified$entityInside(BlockState blockState, Level level, BlockPos pos, Entity entity, CallbackInfo ci) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.RUSTED_NUCLEEPER_ENABLED.get() && entity instanceof NucleeperEntity nucleeper && !((NucleeperXtra)nucleeper).alexsCavesExemplified$isRusted()) {
-            ((NucleeperXtra)nucleeper).alexsCavesExemplified$setRusted(true);
-            entity.playSound( ACSoundRegistry.ACID_BURN.get());
-            nucleeper.getAttribute(Attributes.ARMOR).setBaseValue(2F);
-            nucleeper.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20F);
-            nucleeper.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.15F);
-            nucleeper.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(2F);
-            nucleeper.setHealth(20F);
+        if (AlexsCavesExemplified.COMMON_CONFIG.DESOLATED_WEAPON_ENABLED.get() && entity instanceof NucleeperEntity nucleeper && !((NucleeperXtra)nucleeper).isRusted()) {
+            ((NucleeperXtra)nucleeper).setRusted(true);
             for(Player player : level.getEntitiesOfClass(Player.class, nucleeper.getBoundingBox().inflate(6, 6, 6))){
                 ACEUtils.awardAdvancement(player,"rusting","rust");
             }

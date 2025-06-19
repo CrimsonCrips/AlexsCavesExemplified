@@ -35,7 +35,7 @@ public abstract class ACEGammaroach extends PathfinderMob implements TargetsDrop
     @Inject(method = "registerGoals", at = @At("TAIL"))
     private void registerGoals(CallbackInfo ci) {
         GammaroachEntity gammaroach = (GammaroachEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.GAMMAROACH_FOODING_ENABLED.get()) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.ROACH_FEEDING_ENABLED.get()) {
             gammaroach.targetSelector.addGoal(1, new MobTargetItemGoal<>(this, false));
         }
     }

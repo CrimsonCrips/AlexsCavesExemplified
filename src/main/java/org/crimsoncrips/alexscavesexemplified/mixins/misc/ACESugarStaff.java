@@ -126,8 +126,8 @@ public abstract class ACESugarStaff extends Item {
                 }
                 if (!player.isCreative()) {
                     player.getOffhandItem().shrink(1);
+                    player.getCooldowns().addCooldown(this, seeking ? (multipleMint >= 2 ? 800 : (multipleMint == 1 ? 700 : 600)) : (multipleMint >= 2 ? 600 : (multipleMint == 1 ? 500 : 400)));
                 }
-                player.getCooldowns().addCooldown(this, seeking ? (multipleMint >= 2 ? 800 : (multipleMint == 1 ? 700 : 600)) : (multipleMint >= 2 ? 600 : (multipleMint == 1 ? 500 : 400)));
                 level.playSound((Player) null, player.blockPosition(), (SoundEvent) ACSoundRegistry.SUGAR_STAFF_CAST_PEPPERMINT.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
             }

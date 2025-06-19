@@ -21,7 +21,7 @@ public class ACENucleeperMelee extends Goal {
 
     public boolean canUse() {
         LivingEntity target = nucleeper.getTarget();
-        return target != null && target.isAlive() && !((NucleeperXtra)nucleeper).alexsCavesExemplified$isDefused();
+        return target != null && target.isAlive() && !((NucleeperXtra)nucleeper).isDefused();
     }
 
     public void tick() {

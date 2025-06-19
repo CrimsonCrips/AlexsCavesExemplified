@@ -31,7 +31,7 @@ public abstract class ACERelicheirus extends DinosaurEntity {
         if (AlexsCavesExemplified.COMMON_CONFIG.DINOSAUR_EGG_ANGER_ENABLED.get()){
             relicheirus.targetSelector.addGoal(4, new ACEDinosaurEggAttack<>(relicheirus, LivingEntity.class, true));
         }
-        if (AlexsCavesExemplified.COMMON_CONFIG.FEARED_ANCESTORS_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){
             relicheirus.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(relicheirus, LivingEntity.class, 300, true, false, livingEntity -> {
                 return livingEntity.isHolding(Ingredient.of(ACItemRegistry.LIMESTONE_SPEAR.get()));
             }){

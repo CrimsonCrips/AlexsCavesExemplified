@@ -38,6 +38,7 @@ public class ACELootTables {
 	public static final ResourceLocation GLOOMOTH_TRADE = register("entities/gloomoth_trade");
 	public static final ResourceLocation CORRODENT_TRADE = register("entities/corrodent_trade");
 
+	public static final ResourceLocation NUCLEEPER_DEFUSION = register("entities/nucleeper_defusion");
 
 	public static final ResourceLocation GOSSAMER_DROPS = register("entities/gossamer_drops");
 	public final ResourceLocation lootTable;

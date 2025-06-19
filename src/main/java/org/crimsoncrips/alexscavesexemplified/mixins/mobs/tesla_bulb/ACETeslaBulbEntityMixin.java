@@ -47,7 +47,7 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"))
     private static void alexsCavesExemplified$tick1(Level level, BlockPos blockPos, BlockState state, TeslaBulbBlockEntity entity, CallbackInfo ci) {
-        if(AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()){
+        if(AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
             level.playLocalSound(blockPos, ACESoundRegistry.TESLA_FIRE.get(), SoundSource.BLOCKS, 2, 1, false);
         }
     }
@@ -95,7 +95,7 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                     ParticleUtils.spawnParticlesAlongAxis(Direction.UP.getAxis(), level, blockPos, 0.125D, ParticleTypes.ELECTRIC_SPARK, UniformInt.of(1, 2));
                 }
                 tickAccesor.setCharge(tickAccesor.getCharge() + 1);
-                if (tickAccesor.getCharge() == 5 && AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()){
+                if (tickAccesor.getCharge() == 5 && AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
                     level.playLocalSound(blockPos, ACESoundRegistry.TESLA_POWERUP.get(), SoundSource.AMBIENT, 2, 1, false);
                 }
                 if (tickAccesor.getCharge() > 30 && tickAccesor.getCharge() < 35){
@@ -112,7 +112,7 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                         ACEUtils.awardAdvancement(player,"tesla_shock","shock");
                     }
                 }
-                if (tickAccesor.getCharge() == 33 && AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()){
+                if (tickAccesor.getCharge() == 33 && AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
                     target.playSound( ACESoundRegistry.TESLA_FIRE.get());
                 }
                 if (tickAccesor.getCharge() > 45) {

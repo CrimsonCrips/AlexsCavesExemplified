@@ -429,19 +429,19 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 				.addCriterion("amputate", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:amputate");
 
-		Advancement crumby_rage = (Advancement.Builder.advancement().parent(amputate).display(
-						ACItemRegistry.GINGERBREAD_CRUMBS.get(),
-						Component.translatable("advancement.alexscavesexemplified.crumby_rage"),
-						Component.translatable("advancement.alexscavesexemplified.crumby_rage.desc"),
+		Advancement interrupt = (Advancement.Builder.advancement().parent(candy).display(
+						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/interrupt.png"),
+						Component.translatable("advancement.alexscavesexemplified.interrupt"),
+						Component.translatable("advancement.alexscavesexemplified.interrupt.desc"),
 						null, FrameType.TASK, true, true, false)
-				.addCriterion("raged", new ImpossibleTrigger.TriggerInstance()))
-				.save(consumer, "alexscavesexemplified:crumby_rage");
+				.addCriterion("interrupt", new ImpossibleTrigger.TriggerInstance()))
+				.save(consumer, "alexscavesexemplified:interrupt");
 
-		Advancement feed_speedup = (Advancement.Builder.advancement().parent(candy).display(
+		Advancement feed_speedup = (Advancement.Builder.advancement().parent(interrupt).display(
 						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/feed_speedup.png"),
 						Component.translatable("advancement.alexscavesexemplified.feed_speedup"),
 						Component.translatable("advancement.alexscavesexemplified.feed_speedup.desc"),
-						null, FrameType.TASK, true, true, false)
+						null, FrameType.CHALLENGE, true, true, false)
 				.addCriterion("feed", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:feed_speedup");
 

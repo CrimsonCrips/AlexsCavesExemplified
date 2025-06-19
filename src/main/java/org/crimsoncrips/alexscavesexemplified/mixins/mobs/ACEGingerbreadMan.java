@@ -37,11 +37,6 @@ public abstract class ACEGingerbreadMan extends Monster {
         if (AlexsCavesExemplified.COMMON_CONFIG.HIVE_MIND_ENABLED.get()) gingerbreadMan.targetSelector.addGoal(1, (new ACEHurtByTargetGoal(gingerbreadMan)).setAlertOthers(new Class[0]));
     }
 
-    @Override
-    public boolean isSensitiveToWater() {
-        return AlexsCavesExemplified.COMMON_CONFIG.GINGER_DISINTEGRATE_ENABLED.get();
-    }
-
 
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {

@@ -56,7 +56,7 @@ public abstract class ACERaygunMixin extends Item {
         float time = i < 15 ? i / (float) 15 : 1F;
         HitResult realHitResult = ProjectileUtil.getHitResultOnViewVector(living, Entity::canBeHitByProjectile, 25.0F * time);
 
-        if(stack.getEnchantmentLevel(ACEnchantmentRegistry.X_RAY.get()) <= 0 && AlexsCavesExemplified.COMMON_CONFIG.RERAYGUNNED_ENABLED.get()){
+        if(stack.getEnchantmentLevel(ACEnchantmentRegistry.X_RAY.get()) <= 0 && AlexsCavesExemplified.COMMON_CONFIG.REARAYNGEMENT_ENABLED.get()){
             if (realHitResult instanceof BlockHitResult blockHitResult) {
                 BlockPos pos = blockHitResult.getBlockPos();
                 if (stack.getEnchantmentLevel(ACEnchantmentRegistry.GAMMA_RAY.get()) > 0) {
@@ -93,7 +93,7 @@ public abstract class ACERaygunMixin extends Item {
 
     @Inject(method = "onUseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getType()Lnet/minecraft/world/entity/EntityType;"), cancellable = true)
     private void alexsCavesExemplified$onUseTick(Level level, LivingEntity living, ItemStack stack, int timeUsing, CallbackInfo ci, @Local(ordinal = 1) boolean gamma, @Local(ordinal = 3) int radiationLevel, @Local Entity entity, @Local(ordinal = 1) LivingEntity livingEntity) {
-          if (AlexsCavesExemplified.COMMON_CONFIG.HAZMAT_AMPLIFIED_ENABLED.get()){
+          if (AlexsCavesExemplified.COMMON_CONFIG.ARMORED_LIQUIDATORS_ENABLED.get()){
               ci.cancel();
               int hazmatLevel = HazmatArmorItem.getWornAmount(livingEntity);
               if (!livingEntity.getType().is(ACTagRegistry.RESISTS_RADIATION) && livingEntity.addEffect(new MobEffectInstance((MobEffect) ACEffectRegistry.IRRADIATED.get(), 800 / (hazmatLevel > 0 ? (hazmatLevel + 1) - radiationLevel : 1),radiationLevel - hazmatLevel + (gamma ? 2 : 0)))) {

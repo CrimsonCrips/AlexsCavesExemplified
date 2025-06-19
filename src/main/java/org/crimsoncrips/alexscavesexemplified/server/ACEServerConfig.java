@@ -4,7 +4,6 @@ import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue GLUTTONY_ENABLED;
-    public final ForgeConfigSpec.BooleanValue REGULAR_REFERENCE_ENABLED;
     public final ForgeConfigSpec.BooleanValue REDOABLE_SPELUNKY_ENABLED;
     public final ForgeConfigSpec.BooleanValue KNAWING_ENABLED;
     public final ForgeConfigSpec.BooleanValue AMPUTATION_ENABLED;
@@ -12,11 +11,9 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue FORLORN_LIGHT_EFFECT_ENABLED;
     public final ForgeConfigSpec.BooleanValue BURST_OUT_ENABLED;
     public final ForgeConfigSpec.BooleanValue CORRODENT_CONVERSION_ENABLED;
-    public final ForgeConfigSpec.BooleanValue CRUMBY_RAGE_ENABLED;
     public final ForgeConfigSpec.BooleanValue NUCLEAR_PISTONATION_ENABLED;
     public final ForgeConfigSpec.BooleanValue HIVE_MIND_ENABLED;
     public final ForgeConfigSpec.BooleanValue ANTI_SACRIFICE_ENABLED;
-    public final ForgeConfigSpec.BooleanValue VESPER_HUNT_ENABLED;
     public final ForgeConfigSpec.BooleanValue DREAD_ADDAPTIONS_ENABLED;
     public final ForgeConfigSpec.BooleanValue JELLYBEAN_CHANGES_ENABLED;
     public final ForgeConfigSpec.BooleanValue SWEETISH_SPEEDUP_ENABLED;
@@ -25,9 +22,8 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue GEOTHERMAL_EFFECTS_ENABLED;
     public final ForgeConfigSpec.BooleanValue RABIES_ENABLED;
     public final ForgeConfigSpec.BooleanValue AMPLIFIED_FROSTMINT_ENABLED;
-    public final ForgeConfigSpec.BooleanValue CANIAC_SENSITIVITY_ENABLED;
     public final ForgeConfigSpec.BooleanValue IRRADIATION_WASHOFF_ENABLED;
-    public final ForgeConfigSpec.BooleanValue GAMMAROACH_FOODING_ENABLED;
+    public final ForgeConfigSpec.BooleanValue ROACH_FEEDING_ENABLED;
     public final ForgeConfigSpec.DoubleValue CHARGED_CAVE_CREEPER_CHANCE;
     public final ForgeConfigSpec.BooleanValue MAGNETICISM_ENABLED;
     public final ForgeConfigSpec.BooleanValue PURPLE_LEATHERED_ENABLED;
@@ -38,47 +34,32 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue VOLCANIC_SACRIFICE_ENABLED;
     public final ForgeConfigSpec.BooleanValue RADIANT_WRATH_ENABLED;
     public final ForgeConfigSpec.BooleanValue PRESSURED_HOOKS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue LOGICAL_RIDING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue FEARED_ANCESTORS_ENABLED;
     public final ForgeConfigSpec.BooleanValue DINOSAUR_EGG_ANGER_ENABLED;
-    public final ForgeConfigSpec.BooleanValue IRRADIATED_CREEPER_ENABLED;
     public final ForgeConfigSpec.BooleanValue NUCLEAR_CHAIN_ENABLED;
-    public final ForgeConfigSpec.BooleanValue MUTATED_DEATH_ENABLED;
     public final ForgeConfigSpec.BooleanValue WASTE_PICKUP_ENABLED;
     public final ForgeConfigSpec.BooleanValue CAT_MUTATION_ENABLED;
-    public final ForgeConfigSpec.BooleanValue DARKNESS_APPLYED_ENABLED;
-    public final ForgeConfigSpec.BooleanValue DISORIENTED_ENABLED;
     public final ForgeConfigSpec.BooleanValue UNDERZEALOT_RESPECT_ENABLED;
     public final ForgeConfigSpec.BooleanValue SCAVENGING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue AMBER_HEAL_ENABLED;
     public final ForgeConfigSpec.BooleanValue VESPER_SHOTDOWN_ENABLED;
-    public final ForgeConfigSpec.BooleanValue GUANO_SLOW_ENABLED;
+    public final ForgeConfigSpec.BooleanValue GUASLOWPOKE_ENABLED;
     public final ForgeConfigSpec.BooleanValue ADDITIONAL_FLAMMABILITY_ENABLED;
     public final ForgeConfigSpec.BooleanValue STOMP_DAMAGE_ENABLED;
     public final ForgeConfigSpec.BooleanValue PAINT_EFFECTS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue WASTE_POWERUP_ENABLED;
     public final ForgeConfigSpec.BooleanValue KIROV_REPORTING_ENABLED;
     public final ForgeConfigSpec.IntValue SPELUNKY_ATTEMPTS_AMOUNT;
-    public final ForgeConfigSpec.BooleanValue EXTINGUISH_CAMPFIRES_ENABLED;
-    public final ForgeConfigSpec.BooleanValue BEDWARS_ENABLED;
     public final ForgeConfigSpec.BooleanValue CANIAC_MANIAC_ENABLED;
     public final ForgeConfigSpec.BooleanValue TUNED_SATING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue GUM_TRAMPLE_ENABLED;
     public final ForgeConfigSpec.BooleanValue SUGAR_CRASH_ENABLED;
     public final ForgeConfigSpec.BooleanValue ICED_CREAM_ENABLED;
-    public final ForgeConfigSpec.BooleanValue SOLIDIFIED_WATCHER_ENABLED;
-    public final ForgeConfigSpec.BooleanValue GINGER_DISINTEGRATE_ENABLED;
-    public final ForgeConfigSpec.BooleanValue OVERTUNED_CONSUMPTION_ENABLED;
+    public final ForgeConfigSpec.BooleanValue SOLIDIFIED_ENABLED;
     public final ForgeConfigSpec.BooleanValue PRESERVED_AMBER_ENABLED;
     public final ForgeConfigSpec.BooleanValue SEETHED_TAMING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue HAZMAT_AMPLIFIED_ENABLED;
+    public final ForgeConfigSpec.BooleanValue ARMORED_LIQUIDATORS_ENABLED;
     public final ForgeConfigSpec.BooleanValue TREMOR_V_TREMOR_ENABLED;
-    public final ForgeConfigSpec.BooleanValue PEERING_TRIGGER_ENABLED;
-    public final ForgeConfigSpec.BooleanValue RADIOACTIVE_AWARENESS_ENABLED;
     public final ForgeConfigSpec.BooleanValue BRAINDEAD_MODE_ENABLED ;
     public final ForgeConfigSpec.BooleanValue FORGIVING_SPELUKING_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue RERAYGUNNED_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue GAMMARATED_TREMORZILLA_ENABLED ;
+    public final ForgeConfigSpec.BooleanValue REARAYNGEMENT_ENABLED ;
+    public final ForgeConfigSpec.BooleanValue GAMMA_TREMORZILLA_ENABLED ;
     public final ForgeConfigSpec.BooleanValue CANDICORN_HEAL_ENABLED ;
     public final ForgeConfigSpec.BooleanValue POISONOUS_SKIN_ENABLED ;
     public final ForgeConfigSpec.BooleanValue ABYSSAL_CRUSH_ENABLED ;
@@ -88,11 +69,8 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue COOKIE_CRUMBLE_ENABLED ;
     public final ForgeConfigSpec.BooleanValue CRYONIC_CAVITY_ENABLED ;
     public final ForgeConfigSpec.BooleanValue BREAKING_CANDY_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue LICOWITCH_VENGEANCE_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue CANIACAL_EXPLOSION_ENABLED ;
     public final ForgeConfigSpec.BooleanValue REMINEDING_ENABLED ;
     public final  ForgeConfigSpec.BooleanValue ABYSSAL_LIGHT_CHECK_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue TESLA_COILED_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SHOCKING_THERAPY_ENABLED;
     public final  ForgeConfigSpec.BooleanValue LIQUID_REPLICATION_ENABLED;
     public final  ForgeConfigSpec.BooleanValue ICE_CREAM_CONE_ENABLED;
@@ -100,7 +78,6 @@ public class ACEServerConfig {
 
     public final  ForgeConfigSpec.BooleanValue NOON_GUARDIAN_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SWEET_PUNISHMENT_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue GROUNDED_NUKE_ENABLED;
     public final  ForgeConfigSpec.BooleanValue TOUGH_ROACHES_ENABLED;
     public final  ForgeConfigSpec.BooleanValue DEEP_WEAKENED_ENABLED;
     public final  ForgeConfigSpec.BooleanValue OVERDRIVED_CONVERSION_ENABLED;
@@ -109,7 +86,7 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue POWERED_LOCATORS_ENABLED;
     public final  ForgeConfigSpec.BooleanValue CATTASTROPHE_ENABLED;
     public final  ForgeConfigSpec.BooleanValue BOUNDED_MAGNETISM_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue RUSTED_NUCLEEPER_ENABLED;
+    public final  ForgeConfigSpec.BooleanValue DESOLATED_WEAPON_ENABLED;
     public final  ForgeConfigSpec.BooleanValue DARK_OFFERING_ENABLED;
     public final  ForgeConfigSpec.BooleanValue MAGNERIP_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SUBMARINE_BUMP_ENABLED;
@@ -119,13 +96,12 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue ACE_WIKI_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SCALABLE_HOLOGRAM_ENABLED;
     public final  ForgeConfigSpec.BooleanValue TELETOR_REARM_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue CARAMERGING_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SELF_DESTRUCT_ENABLED;
     public final  ForgeConfigSpec.BooleanValue RAVAGING_TREMOR_ENABLED;
 
-    public final  ForgeConfigSpec.BooleanValue DEEP_HUNTING_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SHOTNUKE_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SERENED_ENABLED;
+    public final  ForgeConfigSpec.BooleanValue ADD_TARGETS_ENABLED;
 
 
 
@@ -141,16 +117,17 @@ public class ACEServerConfig {
         this.CAVIAL_BONEMEAL_ENABLED = buildBoolean(builder, "CAVIAL_BONEMEAL_ENABLED", " ", true, "Whether it adds new interactions of bone meal with Alex's Cave's flora");
         this.LIQUID_REPLICATION_ENABLED = buildBoolean(builder, "LIQUID_REPLICATION_ENABLED", " ", true, "Whether AC liquids can be renewable");
         this.POWERED_LOCATORS_ENABLED = buildBoolean(builder, "POWERED_LOCATORS_ENABLED", " ", true, "Using a wither star to nullify godly interventions.To allow you to use natures compass and alike to find biomes");
+        this.ADD_TARGETS_ENABLED = buildBoolean(builder, "ADD_TARGETS_ENABLED", " ", true, "Adds extra targets for mobs");
+
 
         builder.pop();
         builder.push("Candy Cavity");
-        this.GLUTTONY_ENABLED = buildBoolean(builder, "GLUTTONY_ENABLED", " ", true, "Whether blocks inside candy cavity, can be eaten by right clicking");
+        this.GLUTTONY_ENABLED = buildBoolean(builder, "GLUTTONY_ENABLED", " ", true, "Consume blocks when right clicking, and minor interactions with eating food");
         this.STICKY_SODA_ENABLED = buildBoolean(builder, "STICKY_SODA_ENABLED", " ", true, "Whether purple soda causes stickyness when in it");
         this.RADIANT_WRATH_ENABLED = buildBoolean(builder, "RADIANT_WRATH_ENABLED", " ", true, "Having Radiant Essence amplifies the attacks of Sugar Staff");
         this.TUNED_SATING_ENABLED = buildBoolean(builder, "TUNED_SATING_ENABLED", " ", true, "Dropping foods in a dropped sack of sating will consume the dropped foods");
         this.SUGAR_CRASH_ENABLED = buildBoolean(builder, "SUGAR_CRASH_ENABLED", " ", true, "Sugar Rushes at the end will cause sugar crashed dealing damage and temporary slowness");
         this.ICED_CREAM_ENABLED = buildBoolean(builder, "ICED_CREAM_ENABLED", " ", true, "Thrown ice cream slightly freezes those that are hit");
-        this.OVERTUNED_CONSUMPTION_ENABLED = buildBoolean(builder, "OVERTUNED_CONSUMPTION_ENABLED", " ", true, "Adds interactions when eating things from Candy Cavity");
         this.CRYONIC_CAVITY_ENABLED = buildBoolean(builder, "CRYONIC_CAVITY_ENABLED", " ", true, "Makes the candy cavity freeze outsiders slowly");
         this.BREAKING_CANDY_ENABLED = buildBoolean(builder, "BREAKING_CANDY_ENABLED", " ", true, "Allows the creation of gelatin with bone blocks");
         this.ICE_CREAM_CONE_ENABLED = buildBoolean(builder, "ICE_CREAM_CONE_ENABLED", " ", true, "You can make Ice Cream Cones");
@@ -162,29 +139,18 @@ public class ACEServerConfig {
 
 
         builder.push("Caniac");
-        this.CANIAC_SENSITIVITY_ENABLED = buildBoolean(builder, "CANIAC_SENSITIVITY_ENABLED", " ", true, "Whether Caniac dissolve in water and will actively avoid it");
-        this.BEDWARS_ENABLED = buildBoolean(builder, "BEDWARS_ENABLED", " ", true, "Whether Caniacs randomly destroy beds");
-        this.CANIAC_MANIAC_ENABLED = buildBoolean(builder, "CANIAC_MANIAC_ENABLED", " ", true, "Whether Caniacs randomly attacks others");
-        this.CANIACAL_EXPLOSION_ENABLED = buildBoolean(builder, "CANIACAL_EXPLOSION_ENABLED", " ", true, "Whether Caniacs randomly lights placed explosives");
-
+        this.CANIAC_MANIAC_ENABLED = buildBoolean(builder, "CANIAC_MANIAC_ENABLED", " ", true, "Caniacs become maniacs and do unhinged activities");
         builder.pop();
         builder.push("Candicorn");
         this.CANDICORN_HEAL_ENABLED = buildBoolean(builder, "CANDICORN_HEAL_ENABLED", " ", true, "Whether candicorn heals with caramel apple");
         builder.pop();
         builder.push("Caramel Cube");
         this.STICKY_CARAMEL_ENABLED = buildBoolean(builder, "STICKY_CARAMEL_ENABLED", " ", true, "Whether caramel cube's stickiness applies to its attacks");
-        this.CARAMERGING_ENABLED = buildBoolean(builder, "CARAMERGING_ENABLED", " ", true, "Whether caramel cubes merge with eachother");
 
         builder.pop();
         builder.push("Gingerbread Man");
         this.AMPUTATION_ENABLED = buildBoolean(builder, "AMPUTATION_ENABLED", " ", true, "Whether Gingerbread Men can be amputated with an axe");
         this.HIVE_MIND_ENABLED = buildBoolean(builder, "HIVE_MIND_ENABLED", " ", true, "Whether Gingerbread Men will attack you if you attack one of them.");
-        this.CRUMBY_RAGE_ENABLED = buildBoolean(builder, "CRUMBY_RAGE_ENABLED", " ", true, "Whether Gingerbread Men will attack you if you eat their crumbs");
-        this.GINGER_DISINTEGRATE_ENABLED = buildBoolean(builder, "GINGER_DISINTEGRATE_ENABLED", " ", true, "Whether Gingerbread Men are sensitive to water");
-        builder.pop();
-        builder.push("Gumbeeper");
-        builder.comment("--Requires Alexs Mobs--");
-        this.REGULAR_REFERENCE_ENABLED = buildBoolean(builder, "REGULAR_REFERENCE_ENABLED", " ", true, "Whether Gumbeepers will attack, Blue jays and Raccoons in Alexs Mobs");
         builder.pop();
         builder.push("Gummy Bear");
         this.JELLYBEAN_CHANGES_ENABLED = buildBoolean(builder, "JELLYBEAN_CHANGES_ENABLED", " ", true, "Jellybean harvesting is changed where amount of jellybeans is made the longer they hibernate");
@@ -193,14 +159,7 @@ public class ACEServerConfig {
         builder.pop();
         builder.push("Gum Worm");
         this.PRESSURED_HOOKS_ENABLED = buildBoolean(builder, "PRESSURED_HOOKS_ENABLED", " ", true, "Whether candy hooks will take damage overtime when riding a gum worm");
-        this.LOGICAL_RIDING_ENABLED = buildBoolean(builder, "LOGICAL_RIDING_ENABLED", " ", true, "Whether to kick you off the gum worm when either of your hooks are not present");
-        this.GUM_TRAMPLE_ENABLED = buildBoolean(builder, "GUM_TRAMPLE_ENABLED", " ", true, "Whether gum worm head damages nearby enemies");
-
         builder.pop();
-        builder.push("Licowitch");
-        this.LICOWITCH_VENGEANCE_ENABLED = buildBoolean(builder, "LICOWITCH_VENGEANCE_ENABLED", " ", true, "Whether licowitches attack villagers and iron golems");
-        builder.pop();
-
 
 
         builder.pop();
@@ -208,10 +167,8 @@ public class ACEServerConfig {
         builder.comment("--Compatible with Curios Lanterns--");
         this.FORLORN_LIGHT_EFFECT_ENABLED = buildBoolean(builder, "FORLORN_LIGHT_EFFECT_ENABLED", " ", true, "Whether most forlorn mammals are effected when a player holds light");
         this.BURST_OUT_ENABLED = buildBoolean(builder, "BURST_OUT_ENABLED", " ", true, "Whether breaking Forlorn Hollows blocks has a chance to burst out Underzealots or Corrodents");
-        this.DARKNESS_APPLYED_ENABLED = buildBoolean(builder, "DARKNESS_APPLYED_ENABLED", " ", true, "Whether darkness arrows have a 1% chance of inflicting darkness");
-        this.RABIES_ENABLED = buildBoolean(builder, "RABIES_ENABLED", " ", true, "Whether corrodents inflict rabies-like symptoms");
-        this.GUANO_SLOW_ENABLED = buildBoolean(builder, "GUANO_SLOW_ENABLED", " ", true, "Whether guano slows you down");
-        this.PEERING_TRIGGER_ENABLED = buildBoolean(builder, "PEERING_TRIGGER_ENABLED", " ", true, "Whether peering coprolith interact with players holding light in different ways");
+        this.RABIES_ENABLED = buildBoolean(builder, "RABIES_ENABLED", " ", true, "Rabies Effects for Forlorn Hollows");
+        this.GUASLOWPOKE_ENABLED = buildBoolean(builder, "GUASLOWPOKE_ENABLED", " ", true, "Whether guano slows you down");
         this.BEHOLDENT_STALKING_ENABLED = buildBoolean(builder, "BEHOLDENT_STALKING_ENABLED", " ", true, "Whether beholders stalk nearby players when unused");
         this.DREAD_ADDAPTIONS_ENABLED = buildBoolean(builder, "DREAD_ADDAPTIONS_ENABLED", " ", true, "Whether vanilla enchantments adapts to Dreadbow");
 
@@ -222,7 +179,6 @@ public class ACEServerConfig {
 
         builder.pop();
         builder.push("Underzealot");
-        this.EXTINGUISH_CAMPFIRES_ENABLED = buildBoolean(builder, "EXTINGUISH_CAMPFIRES_ENABLED", " ", true, "Whether underzealots extinguish campfires");
         this.UNDERZEALOT_RESPECT_ENABLED = buildBoolean(builder, "UNDERZEALOT_RESPECT_ENABLED", " ", true, "Whether underzealot respect those that wear the darkness");
         builder.comment("--Compatible with Vine Lasso from AM--");
         this.DARK_OFFERING_ENABLED = buildBoolean(builder, "DARK_OFFERING_ENABLED", " ", true, "Allow you to offer sacrifices to underzealots when neutral to them");
@@ -230,42 +186,35 @@ public class ACEServerConfig {
         builder.pop();
         builder.push("Vesper");
         this.ANTI_SACRIFICE_ENABLED = buildBoolean(builder, "ANTI_SACRIFICE_ENABLED", " ", true, "Whether vespers attack underzealots sacrificing vespers");
-        this.VESPER_HUNT_ENABLED = buildBoolean(builder, "VESPER_HUNT_ENABLED", " ", true, "Additional mobs vesper hunt");
         this.VESPER_SHOTDOWN_ENABLED = buildBoolean(builder, "VESPER_SHOTDOWN_ENABLED", " ", true, "Whether vespers can be shot down");
 
         builder.pop();
         builder.push("Watcher");
-        this.DISORIENTED_ENABLED = buildBoolean(builder, "DISORIENTED_ENABLED", " ", true, "Whether you get disoriented when possessed by a watcher");
-        this.SOLIDIFIED_WATCHER_ENABLED = buildBoolean(builder, "SOLIDIFIED_WATCHER_ENABLED", " ", true, "Whether watchers solidify into totems when long enough");
+        this.SOLIDIFIED_ENABLED = buildBoolean(builder, "SOLIDIFIED_ENABLED", " ", true, "Whether watchers solidify into totems when long enough");
         builder.pop();
         builder.pop();
 
         builder.push("Toxic Caves");
         this.EXEMPLIFIED_IRRADIATION_AMOUNT = buildInt(builder, "EXEMPLIFIED_IRRADIATION_AMOUNT", " ", 5, 1, Integer.MAX_VALUE, "Amount of irradiation level to get the deadly effects");
-        this.IRRADIATED_CREEPER_ENABLED = buildBoolean(builder, "IRRADIATED_CREEPER_ENABLED", " ", true, "Whether Irradiated Creepers have their explosions amplified");
-        this.GEOTHERMAL_EFFECTS_ENABLED = buildBoolean(builder, "GEOTHERMAL_EFFECTS_ENABLED", " ", true, "Whether Geothermal Vents have effects when standing on top depending on the spewed smoke");
         this.KIROV_REPORTING_ENABLED = buildBoolean(builder, "KIROV_REPORTING_ENABLED", " ", true, "Allows lighting of explosives, including nuclear bombs with a flint and steel off-hand during flight");
-        this.HAZMAT_AMPLIFIED_ENABLED = buildBoolean(builder, "HAZMAT_AMPLIFIED_ENABLED", " ", true, "Hazmat reduces amount of irradiation recieved from rayguns");
-        this.RADIOACTIVE_AWARENESS_ENABLED = buildBoolean(builder, "RADIOACTIVE_AWARENESS_ENABLED", " ", true, "Radioactive blocks emit irradiation to nearby players");
-        this.RERAYGUNNED_ENABLED = buildBoolean(builder, "RERAYGUNNED_ENABLED", " ", true, "Amplifies raygun effects,Such as block destruction");
-        this.GROUNDED_NUKE_ENABLED = buildBoolean(builder, "GROUNDED_NUKE_ENABLED", " ", false, "Explosions only progress when in ground (primarily used for midair nuking)");
+        this.ARMORED_LIQUIDATORS_ENABLED = buildBoolean(builder, "ARMORED_LIQUIDATORS_ENABLED", " ", true, "Hazmat reduces amount of irradiation recieved from radiation");
+        this.REARAYNGEMENT_ENABLED = buildBoolean(builder, "REARAYNGEMENT_ENABLED", " ", true, "Amplifies raygun effects,Such as block destruction");
         builder.comment("--Compatible with Soap from Supplementaries--");
         this.IRRADIATION_WASHOFF_ENABLED = buildBoolean(builder, "IRRADIATION_WASHOFF_ENABLED", " ", true, "Whether Irradiation wears off faster when in water");
+        this.GEOTHERMAL_EFFECTS_ENABLED = buildBoolean(builder, "GEOTHERMAL_EFFECTS_ENABLED", " ", true, "Whether Geothermal Vents have effects when standing on top depending on the spewed smoke");
 
 
         builder.push("Braniac");
-        this.MUTATED_DEATH_ENABLED = buildBoolean(builder, "MUTATED_DEATH_ENABLED", " ", true, "Whether players with irradiated with an amplifier of 2 or more spawns braniacs");
         this.WASTE_PICKUP_ENABLED = buildBoolean(builder, "WASTE_PICKUP_ENABLED", " ", true, "Whether Braniacs can pickup waste drums if they have non");
-        this.WASTE_POWERUP_ENABLED = buildBoolean(builder, "WASTE_POWERUP_ENABLED", " ", true, "Whether Braniacs drinking waste drums powers them up");
 
         builder.pop();
         builder.push("Gammaroach");
-        this.GAMMAROACH_FOODING_ENABLED = buildBoolean(builder, "GAMMAROACH_FOODING_ENABLED", " ", true, "Whether gammaroaches hunt dropped food");
+        this.ROACH_FEEDING_ENABLED = buildBoolean(builder, "ROACH_FEEDING_ENABLED", " ", true, "Whether gammaroaches hunt dropped food");
         builder.pop();
         builder.push("Nucleeper");
         this.NUCLEAR_CHAIN_ENABLED = buildBoolean(builder, "NUCLEAR_CHAIN_ENABLED", " ", true, "Whether nucleepers explode when they die from explosions");
         this.DEFUSION_ENABLED = buildBoolean(builder, "DEFUSION_ENABLED", " ", true, "Whether nucleepers can be defused");
-        this.RUSTED_NUCLEEPER_ENABLED = buildBoolean(builder, "RUSTED_NUCLEEPER_ENABLED", " ", true, "Rusted Nucleepers are slower and weaker");
+        this.DESOLATED_WEAPON_ENABLED = buildBoolean(builder, "DESOLATED_WEAPON_ENABLED", " ", true, "Rusted Nucleepers are slower and weaker");
 
         builder.pop();
         builder.push("Radgill");
@@ -275,7 +224,7 @@ public class ACEServerConfig {
         this.CAT_MUTATION_ENABLED = buildBoolean(builder, "CAT_MUTATION_ENABLED", " ", true, "Whether cats have a chance to turn into raycat when dowsed in acid");
         builder.pop();
         builder.push("Tremorzilla");
-        this.GAMMARATED_TREMORZILLA_ENABLED = buildBoolean(builder, "GAMMARATED_TREMORZILLA_ENABLED", " ", true, "Adds a gammafied tremorzilla, assimilated into a more powerful form");
+        this.GAMMA_TREMORZILLA_ENABLED = buildBoolean(builder, "GAMMA_TREMORZILLA_ENABLED", " ", true, "Adds a gammafied tremorzilla, assimilated into a more powerful form");
         builder.pop();
         builder.pop();
 
@@ -283,11 +232,9 @@ public class ACEServerConfig {
         this.SERENED_ENABLED = buildBoolean(builder, "SERENED_ENABLED", " ", true, "Whether feeding mobs with serene salad calms them down");
 
         this.PRIMORDIAL_OXYGEN_ENABLED = buildBoolean(builder, "PRIMORDIAL_OXYGEN_ENABLED", " ", true, "Whether you have less oxygen inside Primordial Caves");
-        this.FEARED_ANCESTORS_ENABLED = buildBoolean(builder, "FEARED_ANCESTORS_ENABLED", " ", true, "Whether you are attacked by some dinosaurs if seen with a limestone spear");
         this.DINOSAUR_EGG_ANGER_ENABLED = buildBoolean(builder, "DINOSAUR_EGG_ANGER_ENABLED", " ", true, "Whether untamed dinosaurs will attack any that are seen with their egg");
         builder.comment("--Compatible with Farmers Delight and Caves Delight--");
         this.SCAVENGING_ENABLED = buildBoolean(builder, "SCAVENGING_ENABLED", " ", true, "Whether carnivores scavenge for placed dinosaur chops");
-        this.AMBER_HEAL_ENABLED = buildBoolean(builder, "AMBER_HEAL_ENABLED", " ", true, "Whether stepping on amber can rarely heal you");
         this.STOMP_DAMAGE_ENABLED = buildBoolean(builder, "STOMP_DAMAGE_ENABLED", " ", true, "Whether Atlatitans/Lux stomps will cause damage");
         this.PAINT_EFFECTS_ENABLED = buildBoolean(builder, "PAINT_EFFECTS_ENABLED", " ", true, "Whether painting dinosaurs gives temporary effects");
         builder.comment("--Compatible with Alexs Mobs--");
@@ -309,12 +256,11 @@ public class ACEServerConfig {
 
         builder.push("Magnetic Caves");
         this.MAGNETICISM_ENABLED = buildBoolean(builder, "MAGNETICISM_ENABLED", " ", true, "Enchantment for Resistor Shield and Galena Gauntlet, amplifying their capabilities");
-        this.SHOCKING_THERAPY_ENABLED = buildBoolean(builder, "SHOCKING_THERAPY_ENABLED", " ", true, "Tesla bulbs rarely directly shock nearby intruders");
-        this.TESLA_COILED_ENABLED = buildBoolean(builder, "TESLA_COILED_ENABLED", " ", true, "Tesla bulbs have new added sfx from Command & Conquer");
+        this.SHOCKING_THERAPY_ENABLED = buildBoolean(builder, "SHOCKING_THERAPY_ENABLED", " ", true, "Tesla bulbs rarely directly shock nearby intruders, and have added sfx");
         this.SCALABLE_HOLOGRAM_ENABLED = buildBoolean(builder, "SCALABLE_HOLOGRAM_ENABLED", "", true, "Scalable Holograms with Azurite/Scarlet ingots");
 
         this.MAGNERIP_ENABLED = buildBoolean(builder, "MAGNERIP_ENABLED", "", true, "Will rip magnetic items in your hands when afflicted with weakness");
-        builder.comment("--Requires Magnerip--");
+        builder.push("--Requires Magnerip--");
         this.HARDCORE_MAGNERIP_ENABLED = buildBoolean(builder, "HARDCORE_MAGNERIP_ENABLED", "", false, "Now causes all your magnetic items in your inventory will be attracted off you,no matter what");
 
         builder.push("Boundroid");
@@ -336,7 +282,6 @@ public class ACEServerConfig {
         this.ABYSSAL_LIGHT_CHECK_ENABLED = buildBoolean(builder, "ABYSSAL_LIGHT_CHECK_ENABLED", " ", true, "Whether abyssal mobs interact with entities holding light");
         this.DEEP_WEAKENED_ENABLED = buildBoolean(builder, "DEEP_WEAKENED_ENABLED", " ", true, "Whether deep ones wilt when outside of abyssal chasm");
         this.SUBMARINE_BUMP_ENABLED = buildBoolean(builder, "SUBMARINE_BUMP_ENABLED", " ", true, "Whether submarine deals damage when moving");
-        this.DEEP_HUNTING_ENABLED = buildBoolean(builder, "DEEP_HUNTING_ENABLED", " ", true, "Whether deep ones hunt fish as well");
 
         builder.push("Mine Guardian");
         this.REMINEDING_ENABLED = buildBoolean(builder, "REMINEDING_ENABLED", " ", true, "Whether mine guardians can be made and owned");
@@ -348,7 +293,7 @@ public class ACEServerConfig {
         this.POISONOUS_SKIN_ENABLED = buildBoolean(builder, "POISONOUS_SKIN_ENABLED", " ", true, "Whether seapigs can inflict poison in nearby mobs");
         builder.pop();
         builder.push("Gossamer Worm");
-        this.GOSSAMER_FEEDING_ENABLED = buildBoolean(builder, "GOSSAMER_FEEDING_ENABLED", " ", true, "Feeding marine snow to worms,dropping bioluminescence in return");
+        this.GOSSAMER_FEEDING_ENABLED = buildBoolean(builder, "GOSSAMER_FEEDING_ENABLED", " ", true, "Feeding marine snow drops bioluminescence in return");
         builder.pop();
         builder.pop();
         builder.push("Goofy Mode");

@@ -1,9 +1,11 @@
 package org.crimsoncrips.alexscavesexemplified.compat;
 
+import com.github.alexthe666.alexsmobs.effect.AMEffectRegistry;
 import com.github.alexthe666.alexsmobs.entity.*;
 import com.github.alexthe666.alexsmobs.entity.util.VineLassoUtil;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -63,17 +65,6 @@ public class AMCompat {
     }
 
 
-    public static Class amMob(int num){
-        return switch (num) {
-            case 1 -> EntityRaccoon.class;
-            case 2 -> EntityBlueJay.class;
-            case 3 -> EntityFly.class;
-            case 4 -> EntityTiger.class;
-            case 5 -> EntityCockroach.class;
-            default -> LivingEntity.class;
-        };
-    }
-
     public static Item amItemRegistry(int num){
         return switch (num) {
             case 1 -> AMItemRegistry.VINE_LASSO.get();
@@ -82,8 +73,8 @@ public class AMCompat {
         };
     }
 
-    public static boolean gumbeeperCheck(LivingEntity living){
-        return living instanceof EntityRaccoon entityRaccoon && entityRaccoon.isRigby();
+    public static MobEffect exsanguination(){
+        return AMEffectRegistry.EXSANGUINATION.get();
     }
 
 }

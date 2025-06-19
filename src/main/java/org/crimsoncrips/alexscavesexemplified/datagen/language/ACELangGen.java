@@ -109,6 +109,7 @@ public class ACELangGen extends ACELangProvider {
 		this.addAdvancementDesc("overdrived_conversion","Overdrived Conversion", "Power up your conversion crucible with radiant essence");
 		this.addAdvancementDesc("amputate","Gingerchops", "Chop off a limp from a gingerbread man");
 		this.addAdvancementDesc("crumby_rage","Appalled Eating", "Eat gingerbread crumbs in front of them");
+		this.addAdvancementDesc("interrupt","Undercooking", "Interrupt a sleeping gummybear by attacking it");
 		this.addAdvancementDesc("feed_speedup","Jellybean Speedrun", "Speed up a gummybear's hibernation with sweetish fish");
 
 		this.addAdvancementDesc("egg_stealing","Eggnapping", "Steal a dinosaur egg, and anger its parents.");

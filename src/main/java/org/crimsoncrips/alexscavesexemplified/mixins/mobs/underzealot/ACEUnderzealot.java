@@ -1,46 +1,33 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.underzealot;
 
-import com.github.alexmodguy.alexscaves.server.entity.ai.UnderzealotCaptureSacrificeGoal;
 import com.github.alexmodguy.alexscaves.server.entity.living.CorrodentEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.GloomothEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.UnderzealotEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.VesperEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.UnderzealotSacrifice;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
-import com.github.alexthe666.alexsmobs.entity.*;
-import com.github.alexthe666.alexsmobs.entity.util.VineLassoUtil;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraftforge.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACELootTables;
-import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACEManualLoot;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACEMobTargetClosePlayers;
-import org.crimsoncrips.alexscavesexemplified.server.goals.ACEUnderzealotExtinguishCampfires;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -69,10 +56,6 @@ public abstract class ACEUnderzealot extends Monster {
             }
         });
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.EXTINGUISH_CAMPFIRES_ENABLED.get()){
-            this.goalSelector.addGoal(7, new ACEUnderzealotExtinguishCampfires(underzealot, 32));
-        }
-
 
 
     }
@@ -96,15 +79,13 @@ public abstract class ACEUnderzealot extends Monster {
         boolean respect = (player.getItemBySlot(EquipmentSlot.CHEST).is(ACItemRegistry.CLOAK_OF_DARKNESS.get()) && player.getItemBySlot(EquipmentSlot.HEAD).is(ACItemRegistry.HOOD_OF_DARKNESS.get()));
 
 
-        ACEUtils.awardAdvancement(player,"dark_respect","respect");
-
 
 
         if (underzealot.getPassengers().isEmpty() && !underzealot.isPraying() && AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get()) {
 
             for (Mob leashedEntities : level.getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(10))) {
                 boolean lasso = ModList.get().isLoaded("alexsmobs") && AMCompat.isLeashed(leashedEntities,player);
-                if ((leashedEntities.getLeashHolder() == player || lasso) && leashedEntities instanceof UnderzealotSacrifice) {
+                if ((leashedEntities.getLeashHolder() == player || lasso)  && leashedEntities instanceof UnderzealotSacrifice && underzealot.getTarget() != player && !leashedEntities.getPersistentData().getBoolean("SacrificeGiven")) {
                     int tradeDeterminer = 0;
                     if (leashedEntities instanceof GloomothEntity) {
                         tradeDeterminer = 1;
@@ -122,12 +103,19 @@ public abstract class ACEUnderzealot extends Monster {
                     } else {
                         leashedEntities.dropLeash(true,true);
                     }
-                    leashedEntities.startRiding(underzealot);
+
+                    leashedEntities.getPersistentData().putBoolean("SacrificeGiven", true);
+
+                    if (!leashedEntities.level().isClientSide()) {
+                        leashedEntities.startRiding(underzealot);
+                    }
 
 
 
                     boolean happy;
                     if (AlexsCavesExemplified.COMMON_CONFIG.UNDERZEALOT_RESPECT_ENABLED.get() && respect){
+                        ACEUtils.awardAdvancement(player,"dark_respect","respect");
+
                         ResourceLocation resourceLocation = switch (tradeDeterminer) {
                             case 1 -> ACELootTables.GLOOMOTH_TRADE;
                             case 2 -> ACELootTables.CORRODENT_TRADE;

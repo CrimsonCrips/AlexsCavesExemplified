@@ -28,10 +28,6 @@ public abstract class ACEDarkArrow extends AbstractArrow {
     @Inject(method = "onHitEntity", at = @At("TAIL"))
     private void hitEntity(EntityHitResult entityHitResult, CallbackInfo ci) {
         if (entityHitResult.getEntity() instanceof LivingEntity livingEntity) {
-            if (entityHitResult.getEntity().level().getRandom().nextDouble() < 0.01 && AlexsCavesExemplified.COMMON_CONFIG.DARKNESS_APPLYED_ENABLED.get()){
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.DARKNESS, 100, 0));
-
-            }
 
             if (AlexsCavesExemplified.COMMON_CONFIG.DREAD_ADDAPTIONS_ENABLED.get()){
                 if (this.isOnFire()) {

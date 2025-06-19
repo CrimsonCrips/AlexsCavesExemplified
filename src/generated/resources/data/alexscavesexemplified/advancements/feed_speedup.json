@@ -1,5 +1,5 @@
 {
-  "parent": "alexscavesexemplified:candy",
+  "parent": "alexscavesexemplified:interrupt",
   "criteria": {
     "feed": {
       "trigger": "minecraft:impossible"
@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancement.alexscavesexemplified.feed_speedup.desc"
     },
-    "frame": "task",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
       "item": "citadel:icon_item",

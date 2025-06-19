@@ -21,6 +21,8 @@ public class ACEEntityTagGenerator extends EntityTypeTagsProvider {
 	public static final TagKey<EntityType<?>> ACID_TO_FISH = create(AlexsCavesExemplified.prefix("acid_to_fish"));
 	public static final TagKey<EntityType<?>> CAN_RABIES = create(AlexsCavesExemplified.prefix("can_rabies"));
 	public static final TagKey<EntityType<?>> VESPER_HUNT = create(AlexsCavesExemplified.prefix("vesper_hunt"));
+	public static final TagKey<EntityType<?>> LICOWITCH_HATE = create(AlexsCavesExemplified.prefix("licowitch_hate"));
+
 
 	public ACEEntityTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper helper) {
 		super(output, provider, AlexsCavesExemplified.MODID, helper);
@@ -32,6 +34,11 @@ public class ACEEntityTagGenerator extends EntityTypeTagsProvider {
 		tag(ACID_TO_CAT).add(
 				EntityType.CAT,
 				EntityType.OCELOT
+		);
+
+		tag(LICOWITCH_HATE).add(
+				EntityType.VILLAGER,
+				EntityType.IRON_GOLEM
 		);
 
 		tag(ACID_TO_FISH).add(
@@ -124,7 +131,6 @@ public class ACEEntityTagGenerator extends EntityTypeTagsProvider {
 				EntityType.SPIDER,
 				EntityType.CAVE_SPIDER
 		)
-				.addOptional(new ResourceLocation("alexsmobs:"))
 				.addOptional(new ResourceLocation("alexsmobs:cockroach"));
 	}
 

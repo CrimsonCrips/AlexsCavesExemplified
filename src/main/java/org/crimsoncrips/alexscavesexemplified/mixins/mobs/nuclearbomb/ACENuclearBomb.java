@@ -56,17 +56,17 @@ public abstract class ACENuclearBomb extends Entity implements Gammafied, Tracea
 
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void define(CallbackInfo ci) {
+    private void alexsCavesExemplified$defineSynchedData(CallbackInfo ci) {
         this.entityData.define(GAMMA, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void add(CompoundTag compound, CallbackInfo ci) {
+    private void alexsCavesExemplified$addAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         compound.putBoolean("Gamma", this.isGamma());
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void read(CompoundTag compound, CallbackInfo ci) {
+    private void alexsCavesExemplified$readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         this.setGamma(compound.getBoolean("Gamma"));
     }
 
@@ -74,16 +74,6 @@ public abstract class ACENuclearBomb extends Entity implements Gammafied, Tracea
     private ParticleOptions alexsCavesExemplified$tick(ParticleOptions pParticleData) {
         return isGamma() ? ACEParticleRegistry.GAMMA_PROTON.get() : pParticleData;
     }
-
-
-    @WrapWithCondition(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/item/NuclearBombEntity;setTime(I)V"))
-    private boolean alexsCavesExemplified$tick1(NuclearBombEntity instance, int time) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.GROUNDED_NUKE_ENABLED.get()){
-            return this.onGround();
-        }
-        return true;
-    }
-
 
 
     @Inject(method = "explode", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))

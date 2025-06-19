@@ -75,7 +75,7 @@ public abstract class ACENuclearExplosionEntity extends Entity implements Gammaf
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;setDeltaMovement(Lnet/minecraft/world/phys/Vec3;)V"))
     private void alexsCavesExemplified$tick(CallbackInfo ci,@Local LivingEntity entity) {
-        if(entity instanceof TremorzillaEntity tremorzilla && AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && !((Gammafied) tremorzilla).isGamma() && isGamma()){
+        if(entity instanceof TremorzillaEntity tremorzilla && AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && !((Gammafied) tremorzilla).isGamma() && isGamma()){
             ((Gammafied) tremorzilla).setGamma(isGamma());
             for (Player player : this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(100))) {
                 ACEUtils.awardAdvancement(player,"gamma_tremorzilla","gamma");

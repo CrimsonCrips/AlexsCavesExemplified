@@ -1,8 +1,9 @@
-// 1.20.1	2025-03-20T07:32:53.0707842	Loot Tables
+// 1.20.1	2025-06-19T23:51:50.146104066	Loot Tables
 76970f8a9456fd365867b4f26fb40fc4e96c0171 data/alexscavesexemplified/loot_tables/blocks/acid_cauldron.json
 de0d59733717d2bdfe50877ca0a61ff5930bcb8b data/alexscavesexemplified/loot_tables/blocks/metal_cauldron.json
 2af21450a57ef0335859f3d1843a3c103366e119 data/alexscavesexemplified/loot_tables/blocks/purple_soda_cauldron.json
 b369fdec5ec62d1a6e83e1b5bba7564dd06a9720 data/alexscavesexemplified/loot_tables/entities/corrodent_trade.json
 3ab5a40a3c9c430134794adcf27b93b44e0f4058 data/alexscavesexemplified/loot_tables/entities/gloomoth_trade.json
 3c9c0ef6065bccc6f7d155e97df558dae3501b06 data/alexscavesexemplified/loot_tables/entities/gossamer_drops.json
+f4ceff1ee37298517e04b4e67091a0dcacead68f data/alexscavesexemplified/loot_tables/entities/nucleeper_defusion.json
 11f614bdffe8a98cbeab275c98e14924bdd79fda data/alexscavesexemplified/loot_tables/entities/vesper_trade.json

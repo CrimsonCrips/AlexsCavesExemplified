@@ -5,6 +5,7 @@ import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.reimnop.pgen.PGenBookProvider;
 import com.reimnop.pgen.builder.PGenEntryBuilder;
 import com.reimnop.pgen.builder.page.PGenSpotlightPageBuilder;
+import com.reimnop.pgen.data.PGenMultiblock;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -13,7 +14,10 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
@@ -37,7 +41,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                 "General",
                                                 "General Additions",
                                                 new ResourceLocation("alexscavesexemplified:textures/gui/adv_icon/ace_adv_icon.png"),
-                                                category -> {})
+                                                category -> category.withSortnum(0))
                                         .addEntry("redo_spelunky",
                                                 "Redoable Spelunky",
                                                 new ResourceLocation("paper"),
@@ -47,7 +51,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                                 itemIconGiver(ACBlockRegistry.SPELUNKERY_TABLE),
                                                                 page -> page.withText(
                                                                         "Allows for you to back-out of the spelunkery table and not have the tablet break," +
-                                                                        "useful for when interrupted by any unwanted interruptions").withTitle("Redoable Spelunky")
+                                                                                "useful for when interrupted by any unwanted interruptions").withTitle("Redoable Spelunky")
                                                         );
                                                 })
                                         .addEntry("spelunkery_attempts",
@@ -144,78 +148,510 @@ public class ACEBookProvider extends PGenBookProvider {
                                                         });
                                                 })
 
+                                        .addEntry("add_targets",
+                                                "Add Targets",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "general"),
+                                                entry -> {entry
+                                                        .addTextPage("Adds extra targets for mobs to improve immersion \n" +
+                                                                "Licowitch - Iron Golem, Villagers \n" +
+                                                                "Vesper - Cockroach, Bat, Spiders \n" +
+                                                                "Deep Ones - Fish" +
+                                                                "Grotocerotops/Relicheirus - Players holding Limespears", page ->{});
+                                                })
                                 ;
-                                lang.addCategory("candy_cavity",
-                                        "Candy Cavity",
-                                        "Candy Cavity Additions",
-                                        new ResourceLocation("alexscaves:textures/misc/advancement/icon/candy_cavity.png"),
-                                        category -> {})
 
-                                        .addEntry("gluttony",
-                                                "Gluttony",
+                                //Candy Cavity
+                                lang.addCategory("candy_cavity",
+                                                "Candy Cavity",
+                                                "Candy Cavity Additions",
+                                                new ResourceLocation("alexscaves:textures/misc/advancement/icon/candy_cavity.png"),
+                                                category -> {})
+
+                                        .addEntry("candy_general",
+                                                "General",
                                                 new ResourceLocation("paper"),
                                                 new ResourceLocation(AlexsCavesExemplified.MODID, "candy_cavity"),
                                                 entry -> {entry
+                                                        //Gluttony
                                                         .addImagePage(page -> {
                                                             page.addImage("textures/gui/wiki/candy_cavity/gluttony.png")
                                                                     .withText("Eat candy blocks by right clicking while crouching," +
                                                                             "has a chance to give sugar rush when consuming")
                                                                     .withTitle("Gluttony");
-                                                        });
-                                                })
+                                                        })
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/gluttony2.png")
+                                                                    .withText("Adds minor interactions with eating food");
+                                                        })
+                                                        .addTextPage("Consuming frostmint and purple soda will cause a minor explosion",page -> {})
 
-                                        .addEntry("sticky_soda",
-                                                "Sticky Soda",
-                                                new ResourceLocation("paper"),
-                                                new ResourceLocation(AlexsCavesExemplified.MODID, "candy_cavity"),
-                                                entry -> {entry
+                                                        //Sticky Soda
                                                         .addImagePage(page -> {
                                                             page.addImage("textures/gui/wiki/candy_cavity/sticky_soda.png")
                                                                     .withText("Purple soda applys slowness when in it")
                                                                     .withTitle("Sticky Soda");
-                                                        });
+                                                        })
+
+                                                        //Radiant Wrath
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/radiant_wrath.png")
+                                                                    .withText("Overdrives your casted sugar staff abilities at the cost of a radiant essence held off-offhand")
+                                                                    .withTitle("Radiant Wrath");
+                                                        })
+
+                                                        //Tuned Sating
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/tuned_sating.png")
+                                                                    .withText("Drop foods directly onto a Sack Of Sating, Will also eat food that cant be picked up when in inventory")
+                                                                    .withTitle("Tuned Sating");
+                                                        })
+
+                                                        //Sugar Crash
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/sugar_crash.png")
+                                                                    .withText("Inflicts you with sugar crash after the effects of Sugar Rush, causing minor damage and slowness")
+                                                                    .withTitle("Sugar Crash");
+                                                        })
+
+                                                        //Iced Cream
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/iced_cream.png")
+                                                                    .withText("Thrown Ice Cream Scoops inflict frost")
+                                                                    .withTitle("Iced Cream");
+                                                        })
+
+                                                        //Cryonic Cavity
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/cryonic_cavity.png")
+                                                                    .withText("Candy Cavity slowly freezes you")
+                                                                    .withTitle("Cryonic Cavity");
+                                                        })
+
+                                                        //Breaking Candy
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/breaking_candy.png")
+                                                                    .withText("Allows the cooking of gelatin with a lit cauldron")
+                                                                    .withTitle("Breaking Candy");
+                                                        })
+                                                        .addSpotlightPage(
+                                                                item -> item.addTag(new ResourceLocation("alexscavesexemplified:gelatinable")),
+                                                                page -> page.withText(
+                                                                        "To cook gelatin, drop in a dye of choice for the color, and a bone item," +
+                                                                                "inside a heated cauldron,and simply wait").withTitle(" ")
+                                                        )
+
+                                                        //Ice Cream Cone
+                                                        .addSpotlightPage(
+                                                                itemIconGiver(ACEItemRegistry.ICE_CREAM_CONE),
+                                                                page -> page.withText(
+                                                                        "Assemble tasty ice creams (i love ice cream), Note that the Ice Cream sequence doesnt matter apart from the cone").withTitle("Ice Cream Cone")
+                                                        )
+                                                        .addMultiblockPage(" ",page -> page.withMultiblock(new PGenMultiblock(
+                                                                        List.of(
+                                                                                List.of("V"),
+                                                                                List.of("S"),
+                                                                                List.of("C"),
+                                                                                List.of("B"),
+                                                                                List.of("0")
+                                                                        ),
+                                                                        Map.of("0", "alexscaves:wafer_cookie_wall","B","alexscaves:wafer_cookie_block","C", "alexscaves:chocolate_ice_cream","S","alexscaves:sweetberry_ice_cream","V","alexscaves:vanilla_ice_cream")
+                                                                ))
+                                                        )
+
+                                                        //Overdrived Conversion
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/overdrived_conversion.png")
+                                                                    .withText("Allows a conversion crucible to be overdrived by dropping a radiant essence to increase the radius of it")
+                                                                    .withTitle("Overdrived Conversion");
+                                                        })
+
+                                                        //Purple Leathered
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/purple_leathered.png")
+                                                                    .withText("Tints an uncolored armor into purple, when submerged in soda," +
+                                                                            "(Compatible with modded armor)")
+                                                                    .withTitle("Purple Leathered");
+                                                        })
+
+                                                        //Amplified Frostmint
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/amplified_frostmint.png")
+                                                                    .withText("Adds interactibility with frostmint items, in item form and spear form")
+                                                                    .withTitle("Amplified Frostmint");
+                                                        })
+                                                        .addTextPage("Dropped Frostmint items will explode simillar to falling frostmint \n" +
+                                                                "Frostmint Spears when in collision will solidify nearby liquids", page -> {});
+
                                                 })
 
-                                        .addEntry("radiant_wrath",
-                                                "Radiant Wrath",
+                                        .addEntry("caniac",
+                                                "Caniac",
                                                 new ResourceLocation("paper"),
                                                 new ResourceLocation(AlexsCavesExemplified.MODID, "candy_cavity"),
                                                 entry -> {entry
                                                         .addImagePage(page -> {
-                                                            page.addImage("textures/gui/wiki/candy_cavity/radiant_wrath.png")
-                                                                    .withText("Purple soda applys slowness when in it")
-                                                                    .withTitle("Radiant Wrath");
+                                                            page.addImage("textures/gui/wiki/candy_cavity/caniac/caniac_sensitivity.png")
+                                                                    .withText("Caniacs dissolve and will avoid water")
+                                                                    .withTitle("Caniac Sensitivity");
+                                                        })
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/caniac/caniac_maniac.png")
+                                                                    .withText("Caniacs do unhinged things like lighting placed explosives,destroying beds,and attacking random entities")
+                                                                    .withTitle("Caniac Maniac");
+                                                        });
+                                                })
+
+                                        .addEntry("candicorn",
+                                                "Candicorn",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "candy_cavity"),
+                                                entry -> {entry
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/candicorn/candicorn_heal.png")
+                                                                    .withText("Candicorn can be healed with caramel apples")
+                                                                    .withTitle("Candicorn Heal");
+                                                        });
+                                                })
+
+                                        .addEntry("caramel_cube",
+                                                "Caramel Cube",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "candy_cavity"),
+                                                entry -> {entry
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/caramel_cube/sticky_caramel.png")
+                                                                    .withText("Caramel Cubes's stickyness apply to their attacks")
+                                                                    .withTitle("Sticky Caramel");
+                                                        });
+                                                })
+
+
+                                        .addEntry("gingerbread_man",
+                                                "Gingerbread Man",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "candy_cavity"),
+                                                entry -> {entry
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/gingerbread_man/amputation.png")
+                                                                    .withText("Allows the amputation of gingerbread limbs")
+                                                                    .withTitle("Amputation");
+                                                        })
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/gingerbread_man/hive_mind.png")
+                                                                    .withText("Attack one of them, Fight all of them.")
+                                                                    .withTitle("Hive Mind");
+                                                        });
+                                                })
+
+                                        .addEntry("gummy_bear",
+                                                "Gummybear",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "candy_cavity"),
+                                                entry -> {entry
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/gummy_bear/jellybean_changes.png")
+                                                                    .withText("Gummybears can be interrupted during their hibernation," +
+                                                                            "allowing for jellybeans to be rushed")
+                                                                    .withTitle("Jellybean Changes");
+                                                        })
+                                                        .addSpotlightPage(
+                                                                itemIconGiver(ACItemRegistry.JELLY_BEAN),
+                                                                page -> page.withText(
+                                                                        "Amount of jellybeans made are dependant on the time taken for hibernation, with the max of 12 jellybeans for the full duration," +
+                                                                                "Works with Sweetish Speedup").withTitle(" ")
+                                                        )
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/gummy_bear/sweetish_speedup.png")
+                                                                    .withText("Feed a hibernating gummybear their matching color of fish to speedup hibernation")
+                                                                    .withTitle("Sweetish Speedup");
+                                                        });
+                                                })
+
+                                        .addEntry("gum_worm",
+                                                "Gum Worm",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "candy_cavity"),
+                                                entry -> {entry
+                                                        .addImagePage(page -> {
+                                                            page.addImage("textures/gui/wiki/candy_cavity/gum_worm/pressured_hooks.png")
+                                                                    .withText("Inflicts damage in hooks when using with a gum worm")
+                                                                    .withTitle("Pressured Hooks");
                                                         });
                                                 })
 
                                 ;
                                 lang.addCategory("forlorn_hollows",
-                                        "Forlorn Hollows",
-                                        "Forlorn Hollows Additions",
-                                        new ResourceLocation("alexscaves:textures/misc/advancement/icon/forlorn_hollows.png"),
-                                        category -> {}).addEntry("dreadbow_adaption",
-                                        "Dreadbow Adaption",
-                                        new ResourceLocation("paper"),
-                                        new ResourceLocation(AlexsCavesExemplified.MODID, "forlorn_hollows"),
-                                        entry -> {entry
-                                                .addImagePage(page -> {
-                                                    page.addImage("textures/gui/wiki/forlorn_hollows/dreadbow_adaption.png")
-                                                            .withText("Vanilla Bow Enchants work for Dreadbow")
-                                                            .withTitle("Dreadbow Adaption");
-                                                });
-                                        })
+                                                "Forlorn Hollows",
+                                                "Forlorn Hollows Additions",
+                                                new ResourceLocation("alexscaves:textures/misc/advancement/icon/forlorn_hollows.png"),
+                                                category -> {})
+                                        .addEntry("forlorn_general",
+                                                "General",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "forlorn_hollows"),
+                                                entry -> {
+                                                    entry
+                                                            //Forlorn Light Effect
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/forlorn_light_effect.png")
+                                                                        .withText("Holding light wards off some mobs of the Forlorn (Compatible with Curios Lanterns)")
+                                                                        .withTitle("Forlorn Light Effect");
+                                                            })
 
-                                ;
+                                                            //Burst Out
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/burst_out.png")
+                                                                        .withText("A random land dwelling forlorn denizen may pop out when excavating in the biome")
+                                                                        .withTitle("Burst Out");
+                                                            })
+
+                                                            //Rabies
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/rabies.png")
+                                                                        .withText("Rabies are discovered within Forlorn mobs,"+
+                                                                                "becoming sensitive to water, and attack most mobs randomly")
+                                                                        .withTitle("Rabies");
+                                                            })
+                                                            .addTextPage("Those afflicted with Rabies will suffer damage at the end of its cycle", page -> {})
+
+                                                            //Guaslowpoke
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/guaslowpoke.png")
+                                                                        .withText("Guano inflicts slowness whether on top or hit by one")
+                                                                        .withTitle("Guaslowpoke");
+                                                            })
+
+                                                            //Beholdent Stalking
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/beholdent_stalking.png")
+                                                                        .withText("Unmanned Beholders stalk nearby players (purely visual)")
+                                                                        .withTitle("Beholding Stalking");
+                                                            })
+
+                                                            //Dreadbow Adaption
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/dreadbow_adaption.png")
+                                                                        .withText("Vanilla Bow Enchants work for Dreadbow")
+                                                                        .withTitle("Dreadbow Adaption");
+                                                            });
+                                                })
+                                        .addEntry("corrodent",
+                                                "Corrodent",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "forlorn_hollows"),
+                                                entry -> {
+                                                    entry
+                                                            //Knawing
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/corrodent/knawing.png")
+                                                                        .withText("Corrodents knaw on items and foods")
+                                                                        .withTitle("Knawing");
+                                                            })
+                                                            //Corrodent Conversion
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/corrodent/corrodent_conversion.png")
+                                                                        .withText("Corrodents can be assimilated into Underzealots")
+                                                                        .withTitle("Corrodent Conversion");
+                                                            });
+                                                })
+
+                                        .addEntry("underzealot",
+                                                "Underzealot",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "forlorn_hollows"),
+                                                entry -> {
+                                                    entry
+                                                            //Underzealot Respect
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/underzealot/underzealot_respect.png")
+                                                                        .withText("Wearing the full set of the Underzealot's clothing makes them neutral with you")
+                                                                        .withTitle("Underzealot Respect");
+                                                            })
+                                                            //Dark Offering
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/underzealot/dark_offering.png")
+                                                                        .withText("Allows a player to leash sacrificeable denizens and give them to Underzealots for their rituals by right clicking,")
+                                                                        .withTitle("Dark Offering");
+                                                            })
+                                                            .addTextPage("(REQUIRES 'Underzealot Respect' FOR THIS PART OF THE FEATURE) \n If neutral with the Underzealots," +
+                                                                    "They will give an item native to the Forlorn Hollows in return of offering them a sacrifice," +
+                                                                    "What they give in return is dependant on the sacrifice type", page -> {})
+                                                    ;
+                                                })
+
+                                        .addEntry("vesper",
+                                                "Vesper",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "forlorn_hollows"),
+                                                entry -> {
+                                                    entry
+                                                            //Anti Sacrifice
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/vesper/anti_sacrifice.png")
+                                                                        .withText("Vespers attack underzealots seen sacrificing their own kind")
+                                                                        .withTitle("Anti Sacrifice");
+                                                            })
+                                                            //Vesper Shotdown
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/vesper/vesper_shotdown.png")
+                                                                        .withText("Vespers can be shot down when bowed down")
+                                                                        .withTitle("Vesper Shotdown");
+                                                            })
+                                                    ;
+                                                })
+
+                                        .addEntry("watcher",
+                                                "Watcher",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "forlorn_hollows"),
+                                                entry -> {
+                                                    entry
+                                                            //Solidified
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/forlorn_hollows/watcher/solidified.png")
+                                                                        .withText("Watchers solidify into statues after a certain amount of time")
+                                                                        .withTitle("Solidified");
+                                                            })
+                                                    ;
+                                                });
+
+                                lang.addCategory("toxic_caves",
+                                                "Toxic Caves",
+                                                "Toxic Caves Addition",
+                                                new ResourceLocation("alexscaves:textures/misc/advancement/icon/toxic_caves.png"),
+                                                category -> {})
+                                        .addEntry("toxic_general",
+                                                "General",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "toxic_caves"),
+                                                entry -> {
+                                                    entry
+                                                            //Exemplified Irradiation
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/exemplified_irradiation.png")
+                                                                        .withText("When reaching a certain level of irradiation, severe side effects are afflicted")
+                                                                        .withTitle("Exemplified Irradiation");
+                                                            })
+                                                            .addTextPage("Side effects are as follows /n" +
+                                                                    "Weakness, Hunger, Nausea, Slowness, (If Alex's Mobs is present) Exsanguination", page -> {
+
+                                                            })
+
+                                                            //Kirov Reporting
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/kirov_reporting.png")
+                                                                        .withText("Allows the dropping of TnT, Tnt Minecarts and Nukes when airborne, with a flint and steel off-hand")
+                                                                        .withTitle("Kirov Reporting!");
+                                                            })
+
+                                                            //Armored Liquidators
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/armored_liquidators.png")
+                                                                        .withText("Hazmat Armor resists radiation sources better")
+                                                                        .withTitle("Armored Liquidators");
+                                                            })
+
+                                                            //Rearayngement
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/rearayngement.png")
+                                                                        .withText("Improves upon Rayguns to be more destructive")
+                                                                        .withTitle("Rearayngement");
+                                                            })
+
+                                                            //Irradiation Washoff
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/irradiation_washoff.png")
+                                                                        .withText("Douse yourself in water to wash off irradiation,(If Supplementaries is present) Can use soap to further wash off such")
+                                                                        .withTitle("Irradiation Washoff");
+                                                            })
+
+                                                            //Geothermal Effects
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/geothermal_effects.png")
+                                                                        .withText("Effects those on top of geothermal vents based on the liquid that is being spewed")
+                                                                        .withTitle("Geothermal Effects");
+                                                            });
+
+
+
+                                                })
+                                        .addEntry("brainiac",
+                                                "Brainiac",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "toxic_caves"),
+                                                entry -> {
+                                                    entry
+                                                            //Waste Pickup
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/brainiac/waste_pickup.png")
+                                                                        .withText("Brainiacs pickup dropped waste drums when non")
+                                                                        .withTitle("Waste Pickup");
+                                                            });
+
+
+
+                                                })
+
+                                        .addEntry("gammaroach",
+                                                "Gammaroach",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "toxic_caves"),
+                                                entry -> {
+                                                    entry
+                                                            //Roach Feeding
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/gammaroach/roach_feeding.png")
+                                                                        .withText("Gammaroaches eat dropped food")
+                                                                        .withTitle("Roach Feeding");
+                                                            });
+
+
+
+                                                })
+
+                                        .addEntry("nucleeper",
+                                                "Nucleeper",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "toxic_caves"),
+                                                entry -> {
+                                                    entry
+                                                            //Nuclear Chain
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/nucleeper/nuclear_chain.png")
+                                                                        .withText("Nucleeper explosions explode other nearby nucleepers")
+                                                                        .withTitle("Nuclear Chain");
+                                                            })
+
+                                                            //Defusion
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/nucleeper/defusion.png")
+                                                                        .withText("Nucleepers can be defused and be rendered walking husks")
+                                                                        .withTitle("Defusion");
+                                                            })
+
+                                                            //Desolated Weapon
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/toxic_caves/nucleeper/desolated_weapon.png")
+                                                                        .withText("Nucleepers can be rusted, reducing them to weak,decaying weapons slowly dying")
+                                                                        .withTitle("Desolated Weapon");
+                                                            });
+
+
+
+                                                });
 
                             });
-                });
-    }
 
-    public Consumer<PGenSpotlightPageBuilder.ItemBuilder> itemIconGiver(RegistryObject itemIcon){
-        return item -> {
-            item.addItem(itemIcon.getKey() != null ? itemIcon.getKey().location() : new ResourceLocation("error"));
-        };
-    }
+
+                });
+}
+
+public Consumer<PGenSpotlightPageBuilder.ItemBuilder> itemIconGiver(RegistryObject itemIcon){
+    return item -> {
+        item.addItem(itemIcon.getKey() != null ? itemIcon.getKey().location() : new ResourceLocation("error"));
+    };
+}
 
 
 

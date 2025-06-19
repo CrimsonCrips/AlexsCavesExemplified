@@ -46,13 +46,13 @@ public abstract class ACETremorzillaRenderGlowMixin extends RenderLayer<Tremorzi
         Gammafied myAccessor = (Gammafied) tremorzilla;
         float normalAlpha = (float)Math.sin((double)(ageInTicks * 0.2F)) * 0.15F + 0.5F;
         float spikeDownAmount = tremorzilla.getClientSpikeDownAmount(partialTicks);
-        VertexConsumer normalGlowConsumer = bufferIn.getBuffer(ACRenderTypes.getEyesAlphaEnabled(tremorzilla.isPowered() ? AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_GLOW_POWERED :tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_GLOW_POWERED : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_GLOW_POWERED : TEXTURE_GLOW_POWERED) : (AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_GLOW : tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_GLOW : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_GLOW : TEXTURE_GLOW))));
+        VertexConsumer normalGlowConsumer = bufferIn.getBuffer(ACRenderTypes.getEyesAlphaEnabled(tremorzilla.isPowered() ? AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_GLOW_POWERED :tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_GLOW_POWERED : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_GLOW_POWERED : TEXTURE_GLOW_POWERED) : (AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_GLOW : tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_GLOW : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_GLOW : TEXTURE_GLOW))));
         ((TremorzillaModel)this.getParentModel()).renderToBuffer(matrixStackIn, normalGlowConsumer, packedLightIn, LivingEntityRenderer.getOverlayCoords(tremorzilla, 0.0F), 1.0F, 1.0F, 1.0F, normalAlpha);
         if (spikeDownAmount > 0.0F) {
             VertexConsumer spikeGlowConsumer;
             if ((Boolean) AlexsCaves.CLIENT_CONFIG.radiationGlowEffect.get()) {
                 PostEffectRegistry.renderEffectForNextTick(ClientProxy.IRRADIATED_SHADER);
-                spikeGlowConsumer = bufferIn.getBuffer(ACRenderTypes.getTremorzillaBeam(AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_GLOW_POWERED : tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_GLOW_POWERED : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_GLOW_POWERED : TEXTURE_GLOW_POWERED), true));
+                spikeGlowConsumer = bufferIn.getBuffer(ACRenderTypes.getTremorzillaBeam(AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_GLOW_POWERED : tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_GLOW_POWERED : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_GLOW_POWERED : TEXTURE_GLOW_POWERED), true));
             } else {
                 spikeGlowConsumer = normalGlowConsumer;
             }

@@ -32,7 +32,7 @@ public abstract class ACETeslaBulbRenderMixin<T extends TeslaBulbBlockEntity> im
 
     @Inject(method = "render(Lcom/github/alexmodguy/alexscaves/server/block/blockentity/TeslaBulbBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/client/model/TeslaBulbModel;setupAnim(Lnet/minecraft/world/entity/Entity;FFFFF)V"), cancellable = true)
     private void alexsCavesExemplified$render(T teslaBulb, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn, CallbackInfo ci, @Local(ordinal = 1) float r, @Local(ordinal = 2) float g, @Local(ordinal = 3) float b) {
-        if(AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()){
+        if(AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
             ci.cancel();
             MODEL.setupAnim(null, 0.0F, teslaBulb.getExplodeProgress(partialTicks), (float)teslaBulb.age + partialTicks, 0.0F, 0.0F);
             int charge = ((ACEBaseInterface)teslaBulb).getCharge();
@@ -43,7 +43,7 @@ public abstract class ACETeslaBulbRenderMixin<T extends TeslaBulbBlockEntity> im
 
     @Inject(method = "render(Lcom/github/alexmodguy/alexscaves/server/block/blockentity/TeslaBulbBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V", at = @At(value = "HEAD"),remap = false)
     private void alexsCavesExemplified$render1(T teslaBulb, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int combinedLightIn, int combinedOverlayIn, CallbackInfo ci) {
-        if(AlexsCavesExemplified.COMMON_CONFIG.TESLA_COILED_ENABLED.get()){
+        if(AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
             poseStack.clear();
 
         }

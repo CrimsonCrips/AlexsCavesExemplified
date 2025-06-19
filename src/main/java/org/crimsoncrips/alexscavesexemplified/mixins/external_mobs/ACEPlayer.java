@@ -61,9 +61,9 @@ public abstract class ACEPlayer extends LivingEntity implements ACEBaseInterface
             lastAte[0] = pFood.getItem();
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.OVERTUNED_CONSUMPTION_ENABLED.get()) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get()) {
             if (pFood.is(ACItemRegistry.SHARPENED_CANDY_CANE.get())) {
-                this.hurt(this.damageSources().generic(), 1);
+                this.hurt(this.damageSources().generic(), 3);
             }
             if (pFood.is(ACItemRegistry.BIOME_TREAT.get())) {
                 this.hurt(this.damageSources().generic(), 1);
@@ -103,7 +103,7 @@ public abstract class ACEPlayer extends LivingEntity implements ACEBaseInterface
         Player player = (Player)(Object)this;
         Level level = this.level();
 
-        if (lastAte[0] != null && lastAte[1] != null && AlexsCavesExemplified.COMMON_CONFIG.OVERTUNED_CONSUMPTION_ENABLED.get()) {
+        if (lastAte[0] != null && lastAte[1] != null && AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get()) {
             String[] foodItems = {"purple_soda_bottle", "frostmint"};
             String firstFood = foodItems[random.nextInt(0, 2)];
             if (lastAte[0].toString().equals(firstFood) && lastAte[1].toString().equals(foodItems[random.nextInt(0, 2)]) && !lastAte[1].toString().equals(firstFood)) {

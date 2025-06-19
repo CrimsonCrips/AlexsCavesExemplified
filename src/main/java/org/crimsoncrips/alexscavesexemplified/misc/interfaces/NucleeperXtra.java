@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface NucleeperXtra {
 
-    void alexsCavesExemplified$setRusted(boolean val);
+    void setRusted(boolean val);
 
-    void alexsCavesExemplified$setDefused(boolean val);
+    void setDefused(boolean val);
 
-    boolean alexsCavesExemplified$isDefused();
+    boolean isDefused();
 
-    boolean alexsCavesExemplified$isRusted();
+    boolean isRusted();
 
 }

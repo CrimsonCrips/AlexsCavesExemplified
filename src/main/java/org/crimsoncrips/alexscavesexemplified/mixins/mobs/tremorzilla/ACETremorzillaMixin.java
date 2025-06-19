@@ -3,9 +3,11 @@ package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tremorzilla;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.living.DinosaurEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.TremorzillaEntity;
+import com.github.alexmodguy.alexscaves.server.item.HazmatArmorItem;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.github.alexthe666.citadel.animation.Animation;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -108,21 +110,21 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
     }
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void define(CallbackInfo ci) {
+    private void alexsCavesExemplified$defineSynchedData(CallbackInfo ci) {
         this.entityData.define(GAMMA, false);
         this.entityData.define(SECOND_PHASE, false);
         this.entityData.define(ANIMATION_BEAMING, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void add(CompoundTag compound, CallbackInfo ci) {
+    private void alexsCavesExemplified$addAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         compound.putBoolean("Gamma", this.isGamma());
         compound.putBoolean("2ndPhase", this.is2ndPhase());
         compound.putBoolean("AnimationBeaming", this.isAnimationBeaming());
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void read(CompoundTag compound, CallbackInfo ci) {
+    private void alexsCavesExemplified$readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
         this.setGamma(compound.getBoolean("Gamma"));
         this.set2ndPhase(compound.getBoolean("2ndPhase"));
         this.setAnimationBeaming(compound.getBoolean("AnimationBeaming"));
@@ -143,7 +145,7 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
 
         float determiner = this.getMaxHealth() / 3;
 
-        if (amount > determiner && this.getHealth() > determiner && !isBaby() && !is2ndPhase() && isGamma() && AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && source.getEntity() != null){
+        if (amount > determiner && this.getHealth() > determiner && !isBaby() && !is2ndPhase() && isGamma() && AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && source.getEntity() != null){
             setAnimationBeaming(true);
             this.beamServerTarget = createInitialBeamVec();
             this.setMaxBeamBreakLength(180F);
@@ -168,17 +170,12 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
         return original.add(0,isGamma() ? 3D : 0,0);
     }
 
-    @ModifyConstant(method = "tickBreath",constant = @Constant(floatValue = 5.0F),remap = false)
-    private float modifyAmount(float amount) {
-        return isGamma() ? 10 : amount;
-    }
-
     int spitDesire = 0;
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/DinosaurEntity;tick()V"))
-    private void tick(CallbackInfo ci) {
+    private void alexsCavesExemplified$tick(CallbackInfo ci) {
         refreshDimensions();
-        if (AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get()){
             Level level = this.level();
             if (this.getHealth() == this.getMaxHealth()){
                 this.set2ndPhase(false);
@@ -252,56 +249,61 @@ public abstract class ACETremorzillaMixin extends DinosaurEntity implements Gamm
             spitDesire++;
         }
 
-        if (!AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && isGamma()) {
+        if (!AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && isGamma()) {
             this.setGamma(false);
             this.set2ndPhase(false);
         }
     }
 
     @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/TremorzillaEntity;breakBlocksAround(Lnet/minecraft/world/phys/Vec3;FZZF)Z"),index = 1)
-    private float protonAddition(float radius) {
+    private float alexsCavesExemplified$tick1(float radius) {
         return radius * (isGamma() ? 1.4F : 1F);
     }
 
     @ModifyArg(method = "positionRider", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity$MoveFunction;accept(Lnet/minecraft/world/entity/Entity;DDD)V"),index = 2)
-    private double positionRider(double pY) {
+    private double alexsCavesExemplified$positionRider(double pY) {
         return pY + (isGamma() ? 3D : 0D);
     }
 
+    @ModifyConstant(method = "tickBreath",constant = @Constant(floatValue = 5.0F),remap = false)
+    private float alexsCavesExemplified$tickBreath1(float amount) {
+        return isGamma() ? 10 : amount;
+    }
 
     @ModifyArg(method = "tickBreath", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addAlwaysVisibleParticle(Lnet/minecraft/core/particles/ParticleOptions;ZDDDDDD)V",ordinal = 2))
-    private ParticleOptions protonAddition(ParticleOptions pParticleData) {
-        return (AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && isGamma() ? ACEParticleRegistry.TREMORZILLA_GAMMA_PROTON.get() : this.getAltSkin() == 2 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_TECTONIC_PROTON.get() : (this.getAltSkin() == 1 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_RETRO_PROTON.get() : (ParticleOptions)ACParticleRegistry.TREMORZILLA_PROTON.get()));
+    private ParticleOptions alexsCavesExemplified$tickBreath2(ParticleOptions pParticleData) {
+        return (AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && isGamma() ? ACEParticleRegistry.TREMORZILLA_GAMMA_PROTON.get() : this.getAltSkin() == 2 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_TECTONIC_PROTON.get() : (this.getAltSkin() == 1 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_RETRO_PROTON.get() : (ParticleOptions)ACParticleRegistry.TREMORZILLA_PROTON.get()));
     }
 
     @ModifyArg(method = "tickBreath", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addAlwaysVisibleParticle(Lnet/minecraft/core/particles/ParticleOptions;ZDDDDDD)V",ordinal = 0))
-    private ParticleOptions explosionAddition(ParticleOptions pParticleData) {
-        return (AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && isGamma() ? ACEParticleRegistry.TREMORZILLA_GAMMA_EXPLOSION.get() : this.getAltSkin() == 2 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_TECTONIC_EXPLOSION.get() : (this.getAltSkin() == 1 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_RETRO_EXPLOSION.get() : (ParticleOptions)ACParticleRegistry.TREMORZILLA_EXPLOSION.get()));
+    private ParticleOptions alexsCavesExemplified$tickBreath3(ParticleOptions pParticleData) {
+        return (AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && isGamma() ? ACEParticleRegistry.TREMORZILLA_GAMMA_EXPLOSION.get() : this.getAltSkin() == 2 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_TECTONIC_EXPLOSION.get() : (this.getAltSkin() == 1 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_RETRO_EXPLOSION.get() : (ParticleOptions)ACParticleRegistry.TREMORZILLA_EXPLOSION.get()));
     }
 
     @ModifyArg(method = "tickBreath", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addAlwaysVisibleParticle(Lnet/minecraft/core/particles/ParticleOptions;ZDDDDDD)V",ordinal = 1))
-    private ParticleOptions lightningAddition(ParticleOptions pParticleData) {
-        return (AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && isGamma() ? ACEParticleRegistry.TREMORZILLA_GAMMA_LIGHTNING.get() : this.getAltSkin() == 2 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_TECTONIC_LIGHTNING.get() : (this.getAltSkin() == 1 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_RETRO_LIGHTNING.get() : (ParticleOptions)ACParticleRegistry.TREMORZILLA_LIGHTNING.get()));
+    private ParticleOptions alexsCavesExemplified$tickBreath4(ParticleOptions pParticleData) {
+        return (AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && isGamma() ? ACEParticleRegistry.TREMORZILLA_GAMMA_LIGHTNING.get() : this.getAltSkin() == 2 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_TECTONIC_LIGHTNING.get() : (this.getAltSkin() == 1 ? (ParticleOptions)ACParticleRegistry.TREMORZILLA_RETRO_LIGHTNING.get() : (ParticleOptions)ACParticleRegistry.TREMORZILLA_LIGHTNING.get()));
     }
 
     @ModifyConstant(method = "tick",constant = @Constant(intValue = 100,ordinal = 1))
-    private int beamTime(int amount) {
-        return AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && isGamma() ? 250 : amount;
+    private int alexsCavesExemplified$tick(int amount) {
+        return AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && isGamma() ? 250 : amount;
     }
 
     @ModifyConstant(method = "tick",constant = @Constant(floatValue = 100.0F,ordinal = 0))
-    private float beamLength(float constant) {
-        return AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && isGamma() ? 180 : constant;
+    private float alexsCavesExemplified$tick(float constant) {
+        return AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && isGamma() ? 180 : constant;
     }
 
     @ModifyConstant(method = "hurtEntitiesAround",constant = @Constant(intValue = 2),remap = false)
-    private int modifyIrradiation(int amount) {
-        return AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && isGamma() ? 6 : amount;
+    private int alexsCavesExemplified$hurtEntitiesAround(int amount, @Local LivingEntity living) {
+        int hazmatReduction = AlexsCavesExemplified.COMMON_CONFIG.ARMORED_LIQUIDATORS_ENABLED.get() ? HazmatArmorItem.getWornAmount(living) : 0;
+        return AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && isGamma() ? (6 - hazmatReduction > 0 ? 6 - hazmatReduction : 1) : (amount - hazmatReduction > 0 ? amount - hazmatReduction : 1);
     }
 
     @Inject(method = "hurtEntitiesAround", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/TremorzillaEntity;knockbackTarget(Lnet/minecraft/world/entity/Entity;DDDZ)V"),locals = LocalCapture.CAPTURE_FAILSOFT,remap = false)
-    private void mobInteract(Vec3 center, float radius, float damageAmount, float knockbackAmount, boolean radioactive, boolean hurtsOtherKaiju, boolean stretchY, CallbackInfoReturnable<Boolean> cir, AABB aabb, boolean flag, DamageSource damageSource, Iterator var11, LivingEntity living) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.GAMMARATED_TREMORZILLA_ENABLED.get() && isGamma()){
+    private void alexsCavesExemplified$hurtEntitiesAround1(Vec3 center, float radius, float damageAmount, float knockbackAmount, boolean radioactive, boolean hurtsOtherKaiju, boolean stretchY, CallbackInfoReturnable<Boolean> cir, AABB aabb, boolean flag, DamageSource damageSource, Iterator var11, LivingEntity living) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && isGamma()){
             living.setRemainingFireTicks(1000);
         }
     }

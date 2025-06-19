@@ -1,9 +1,11 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.nucleeper;
 
+import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
+import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -12,15 +14,20 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACELootTables;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACENucleeperMelee;
@@ -47,6 +54,7 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
         this.goalSelector.addGoal(2, new ACENucleeperMelee((NucleeperEntity)(Object)this));
     }
 
+
     private static final EntityDataAccessor<Boolean> RUSTED = SynchedEntityData.defineId(NucleeperEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DEFUSED = SynchedEntityData.defineId(NucleeperEntity.class, EntityDataSerializers.BOOLEAN);
 
@@ -58,29 +66,45 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void alexsCavesExemplified$addAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
-        compound.putBoolean("Rusted", this.alexsCavesExemplified$isRusted());
-        compound.putBoolean("Defused", this.alexsCavesExemplified$isDefused());
+        compound.putBoolean("Rusted", this.isRusted());
+        compound.putBoolean("Defused", this.isDefused());
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void alexsCavesExemplified$readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
-        this.alexsCavesExemplified$setRusted(compound.getBoolean("Rusted"));
-        this.alexsCavesExemplified$setDefused(compound.getBoolean("Defused"));
+        this.setRusted(compound.getBoolean("Rusted"));
+        this.setDefused(compound.getBoolean("Defused"));
+    }
+
+    @Override
+    public void aiStep() {
+        super.aiStep();
+        if (isRusted() && this.getRandom().nextDouble() < 0.005){
+            hurt(this.damageSources().generic(),2);
+        }
     }
 
     @Inject(method = "mobInteract", at = @At("HEAD"))
     private void alexsCavesExemplified$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
-        if (player.getItemInHand(hand).is(Items.SHEARS) && !alexsCavesExemplified$isDefused() && AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get()){
+        if (player.getItemInHand(hand).is(Items.SHEARS) && !isDefused() && AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get()){
             ACEUtils.awardAdvancement(player,"defusing","defuse");
             this.setTriggered(false);
-            this.playSound(SoundEvents.SHEEP_SHEAR);
-            alexsCavesExemplified$setDefused(true);
+            ACEUtils.spawnLoot(ACELootTables.NUCLEEPER_DEFUSION,this,player,1);
+            this.playSound(ACSoundRegistry.NUCLEAR_BOMB_DEFUSE.get());
+            setDefused(true);
+            player.swing(hand);
+            if (!player.isCreative()) {
+                player.getItemInHand(hand).hurtAndBreak(1, player, (p_233654_0_) -> {});
+            }
+
         }
-        if (player.getItemInHand(hand).is(ACItemRegistry.ACID_BUCKET.get()) && !alexsCavesExemplified$isRusted() && AlexsCavesExemplified.COMMON_CONFIG.RUSTED_NUCLEEPER_ENABLED.get()){
+        if (player.getItemInHand(hand).is(ACItemRegistry.ACID_BUCKET.get()) && !isRusted() && AlexsCavesExemplified.COMMON_CONFIG.DESOLATED_WEAPON_ENABLED.get()){
             ACEUtils.awardAdvancement(player,"rusting","rust");
-            this.setTriggered(false);
-            this.playSound(SoundEvents.SHEEP_SHEAR);
-            alexsCavesExemplified$setDefused(true);
+            setRusted(true);
+            player.swing(hand);
+            if (!player.isCreative()) {
+                player.setItemInHand(hand, Items.BUCKET.getDefaultInstance());
+            }
         }
     }
 
@@ -89,7 +113,7 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
         Level level = this.level();
         int amount = 0;
         for (NucleeperEntity nucleepers : level.getEntitiesOfClass(NucleeperEntity.class, this.getBoundingBox().inflate(13))) {
-            if (AlexsCavesExemplified.COMMON_CONFIG.NUCLEAR_CHAIN_ENABLED.get() && !((NucleeperXtra)nucleepers).alexsCavesExemplified$isDefused()){
+            if (AlexsCavesExemplified.COMMON_CONFIG.NUCLEAR_CHAIN_ENABLED.get() && !((NucleeperXtra)nucleepers).isDefused()){
                 amount++;
                 NuclearExplosionEntity explosion = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(level);
                 explosion.copyPosition(nucleepers);
@@ -113,42 +137,50 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
-        if (!AlexsCavesExemplified.COMMON_CONFIG.RUSTED_NUCLEEPER_ENABLED.get() && alexsCavesExemplified$isRusted()){
-            alexsCavesExemplified$setRusted(false);
+        if (!AlexsCavesExemplified.COMMON_CONFIG.DESOLATED_WEAPON_ENABLED.get() && isRusted()){
+            setRusted(false);
         }
-        if (!AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get() && alexsCavesExemplified$isDefused()){
-            alexsCavesExemplified$setDefused(false);
+        if (!AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get() && isDefused()){
+            setDefused(false);
         }
     }
 
     @ModifyArg(method = "explode", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/item/NuclearExplosionEntity;setSize(F)V"),remap = false)
     private float alexsCavesExemplified$explode(float f) {
-        return alexsCavesExemplified$isRusted() ? f / 2 : f;
+        return isRusted() ? f / 2 : f;
     }
 
     @Override
-    public void alexsCavesExemplified$setRusted(boolean val) {
+    public void setRusted(boolean val) {
         this.entityData.set(RUSTED, Boolean.valueOf(val));
+        if (val){
+            this.playSound( ACSoundRegistry.ACID_BURN.get());
+            this.getAttribute(Attributes.ARMOR).setBaseValue(2F);
+            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20F);
+            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.05F);
+            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(2F);
+            this.setHealth(20F);
+        }
     }
 
     @Override
-    public void alexsCavesExemplified$setDefused(boolean val) {
+    public void setDefused(boolean val) {
         this.entityData.set(DEFUSED, Boolean.valueOf(val));
     }
 
     @Override
-    public boolean alexsCavesExemplified$isDefused() {
+    public boolean isDefused() {
         return this.entityData.get(DEFUSED);
     }
 
     @Override
-    public boolean alexsCavesExemplified$isRusted() {
+    public boolean isRusted() {
         return this.entityData.get(RUSTED);
     }
 
     @WrapWithCondition(method = "mobInteract", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/NucleeperEntity;setTriggered(Z)V"))
     private boolean alexsCavesExemplified$tick(NucleeperEntity instance, boolean triggered) {
-        return !alexsCavesExemplified$isDefused();
+        return !isDefused();
     }
 
     @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 2))
