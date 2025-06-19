@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:forlorn_hollows",
+  "icon": "minecraft:paper",
+  "name": "Watcher",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/watcher/solidified.png"
+      ],
+      "text": "Watchers solidify into statues after a certain amount of time",
+      "title": "Solidified"
+    }
+  ]
+}

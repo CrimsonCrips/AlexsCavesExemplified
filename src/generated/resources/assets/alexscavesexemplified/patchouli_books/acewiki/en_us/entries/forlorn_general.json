@@ -1,0 +1,59 @@
+{
+  "category": "alexscavesexemplified:forlorn_hollows",
+  "icon": "minecraft:paper",
+  "name": "General",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/forlorn_light_effect.png"
+      ],
+      "text": "Holding light wards off some mobs of the Forlorn (Compatible with Curios Lanterns)",
+      "title": "Forlorn Light Effect"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/burst_out.png"
+      ],
+      "text": "A random land dwelling forlorn denizen may pop out when excavating in the biome",
+      "title": "Burst Out"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/rabies.png"
+      ],
+      "text": "Rabies are discovered within Forlorn mobs,becoming sensitive to water, and attack most mobs randomly",
+      "title": "Rabies"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Those afflicted with Rabies will suffer damage at the end of its cycle"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/guaslowpoke.png"
+      ],
+      "text": "Guano inflicts slowness whether on top or hit by one",
+      "title": "Guaslowpoke"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/beholdent_stalking.png"
+      ],
+      "text": "Unmanned Beholders stalk nearby players (purely visual)",
+      "title": "Beholding Stalking"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/dreadbow_adaption.png"
+      ],
+      "text": "Vanilla Bow Enchants work for Dreadbow",
+      "title": "Dreadbow Adaption"
+    }
+  ]
+}

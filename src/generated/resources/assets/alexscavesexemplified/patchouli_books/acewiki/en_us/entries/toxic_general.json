@@ -1,0 +1,59 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "General",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/exemplified_irradiation.png"
+      ],
+      "text": "When reaching a certain level of irradiation, severe side effects are afflicted",
+      "title": "Exemplified Irradiation"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Side effects are as follows /nWeakness, Hunger, Nausea, Slowness, (If Alex's Mobs is present) Exsanguination"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/kirov_reporting.png"
+      ],
+      "text": "Allows the dropping of TnT, Tnt Minecarts and Nukes when airborne, with a flint and steel off-hand",
+      "title": "Kirov Reporting!"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/armored_liquidators.png"
+      ],
+      "text": "Hazmat Armor resists radiation sources better",
+      "title": "Armored Liquidators"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/rearayngement.png"
+      ],
+      "text": "Improves upon Rayguns to be more destructive",
+      "title": "Rearayngement"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/irradiation_washoff.png"
+      ],
+      "text": "Douse yourself in water to wash off irradiation,(If Supplementaries is present) Can use soap to further wash off such",
+      "title": "Irradiation Washoff"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/geothermal_effects.png"
+      ],
+      "text": "Effects those on top of geothermal vents based on the liquid that is being spewed",
+      "title": "Geothermal Effects"
+    }
+  ]
+}

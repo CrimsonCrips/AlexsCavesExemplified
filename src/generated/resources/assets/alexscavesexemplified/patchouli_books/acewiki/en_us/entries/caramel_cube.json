@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Caramel Cube",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/caramel_cube/sticky_caramel.png"
+      ],
+      "text": "Caramel Cubes's stickyness apply to their attacks",
+      "title": "Sticky Caramel"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "Nucleeper",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/nucleeper/nuclear_chain.png"
+      ],
+      "text": "Nucleeper explosions explode other nearby nucleepers",
+      "title": "Nuclear Chain"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/nucleeper/defusion.png"
+      ],
+      "text": "Nucleepers can be defused and be rendered walking husks",
+      "title": "Defusion"
+    }
+  ]
+}

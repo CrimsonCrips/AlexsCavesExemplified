@@ -1,0 +1,23 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Gingerbread Man",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gingerbread_man/amputation.png"
+      ],
+      "text": "Allows the amputation of gingerbread limbs",
+      "title": "Amputation"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gingerbread_man/hive_mind.png"
+      ],
+      "text": "Attack one of them, Fight all of them.",
+      "title": "Hive Mind"
+    }
+  ]
+}

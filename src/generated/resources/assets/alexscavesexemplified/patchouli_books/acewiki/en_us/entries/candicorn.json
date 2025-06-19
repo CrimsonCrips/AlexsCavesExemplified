@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Candicorn",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/candicorn/candicorn_heal.png"
+      ],
+      "text": "Candicorn can be healed with caramel apples",
+      "title": "Candicorn Heal"
+    }
+  ]
+}

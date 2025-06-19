@@ -1,0 +1,27 @@
+{
+  "category": "alexscavesexemplified:forlorn_hollows",
+  "icon": "minecraft:paper",
+  "name": "Underzealot",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/underzealot/underzealot_respect.png"
+      ],
+      "text": "Wearing the full set of the Underzealot's clothing makes them neutral with you",
+      "title": "Underzealot Respect"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/underzealot/dark_offering.png"
+      ],
+      "text": "Allows a player to leash sacrificeable denizens and give them to Underzealots for their rituals by right clicking,",
+      "title": "Dark Offering"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "(REQUIRES 'Underzealot Respect' FOR THIS PART OF THE FEATURE) \n If neutral with the Underzealots,They will give an item native to the Forlorn Hollows in return of offering them a sacrifice,What they give in return is dependant on the sacrifice type"
+    }
+  ]
+}

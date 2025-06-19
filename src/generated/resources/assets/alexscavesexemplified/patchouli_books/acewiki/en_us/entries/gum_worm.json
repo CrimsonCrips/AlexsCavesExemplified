@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Gum Worm",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gum_worm/pressured_hooks.png"
+      ],
+      "text": "Inflicts damage in hooks when using with a gum worm",
+      "title": "Pressured Hooks"
+    }
+  ]
+}

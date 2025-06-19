@@ -1,0 +1,29 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Gummybear",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gummy_bear/jellybean_changes.png"
+      ],
+      "text": "Gummybears can be interrupted during their hibernation,allowing for jellybeans to be rushed",
+      "title": "Jellybean Changes"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscaves:jelly_bean",
+      "text": "Amount of jellybeans made are dependant on the time taken for hibernation, with the max of 12 jellybeans for the full duration,Works with Sweetish Speedup",
+      "title": " "
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gummy_bear/sweetish_speedup.png"
+      ],
+      "text": "Feed a hibernating gummybear their matching color of fish to speedup hibernation",
+      "title": "Sweetish Speedup"
+    }
+  ]
+}

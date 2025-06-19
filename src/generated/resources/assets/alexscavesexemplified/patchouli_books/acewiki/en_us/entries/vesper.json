@@ -1,0 +1,23 @@
+{
+  "category": "alexscavesexemplified:forlorn_hollows",
+  "icon": "minecraft:paper",
+  "name": "Vesper",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/vesper/anti_sacrifice.png"
+      ],
+      "text": "Vespers attack underzealots seen sacrificing their own kind",
+      "title": "Anti Sacrifice"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/vesper/vesper_shotdown.png"
+      ],
+      "text": "Vespers can be shot down when bowed down",
+      "title": "Vesper Shotdown"
+    }
+  ]
+}

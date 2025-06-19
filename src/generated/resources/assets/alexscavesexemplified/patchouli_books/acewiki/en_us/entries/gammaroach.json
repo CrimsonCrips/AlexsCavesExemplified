@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "Gammaroach",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/gammaroach/roach_feeding.png"
+      ],
+      "text": "Gammaroaches eat dropped food",
+      "title": "Roach Feeding"
+    }
+  ]
+}
