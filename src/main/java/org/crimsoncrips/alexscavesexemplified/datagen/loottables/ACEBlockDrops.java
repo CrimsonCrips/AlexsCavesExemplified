@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.datagen.loottables;
 
+import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -45,9 +46,18 @@ public class ACEBlockDrops extends BlockLootSubProvider {
 	@Override
 	protected void generate() {
 		dropSelf(ACEBlockRegistry.METAL_CAULDRON.get());
-
 		add(ACEBlockRegistry.ACID_CAULDRON.get(), createSingleItemTable(ACEBlockRegistry.METAL_CAULDRON.get()));
 		add(ACEBlockRegistry.PURPLE_SODA_CAULDRON.get(), createSingleItemTable(ACEBlockRegistry.METAL_CAULDRON.get()));
+
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_1.get(),ACBlockRegistry.LIMESTONE.get());
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_2.get(),ACBlockRegistry.LIMESTONE.get());
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_3.get(),ACBlockRegistry.LIMESTONE.get());
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_4.get(),ACBlockRegistry.LIMESTONE.get());
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_5.get(),ACBlockRegistry.LIMESTONE.get());
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_6.get(),ACBlockRegistry.LIMESTONE.get());
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_7.get(),ACBlockRegistry.LIMESTONE.get());
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_8.get(),ACBlockRegistry.LIMESTONE.get());
+		otherWhenSilkTouch(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_9.get(),ACBlockRegistry.LIMESTONE.get());
 
 
 	}

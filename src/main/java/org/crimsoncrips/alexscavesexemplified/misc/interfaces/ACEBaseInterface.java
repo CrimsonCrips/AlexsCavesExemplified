@@ -17,4 +17,5 @@ public interface ACEBaseInterface {
     void setProjectionScale(int var);
 
     int getSelfDestructTime();
+
 }

@@ -103,8 +103,6 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                     Vec3 from = Vec3.atCenterOf(blockPos);
                     if (!level.isClientSide) {
                         ((ServerLevel) level).sendParticles(ACParticleRegistry.TESLA_BULB_LIGHTNING.get(), from.x, from.y, from.z, 0, -vec3.x, -vec3.y + 1, -vec3.z, 1.3D);
-                    }
-                    if (!level.isClientSide) {
                         LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
                         lightningBolt.setDamage(7);
                         target.thunderHit((ServerLevel) level, lightningBolt);

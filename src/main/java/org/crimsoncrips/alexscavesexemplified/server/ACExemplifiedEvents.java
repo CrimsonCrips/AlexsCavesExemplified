@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.server;
 
+import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.block.*;
 import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
@@ -23,6 +24,7 @@ import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.mehvahdjukaar.supplementaries.reg.ModParticles;
 import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
+import net.minecraft.advancements.Advancement;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -524,22 +526,10 @@ public class ACExemplifiedEvents {
             checkLeatherArmor(livingEntity.getItemBySlot(EquipmentSlot.OFFHAND),livingEntity);
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.FLY_TRAP_ENABLED.get()  && ModList.get().isLoaded("alexsmobs")){
-            BlockState blockState = livingEntity.getFeetBlockState();
-            BlockPos blockPos = new BlockPos(livingEntity.getBlockX(),livingEntity.getBlockY(),livingEntity.getBlockZ());
-            if (blockState.is(ACBlockRegistry.FLYTRAP.get())&& AMCompat.fly(livingEntity)){
-                 if (blockState.getValue(PottedFlytrapBlock.OPEN)){
-                     livingEntity.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
-                     livingEntity.captureDrops();
-                     livingEntity.kill();
-                     livingEntity.level().setBlock(blockPos, blockState.setValue(PottedFlytrapBlock.OPEN, false), 2);
-                 }
-            }
-        }
-
         if(livingEntity.getRandom().nextDouble() < 0.05 && AlexsCavesExemplified.COMMON_CONFIG.IRRADIATION_WASHOFF_ENABLED.get() && (livingEntity.isInWater() || livingEntity.getBlockStateOn().is(Blocks.WATER_CAULDRON) || livingEntity.isInWaterRainOrBubble())){
             ACEUtils.irradiationWash(livingEntity,50);
         }
+
 
         BlockState blockState = livingEntity.getBlockStateOn();
         if (blockState.getBlock() instanceof GeothermalVentBlock){

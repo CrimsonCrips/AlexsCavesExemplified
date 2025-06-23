@@ -10,6 +10,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
+import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +26,7 @@ public abstract class ACEMobMixin extends LivingEntity {
 
     @WrapOperation(method = "setTarget", at = @At(value = "INVOKE", target = "Lnet/minecraftforge/event/entity/living/LivingChangeTargetEvent;getNewTarget()Lnet/minecraft/world/entity/LivingEntity;"))
     private LivingEntity bypassExpensiveCalculationIfNecessary(LivingChangeTargetEvent instance, Operation<LivingEntity> original) {
-        if (this.hasEffect(ACEEffects.SERENED.get()) && this.getLastHurtByMob() != instance.getNewTarget()) {
+        if (this.hasEffect(ACEEffects.SERENED.get()) && this.getLastHurtByMob() != instance.getNewTarget() && AlexsCavesExemplified.COMMON_CONFIG.SERENED_ENABLED.get()) {
             return null;
         } else {
             return original.call(instance);

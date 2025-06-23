@@ -33,6 +33,10 @@ public abstract class ACELangProvider extends LanguageProvider {
 		this.add("subtitle.alexscavesexemplified.sound." + subtitleKey,name);
 	}
 
+	public void addCavePainting(String subtitleKey, String name) {
+		this.add("block." + subtitleKey + ".desc", name);
+	}
+
 	public void addEnchantmentDesc(String effectKey, String title,String description){
 		this.add("enchantment.alexscavesexemplified." + effectKey, title);
 		this.add("enchantment.alexscavesexemplified." + effectKey + ".desc", description);

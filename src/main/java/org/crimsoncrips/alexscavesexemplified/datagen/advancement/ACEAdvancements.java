@@ -576,15 +576,7 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 				.addCriterion("feedroach", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:feed_roach");
 
-		Advancement rusting = (Advancement.Builder.advancement().parent(toxic).display(
-						ACItemRegistry.ACID_BUCKET.get(),
-						Component.translatable("advancement.alexscavesexemplified.rusting"),
-						Component.translatable("advancement.alexscavesexemplified.rusting.desc"),
-						null, FrameType.TASK, true, true, false)
-				.addCriterion("rust", new ImpossibleTrigger.TriggerInstance()))
-				.save(consumer, "alexscavesexemplified:rusting");
-
-		Advancement defusing = (Advancement.Builder.advancement().parent(rusting).display(
+		Advancement defusing = (Advancement.Builder.advancement().parent(toxic).display(
 						Items.SHEARS,
 						Component.translatable("advancement.alexscavesexemplified.defusing"),
 						Component.translatable("advancement.alexscavesexemplified.defusing.desc"),

@@ -1,0 +1,6 @@
+{
+  "parent": "alexscavesexemplified:block/cave_painting_base",
+  "textures": {
+    "painting": "alexscavesexemplified:block/cave_painting/sacrifice_6"
+  }
+}

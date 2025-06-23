@@ -34,7 +34,7 @@ public class ACETremorTempt extends TemptGoal {
                 if (!player.isCreative()){
                     heldFood.shrink(1);
                 }
-                if (player.getRandom().nextDouble() < 0.2 || player.isCreative()){
+                if (player.getRandom().nextDouble() < 0.05 || player.isCreative()){
                     tremorsaurus.tame(player);
                     ACEUtils.awardAdvancement(player,"seethed_taming","tame");
                     tremorsaurus.level().broadcastEntityEvent(tremorsaurus, (byte)7);

@@ -17,7 +17,7 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue DREAD_ADDAPTIONS_ENABLED;
     public final ForgeConfigSpec.BooleanValue JELLYBEAN_CHANGES_ENABLED;
     public final ForgeConfigSpec.BooleanValue SWEETISH_SPEEDUP_ENABLED;
-    public final ForgeConfigSpec.BooleanValue FLY_TRAP_ENABLED;
+    public final ForgeConfigSpec.BooleanValue FLY_TRAPPED_ENABLED;
     public final ForgeConfigSpec.BooleanValue RATATATATATA_ENABLED;
     public final ForgeConfigSpec.BooleanValue GEOTHERMAL_EFFECTS_ENABLED;
     public final ForgeConfigSpec.BooleanValue RABIES_ENABLED;
@@ -30,11 +30,10 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue FISH_MUTATION_ENABLED;
     public final ForgeConfigSpec.BooleanValue STICKY_CARAMEL_ENABLED;
     public final ForgeConfigSpec.BooleanValue STICKY_SODA_ENABLED;
-    public final ForgeConfigSpec.BooleanValue PRIMORDIAL_OXYGEN_ENABLED;
     public final ForgeConfigSpec.BooleanValue VOLCANIC_SACRIFICE_ENABLED;
     public final ForgeConfigSpec.BooleanValue RADIANT_WRATH_ENABLED;
     public final ForgeConfigSpec.BooleanValue PRESSURED_HOOKS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue DINOSAUR_EGG_ANGER_ENABLED;
+    public final ForgeConfigSpec.BooleanValue EGG_ANGER_ENABLED;
     public final ForgeConfigSpec.BooleanValue NUCLEAR_CHAIN_ENABLED;
     public final ForgeConfigSpec.BooleanValue WASTE_PICKUP_ENABLED;
     public final ForgeConfigSpec.BooleanValue CAT_MUTATION_ENABLED;
@@ -43,8 +42,7 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue VESPER_SHOTDOWN_ENABLED;
     public final ForgeConfigSpec.BooleanValue GUASLOWPOKE_ENABLED;
     public final ForgeConfigSpec.BooleanValue ADDITIONAL_FLAMMABILITY_ENABLED;
-    public final ForgeConfigSpec.BooleanValue STOMP_DAMAGE_ENABLED;
-    public final ForgeConfigSpec.BooleanValue PAINT_EFFECTS_ENABLED;
+    public final ForgeConfigSpec.BooleanValue STOMPING_ENABLED;
     public final ForgeConfigSpec.BooleanValue KIROV_REPORTING_ENABLED;
     public final ForgeConfigSpec.IntValue SPELUNKY_ATTEMPTS_AMOUNT;
     public final ForgeConfigSpec.BooleanValue CANIAC_MANIAC_ENABLED;
@@ -55,7 +53,6 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue PRESERVED_AMBER_ENABLED;
     public final ForgeConfigSpec.BooleanValue SEETHED_TAMING_ENABLED;
     public final ForgeConfigSpec.BooleanValue ARMORED_LIQUIDATORS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue TREMOR_V_TREMOR_ENABLED;
     public final ForgeConfigSpec.BooleanValue BRAINDEAD_MODE_ENABLED ;
     public final ForgeConfigSpec.BooleanValue FORGIVING_SPELUKING_ENABLED ;
     public final ForgeConfigSpec.BooleanValue REARAYNGEMENT_ENABLED ;
@@ -86,7 +83,6 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue POWERED_LOCATORS_ENABLED;
     public final  ForgeConfigSpec.BooleanValue CATTASTROPHE_ENABLED;
     public final  ForgeConfigSpec.BooleanValue BOUNDED_MAGNETISM_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue DESOLATED_WEAPON_ENABLED;
     public final  ForgeConfigSpec.BooleanValue DARK_OFFERING_ENABLED;
     public final  ForgeConfigSpec.BooleanValue MAGNERIP_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SUBMARINE_BUMP_ENABLED;
@@ -97,7 +93,6 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue SCALABLE_HOLOGRAM_ENABLED;
     public final  ForgeConfigSpec.BooleanValue TELETOR_REARM_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SELF_DESTRUCT_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue RAVAGING_TREMOR_ENABLED;
 
     public final  ForgeConfigSpec.BooleanValue SHOTNUKE_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SERENED_ENABLED;
@@ -214,8 +209,6 @@ public class ACEServerConfig {
         builder.push("Nucleeper");
         this.NUCLEAR_CHAIN_ENABLED = buildBoolean(builder, "NUCLEAR_CHAIN_ENABLED", " ", true, "Whether nucleepers explode when they die from explosions");
         this.DEFUSION_ENABLED = buildBoolean(builder, "DEFUSION_ENABLED", " ", true, "Whether nucleepers can be defused");
-        this.DESOLATED_WEAPON_ENABLED = buildBoolean(builder, "DESOLATED_WEAPON_ENABLED", " ", true, "Rusted Nucleepers are slower and weaker");
-
         builder.pop();
         builder.push("Radgill");
         this.FISH_MUTATION_ENABLED = buildBoolean(builder, "FISH_MUTATION_ENABLED", " ", true, "Whether fish have a chance to turn into radgill when dowsed in acid");
@@ -230,26 +223,20 @@ public class ACEServerConfig {
 
         builder.push("Primordial Caves");
         this.SERENED_ENABLED = buildBoolean(builder, "SERENED_ENABLED", " ", true, "Whether feeding mobs with serene salad calms them down");
-
-        this.PRIMORDIAL_OXYGEN_ENABLED = buildBoolean(builder, "PRIMORDIAL_OXYGEN_ENABLED", " ", true, "Whether you have less oxygen inside Primordial Caves");
-        this.DINOSAUR_EGG_ANGER_ENABLED = buildBoolean(builder, "DINOSAUR_EGG_ANGER_ENABLED", " ", true, "Whether untamed dinosaurs will attack any that are seen with their egg");
+        this.EGG_ANGER_ENABLED = buildBoolean(builder, "EGG_ANGER_ENABLED", " ", true, "Whether untamed dinosaurs will attack any that are seen with their egg");
         builder.comment("--Compatible with Farmers Delight and Caves Delight--");
         this.SCAVENGING_ENABLED = buildBoolean(builder, "SCAVENGING_ENABLED", " ", true, "Whether carnivores scavenge for placed dinosaur chops");
-        this.STOMP_DAMAGE_ENABLED = buildBoolean(builder, "STOMP_DAMAGE_ENABLED", " ", true, "Whether Atlatitans/Lux stomps will cause damage");
-        this.PAINT_EFFECTS_ENABLED = buildBoolean(builder, "PAINT_EFFECTS_ENABLED", " ", true, "Whether painting dinosaurs gives temporary effects");
+        this.STOMPING_ENABLED = buildBoolean(builder, "STOMPING_ENABLED", " ", true, "Whether Atlatitans/Lux stomps will cause damage");
         builder.comment("--Compatible with Alexs Mobs--");
         this.PRESERVED_AMBER_ENABLED = buildBoolean(builder, "PRESERVED_AMBER_ENABLED", " ", true, "Whether amber when generated could contain trapped mobs");
         builder.comment("--Requires Alexs Mobs--");
-        this.FLY_TRAP_ENABLED = buildBoolean(builder, "FLY_TRAP_ENABLED", " ", true, "Flytraps close shut when a fly (From Alexs Mobs) comes into contact with it");
+        this.FLY_TRAPPED_ENABLED = buildBoolean(builder, "FLY_TRAPPED_ENABLED", " ", true, "Flytraps close shut when a fly (From Alexs Mobs) comes into contact with it");
 
         builder.push("Atlatitan");
         this.VOLCANIC_SACRIFICE_ENABLED = buildBoolean(builder, "VOLCANIC_SACRIFICE_ENABLED", " ", true, "Whether atlatitan eggs or babies can be sacrificed to a volcano to refresh its lux cooldown");
         builder.pop();
         builder.push("Tremorsaurus");
         this.SEETHED_TAMING_ENABLED = buildBoolean(builder, "SEETHED_TAMING_ENABLED", " ", true, "Whether tremorsaurus can be tamed alternatively with meat(MUST HAVE SCAVENGING FEATURE ENABLED)");
-        this.TREMOR_V_TREMOR_ENABLED = buildBoolean(builder, "TREMOR_V_TREMOR_ENABLED", " ", true, "Whether tremorsaurus fights other tremorsaurus when attacked");
-        this.RAVAGING_TREMOR_ENABLED = buildBoolean(builder, "RAVAGING_TREMOR_ENABLED", " ", true, "Whether tremorsaurus destroys blocks like a ravager when ridden or chasing something");
-
         builder.pop();
         builder.pop();
 

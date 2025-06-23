@@ -28,7 +28,7 @@ public abstract class ACERelicheirus extends DinosaurEntity {
     @Inject(method = "registerGoals", at = @At("TAIL"))
     private void registerGoals(CallbackInfo ci) {
         RelicheirusEntity relicheirus = (RelicheirusEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.DINOSAUR_EGG_ANGER_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.EGG_ANGER_ENABLED.get()){
             relicheirus.targetSelector.addGoal(4, new ACEDinosaurEggAttack<>(relicheirus, LivingEntity.class, true));
         }
         if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){

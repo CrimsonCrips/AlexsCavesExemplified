@@ -1,7 +1,9 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.blocks;
 
 import com.github.alexmodguy.alexscaves.server.block.DinosaurEggBlock;
+import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
@@ -29,7 +31,7 @@ public class ACEDinosaurEggBlock {
 
     @Inject(method = "playerDestroy", at = @At("TAIL"))
     private void playerBreak(Level worldIn, Player player, BlockPos pos, BlockState state, BlockEntity te, ItemStack stack, CallbackInfo ci) {
-        if (!worldIn.isClientSide && AlexsCavesExemplified.COMMON_CONFIG.DINOSAUR_EGG_ANGER_ENABLED.get()) {
+        if (!worldIn.isClientSide && AlexsCavesExemplified.COMMON_CONFIG.EGG_ANGER_ENABLED.get()) {
             AABB bb = (new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1)).inflate(10.0F, 10.0F, 10.0F);
             if (player.isCreative())
                 return;

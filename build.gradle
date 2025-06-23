@@ -196,6 +196,7 @@ dependencies {
     runtimeOnly fg.deobf("maven.modrinth:glitchcore:0.0.1.1")
     runtimeOnly fg.deobf("maven.modrinth:better-advancements:NS5G3ENg")
     runtimeOnly fg.deobf("maven.modrinth:terrablender:3.0.1.7")
+    runtimeOnly fg.deobf("maven.modrinth:debugutils:Tr2n6OzX")
     runtimeOnly fg.deobf("maven.modrinth:cobweb:RdRlnl4S")
     runtimeOnly fg.deobf("maven.modrinth:radiant-gear:2.1.5+1.20.1")
     runtimeOnly fg.deobf("maven.modrinth:jade:11.7.1")

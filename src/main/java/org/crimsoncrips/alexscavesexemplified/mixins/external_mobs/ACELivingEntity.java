@@ -83,7 +83,7 @@ public abstract class ACELivingEntity extends Entity {
             if (serene != null) {
                 livingEntity.removeEffect(serene.getEffect());
                 if (serene.getDuration() > 100) {
-                    livingEntity.addEffect(new MobEffectInstance(serene.getEffect(), serene.getDuration() - 100, serene.getAmplifier()));
+                    livingEntity.addEffect(new MobEffectInstance(serene.getEffect(), serene.getDuration() - 1000, serene.getAmplifier()));
                 }
             }
         }

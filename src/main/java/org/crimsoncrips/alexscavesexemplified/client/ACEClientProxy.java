@@ -3,6 +3,7 @@ package org.crimsoncrips.alexscavesexemplified.client;
 import com.github.alexmodguy.alexscaves.client.event.ClientEvents;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.client.particle.TephraParticle;
+import com.github.alexmodguy.alexscaves.client.particle.TeslaBulbLightningParticle;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -37,6 +38,9 @@ public class ACEClientProxy extends ACECommonProxy {
         registry.registerSpriteSet(ACEParticleRegistry.GAMMA_TEPHRA.get(), TephraParticle.Factory::new);
         registry.registerSpriteSet(ACEParticleRegistry.GAMMA_TEPHRA_SMALL.get(), TephraParticle.SmallFactory::new);
         registry.registerSpriteSet(ACEParticleRegistry.GAMMA_TEPHRA_FLAME.get(), TephraParticle.FlameFactory::new);
+
+        registry.registerSpecial(ACEParticleRegistry.AZURE_FOCUSED_LIGHTNING.get(), new FocusedLightningParticle.AzureFactory());
+        registry.registerSpecial(ACEParticleRegistry.SCARLET_FOCUSED_LIGHTNING.get(), new FocusedLightningParticle.ScarletFactory());
 
 
     }

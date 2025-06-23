@@ -66,7 +66,7 @@ public abstract class ACEVolcanicCoreBlockEntity extends BlockEntity{
                     item.getItem().shrink(1);
                     if (level.getRandom().nextDouble() < 1) {
                         spawnTephra(level, entity);
-                        ACEReflectionUtil.setField(entity, "bossSpawnCooldown", bossCooldown / 2);
+                        ACEReflectionUtil.setField(entity, "bossSpawnCooldown", 0);
                         ACEUtils.awardAdvancement(item.getOwner(),"egg_sacrifice","egg_sacrifice");
                     }
                 }

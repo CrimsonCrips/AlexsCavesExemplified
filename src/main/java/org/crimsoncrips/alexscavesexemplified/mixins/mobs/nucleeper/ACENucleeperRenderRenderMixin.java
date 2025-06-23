@@ -25,7 +25,6 @@ public abstract class ACENucleeperRenderRenderMixin extends RenderLayer<Nucleepe
     private static final ResourceLocation TEXTURE_BROKEN_GLASS = new ResourceLocation("alexscavesexemplified:textures/entity/nucleeper/broken_glass.png");
 
     private static final ResourceLocation TEXTURE_GLOW = new ResourceLocation("alexscaves:textures/entity/nucleeper/nucleeper_glow.png");
-    private static final ResourceLocation TEXTURE_RUSTED_GLOW = new ResourceLocation("alexscavesexemplified:textures/entity/nucleeper/nucleeper_rusted_glow.png");
 
     private static final ResourceLocation TEXTURE_GLASS = new ResourceLocation("alexscaves:textures/entity/nucleeper/nucleeper_glass.png");
 
@@ -41,9 +40,9 @@ public abstract class ACENucleeperRenderRenderMixin extends RenderLayer<Nucleepe
     public void render(PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn, NucleeperEntity entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch) {
         float alpha = (float)((double)1.0F + Math.sin((double)(ageInTicks * 0.3F))) * 0.25F + 0.5F;
         float explodeProgress = entitylivingbaseIn.getExplodeProgress(partialTicks);
-        VertexConsumer ivertexbuilder1 = bufferIn.getBuffer(ACRenderTypes.getEyesAlphaEnabled(((NucleeperXtra)entitylivingbaseIn).isRusted() ? TEXTURE_RUSTED_GLOW : TEXTURE_GLOW));
+        VertexConsumer ivertexbuilder1 = bufferIn.getBuffer(ACRenderTypes.getEyesAlphaEnabled(TEXTURE_GLOW));
         ((NucleeperModel)this.getParentModel()).renderToBuffer(poseStack, ivertexbuilder1, packedLightIn, LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F), 1.0F, 1.0F, 1.0F, alpha);
-        VertexConsumer ivertexbuilder2 = bufferIn.getBuffer(ForgeRenderTypes.getUnlitTranslucent(((NucleeperXtra)entitylivingbaseIn).isRusted() ? TEXTURE_BROKEN_GLASS : TEXTURE_GLASS));
+        VertexConsumer ivertexbuilder2 = bufferIn.getBuffer(ForgeRenderTypes.getUnlitTranslucent(TEXTURE_GLASS));
         ((NucleeperModel)this.getParentModel()).renderToBuffer(poseStack, ivertexbuilder2, packedLightIn, LivingEntityRenderer.getOverlayCoords(entitylivingbaseIn, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
         int buttonDiv = entitylivingbaseIn.tickCount / 5 % 6;
         if (entitylivingbaseIn.isCharged()) {

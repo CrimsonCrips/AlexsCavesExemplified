@@ -50,12 +50,8 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
     @Inject(method = "registerGoals", at = @At("HEAD"))
     private void registerGoals(CallbackInfo ci) {
         TremorsaurusEntity tremorsaurus = (TremorsaurusEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.DINOSAUR_EGG_ANGER_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.EGG_ANGER_ENABLED.get()){
             tremorsaurus.targetSelector.addGoal(4, new ACEDinosaurEggAttack<>(tremorsaurus, LivingEntity.class, true));
-        }
-
-        if (AlexsCavesExemplified.COMMON_CONFIG.TREMOR_V_TREMOR_ENABLED.get()){
-            this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get()) {
@@ -81,32 +77,12 @@ public abstract class ACETremorsaurus extends DinosaurEntity implements TargetsD
         }
     }
 
-    @Inject(method = "tick", at = @At(value = "HEAD"))
-    private void tick(CallbackInfo ci) {
-        TremorsaurusEntity tremorsaurus = (TremorsaurusEntity)(Object)this;
-
-        if (isAlive() && (isVehicle() || tremorsaurus.getTarget() != null) && AlexsCavesExemplified.COMMON_CONFIG.RAVAGING_TREMOR_ENABLED.get() && getRandom().nextDouble() < 0.3){
-            AABB aabb = this.getBoundingBox().inflate(0.2D);
-
-            for(BlockPos blockpos : BlockPos.betweenClosed(Mth.floor(aabb.minX), Mth.floor(aabb.minY), Mth.floor(aabb.minZ), Mth.floor(aabb.maxX), Mth.floor(aabb.maxY), Mth.floor(aabb.maxZ))) {
-                BlockState blockstate = this.level().getBlockState(blockpos);
-                Block block = blockstate.getBlock();
-                if (block instanceof LeavesBlock) {
-                    this.level().destroyBlock(blockpos, true, this);
-                }
-            }
-        }
-    }
 
     @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 6))
     private boolean tempt(GoalSelector instance, int pPriority, Goal pGoal) {
         return !AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get();
     }
 
-    @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 10))
-    private boolean hurtBy(GoalSelector instance, int pPriority, Goal pGoal) {
-        return !AlexsCavesExemplified.COMMON_CONFIG.TREMOR_V_TREMOR_ENABLED.get();
-    }
 
 
 

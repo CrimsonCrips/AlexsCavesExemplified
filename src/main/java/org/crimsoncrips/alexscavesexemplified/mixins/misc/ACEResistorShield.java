@@ -1,13 +1,20 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import com.github.alexmodguy.alexscaves.server.entity.item.SeekingArrowEntity;
 import com.github.alexmodguy.alexscaves.server.item.ResistorShieldItem;
+import com.github.alexmodguy.alexscaves.server.item.SeekingArrowItem;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.crimsoncrips.alexscavesexemplified.ACEReflectionUtil;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.enchantment.ACEEnchants;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,6 +49,24 @@ public class ACEResistorShield extends ShieldItem {
                             entity.setDeltaMovement(entity.getDeltaMovement().scale(-0.3F).add(arcVec.normalize().scale(-0.7F)));
                         }
                     }
+                }
+            }
+
+            for (SeekingArrowEntity seekingArrowEntity : living.level().getEntitiesOfClass(SeekingArrowEntity.class, living.getBoundingBox().inflate(5, 8, 5))) {
+                if (living instanceof Player player && seekingArrowEntity.getOwner() != living && stack.getEnchantmentLevel(ACEEnchants.MAGNETICISM.get()) > 0) {
+                    Entity entityLook = ACEUtils.getLookingAtEntity(player);
+                    if (entityLook == null){
+                        return;
+                    }
+
+                    System.out.println("test");
+
+                    seekingArrowEntity.inGround = false;
+                    seekingArrowEntity.setOwner(living);
+                    seekingArrowEntity.setDeltaMovement(0,1,0);
+                    EntityDataAccessor<Integer> arc_id = (EntityDataAccessor<Integer>) ACEReflectionUtil.getField(seekingArrowEntity, "ARC_TOWARDS_ENTITY_ID");
+                    seekingArrowEntity.getEntityData().set(arc_id,entityLook.getId());
+
                 }
             }
         }

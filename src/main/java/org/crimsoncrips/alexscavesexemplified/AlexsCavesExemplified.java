@@ -2,7 +2,6 @@ package org.crimsoncrips.alexscavesexemplified;
 
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
-import com.github.alexthe666.alexsmobs.effect.AMEffectRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FireBlock;
@@ -72,7 +71,6 @@ public class AlexsCavesExemplified {
         ACEEffects.EFFECT_REGISTER.register(modEventBus);
         ACESoundRegistry.DEF_REG.register(modEventBus);
         ACEEffects.POTION_REGISTER.register(modEventBus);
-
         modEventBus.addListener(this::setup);
 
 

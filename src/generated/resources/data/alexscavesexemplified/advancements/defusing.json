@@ -1,5 +1,5 @@
 {
-  "parent": "alexscavesexemplified:rusting",
+  "parent": "alexscavesexemplified:toxic",
   "criteria": {
     "defuse": {
       "trigger": "minecraft:impossible"

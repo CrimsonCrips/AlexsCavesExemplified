@@ -50,6 +50,16 @@ public class ACELangGen extends ACELangProvider {
 		this.addBlock(ACEBlockRegistry.PURPLE_SODA_CAULDRON,"Purple Soda Cauldron");
 		this.addBlock(ACEBlockRegistry.ACID_CAULDRON,"Acid Cauldron");
 
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_1.getId().toLanguageKey(), "Sacrifice I");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_2.getId().toLanguageKey(), "Sacrifice II");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_3.getId().toLanguageKey(), "Sacrifice III");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_4.getId().toLanguageKey(), "Sacrifice IV");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_5.getId().toLanguageKey(), "Sacrifice V");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_6.getId().toLanguageKey(), "Sacrifice VII");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_7.getId().toLanguageKey(), "Sacrifice VII");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_8.getId().toLanguageKey(), "Sacrifice VIII");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_9.getId().toLanguageKey(), "Sacrifice IX");
+
 		this.addItem(ACEItemRegistry.ICE_CREAM_CONE, "Ice Cream Cone");
 
 		this.addEnchantmentDesc("magneticism","Magneticism", "Boosts Magnetic Caves related tools");
@@ -123,7 +133,6 @@ public class ACELangGen extends ACELangProvider {
 		this.addAdvancementDesc("propogate","Primordial Propogation", "Propogate flora in the primordial caves");
 		this.addAdvancementDesc("serened","Serene Neutrality", "Inflict serened on yourself or another mob with serene salad, causing non-players to not attack unless attacked");
 
-		this.addAdvancementDesc("rusting","The Forgotten Weapon", "Rust a nucleeper by dousing it in acid");
 		this.addAdvancementDesc("deathly_radiation","Deathly Radiation", "Have your body submit to immense radiation");
 		this.addAdvancementDesc("washing_radiation","Nuclear Wash", "Wash off radiation with water, soap is applicable");
 		this.addAdvancementDesc("kirov_reporting","Kirov, Reporting!", "Drop an explosive, during flight");

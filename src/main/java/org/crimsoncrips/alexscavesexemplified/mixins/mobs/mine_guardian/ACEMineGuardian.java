@@ -67,19 +67,8 @@ public abstract class ACEMineGuardian extends Monster implements MineGuardianXtr
         mineGuardian.targetSelector.addGoal(1, new ACEMineGuardianHurtBy(mineGuardian, new Class[0]));
     }
 
-    @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        if (pSource.getEntity() instanceof Player player && player.getUUID().toString().equals(alexsCavesExemplified$getOwner())){
-            alexsCavesExemplified$setOwner("-1");
-        }
-        return super.hurt(pSource, pAmount);
-    }
-
     @Inject(method = "tick", at = @At("TAIL"))
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
-        if (!AlexsCavesExemplified.COMMON_CONFIG.REMINEDING_ENABLED.get() && !Objects.equals(alexsCavesExemplified$getOwner(), "-1")){
-            alexsCavesExemplified$setOwner("-1");
-        }
         if (alexsCavesExemplified$getVariant() >= 1){
             if (this.getName().getString().equals("Ae")){
                 alexsCavesExemplified$setVariant(1);
@@ -198,7 +187,7 @@ public abstract class ACEMineGuardian extends Monster implements MineGuardianXtr
     @Override
     protected InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
         ItemStack itemHeld = pPlayer.getItemInHand(pHand);
-        if (AlexsCavesExemplified.COMMON_CONFIG.NAVAL_NUCLEARITY_ENABLED.get() && itemHeld.is(ACBlockRegistry.NUCLEAR_BOMB.get().asItem()) && alexsCavesExemplified$getVariant() == 0){
+        if (AlexsCavesExemplified.COMMON_CONFIG.NAVAL_NUCLEARITY_ENABLED.get() && itemHeld.is(ACBlockRegistry.NUCLEAR_BOMB.get().asItem()) && alexsCavesExemplified$getVariant() == 0 && !alexsCavesExemplified$getOwner().equals("-1")){
             alexsCavesExemplified$setVariant(random.nextBoolean() ? 1 : 2);
             if (!pPlayer.isCreative()){
                 itemHeld.shrink(1);

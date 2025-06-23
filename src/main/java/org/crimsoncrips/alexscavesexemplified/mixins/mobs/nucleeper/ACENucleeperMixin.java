@@ -55,34 +55,23 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
     }
 
 
-    private static final EntityDataAccessor<Boolean> RUSTED = SynchedEntityData.defineId(NucleeperEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> DEFUSED = SynchedEntityData.defineId(NucleeperEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
     private void alexsCavesExemplified$defineSynchedData(CallbackInfo ci) {
-        this.entityData.define(RUSTED, false);
         this.entityData.define(DEFUSED, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
     private void alexsCavesExemplified$addAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
-        compound.putBoolean("Rusted", this.isRusted());
         compound.putBoolean("Defused", this.isDefused());
     }
 
     @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
     private void alexsCavesExemplified$readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
-        this.setRusted(compound.getBoolean("Rusted"));
         this.setDefused(compound.getBoolean("Defused"));
     }
 
-    @Override
-    public void aiStep() {
-        super.aiStep();
-        if (isRusted() && this.getRandom().nextDouble() < 0.005){
-            hurt(this.damageSources().generic(),2);
-        }
-    }
 
     @Inject(method = "mobInteract", at = @At("HEAD"))
     private void alexsCavesExemplified$mobInteract(Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
@@ -97,14 +86,6 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
                 player.getItemInHand(hand).hurtAndBreak(1, player, (p_233654_0_) -> {});
             }
 
-        }
-        if (player.getItemInHand(hand).is(ACItemRegistry.ACID_BUCKET.get()) && !isRusted() && AlexsCavesExemplified.COMMON_CONFIG.DESOLATED_WEAPON_ENABLED.get()){
-            ACEUtils.awardAdvancement(player,"rusting","rust");
-            setRusted(true);
-            player.swing(hand);
-            if (!player.isCreative()) {
-                player.setItemInHand(hand, Items.BUCKET.getDefaultInstance());
-            }
         }
     }
 
@@ -137,29 +118,8 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
 
     @Inject(method = "tick", at = @At("HEAD"))
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
-        if (!AlexsCavesExemplified.COMMON_CONFIG.DESOLATED_WEAPON_ENABLED.get() && isRusted()){
-            setRusted(false);
-        }
         if (!AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get() && isDefused()){
             setDefused(false);
-        }
-    }
-
-    @ModifyArg(method = "explode", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/item/NuclearExplosionEntity;setSize(F)V"),remap = false)
-    private float alexsCavesExemplified$explode(float f) {
-        return isRusted() ? f / 2 : f;
-    }
-
-    @Override
-    public void setRusted(boolean val) {
-        this.entityData.set(RUSTED, Boolean.valueOf(val));
-        if (val){
-            this.playSound( ACSoundRegistry.ACID_BURN.get());
-            this.getAttribute(Attributes.ARMOR).setBaseValue(2F);
-            this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(20F);
-            this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(0.05F);
-            this.getAttribute(Attributes.KNOCKBACK_RESISTANCE).setBaseValue(2F);
-            this.setHealth(20F);
         }
     }
 
@@ -171,11 +131,6 @@ public abstract class ACENucleeperMixin extends Monster implements NucleeperXtra
     @Override
     public boolean isDefused() {
         return this.entityData.get(DEFUSED);
-    }
-
-    @Override
-    public boolean isRusted() {
-        return this.entityData.get(RUSTED);
     }
 
     @WrapWithCondition(method = "mobInteract", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/NucleeperEntity;setTriggered(Z)V"))

@@ -15,7 +15,7 @@ public abstract class ACESauropod {
     @Inject(method = "crushBlocksInRing", at = @At("TAIL"),remap = false)
     private void crush(int width, int ringStartX, int ringStartZ, float dropChance, CallbackInfo ci) {
         SauropodBaseEntity sauropodBase = (SauropodBaseEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.STOMP_DAMAGE_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.STOMPING_ENABLED.get()){
             for (LivingEntity entity : sauropodBase.level().getEntitiesOfClass(LivingEntity.class, sauropodBase.getBoundingBox().inflate(width))) {
                 if (entity != sauropodBase && entity.getBbHeight() <= 3F) {
                     entity.hurt(sauropodBase.damageSources().mobAttack(sauropodBase), 6.0F);

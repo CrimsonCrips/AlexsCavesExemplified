@@ -25,8 +25,6 @@ public abstract class ACENucleeperModelMixin extends AdvancedEntityModel<Nucleep
         if (((NucleeperXtra)entity).isDefused()){
             this.lpupil.setPos(lpupil.defaultPositionX,lpupil.defaultPositionY,lpupil.defaultPositionZ + 2);
             this.rpupil.setPos(rpupil.defaultPositionX,rpupil.defaultPositionY,rpupil.defaultPositionZ + 2);
-        } else if (((NucleeperXtra)entity).isRusted()) {
-            this.lpupil.setPos(lpupil.defaultPositionX,lpupil.defaultPositionY,lpupil.defaultPositionZ + 2);
         }
     }
 }

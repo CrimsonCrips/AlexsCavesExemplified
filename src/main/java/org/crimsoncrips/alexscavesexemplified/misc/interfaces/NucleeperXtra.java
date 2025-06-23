@@ -9,12 +9,8 @@ import java.util.List;
 
 public interface NucleeperXtra {
 
-    void setRusted(boolean val);
-
     void setDefused(boolean val);
 
     boolean isDefused();
-
-    boolean isRusted();
 
 }

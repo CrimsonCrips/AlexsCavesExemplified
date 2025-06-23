@@ -22,5 +22,7 @@ public class ACEParticleRegistry {
     public static final RegistryObject<SimpleParticleType> GAMMA_TEPHRA_SMALL = DEF_REG.register("gamma_tephra_small", () -> new SimpleParticleType(false));
     public static final RegistryObject<SimpleParticleType> GAMMA_TEPHRA_FLAME = DEF_REG.register("gamma_tephra_flame", () -> new SimpleParticleType(false));
 
+    public static final RegistryObject<SimpleParticleType> AZURE_FOCUSED_LIGHTNING = DEF_REG.register("azure_focused_lightning", () -> new SimpleParticleType(false));
+    public static final RegistryObject<SimpleParticleType> SCARLET_FOCUSED_LIGHTNING = DEF_REG.register("scarlet_focused_lightning", () -> new SimpleParticleType(false));
 
 }

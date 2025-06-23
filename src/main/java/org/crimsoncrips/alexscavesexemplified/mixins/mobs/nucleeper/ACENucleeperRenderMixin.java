@@ -18,17 +18,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ACENucleeperRenderMixin extends MobRenderer<NucleeperEntity, NucleeperModel> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation("alexscaves:textures/entity/nucleeper/nucleeper.png");
-    private static final ResourceLocation TEXTURE_RUSTED = new ResourceLocation("alexscavesexemplified:textures/entity/nucleeper/rusted_nucleeper.png");
 
     public ACENucleeperRenderMixin(EntityRendererProvider.Context pContext, NucleeperModel pModel, float pShadowRadius) {
         super(pContext, pModel, pShadowRadius);
     }
 
-
-    @Override
-    public ResourceLocation getTextureLocation(NucleeperEntity entity) {
-        return ((NucleeperXtra)entity).isRusted() ? TEXTURE_RUSTED : TEXTURE;
-    }
 
     @Inject(method = "render(Lcom/github/alexmodguy/alexscaves/server/entity/living/NucleeperEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/MultiBufferSource;getBuffer(Lnet/minecraft/client/renderer/RenderType;)Lcom/mojang/blaze3d/vertex/VertexConsumer;"), cancellable = true)
     private void alexsCavesExemplified$render(NucleeperEntity entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn, CallbackInfo ci) {

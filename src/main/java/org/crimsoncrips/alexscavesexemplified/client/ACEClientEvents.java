@@ -27,7 +27,7 @@ public class ACEClientEvents {
                 preEvent.getPoseStack().translate(vibrate,  vibrate, vibrate);
             }
         }
-        if (preEvent.getEntity() instanceof CaniacEntity) {
+        if (preEvent.getEntity() instanceof CaniacEntity && AlexsCavesExemplified.COMMON_CONFIG.CANIAC_MANIAC_ENABLED.get()) {
             preEvent.getPoseStack().pushPose();
             vibrate = (preEvent.getEntity().getRandom().nextFloat() - 0.5F) * (Math.sin((double) preEvent.getEntity().tickCount / 50) * 0.5 + 0.5) * 0.1;
             if (vibrate >= 0) {
@@ -42,7 +42,7 @@ public class ACEClientEvents {
         if (postEvent.getEntity().hasEffect(ACEEffects.RABIAL.get())) {
             postEvent.getPoseStack().popPose();
         }
-        if (postEvent.getEntity() instanceof CaniacEntity) {
+        if (postEvent.getEntity() instanceof CaniacEntity && AlexsCavesExemplified.COMMON_CONFIG.CANIAC_MANIAC_ENABLED.get()) {
             postEvent.getPoseStack().popPose();
         }
     }

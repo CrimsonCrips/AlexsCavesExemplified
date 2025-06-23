@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 import static net.minecraft.client.renderer.texture.OverlayTexture.NO_OVERLAY;
 
 @Mixin(MineGuardianModel.class)
-public abstract class                                                                       ACEMineGuardianModel extends AdvancedEntityModel<MineGuardianEntity> {
+public abstract class ACEMineGuardianModel extends AdvancedEntityModel<MineGuardianEntity> {
 
 
     @Shadow @Final private AdvancedModelBox eye;
