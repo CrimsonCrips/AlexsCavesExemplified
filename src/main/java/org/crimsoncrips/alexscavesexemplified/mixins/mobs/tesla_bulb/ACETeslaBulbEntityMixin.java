@@ -84,12 +84,12 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
         if(AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
             ACEBaseInterface tickAccesor = (ACEBaseInterface)entity;
 
-            LivingEntity target = null;
-            for (LivingEntity livingEntity : level.getEntitiesOfClass(LivingEntity.class, new AABB(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)))) {
+            Player target = null;
+            for (Player livingEntity : level.getEntitiesOfClass(Player.class, new AABB(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)))) {
                 target = livingEntity;
             }
 
-            if (target instanceof Player player && !player.isCreative()) {
+            if (target != null && !target.isCreative()) {
 
                 if (tickAccesor.getCharge() > 0) {
                     ParticleUtils.spawnParticlesAlongAxis(Direction.UP.getAxis(), level, blockPos, 0.125D, ParticleTypes.ELECTRIC_SPARK, UniformInt.of(1, 2));
@@ -98,7 +98,7 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                 if (tickAccesor.getCharge() == 5 && AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
                     level.playLocalSound(blockPos, ACESoundRegistry.TESLA_POWERUP.get(), SoundSource.AMBIENT, 2, 1, false);
                 }
-                if (tickAccesor.getCharge() > 30 && tickAccesor.getCharge() < 35){
+                if (tickAccesor.getCharge() == 32){
                     Vec3 vec3 = findTargetPos(blockPos, target);
                     Vec3 from = Vec3.atCenterOf(blockPos);
                     if (!level.isClientSide) {
@@ -107,16 +107,14 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                         lightningBolt.setDamage(7);
                         target.thunderHit((ServerLevel) level, lightningBolt);
                         target.setRemainingFireTicks(30);
-                        ACEUtils.awardAdvancement(player,"tesla_shock","shock");
+                        ACEUtils.awardAdvancement(target,"tesla_shock","shock");
                     }
-                }
-                if (tickAccesor.getCharge() == 33 && AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
                     target.playSound( ACESoundRegistry.TESLA_FIRE.get());
-                }
-                if (tickAccesor.getCharge() > 45) {
                     tickAccesor.setCharge(-30);
                 }
-            } else tickAccesor.setCharge(-30);
+            } else {
+                tickAccesor.setCharge(-30);
+            }
 
 
 

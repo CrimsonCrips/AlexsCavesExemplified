@@ -1,5 +1,5 @@
 {
-  "parent": "alexscavesexemplified:egg_sacrifice",
+  "parent": "alexscavesexemplified:sacrifice_painting",
   "criteria": {
     "live_sacrifice": {
       "trigger": "minecraft:impossible"
@@ -10,7 +10,7 @@
     "description": {
       "translate": "advancement.alexscavesexemplified.volcanic_sacrifice.desc"
     },
-    "frame": "task",
+    "frame": "challenge",
     "hidden": false,
     "icon": {
       "item": "citadel:icon_item",

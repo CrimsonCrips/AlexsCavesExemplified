@@ -17,6 +17,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
@@ -29,17 +30,12 @@ import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 
 public class ACECauldron extends Block {
-    private static final int SIDE_THICKNESS = 2;
-    private static final int LEG_WIDTH = 4;
-    private static final int LEG_HEIGHT = 3;
-    private static final int LEG_DEPTH = 2;
-    protected static final int FLOOR_LEVEL = 4;
     private static final VoxelShape INSIDE = box(2.0D, 4.0D, 2.0D, 14.0D, 16.0D, 14.0D);
     protected static final VoxelShape SHAPE = Shapes.join(Shapes.block(), Shapes.or(box(0.0D, 0.0D, 4.0D, 16.0D, 3.0D, 12.0D), box(4.0D, 0.0D, 0.0D, 12.0D, 3.0D, 16.0D), box(2.0D, 0.0D, 2.0D, 14.0D, 3.0D, 14.0D), INSIDE), BooleanOp.ONLY_FIRST);
     private final Map<Item, ACECauldronInteraction> interactions;
 
     public ACECauldron(BlockBehaviour.Properties pProperties, Map<Item, ACECauldronInteraction> pInteractions) {
-        super(pProperties.randomTicks());
+        super(pProperties.randomTicks().requiresCorrectToolForDrops().strength(5F));
         this.interactions = pInteractions;
     }
 

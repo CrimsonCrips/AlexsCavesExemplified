@@ -27,6 +27,7 @@ public class ACEItemTagGenerator extends ItemTagsProvider {
 	public static final TagKey<Item> KNAWING = create("knawing");
 	public static final TagKey<Item> LIGHT = create("light");
 	public static final TagKey<Item> SWEETS = create("sweets");
+	public static final TagKey<Item> GELATIN = create("gelatin");
 
     public ACEItemTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> future, CompletableFuture<TagLookup<Block>> provider, ExistingFileHelper helper) {
         super(output, future, provider, AlexsCavesExemplified.MODID, helper);
@@ -35,6 +36,14 @@ public class ACEItemTagGenerator extends ItemTagsProvider {
 	@SuppressWarnings("unchecked")
     @Override
 	protected void addTags(HolderLookup.Provider provider) {
+
+		tag(GELATIN).add(
+				ACItemRegistry.GELATIN_BLUE.get(),
+				ACItemRegistry.GELATIN_GREEN.get(),
+				ACItemRegistry.GELATIN_RED.get(),
+				ACItemRegistry.GELATIN_PINK.get(),
+				ACItemRegistry.GELATIN_YELLOW.get()
+		);
 
 		tag(COLD_FOOD).add(
 				ACBlockRegistry.CHOCOLATE_ICE_CREAM.get().asItem(),

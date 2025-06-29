@@ -41,12 +41,13 @@ public abstract class ACEHologramProjectorMixin extends BaseEntityBlock {
             if (heldItem.is(ACItemRegistry.SCARLET_NEODYMIUM_INGOT.get())) {
                 worldIn.playSound((Player) null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);
                 accesor.setProjectionScale(accesor.getProjectionScale() + 1);
+                ACEUtils.awardAdvancement(player,"resizing","resize");
             }
             if (heldItem.is(ACItemRegistry.AZURE_NEODYMIUM_INGOT.get()) && ((ACEBaseInterface) projectorBlockEntity).getProjectionScale() > 1) {
                 worldIn.playSound((Player) null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);
                 accesor.setProjectionScale(accesor.getProjectionScale() - 1);
+                ACEUtils.awardAdvancement(player,"resizing","resize");
             }
-            ACEUtils.awardAdvancement(player,"resizing","resize");
         }
     }
 

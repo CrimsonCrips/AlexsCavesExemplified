@@ -21,6 +21,7 @@ public class ACELangGen extends ACELangProvider {
 		this.addMisc("candy_warn_1","Dad: That's enough candy, child.");
 
 
+
 		this.addEffect("rabial","Rabial Infection","Deathly Nervous Disease");
 		this.addEffect("sugar_crash","Sugar Crash","Sugar Crashed");
 		this.addEffect("serened","Serened","Serene");
@@ -61,6 +62,7 @@ public class ACELangGen extends ACELangProvider {
 		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_9.getId().toLanguageKey(), "Sacrifice IX");
 
 		this.addItem(ACEItemRegistry.ICE_CREAM_CONE, "Ice Cream Cone");
+
 
 		this.addEnchantmentDesc("magneticism","Magneticism", "Boosts Magnetic Caves related tools");
 
@@ -128,6 +130,7 @@ public class ACELangGen extends ACELangProvider {
 		this.addAdvancementDesc("paint_effects","P2W Skins", "Paint a dinosaur, to give it specific effects");
 		this.addAdvancementDesc("egg_sacrifice","Egg Fuel", "Sacrifice an atlatitan egg to the volcanoes");
 		this.addAdvancementDesc("volcanic_sacrifice","Lux Reborn", "Sacrifice a live baby atlatitan");
+		this.addAdvancementDesc("sacrifice_painting","Prophesized Sacrifice", "Paint a depiction of a volcanic sacrifice after defeating the Luxtructosaurus");
 		this.addAdvancementDesc("drop_food","Feeding the Past", "Drop the carnivores some meat");
 		this.addAdvancementDesc("seethed_taming","Satisfied Dino", "Tame a Tremor by seething it with enough meat");
 		this.addAdvancementDesc("propogate","Primordial Propogation", "Propogate flora in the primordial caves");

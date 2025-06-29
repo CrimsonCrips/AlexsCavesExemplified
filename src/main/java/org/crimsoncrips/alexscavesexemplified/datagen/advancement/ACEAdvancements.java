@@ -503,7 +503,15 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 				.addCriterion("paint", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:paint_effects");
 
-		Advancement egg_sacrifice = (Advancement.Builder.advancement().parent(primordial).display(
+		Advancement sacrifice_painting = (Advancement.Builder.advancement().parent(primordial).display(
+						Items.CHARCOAL,
+						Component.translatable("advancement.alexscavesexemplified.sacrifice_painting"),
+						Component.translatable("advancement.alexscavesexemplified.sacrifice_painting.desc"),
+						null, FrameType.TASK, true, true, false)
+				.addCriterion("paint", new ImpossibleTrigger.TriggerInstance()))
+				.save(consumer, "alexscavesexemplified:sacrifice_painting");
+
+		Advancement egg_sacrifice = (Advancement.Builder.advancement().parent(sacrifice_painting).display(
 						ACBlockRegistry.ATLATITAN_EGG.get(),
 						Component.translatable("advancement.alexscavesexemplified.egg_sacrifice"),
 						Component.translatable("advancement.alexscavesexemplified.egg_sacrifice.desc"),
@@ -511,11 +519,11 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 				.addCriterion("egg_sacrifice", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:egg_sacrifice");
 
-		Advancement volcanic_sacrifice = (Advancement.Builder.advancement().parent(egg_sacrifice).display(
+		Advancement volcanic_sacrifice = (Advancement.Builder.advancement().parent(sacrifice_painting).display(
 						createCitadelIcon("alexscaves:textures/misc/advancement/icon/summon_luxtructosaurus.png"),
 						Component.translatable("advancement.alexscavesexemplified.volcanic_sacrifice"),
 						Component.translatable("advancement.alexscavesexemplified.volcanic_sacrifice.desc"),
-						null, FrameType.TASK, true, true, false)
+						null, FrameType.CHALLENGE, true, true, false)
 				.addCriterion("live_sacrifice", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:volcanic_sacrifice");
 

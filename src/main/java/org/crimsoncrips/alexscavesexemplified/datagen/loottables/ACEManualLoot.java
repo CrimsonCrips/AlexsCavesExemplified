@@ -27,6 +27,7 @@ public class ACEManualLoot implements LootTableSubProvider {
     @Override
     public void generate(BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
 
+
         consumer.accept(ACELootTables.GLOOMOTH_TRADE, LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(5))

@@ -88,7 +88,7 @@ public class ACEUtils {
 
     public static Entity getLookingAtEntity(Player player) {
         Entity closestValid = null;
-        HitResult hitresult = ProjectileUtil.getHitResultOnViewVector(player, Entity::isAlive, 32);
+        HitResult hitresult = ProjectileUtil.getHitResultOnViewVector(player, Entity::isAlive, 50);
         if (hitresult instanceof EntityHitResult entityHitResult) {
             Entity entity = entityHitResult.getEntity();
             if (!entity.equals(player) && player.hasLineOfSight(entity)) {

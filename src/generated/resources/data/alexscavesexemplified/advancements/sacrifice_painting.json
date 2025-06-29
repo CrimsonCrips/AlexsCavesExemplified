@@ -1,28 +1,28 @@
 {
-  "parent": "alexscavesexemplified:sacrifice_painting",
+  "parent": "alexscavesexemplified:primordial",
   "criteria": {
-    "egg_sacrifice": {
+    "paint": {
       "trigger": "minecraft:impossible"
     }
   },
   "display": {
     "announce_to_chat": true,
     "description": {
-      "translate": "advancement.alexscavesexemplified.egg_sacrifice.desc"
+      "translate": "advancement.alexscavesexemplified.sacrifice_painting.desc"
     },
     "frame": "task",
     "hidden": false,
     "icon": {
-      "item": "alexscaves:atlatitan_egg"
+      "item": "minecraft:charcoal"
     },
     "show_toast": true,
     "title": {
-      "translate": "advancement.alexscavesexemplified.egg_sacrifice"
+      "translate": "advancement.alexscavesexemplified.sacrifice_painting"
     }
   },
   "requirements": [
     [
-      "egg_sacrifice"
+      "paint"
     ]
   ],
   "sends_telemetry_event": true
