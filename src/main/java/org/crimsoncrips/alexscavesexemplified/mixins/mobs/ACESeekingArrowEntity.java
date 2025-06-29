@@ -26,9 +26,9 @@ public abstract class ACESeekingArrowEntity extends AbstractArrow implements Lau
     @Shadow protected abstract void setArcTowardsID(int id);
 
 
-    int launchDelay = 0;
-    int usedDelay = 0;
 
+    int usedDelay = 0;
+    int launchDelay = 0;
     protected ACESeekingArrowEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
