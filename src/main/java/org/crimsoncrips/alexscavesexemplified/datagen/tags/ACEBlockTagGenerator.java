@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -34,6 +35,19 @@ public class ACEBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
+
+
+		tag(BlockTags.NEEDS_IRON_TOOL).add(
+				ACEBlockRegistry.METAL_CAULDRON.get(),
+				ACEBlockRegistry.ACID_CAULDRON.get(),
+				ACEBlockRegistry.PURPLE_SODA_CAULDRON.get()
+		);
+
+		tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+				ACEBlockRegistry.METAL_CAULDRON.get(),
+				ACEBlockRegistry.ACID_CAULDRON.get(),
+				ACEBlockRegistry.PURPLE_SODA_CAULDRON.get()
+		);
 
 		tag(ABYSSAL_ECOSYSTEM).add(
 				ACBlockRegistry.GEOTHERMAL_VENT.get(),

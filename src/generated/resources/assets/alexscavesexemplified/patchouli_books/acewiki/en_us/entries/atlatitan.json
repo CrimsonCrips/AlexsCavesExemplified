@@ -1,0 +1,19 @@
+{
+  "category": "alexscavesexemplified:primordial_caves",
+  "icon": "minecraft:paper",
+  "name": "Atlatitan",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/atlatitan/volcanic_sacrifice.png"
+      ],
+      "text": "Sacrifice an Atlatitan Egg or a baby Atlatitan in a volcano to refresh its cooldown",
+      "title": "Volcanic Sacrifice"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Adds a new cave painting in a 3x3 space related to this feature once a Lux has been slain once"
+    }
+  ]
+}

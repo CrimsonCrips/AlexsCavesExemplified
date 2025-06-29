@@ -794,7 +794,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                                         .withText("Sacrifice an Atlatitan Egg or a baby Atlatitan in a volcano to refresh its cooldown")
                                                                         .withTitle("Volcanic Sacrifice");
                                                             })
-                                                            .addTextPage("Adds a new cave painting in a 3x3 space related to this feature", page -> {
+                                                            .addTextPage("Adds a new cave painting in a 3x3 space related to this feature once a Lux has been slain once", page -> {
                                                             });
 
 
@@ -850,7 +850,9 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             .addSpotlightPage(
                                                                     itemIconGiver(ACItemRegistry.RESISTOR_SHIELD),
                                                                     page -> page.withText(
-                                                                            "Attracts and repels ").withTitle(" ")
+                                                                            "Resistor Shield now has the ability to affect dropped items \n" +
+                                                                            "Can launch nearby seeking arrows at a pointed target if the shield is azure \n"+
+                                                                            "Circle nearby seeking arrows during use while scarlet").withTitle(" ")
                                                             )
 
 
@@ -859,9 +861,36 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Shocking Therapy
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/magnetic_caves/shocking_therapy.png")
-                                                                        .withText("Serened is given with serene salads to mobs, becoming neutral,weakening them but upping health")
+                                                                        .withText("Tesla Bulbs directly shock nearby players when in range")
                                                                         .withTitle("Shocking Therapy");
-                                                            });
+                                                            })
+
+                                                            .addTextPage("Also adds sfx from the franchise, Command And Conquer for the tesla bulbs", page ->{}
+                                                            )
+
+                                                            //Scallable Hologram
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/magnetic_caves/scalable_hologram.png")
+                                                                        .withText("Scale Holograms with Azure/Scarlet Ingots")
+                                                                        .withTitle("Scalable Hologram");
+                                                            })
+
+                                                            //Magnetic Movement
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/magnetic_caves/magnetic_movement.png")
+                                                                        .withText("(CLIENT SIDE) Magnetic Items sway around if within the Magnetic Caves")
+                                                                        .withTitle("Magnetic Movement");
+                                                            })
+
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/magnetic_caves/magnerip.png")
+                                                                        .withText("Rips out magnetic items out of hand with the magnetic forces if inflicted with weakness")
+                                                                        .withTitle("Magnerip");
+                                                            })
+
+                                                            .addTextPage("(IF HARDCORE_MAGNERIP ENABLED) Rips out all magnetic items off of your inventory, Disabled By Default", page ->{}
+                                                            );
+                                                    ;
 
 
                                                 });

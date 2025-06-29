@@ -6,16 +6,26 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.UUID;
 
 
 @Mixin(DeepOneBaseEntity.class)
 public abstract class ACEBaseDeepEntityMixin extends PathfinderMob {
+
+    @Shadow public abstract boolean isSummoned();
+
+    @Shadow private UUID summonerUUID;
 
     protected ACEBaseDeepEntityMixin(EntityType<? extends PathfinderMob> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -29,5 +39,13 @@ public abstract class ACEBaseDeepEntityMixin extends PathfinderMob {
                 this.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 60, 0));
             }
         }
+    }
+
+    @ModifyArg(method = "hurt", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/DeepOneBaseEntity;addReputation(Ljava/util/UUID;I)V"))
+    private UUID alexsCavesExemplified$hurt(UUID playerUUID) {
+        if (true && this.isSummoned()){
+            return this.summonerUUID;
+        }
+        return playerUUID;
     }
 }

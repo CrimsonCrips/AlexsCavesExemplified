@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:primordial",
+  "criteria": {
+    "paint": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.alexscavesexemplified.sacrifice_painting.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:charcoal"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.alexscavesexemplified.sacrifice_painting"
+    }
+  },
+  "requirements": [
+    [
+      "paint"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

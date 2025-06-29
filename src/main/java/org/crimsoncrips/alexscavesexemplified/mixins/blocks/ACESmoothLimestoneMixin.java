@@ -18,6 +18,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -34,8 +35,12 @@ public class ACESmoothLimestoneMixin extends Block {
 
     @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/block/SmoothLimestoneBlock;attemptPlaceMysteryCavePainting(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z",ordinal = 1),remap = false)
     private boolean alexsCavesExemplified$use(SmoothLimestoneBlock instance, Level level, BlockPos paintingPos, Direction direction, boolean j, Operation<Boolean> original, @Local Player player) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.VOLCANIC_SACRIFICE_ENABLED.get() && player.getRandom().nextBoolean()) {
-            return attemptPlaceSacrificeCavePainting(level,paintingPos,direction,j);
+        if (player instanceof ServerPlayer serverPlayer){
+            Advancement luxDefeat = serverPlayer.getServer().getAdvancements().getAdvancement(new ResourceLocation(AlexsCaves.MODID, "alexscaves/defeat_luxtructosaurus"));
+            if (luxDefeat != null && serverPlayer.getAdvancements().getOrStartProgress(luxDefeat).isDone() && serverPlayer.getRandom().nextBoolean()) {
+                ACEUtils.awardAdvancement(serverPlayer,"sacrifice_painting","paint");
+                return attemptPlaceSacrificeCavePainting(level,paintingPos,direction,j);
+            }
         }
         return original.call(instance,level,paintingPos,direction,j);
 

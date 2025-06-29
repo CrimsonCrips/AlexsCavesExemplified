@@ -14,6 +14,7 @@ import com.github.alexmodguy.alexscaves.server.entity.util.UnderzealotSacrifice;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.item.HazmatArmorItem;
 import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
+import com.github.alexmodguy.alexscaves.server.misc.ACCreativeTabRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACDamageTypes;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
@@ -63,6 +64,7 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -89,6 +91,7 @@ import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 
 import java.util.*;
 
@@ -141,6 +144,12 @@ public class ACExemplifiedEvents {
         }
 
     }
+
+//    @SubscribeEvent
+//    public void additionTabs (BuildCreativeModeTabContentsEvent event){
+//        event.accept(ACEItemRegistry.ICE_CREAM_CONE);
+//        event.accept(ACEItemRegistry.ICE_CREAM_CONE.get());
+//    }
 
 
     @SubscribeEvent

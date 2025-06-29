@@ -1,0 +1,67 @@
+{
+  "category": "alexscavesexemplified:magnetic_caves",
+  "icon": "minecraft:paper",
+  "name": "General",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/magneticism.png"
+      ],
+      "text": "Magneticism is an enchantment given to gears from Magnetic Caves,adding new mechanics",
+      "title": "Magneticism"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscaves:galena_gauntlet",
+      "text": "Galena Gaunlet now has the ability to be able to appropriate Teletor weapons for your own \nGrab magnetic and crystalized items from afar \n and the ability to rip out the hearts of Magnetrons, at the cost of significant damage and cooldown dealt ",
+      "title": " "
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscaves:resistor_shield",
+      "text": "Resistor Shield now has the ability to affect dropped items \nCan launch nearby seeking arrows at a pointed target if the shield is azure \nCircle nearby seeking arrows during use while scarlet",
+      "title": " "
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/shocking_therapy.png"
+      ],
+      "text": "Tesla Bulbs directly shock nearby players when in range",
+      "title": "Shocking Therapy"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Also adds sfx from the franchise, Command And Conquer for the tesla bulbs"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/scalable_hologram.png"
+      ],
+      "text": "Scale Holograms with Azure/Scarlet Ingots",
+      "title": "Scalable Hologram"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/magnetic_movement.png"
+      ],
+      "text": "(CLIENT SIDE) Magnetic Items sway around if within the Magnetic Caves",
+      "title": "Magnetic Movement"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/magnerip.png"
+      ],
+      "text": "Rips out magnetic items out of hand with the magnetic forces if inflicted with weakness",
+      "title": "Magnerip"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "(IF HARDCORE_MAGNERIP ENABLED) Rips out all magnetic items off of your inventory, Disabled By Default"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ import com.github.alexmodguy.alexscaves.server.item.BlockItemWithSupplierLore;
 import com.github.alexthe666.alexsmobs.item.AMBlockItem;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import com.github.alexthe666.alexsmobs.item.BlockItemAMRender;
+import com.github.alexthe666.citadel.item.BlockItemWithSupplier;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
@@ -29,11 +30,13 @@ public class ACEBlockRegistry {
 
    public static final DeferredRegister<Block> DEF_REG = DeferredRegister.create(ForgeRegistries.BLOCKS, AlexsCavesExemplified.MODID);
 
-    public static final RegistryObject<Block> METAL_CAULDRON = DEF_REG.register("metal_cauldron", () -> new MetalCauldronBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(2.0F).noOcclusion().strength(5F, 15.0F).sound(ACSoundTypes.SCRAP_METAL)));
 
-    public static final RegistryObject<Block> ACID_CAULDRON = DEF_REG.register("acid_cauldron", () -> new AcidCauldronBlock(BlockBehaviour.Properties.copy(METAL_CAULDRON.get()).lightLevel((p_50870_) -> 15).strength(5F, 15.0F).sound(ACSoundTypes.SCRAP_METAL)));
 
-    public static final RegistryObject<Block> PURPLE_SODA_CAULDRON = DEF_REG.register("purple_soda_cauldron", () -> new PurpleSodaCauldronBlock(BlockBehaviour.Properties.copy(METAL_CAULDRON.get()).strength(5F, 15.0F).sound(ACSoundTypes.SCRAP_METAL)));
+    public static final RegistryObject<Block> METAL_CAULDRON = registerBlockAndItem("metal_cauldron", () -> new MetalCauldronBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(ACSoundTypes.SCRAP_METAL).noOcclusion()));
+
+    public static final RegistryObject<Block> ACID_CAULDRON = DEF_REG.register("acid_cauldron", () -> new AcidCauldronBlock(BlockBehaviour.Properties.copy(METAL_CAULDRON.get()).lightLevel((p_50870_) -> 13)));
+
+    public static final RegistryObject<Block> PURPLE_SODA_CAULDRON = DEF_REG.register("purple_soda_cauldron", () -> new PurpleSodaCauldronBlock(BlockBehaviour.Properties.copy(METAL_CAULDRON.get())));
 
 
     public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_1 = registerBlockAndItem("cave_painting_sacrifice_1", CavePaintingBlock::new);
@@ -47,9 +50,10 @@ public class ACEBlockRegistry {
     public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_9 = registerBlockAndItem("cave_painting_sacrifice_9", CavePaintingBlock::new);
 
 
+
     private static RegistryObject<Block> registerBlockAndItem(String name, Supplier<Block> block) {
         RegistryObject<Block> blockObj = DEF_REG.register(name, block);
-        ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplierLore(blockObj, new Item.Properties()));
+        ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplier(blockObj, new Item.Properties()));
         return blockObj;
     }
     

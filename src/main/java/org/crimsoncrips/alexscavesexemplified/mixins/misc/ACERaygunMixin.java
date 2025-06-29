@@ -66,13 +66,6 @@ public abstract class ACERaygunMixin extends Item {
                             level.destroyBlock(pos, false, living);
                         }
 
-                        setAdjascentBlock(pos.north(),level);
-                        setAdjascentBlock(pos.east(),level);
-                        setAdjascentBlock(pos.south(),level);
-                        setAdjascentBlock(pos.west(),level);
-                        setAdjascentBlock(pos.above(),level);
-                        setAdjascentBlock(pos.below(),level);
-
                     }
                 }
                 else {

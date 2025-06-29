@@ -1,5 +1,5 @@
 {
-  "parent": "alexscavesexemplified:primordial",
+  "parent": "alexscavesexemplified:sacrifice_painting",
   "criteria": {
     "egg_sacrifice": {
       "trigger": "minecraft:impossible"
