@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "Raycat",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/raycat/cat_mutation.png"
+      ],
+      "text": "Cat can be mutated into raycat in acid",
+      "title": "Cat Mutation"
+    }
+  ]
+}

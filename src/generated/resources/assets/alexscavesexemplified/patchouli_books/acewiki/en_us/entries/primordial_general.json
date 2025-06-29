@@ -1,0 +1,63 @@
+{
+  "category": "alexscavesexemplified:primordial_caves",
+  "icon": "minecraft:paper",
+  "name": "General",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/serened.png"
+      ],
+      "text": "Serened is given with serene salads to mobs, becoming neutral,weakening them but upping health",
+      "title": "Serened"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/egg_anger.png"
+      ],
+      "text": "Handling eggs of dinosaurs will anger them",
+      "title": "Egg Anger"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/scavenging.png"
+      ],
+      "text": "Carnivorous Dinosaurs will scavenge dropped/placed meat on the ground",
+      "title": "Scavenging"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "When tremorsauruses finds food but is swarming with vallumraptors. Tremorsauruses will roar loudly to ward off competition"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/stomping.png"
+      ],
+      "text": "Atlatitan/Luxtructosaurus deals damage when stepping",
+      "title": "Stomping"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/preserved_amber.png"
+      ],
+      "text": "Natural amber can be discovered to have trapped critters inside them,",
+      "title": "Preserved Amber"
+    },
+    {
+      "type": "patchouli:text",
+      "text": " from frogs (If Alexs Mobs is present) to flies and cockroaches"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/fly_trapped.png"
+      ],
+      "text": "(REQUIRES ALEXS MOBS) Fly Trap plants snap at the presence of physical flies",
+      "title": "Fly Trapped"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "Tremorzilla",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/tremorzilla/gamma_tremorzilla.png"
+      ],
+      "text": "Born from pure condensed energy, Gamma Tremorzilla is an ascension above its former self",
+      "title": "Gamma Tremorzilla"
+    }
+  ]
+}

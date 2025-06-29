@@ -1,0 +1,23 @@
+{
+  "category": "alexscavesexemplified:magnetic_caves",
+  "icon": "minecraft:paper",
+  "name": "General",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/magneticism.png"
+      ],
+      "text": "Serened is given with serene salads to mobs, becoming neutral,weakening them but upping health",
+      "title": "Magneticism"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/shocking_therapy.png"
+      ],
+      "text": "Serened is given with serene salads to mobs, becoming neutral,weakening them but upping health",
+      "title": "Shocking Therapy"
+    }
+  ]
+}
