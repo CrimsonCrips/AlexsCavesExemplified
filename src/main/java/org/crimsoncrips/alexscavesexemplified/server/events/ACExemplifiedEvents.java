@@ -689,17 +689,19 @@ public class ACExemplifiedEvents {
 
     @SubscribeEvent
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        Player player = event.getEntity();
-        CompoundTag playerData = event.getEntity().getPersistentData();
-        CompoundTag data = playerData.getCompound(Player.PERSISTED_NBT_TAG);
+        if (ModList.get().isLoaded("patchouli")){
+            Player player = event.getEntity();
+            CompoundTag playerData = event.getEntity().getPersistentData();
+            CompoundTag data = playerData.getCompound(Player.PERSISTED_NBT_TAG);
 
-        ItemStack book = new ItemStack(PatchouliItems.BOOK);
-        book.getOrCreateTag().putString("patchouli:book","alexscavesexemplified:acewiki");
+            ItemStack book = new ItemStack(PatchouliItems.BOOK);
+            book.getOrCreateTag().putString("patchouli:book", "alexscavesexemplified:acewiki");
 
-        if (!data.getBoolean("ace_book") && AlexsCavesExemplified.COMMON_CONFIG.ACE_WIKI_ENABLED.get()) {
-            player.addItem(book);
-            data.putBoolean("ace_book", true);
-            playerData.put(Player.PERSISTED_NBT_TAG, data);
+            if (!data.getBoolean("ace_book") && AlexsCavesExemplified.COMMON_CONFIG.ACE_WIKI_ENABLED.get()) {
+                player.addItem(book);
+                data.putBoolean("ace_book", true);
+                playerData.put(Player.PERSISTED_NBT_TAG, data);
+            }
         }
     }
 
