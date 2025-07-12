@@ -15,6 +15,7 @@ import net.minecraftforge.common.crafting.CompoundIngredient;
 import net.minecraftforge.common.crafting.ConditionalRecipe;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
+import vazkii.patchouli.common.item.PatchouliItems;
 
 
 import java.util.function.Consumer;
