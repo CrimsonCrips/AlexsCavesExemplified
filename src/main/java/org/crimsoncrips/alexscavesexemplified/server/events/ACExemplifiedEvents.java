@@ -1,6 +1,5 @@
-package org.crimsoncrips.alexscavesexemplified.server;
+package org.crimsoncrips.alexscavesexemplified.server.events;
 
-import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.block.*;
 import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
@@ -10,65 +9,43 @@ import com.github.alexmodguy.alexscaves.server.entity.item.MeltedCaramelEntity;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntity;
 import com.github.alexmodguy.alexscaves.server.entity.item.SubmarineEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.*;
-import com.github.alexmodguy.alexscaves.server.entity.util.UnderzealotSacrifice;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
-import com.github.alexmodguy.alexscaves.server.item.HazmatArmorItem;
 import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
-import com.github.alexmodguy.alexscaves.server.misc.ACCreativeTabRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACDamageTypes;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import com.github.alexmodguy.alexscaves.server.potion.ACEffectRegistry;
-import com.github.alexthe666.alexsmobs.effect.AMEffectRegistry;
-import com.github.alexthe666.alexsmobs.entity.util.VineLassoUtil;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
-import net.mehvahdjukaar.supplementaries.reg.ModParticles;
-import net.mehvahdjukaar.supplementaries.reg.ModRegistry;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.animal.Parrot;
-import net.minecraft.world.entity.boss.wither.WitherBoss;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.event.entity.player.BonemealEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -76,10 +53,8 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
-import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.SupplementariesCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
-import org.crimsoncrips.alexscavesexemplified.datagen.ACEFeatures;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEEntityTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
@@ -91,11 +66,10 @@ import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
+import vazkii.patchouli.common.item.PatchouliItems;
 
 import java.util.*;
 
-import static com.github.alexmodguy.alexscaves.server.entity.living.BrainiacEntity.ANIMATION_DRINK_BARREL;
 import static net.minecraft.world.entity.EntityType.*;
 
 
@@ -145,11 +119,6 @@ public class ACExemplifiedEvents {
 
     }
 
-//    @SubscribeEvent
-//    public void additionTabs (BuildCreativeModeTabContentsEvent event){
-//        event.accept(ACEItemRegistry.ICE_CREAM_CONE);
-//        event.accept(ACEItemRegistry.ICE_CREAM_CONE.get());
-//    }
 
 
     @SubscribeEvent
@@ -362,7 +331,7 @@ public class ACExemplifiedEvents {
                 ACEUtils.deepReputation(player,-1);
             } else if (died instanceof HullbreakerEntity){
                 ACEUtils.awardAdvancement(player,"hullbreaker_reputation","killed");
-                ACEUtils.deepReputation(player,-10);
+                ACEUtils.deepReputation(player,-20);
             } else if (died instanceof MineGuardianEntity){
                 ACEUtils.deepReputation(player,2);
             }
@@ -440,7 +409,7 @@ public class ACExemplifiedEvents {
             }
         }
 
-        if (livingEntity instanceof Player player && level.getBiome(player.blockPosition()).is(ACBiomeRegistry.ABYSSAL_CHASM) && AlexsCavesExemplified.COMMON_CONFIG.ABYSSAL_CRUSH_ENABLED.get()){
+        if (livingEntity instanceof Player player && level.getBiome(player.blockPosition()).is(ACBiomeRegistry.ABYSSAL_CHASM) && AlexsCavesExemplified.COMMON_CONFIG.ABYSSAL_CRUSH_ENABLED.get() && !(player.getVehicle() instanceof SubmarineEntity)){
             int aboveWater = 0;
             BlockPos pos = new BlockPos(player.getBlockX(), (int) (player.getBlockY() + 2),player.getBlockZ());
             while (level.getBlockState(pos).is(Blocks.WATER)){
@@ -449,8 +418,8 @@ public class ACExemplifiedEvents {
             }
             int diving = ACEUtils.getDivingAmount(livingEntity);
 
-            if (level.random.nextDouble() < (0.1 - (0.020 * diving)) && !(player.getVehicle() instanceof SubmarineEntity)){
-                if (aboveWater > 50 && diving < 10){
+            if (level.random.nextDouble() < (0.1 - (0.030 * diving))){
+                if (aboveWater > 50 && diving <= 10){
                     player.hurt(ACEDamageTypes.getDamageSource(player.level(),ACEDamageTypes.DEPTH_CRUSH), (float) (0.025 * (aboveWater - 40)));
                     player.setAirSupply(player.getAirSupply() + (int) (0.025 * (aboveWater - 100)));
                 }
@@ -718,21 +687,21 @@ public class ACExemplifiedEvents {
         }
     }
 
-//    @SubscribeEvent
-//    public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-//        Player player = event.getEntity();
-//        CompoundTag playerData = event.getEntity().getPersistentData();
-//        CompoundTag data = playerData.getCompound(Player.PERSISTED_NBT_TAG);
-//
-//        ItemStack book = new ItemStack(PatchouliItems.BOOK);
-//        book.getOrCreateTag().putString("patchouli:book","alexscavesexemplified:ace_exemplified_wiki");
-//
-//        if (!data.getBoolean("ace_book") && AlexsCavesExemplified.COMMON_CONFIG.ACE_WIKI_ENABLED.get()) {
-//            player.addItem(book);
-//            data.putBoolean("ace_book", true);
-//            playerData.put(Player.PERSISTED_NBT_TAG, data);
-//        }
-//    }
+    @SubscribeEvent
+    public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        Player player = event.getEntity();
+        CompoundTag playerData = event.getEntity().getPersistentData();
+        CompoundTag data = playerData.getCompound(Player.PERSISTED_NBT_TAG);
+
+        ItemStack book = new ItemStack(PatchouliItems.BOOK);
+        book.getOrCreateTag().putString("patchouli:book","alexscavesexemplified:acewiki");
+
+        if (!data.getBoolean("ace_book") && AlexsCavesExemplified.COMMON_CONFIG.ACE_WIKI_ENABLED.get()) {
+            player.addItem(book);
+            data.putBoolean("ace_book", true);
+            playerData.put(Player.PERSISTED_NBT_TAG, data);
+        }
+    }
 
 
 

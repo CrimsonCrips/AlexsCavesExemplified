@@ -61,13 +61,11 @@ public class ACEServerConfig {
     public final ForgeConfigSpec.BooleanValue POISONOUS_SKIN_ENABLED ;
     public final ForgeConfigSpec.BooleanValue ABYSSAL_CRUSH_ENABLED ;
     public final ForgeConfigSpec.BooleanValue ECOLOGICAL_REPUTATION_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue GOSSAMER_FEEDING_ENABLED ;
     public final ForgeConfigSpec.BooleanValue CAVIAL_BONEMEAL_ENABLED ;
     public final ForgeConfigSpec.BooleanValue COOKIE_CRUMBLE_ENABLED ;
     public final ForgeConfigSpec.BooleanValue CRYONIC_CAVITY_ENABLED ;
     public final ForgeConfigSpec.BooleanValue BREAKING_CANDY_ENABLED ;
     public final ForgeConfigSpec.BooleanValue REMINEDING_ENABLED ;
-    public final  ForgeConfigSpec.BooleanValue ABYSSAL_LIGHT_CHECK_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SHOCKING_THERAPY_ENABLED;
     public final  ForgeConfigSpec.BooleanValue LIQUID_REPLICATION_ENABLED;
     public final  ForgeConfigSpec.BooleanValue ICE_CREAM_CONE_ENABLED;
@@ -76,7 +74,6 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue NOON_GUARDIAN_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SWEET_PUNISHMENT_ENABLED;
     public final  ForgeConfigSpec.BooleanValue TOUGH_ROACHES_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue DEEP_WEAKENED_ENABLED;
     public final  ForgeConfigSpec.BooleanValue OVERDRIVED_CONVERSION_ENABLED;
     public final  ForgeConfigSpec.BooleanValue DEFUSION_ENABLED;
     public final  ForgeConfigSpec.BooleanValue NAVAL_NUCLEARITY_ENABLED;
@@ -91,7 +88,7 @@ public class ACEServerConfig {
     public final  ForgeConfigSpec.BooleanValue IP_ENABLED;
     public final  ForgeConfigSpec.BooleanValue ACE_WIKI_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SCALABLE_HOLOGRAM_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue TELETOR_REARM_ENABLED;
+    public final  ForgeConfigSpec.BooleanValue TELETOR_ARMORY_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SELF_DESTRUCT_ENABLED;
 
     public final  ForgeConfigSpec.BooleanValue SHOTNUKE_ENABLED;
@@ -254,7 +251,7 @@ public class ACEServerConfig {
         this.BOUNDED_MAGNETISM_ENABLED = buildBoolean(builder, "BOUNDED_MAGNETISM_ENABLED", " ", true, "Boundroid attracts magnetic items and attacks uniquely to magnetable players");
         builder.pop();
         builder.push("Teletor");
-        this.TELETOR_REARM_ENABLED = buildBoolean(builder, "TELETOR_REARM_ENABLED", " ", true, "Teletors rearm their magnetic weapons when unavailable with nearby magnetic weapons");
+        this.TELETOR_ARMORY_ENABLED = buildBoolean(builder, "TELETOR_ARMORY_ENABLED", " ", true, "Teletors rearm their magnetic weapons when unavailable with nearby magnetic weapons");
         builder.pop();
         builder.push("Notor");
         this.SELF_DESTRUCT_ENABLED = buildBoolean(builder, "SELF_DESTRUCT_ENABLED", " ", true, "Notors self destruct when attacked");
@@ -265,9 +262,6 @@ public class ACEServerConfig {
         builder.comment("--Compatible with Create--");
         this.ABYSSAL_CRUSH_ENABLED = buildBoolean(builder, "ABYSSAL_CRUSH_ENABLED", " ", true, "Whether abyssal chasms cause crushing damage to you and your breath meter when deep enough");
         this.ECOLOGICAL_REPUTATION_ENABLED = buildBoolean(builder, "ECOLOGICAL_REPUTATION_ENABLED", " ", true, "Affecting the abyssal ecosystem will have effects for your reputation");
-        builder.comment("--Compatible with Curios Lanterns--");
-        this.ABYSSAL_LIGHT_CHECK_ENABLED = buildBoolean(builder, "ABYSSAL_LIGHT_CHECK_ENABLED", " ", true, "Whether abyssal mobs interact with entities holding light");
-        this.DEEP_WEAKENED_ENABLED = buildBoolean(builder, "DEEP_WEAKENED_ENABLED", " ", true, "Whether deep ones wilt when outside of abyssal chasm");
         this.SUBMARINE_BUMP_ENABLED = buildBoolean(builder, "SUBMARINE_BUMP_ENABLED", " ", true, "Whether submarine deals damage when moving");
 
         builder.push("Mine Guardian");
@@ -278,9 +272,6 @@ public class ACEServerConfig {
         builder.pop();
         builder.push("Sea Pig");
         this.POISONOUS_SKIN_ENABLED = buildBoolean(builder, "POISONOUS_SKIN_ENABLED", " ", true, "Whether seapigs can inflict poison in nearby mobs");
-        builder.pop();
-        builder.push("Gossamer Worm");
-        this.GOSSAMER_FEEDING_ENABLED = buildBoolean(builder, "GOSSAMER_FEEDING_ENABLED", " ", true, "Feeding marine snow drops bioluminescence in return");
         builder.pop();
         builder.pop();
         builder.push("Goofy Mode");

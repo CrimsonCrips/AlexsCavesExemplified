@@ -175,9 +175,9 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
     //Thank you reimnop :prayge:
-    implementation fg.deobf('com.github.Reimnop:PGen:1.0.1-1.20.1')
+    implementation fg.deobf('com.github.Reimnop:PGen:1.1.0-1.20.1')
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
+    implementation fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84.1-FORGE")
 
     implementation fg.deobf("maven.modrinth:alexs-caves:2.0.2")
     implementation fg.deobf("maven.modrinth:citadel:2.6.0")

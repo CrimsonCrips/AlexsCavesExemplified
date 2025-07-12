@@ -45,7 +45,7 @@ public abstract class ACETeletorMixin extends Monster {
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
         TeletorEntity teletor = (TeletorEntity)(Object)this;
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.TELETOR_REARM_ENABLED.get() && !teletor.isDeadOrDying()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.TELETOR_ARMORY_ENABLED.get() && !teletor.isDeadOrDying()){
             for (ItemEntity item : teletor.level().getEntitiesOfClass(ItemEntity.class, teletor.getBoundingBox().inflate(8))) {
                 if (item.getItem().is(ACTagRegistry.TELETOR_SPAWNS_WITH) && teletor.getWeapon() == null) {
                     ItemStack stolen = item.getItem();

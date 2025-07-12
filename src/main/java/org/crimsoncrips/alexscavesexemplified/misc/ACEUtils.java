@@ -9,6 +9,8 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerLevel;
@@ -60,16 +62,16 @@ public class ACEUtils {
     public static int getDivingAmount(LivingEntity entity) {
         int i = 0;
         if (entity.getItemBySlot(EquipmentSlot.HEAD).is((Item)ACItemRegistry.DIVING_HELMET.get())) {
-            ++i;
+            i = i + 1;
         }
         if (entity.getItemBySlot(EquipmentSlot.CHEST).is((Item)ACItemRegistry.DIVING_CHESTPLATE.get())) {
-            ++i;
+            i = i + 2;
         }
         if (entity.getItemBySlot(EquipmentSlot.LEGS).is((Item)ACItemRegistry.DIVING_LEGGINGS.get())) {
-            ++i;
+            i = i + 1;
         }
         if (entity.getItemBySlot(EquipmentSlot.FEET).is((Item)ACItemRegistry.DIVING_BOOTS.get())) {
-            ++i;
+            i = i + 1;
         }
         if(ModList.get().isLoaded("create")){
             i = i + CreateCompat.createDivingSuit(entity);
@@ -128,6 +130,14 @@ public class ACEUtils {
             }
         }
     }
+
+    public static CompoundTag nbt(String name, Tag value){
+        CompoundTag nbt = new CompoundTag();
+        nbt.put(name,value);
+        return nbt;
+    }
+
+
 
     public static void irradiationWash(LivingEntity entity,int amount){
         if (AlexsCavesExemplified.COMMON_CONFIG.IRRADIATION_WASHOFF_ENABLED.get()){

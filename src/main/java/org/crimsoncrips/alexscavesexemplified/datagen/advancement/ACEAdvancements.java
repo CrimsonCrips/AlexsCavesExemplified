@@ -471,7 +471,7 @@ public class ACEAdvancements implements ForgeAdvancementProvider.AdvancementGene
 				.save(consumer, "alexscavesexemplified:splat");
 
 		Advancement riding_splat = (Advancement.Builder.advancement().parent(splat).display(
-						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/riding_splat.png"),
+						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/splat.png"),
 						Component.translatable("advancement.alexscavesexemplified.riding_splat"),
 						Component.translatable("advancement.alexscavesexemplified.riding_splat.desc"),
 						null, FrameType.TASK, true, true, false)

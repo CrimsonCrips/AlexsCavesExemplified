@@ -33,7 +33,7 @@ public class ACESmoothLimestoneMixin extends Block {
         super(pProperties);
     }
 
-    @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/block/SmoothLimestoneBlock;attemptPlaceMysteryCavePainting(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z",ordinal = 1),remap = false)
+    @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/block/SmoothLimestoneBlock;attemptPlaceMysteryCavePainting(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z",ordinal = 1))
     private boolean alexsCavesExemplified$use(SmoothLimestoneBlock instance, Level level, BlockPos paintingPos, Direction direction, boolean j, Operation<Boolean> original, @Local Player player) {
         if (player instanceof ServerPlayer serverPlayer){
             Advancement luxDefeat = serverPlayer.getServer().getAdvancements().getAdvancement(new ResourceLocation(AlexsCaves.MODID, "alexscaves/defeat_luxtructosaurus"));

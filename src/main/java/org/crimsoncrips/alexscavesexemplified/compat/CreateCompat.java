@@ -58,14 +58,21 @@ public class CreateCompat {
         if (livingEntity.getItemBySlot(EquipmentSlot.HEAD).is((Item) AllItems.COPPER_DIVING_HELMET.get())) {
             i = i + 2;
         }
-        if (livingEntity.getItemBySlot(EquipmentSlot.HEAD).is((Item) AllItems.NETHERITE_DIVING_HELMET.get())) {
-            i = i + 4;
-        }
         if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is((Item) AllItems.COPPER_DIVING_BOOTS.get())) {
-            i = i + 2;
+            i = i + 1;
+        }
+        if (livingEntity.getItemBySlot(EquipmentSlot.CHEST).is((Item) AllItems.COPPER_BACKTANK.get())) {
+            i = i + 1;
+        }
+
+        if (livingEntity.getItemBySlot(EquipmentSlot.HEAD).is((Item) AllItems.NETHERITE_DIVING_HELMET.get())) {
+            i = i + 3;
         }
         if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is((Item) AllItems.NETHERITE_DIVING_BOOTS.get())) {
-            i = i + 4;
+            i = i + 3;
+        }
+        if (livingEntity.getItemBySlot(EquipmentSlot.FEET).is((Item) AllItems.NETHERITE_BACKTANK.get())) {
+            i = i + 5;
         }
 
         return i;

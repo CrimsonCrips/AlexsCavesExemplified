@@ -1,5 +1,6 @@
 {
   "description": "Primordial Caves Addition",
   "icon": "alexscaves:textures/misc/advancement/icon/primordial_caves.png",
-  "name": "Primordial Caves"
+  "name": "Primordial Caves",
+  "sortnum": 4
 }

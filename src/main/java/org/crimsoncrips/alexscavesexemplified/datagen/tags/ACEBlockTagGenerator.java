@@ -23,6 +23,7 @@ public class ACEBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 	public static final TagKey<Block> GELATIN_FIRE = BlockTags.create(AlexsCavesExemplified.prefix("gelatin_fire"));
 	public static final TagKey<Block> RADIOACTIVE = BlockTags.create(AlexsCavesExemplified.prefix("radioactive"));
 	public static final TagKey<Block> DINO_SCAVENGE = BlockTags.create(AlexsCavesExemplified.prefix("dino_scavenge"));
+	public static final TagKey<Block> REMINEDING_MATERIAL = BlockTags.create(AlexsCavesExemplified.prefix("remineding_material"));
 
 	public ACEBlockTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> future, ExistingFileHelper helper) {
 		super(output, Registries.BLOCK, future, block -> block.builtInRegistryHolder().key(), AlexsCavesExemplified.MODID, helper);
@@ -35,7 +36,10 @@ public class ACEBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
-
+		tag(REMINEDING_MATERIAL).add(
+				ACBlockRegistry.SCRAP_METAL_PLATE.get(),
+				ACBlockRegistry.SCRAP_METAL.get()
+		);
 
 		tag(BlockTags.NEEDS_IRON_TOOL).add(
 				ACEBlockRegistry.METAL_CAULDRON.get(),

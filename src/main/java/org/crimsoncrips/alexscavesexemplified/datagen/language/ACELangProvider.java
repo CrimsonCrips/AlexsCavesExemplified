@@ -25,8 +25,8 @@ public abstract class ACELangProvider extends LanguageProvider {
 		this.add("effect.alexscavesexemplified." + effectKey + ".description", description);
 	}
 
-	public void addDeathMessage(String deathKey, int number, String name) {
-		this.add("death.attack.death.alexscavesexemplified.attack." + deathKey + "_" + number, name);
+	public void addDeathMessage(String deathKey, String name) {
+		this.add("death.attack." + deathKey, name);
 	}
 
 	public void addSubtitle(String subtitleKey,String name) {

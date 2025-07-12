@@ -12,7 +12,4 @@ public interface LaunchedSeeking {
 
     void setStopSeeking(boolean var);
 
-    void setUsedDelay(int var);
-
-    int getUsedDelay();
 }

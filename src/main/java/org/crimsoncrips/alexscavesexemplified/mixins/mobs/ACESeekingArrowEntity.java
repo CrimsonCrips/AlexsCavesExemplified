@@ -27,7 +27,6 @@ public abstract class ACESeekingArrowEntity extends AbstractArrow implements Lau
 
 
 
-    int usedDelay = 0;
     int launchDelay = 0;
     protected ACESeekingArrowEntity(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -46,9 +45,6 @@ public abstract class ACESeekingArrowEntity extends AbstractArrow implements Lau
             setArcTowardsID(getLaunchedTargetID());
             setLaunchedTargetID(-1);
             launchDelay = 0;
-        }
-        if (getUsedDelay() > 0){
-            setUsedDelay(getUsedDelay() - 1);
         }
     }
 
@@ -91,13 +87,4 @@ public abstract class ACESeekingArrowEntity extends AbstractArrow implements Lau
         this.stopSeeking = stopSeeking;
     }
 
-    @Override
-    public int getUsedDelay() {
-        return usedDelay;
-    }
-
-    @Override
-    public void setUsedDelay(int var) {
-        usedDelay = var;
-    }
 }

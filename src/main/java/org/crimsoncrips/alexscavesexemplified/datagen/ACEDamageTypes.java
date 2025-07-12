@@ -38,10 +38,11 @@ public class ACEDamageTypes {
     }
             
     public static void bootstrap(BootstapContext<DamageType> context) {
-        context.register(DEPTH_CRUSH, new DamageType("death.alexscavesexemplified.attack.depth_crush", 0.0F));
-        context.register(RABIAL_END, new DamageType("death.alexscavesexemplified.attack.rabial_end", 0.0F));
-        context.register(STOMACH_DAMAGE, new DamageType("death.alexscavesexemplified.attack.stomach_damage", 0.0F));
-        context.register(SWEET_PUNISH, new DamageType("death.alexscavesexemplified.attack.sweet_punish", 0.0F));
-        context.register(SUGAR_CRASH, new DamageType("death.alexscavesexemplified.attack.sugar_crash", 0.0F));
+
+        context.register(DEPTH_CRUSH, new DamageType("depth_crush", 0.0F));
+        context.register(RABIAL_END, new DamageType("rabial_end", 0.0F));
+        context.register(STOMACH_DAMAGE, new DamageType("stomach_damage", 1F));
+        context.register(SWEET_PUNISH, new DamageType("sweet_punish", 0.0F));
+        context.register(SUGAR_CRASH, new DamageType("sugar_crash", 0.0F));
     }
 }

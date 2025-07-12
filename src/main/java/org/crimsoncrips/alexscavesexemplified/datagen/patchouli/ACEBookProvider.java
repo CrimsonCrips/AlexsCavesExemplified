@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.datagen.patchouli;
 
+import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.reimnop.pgen.PGenBookProvider;
@@ -8,11 +9,14 @@ import com.reimnop.pgen.builder.page.PGenSpotlightPageBuilder;
 import com.reimnop.pgen.data.PGenMultiblock;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 
@@ -30,11 +34,11 @@ public class ACEBookProvider extends PGenBookProvider {
     @Override
     protected void generate(HolderLookup.Provider provider) {
         addBook("acewiki",
-                "AC Exemplified Wiki",
+                "         ACE Wiki",
                 "Welcome to an exemplified universe!",
                 true,
                 book -> {
-                    book.withCreativeTab(CreativeModeTabs.TOOLS_AND_UTILITIES.location())
+                    book.withBookTexture("textures/gui/ace_gui_book.png").withModel("ace_book").withNameplateColor("e3cccc").withSubtitle("Bastion of Exemplification").withCreativeTab(CreativeModeTabs.TOOLS_AND_UTILITIES.location())
                             .addLanguage("en_us", lang -> {
                                 //General Category
                                 lang.addCategory("general",
@@ -178,7 +182,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                 "Candy Cavity",
                                                 "Candy Cavity Additions",
                                                 new ResourceLocation("alexscaves:textures/misc/advancement/icon/candy_cavity.png"),
-                                                category -> {
+                                                category -> {category.withSortnum(1);
                                                 })
 
                                         .addEntry("candy_general",
@@ -308,11 +312,6 @@ public class ACEBookProvider extends PGenBookProvider {
                                                 entry -> {
                                                     entry
                                                             .addImagePage(page -> {
-                                                                page.addImage("textures/gui/wiki/candy_cavity/caniac/caniac_sensitivity.png")
-                                                                        .withText("Caniacs dissolve and will avoid water")
-                                                                        .withTitle("Caniac Sensitivity");
-                                                            })
-                                                            .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/candy_cavity/caniac/caniac_maniac.png")
                                                                         .withText("Caniacs do unhinged things like lighting placed explosives,destroying beds,and attacking random entities")
                                                                         .withTitle("Caniac Maniac");
@@ -407,7 +406,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                 "Forlorn Hollows",
                                                 "Forlorn Hollows Additions",
                                                 new ResourceLocation("alexscaves:textures/misc/advancement/icon/forlorn_hollows.png"),
-                                                category -> {
+                                                category -> {category.withSortnum(2);
                                                 })
                                         .addEntry("forlorn_general",
                                                 "General",
@@ -545,7 +544,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                 "Toxic Caves",
                                                 "Toxic Caves Addition",
                                                 new ResourceLocation("alexscaves:textures/misc/advancement/icon/toxic_caves.png"),
-                                                category -> {
+                                                category -> {category.withSortnum(3);
                                                 })
                                         .addEntry("toxic_general",
                                                 "General",
@@ -723,7 +722,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                 "Primordial Caves",
                                                 "Primordial Caves Addition",
                                                 new ResourceLocation("alexscaves:textures/misc/advancement/icon/primordial_caves.png"),
-                                                category -> {
+                                                category -> {category.withSortnum(4);
                                                 })
                                         .addEntry("primordial_general",
                                                 "General",
@@ -811,12 +810,6 @@ public class ACEBookProvider extends PGenBookProvider {
                                                                 page.addImage("textures/gui/wiki/primordial_caves/tremorsaurus/seethed_taming.png")
                                                                         .withText("(REQUIRES SCAVENGING) Serened Tremorsauruses can be tamed by letting it eat meat off of your hand")
                                                                         .withTitle("Seethed Taming");
-                                                            })
-
-                                                            .addImagePage(page -> {
-                                                                page.addImage("textures/gui/wiki/primordial_caves/tremorsaurus/seethed_taming.png")
-                                                                        .withText("(REQUIRES SCAVENGING) Serened Tremorsauruses can be tamed by letting it eat meat off of your hand")
-                                                                        .withTitle("Seethed Taming");
                                                             });
 
                                                 });
@@ -825,7 +818,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                 "Magnetic Caves",
                                                 "Magnetic Caves Addition",
                                                 new ResourceLocation("alexscaves:textures/misc/advancement/icon/magnetic_caves.png"),
-                                                category -> {
+                                                category -> {category.withSortnum(5);
                                                 })
                                         .addEntry("magnetic_general",
                                                 "General",
@@ -893,10 +886,168 @@ public class ACEBookProvider extends PGenBookProvider {
                                                     ;
 
 
+                                                })
+
+                                        .addEntry("boundroid",
+                                                "Boundroid",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "magnetic_caves"),
+                                                entry -> {
+                                                    entry
+                                                            //Bounded Magnetism
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/magnetic_caves/boundroid/bounded_magnetism.png")
+                                                                        .withText("Boundroid attacks uniquely when its target is capable of magnetizing")
+                                                                        .withTitle("Bounded Mangetism");
+                                                            });
+
+
+                                                })
+
+                                        .addEntry("teletor",
+                                                "Teletor",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "magnetic_caves"),
+                                                entry -> {
+                                                    entry
+                                                            //Bounded Magnetism
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/magnetic_caves/teletor/teletor_armory.png")
+                                                                        .withText("Teletor picks up suitable weapons if unarmed")
+                                                                        .withTitle("Teletor Armory");
+                                                            });
+
+
+                                                })
+
+                                        .addEntry("notor",
+                                                "Notor",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "magnetic_caves"),
+                                                entry -> {
+                                                    entry
+                                                            //Bounded Magnetism
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/magnetic_caves/notor/self_destruct.png")
+                                                                        .withText("Notors charges at their attacker and initiates self-destruction when hit")
+                                                                        .withTitle("Self Destruct");
+                                                            });
+
+
+                                                });
+
+                                lang.addCategory("abyssal_chasm",
+                                                "Abyssal Chasm",
+                                                "Abyssal Chasm Addition",
+                                                new ResourceLocation("alexscaves:textures/misc/advancement/icon/abyssal_chasm.png"),
+                                                category -> {category.withSortnum(6);
+                                                })
+                                        .addEntry("abyssal_general",
+                                                "General",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "abyssal_chasm"),
+                                                entry -> {
+                                                    entry
+                                                            //Abyssal Crush
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/abyssal_chasm/abyssal_crush.png")
+                                                                        .withText("Takes damage the deeper you submerge in water along with reducing breath")
+                                                                        .withTitle("Abyssal Crush");
+                                                            })
+
+                                                            .addTextPage("To counterract the crushing effects, It is adviced to suit up with Diving Gear. Each increasing the ammount of reduction \n"+
+                                                                    "(IF CREATE IS PRESENT) Create Diving Gear is a viable alternative to such,at the cost of slow movement native to the armor",page ->{})
+
+
+                                                            //Ecological Reputation
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/abyssal_chasm/ecological_reputation.png")
+                                                                        .withText("Deep Ones will affect player reputation, depending on whether promoting or destroying the ecosystem")
+                                                                        .withTitle("Ecological Reputation");
+                                                            })
+
+                                                            //Submarine Bump
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/abyssal_chasm/submarine_bump.png")
+                                                                        .withText("Submarine can bump into entities")
+                                                                        .withTitle("Submarine Bump");
+                                                            })
+
+                                                            //Remineding
+                                                            .addTextPage("Mine Guardians can be created which will cause them to not attack their creators \n Make sure to be near when creating them alone",page ->{page.withTitle("Remineding");})
+
+
+                                                            .addMultiblockPage(" ", page -> page.withMultiblock(new PGenMultiblock(
+                                                                            List.of(
+                                                                                    List.of(" # ", // Layer 3
+                                                                                            "###",
+                                                                                            " # "),
+                                                                                    List.of("###", // Layer 2
+                                                                                            "#eg",
+                                                                                            "#0#"),
+                                                                                    List.of(" # ", // Layer 3
+                                                                                            "###",
+                                                                                            " # ")
+                                                                            ),
+                                                                            Map.of("g","alexscaves:depth_glass","e","alexscaves:enigmatic_engine","#","#alexscavesexemplified:remineding_material","0","#alexscavesexemplified:remineding_material")
+                                                                    ))
+                                                            )
+
+                                                            //Noon Guardian
+                                                            .addEntityPage(new ResourceLocation(AlexsCaves.MODID,"mine_guardian"), nbtInt("Variant",-1), page ->{page.withText("Rename a mine guardian 'Noon' for a Noon Guardian in reference to the Head Artist of Alexs Caves").withScale(0.5F).withName("Noon Guardian");})
+
+
+                                                            //Nuclear Warfare
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/abyssal_chasm/nuclear_warfare.png")
+                                                                        .withText("(REQUIRES REMINEDING) Arm owned mine guardians with a nuclear bomb to make nuclear mine guardians,Refer to the next page for the naming of specific skins")
+                                                                        .withTitle("Nuclear Warfare");
+                                                            })
+
+                                                            .addEntityPage(new ResourceLocation(AlexsCaves.MODID,"mine_guardian"), nbtInt("Variant",1), page ->{page.withText("Rename to 'Ae'").withScale(0.5F).withName("Ae");})
+                                                            .addEntityPage(new ResourceLocation(AlexsCaves.MODID,"mine_guardian"), nbtInt("Variant",2), page ->{page.withText("Rename to 'Jesse'").withScale(0.5F).withName("Jesse");})
+
+
+
+                                                    ;
+
+
+                                                })
+
+                                        .addEntry("sea_pig",
+                                                "Sea Pig",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "abyssal_chasm"),
+                                                entry -> {
+                                                    entry
+                                                            //Poisonous Skin
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/abyssal_chasm/sea_pig/poisonous_skin.png")
+                                                                        .withText("Sea Pig can inflict poison when touched")
+                                                                        .withTitle("Poisonous Skin");
+                                                            });
+
+
                                                 });
 
 
+                                lang.addCategory("goofy_mode",
+                                                "Goofy Mode",
+                                                "TBD",
+                                                new ResourceLocation("alexscavesexemplified:textures/mob_effect/sugar_crash.png"),
+                                                category -> {category.withSortnum(7);
+                                                })
+                                        .addEntry("goofy_general",
+                                                "General",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "goofy_mode"),
+                                                entry -> {
+                                                });
+
                             });
+
+
+
                 });
 
 }
@@ -906,6 +1057,13 @@ public Consumer<PGenSpotlightPageBuilder.ItemBuilder> itemIconGiver(RegistryObje
         item.addItem(itemIcon.getKey() != null ? itemIcon.getKey().location() : new ResourceLocation("error"));
     };
 }
+
+    public static CompoundTag nbtInt(String name, int value){
+        CompoundTag nbt = new CompoundTag();
+        nbt.putInt(name,value);
+        return nbt;
+    }
+
 
 
 

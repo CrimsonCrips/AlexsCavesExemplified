@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
 import org.spongepowered.asm.mixin.Mixin;
@@ -97,11 +98,11 @@ public abstract class ACEEnigmaticEngineMixin extends BlockEntity {
                 for (int z = -1; z < 2; z++) {
                     BlockPos blockCheck = new BlockPos(blockPos.getX() + x,blockPos.getY() + y,blockPos.getZ() + z);
                     if (y == 0){
-                        if (level.getBlockState(blockCheck).is(ACBlockRegistry.SCRAP_METAL_PLATE.get()) || level.getBlockState(blockCheck).is(ACBlockRegistry.SCRAP_METAL.get())) {
+                        if (level.getBlockState(blockCheck).is(ACEBlockTagGenerator.REMINEDING_MATERIAL)) {
                             scrap.add(blockCheck);
                         }
                     } else if (((x == 0 && z == 0) || (x + z == 1 || x + z == -1))){
-                        if ((level.getBlockState(blockCheck).is(ACBlockRegistry.SCRAP_METAL_PLATE.get()) || level.getBlockState(blockCheck).is(ACBlockRegistry.SCRAP_METAL.get()))) {
+                        if (level.getBlockState(blockCheck).is(ACEBlockTagGenerator.REMINEDING_MATERIAL)) {
                             scrap.add(blockCheck);
                         }
                     } else if (level.getBlockState(blockCheck).isCollisionShapeFullBlock(level,blockCheck)) {

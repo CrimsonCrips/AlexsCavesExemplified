@@ -1,6 +1,10 @@
 {
+  "book_texture": "alexscavesexemplified:textures/gui/ace_gui_book.png",
   "creative_tab": "minecraft:tools_and_utilities",
   "landing_text": "Welcome to an exemplified universe!",
-  "name": "AC Exemplified Wiki",
+  "model": "alexscavesexemplified:ace_book",
+  "name": "         ACE Wiki",
+  "nameplate_color": "e3cccc",
+  "subtitle": "Bastion of Exemplification",
   "use_resource_pack": true
 }

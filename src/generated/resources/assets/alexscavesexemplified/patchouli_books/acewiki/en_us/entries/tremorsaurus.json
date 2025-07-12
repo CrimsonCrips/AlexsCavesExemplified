@@ -10,14 +10,6 @@
       ],
       "text": "(REQUIRES SCAVENGING) Serened Tremorsauruses can be tamed by letting it eat meat off of your hand",
       "title": "Seethed Taming"
-    },
-    {
-      "type": "patchouli:image",
-      "images": [
-        "alexscavesexemplified:textures/gui/wiki/primordial_caves/tremorsaurus/seethed_taming.png"
-      ],
-      "text": "(REQUIRES SCAVENGING) Serened Tremorsauruses can be tamed by letting it eat meat off of your hand",
-      "title": "Seethed Taming"
     }
   ]
 }

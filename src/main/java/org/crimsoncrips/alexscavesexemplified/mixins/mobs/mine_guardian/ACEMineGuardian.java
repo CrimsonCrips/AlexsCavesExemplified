@@ -85,19 +85,14 @@ public abstract class ACEMineGuardian extends Monster implements MineGuardianXtr
                 this.level().addParticle(ACParticleRegistry.PROTON.get(), this.getX(), this.getY() + 0.5, this.getZ(), this.getX(), this.getY(), this.getZ());
             }
 
-            if (!AlexsCavesExemplified.COMMON_CONFIG.NAVAL_NUCLEARITY_ENABLED.get()){
-                alexsCavesExemplified$setVariant(0);
-            }
         }
-        if (AlexsCavesExemplified.COMMON_CONFIG.NOON_GUARDIAN_ENABLED.get()){
+        if (AlexsCavesExemplified.COMMON_CONFIG.NOON_GUARDIAN_ENABLED.get() ){
             if (this.getName().getString().equals("Noon") && alexsCavesExemplified$getVariant() == 0){
                 this.alexsCavesExemplified$setVariant(-1);
                 for (Player deepOne : this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(10))) {
                     ACEUtils.awardAdvancement(deepOne,"noon_guardian","noon");
                 }
             }
-        } else if (alexsCavesExemplified$getVariant() == -1){
-            alexsCavesExemplified$setVariant(1);
         }
     }
 

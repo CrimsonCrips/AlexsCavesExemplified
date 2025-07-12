@@ -62,10 +62,6 @@ public abstract class ACEResistorShield extends ShieldItem {
                 int seekingAmount = 0;
                 for (SeekingArrowEntity seekingArrowEntity : living.level().getEntitiesOfClass(SeekingArrowEntity.class, living.getBoundingBox().inflate(5, 2, 5))) {
                     LaunchedSeeking accesor = (LaunchedSeeking) seekingArrowEntity;
-                    if (accesor.getUsedDelay() > 0)
-                        return;
-
-                    accesor.setUsedDelay(100);
                     Entity entityLook = ACEUtils.getLookingAtEntity(player);
                     seekingArrowEntity.life = 0;
                     seekingArrowEntity.inGround = false;

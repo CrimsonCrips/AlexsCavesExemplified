@@ -14,7 +14,7 @@
     "hidden": false,
     "icon": {
       "item": "citadel:icon_item",
-      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/riding_splat.png\"}"
+      "nbt": "{IconLocation:\"alexscavesexemplified:textures/gui/adv_icon/splat.png\"}"
     },
     "show_toast": true,
     "title": {

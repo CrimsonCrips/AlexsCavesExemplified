@@ -26,19 +26,11 @@ public class ACELangGen extends ACELangProvider {
 		this.addEffect("sugar_crash","Sugar Crash","Sugar Crashed");
 		this.addEffect("serened","Serened","Serene");
 
-		this.addDeathMessage("rabial_end",0,"%s died to Rabies");
-		this.addDeathMessage("sugar_crash",0,"%s died from a sugar overdose");
-		this.addDeathMessage("sugar_crash",1,"%s died from a chocoverdose");
-		this.addDeathMessage("stomach_damage",0,"%s's stomach exploded");
-		this.addDeathMessage("depth_crush",0,"%s died from the crushing depths");
-		this.addDeathMessage("depth_crush",1,"%s got Ocean Gated");
-		this.addDeathMessage("depth_crush",2,"%s imploded");
-		this.addDeathMessage("depth_crush",3,"%s flattened as a pancake");
-		this.addDeathMessage("sweet_punish",0,"%s disobeyed");
-		this.addDeathMessage("sweet_punish",1,"%s got slippered to death");
-		this.addDeathMessage("sweet_punish",2,"%s got spanked for disobedience");
-		this.addDeathMessage("sweet_punish",3,"%s punihsment was bitter-sweet");
-		this.addDeathMessage("sweet_punish",4,"%s got their sweet relief");
+		this.addDeathMessage("rabial_end","%s died to Rabies");
+		this.addDeathMessage("sugar_crash","%s died from a sugar overdose");
+		this.addDeathMessage("stomach_damage","%s's stomach exploded");
+		this.addDeathMessage("depth_crush","%s got Ocean Gated");
+		this.addDeathMessage("sweet_punish","%s got slippered to death");
 
 		this.addSubtitle("tesla_fire","Tesla fired");
 		this.addSubtitle("tesla_powerup","Tesla powering");
@@ -51,15 +43,15 @@ public class ACELangGen extends ACELangProvider {
 		this.addBlock(ACEBlockRegistry.PURPLE_SODA_CAULDRON,"Purple Soda Cauldron");
 		this.addBlock(ACEBlockRegistry.ACID_CAULDRON,"Acid Cauldron");
 
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_1.getId().toLanguageKey(), "Sacrifice I");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_2.getId().toLanguageKey(), "Sacrifice II");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_3.getId().toLanguageKey(), "Sacrifice III");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_4.getId().toLanguageKey(), "Sacrifice IV");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_5.getId().toLanguageKey(), "Sacrifice V");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_6.getId().toLanguageKey(), "Sacrifice VII");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_7.getId().toLanguageKey(), "Sacrifice VII");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_8.getId().toLanguageKey(), "Sacrifice VIII");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_9.getId().toLanguageKey(), "Sacrifice IX");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_1.getId().toLanguageKey(), "\"Sacrifice I\"");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_2.getId().toLanguageKey(), "\"Sacrifice II\"");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_3.getId().toLanguageKey(), "\"Sacrifice III\"");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_4.getId().toLanguageKey(), "\"Sacrifice IV\"");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_5.getId().toLanguageKey(), "\"Sacrifice V\"");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_6.getId().toLanguageKey(), "\"Sacrifice VII\"");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_7.getId().toLanguageKey(), "\"Sacrifice VII\"");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_8.getId().toLanguageKey(), "\"Sacrifice VIII\"");
+		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_9.getId().toLanguageKey(), "\"Sacrifice IX\"");
 
 		this.addItem(ACEItemRegistry.ICE_CREAM_CONE, "Ice Cream Cone");
 

@@ -25,7 +25,8 @@ import org.crimsoncrips.alexscavesexemplified.client.ACESoundRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron.ACECauldronInteraction;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.crimsoncrips.alexscavesexemplified.server.enchantment.ACEEnchants;
-import org.crimsoncrips.alexscavesexemplified.server.ACExemplifiedEvents;
+import org.crimsoncrips.alexscavesexemplified.server.events.ACEModEvents;
+import org.crimsoncrips.alexscavesexemplified.server.events.ACExemplifiedEvents;
 import org.crimsoncrips.alexscavesexemplified.loot.ACELootModifiers;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 
@@ -62,6 +63,7 @@ public class AlexsCavesExemplified {
 
         ACELootModifiers.register(modEventBus);
         ACEEnchants.DEF_REG.register(modEventBus);
+        modEventBus.register(new ACEModEvents());
         MinecraftForge.EVENT_BUS.register(new ACExemplifiedEvents());
         MinecraftForge.EVENT_BUS.register(this);
         ACEParticleRegistry.DEF_REG.register(modEventBus);

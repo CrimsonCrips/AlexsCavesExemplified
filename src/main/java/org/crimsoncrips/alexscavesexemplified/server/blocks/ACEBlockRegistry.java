@@ -39,21 +39,27 @@ public class ACEBlockRegistry {
     public static final RegistryObject<Block> PURPLE_SODA_CAULDRON = DEF_REG.register("purple_soda_cauldron", () -> new PurpleSodaCauldronBlock(BlockBehaviour.Properties.copy(METAL_CAULDRON.get())));
 
 
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_1 = registerBlockAndItem("cave_painting_sacrifice_1", CavePaintingBlock::new);
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_2 = registerBlockAndItem("cave_painting_sacrifice_2", CavePaintingBlock::new);
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_3 = registerBlockAndItem("cave_painting_sacrifice_3", CavePaintingBlock::new);
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_4 = registerBlockAndItem("cave_painting_sacrifice_4", CavePaintingBlock::new);
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_5 = registerBlockAndItem("cave_painting_sacrifice_5", CavePaintingBlock::new);
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_6 = registerBlockAndItem("cave_painting_sacrifice_6", CavePaintingBlock::new);
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_7 = registerBlockAndItem("cave_painting_sacrifice_7", CavePaintingBlock::new);
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_8 = registerBlockAndItem("cave_painting_sacrifice_8", CavePaintingBlock::new);
-    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_9 = registerBlockAndItem("cave_painting_sacrifice_9", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_1 = registerBlockAndItemLored("cave_painting_sacrifice_1", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_2 = registerBlockAndItemLored("cave_painting_sacrifice_2", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_3 = registerBlockAndItemLored("cave_painting_sacrifice_3", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_4 = registerBlockAndItemLored("cave_painting_sacrifice_4", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_5 = registerBlockAndItemLored("cave_painting_sacrifice_5", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_6 = registerBlockAndItemLored("cave_painting_sacrifice_6", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_7 = registerBlockAndItemLored("cave_painting_sacrifice_7", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_8 = registerBlockAndItemLored("cave_painting_sacrifice_8", CavePaintingBlock::new);
+    public static final RegistryObject<Block> CAVE_PAINTING_SACRIFICE_9 = registerBlockAndItemLored("cave_painting_sacrifice_9", CavePaintingBlock::new);
 
 
 
     private static RegistryObject<Block> registerBlockAndItem(String name, Supplier<Block> block) {
         RegistryObject<Block> blockObj = DEF_REG.register(name, block);
         ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplier(blockObj, new Item.Properties()));
+        return blockObj;
+    }
+
+    private static RegistryObject<Block> registerBlockAndItemLored(String name, Supplier<Block> block) {
+        RegistryObject<Block> blockObj = DEF_REG.register(name, block);
+        ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplierLore(blockObj, new Item.Properties()));
         return blockObj;
     }
     

@@ -6,14 +6,6 @@
     {
       "type": "patchouli:image",
       "images": [
-        "alexscavesexemplified:textures/gui/wiki/candy_cavity/caniac/caniac_sensitivity.png"
-      ],
-      "text": "Caniacs dissolve and will avoid water",
-      "title": "Caniac Sensitivity"
-    },
-    {
-      "type": "patchouli:image",
-      "images": [
         "alexscavesexemplified:textures/gui/wiki/candy_cavity/caniac/caniac_maniac.png"
       ],
       "text": "Caniacs do unhinged things like lighting placed explosives,destroying beds,and attacking random entities",
