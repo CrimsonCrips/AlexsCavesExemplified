@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:magnetic_caves",
+  "icon": "minecraft:paper",
+  "name": "Boundroid",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/boundroid/bounded_magnetism.png"
+      ],
+      "text": "Boundroid attacks uniquely when its target is capable of magnetizing",
+      "title": "Bounded Mangetism"
+    }
+  ]
+}

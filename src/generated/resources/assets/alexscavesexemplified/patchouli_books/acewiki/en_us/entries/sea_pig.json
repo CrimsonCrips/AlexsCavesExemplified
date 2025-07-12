@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:abyssal_chasm",
+  "icon": "minecraft:paper",
+  "name": "Sea Pig",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/abyssal_chasm/sea_pig/poisonous_skin.png"
+      ],
+      "text": "Sea Pig can inflict poison when touched",
+      "title": "Poisonous Skin"
+    }
+  ]
+}

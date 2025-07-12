@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:magnetic_caves",
+  "icon": "minecraft:paper",
+  "name": "Notor",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/notor/self_destruct.png"
+      ],
+      "text": "Notors charges at their attacker and initiates self-destruction when hit",
+      "title": "Self Destruct"
+    }
+  ]
+}
