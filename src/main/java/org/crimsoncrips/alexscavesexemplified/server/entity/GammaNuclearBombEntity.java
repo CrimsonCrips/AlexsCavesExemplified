@@ -84,11 +84,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
 
     private void explode() {
         if (ModList.get().isLoaded("alexscavesenriched") && AlexsCavesEnriched.CONFIG.nuclear.useNewNuke){
-            NuclearExplosion2Entity enrichedNuke = ACEnrichedCompat.nuclearExplosion2(this.level());
-            enrichedNuke.setSize(AlexsCaves.COMMON_CONFIG.nukeExplosionSizeModifier.get().floatValue() * 1.3F);
-            ((Gammafied) enrichedNuke).setGamma(true);
-            enrichedNuke.copyPosition(this);
-            level().addFreshEntity(enrichedNuke);
+            ACEnrichedCompat.summonNuclearExplosion2(level(),this);
         } else {
             NuclearExplosionEntity vanillaNuke = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(level());
             vanillaNuke.setSize(AlexsCaves.COMMON_CONFIG.nukeExplosionSizeModifier.get().floatValue() * 1.5F);
