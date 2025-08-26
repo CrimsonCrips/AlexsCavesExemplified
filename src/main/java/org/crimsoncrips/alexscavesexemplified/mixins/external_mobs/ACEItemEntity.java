@@ -124,7 +124,6 @@ public abstract class ACEItemEntity extends Entity {
                         level.addParticle(ParticleTypes.EXPLOSION, this.getX(), this.getY() + 1, this.getZ(), 0,0,0);
 
                         ACEUtils.awardAdvancement(this.getOwner(),"breaking_candy","bake");
-
                     } else timeToCook++;
                 }
             }

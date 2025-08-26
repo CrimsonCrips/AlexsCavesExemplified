@@ -58,6 +58,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.compat.ACEnrichedCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.SupplementariesCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
@@ -586,34 +587,13 @@ public class ACExemplifiedEvents {
                         }
                     }
                     case "mini_nuke" -> {
-                        if (!level.isClientSide() && ModList.get().isLoaded("alexscavesenriched")) {
-                            MiniNukeEntity bomb = ACEEntityRegistry.MINI_NUKE.get().create(player.level());
-                            if (bomb == null)
-                                return;
-                            bomb.setPos(player.getPosition(1).add(0,-2,0));
-                            bomb.level().addFreshEntity(bomb);
-                            bomb.setFuse(200);
-                        }
+                        ACEnrichedCompat.enrichedBomb(player,200,1);
                     }
                     case "neutron_bomb" -> {
-                        if (!level.isClientSide() && ModList.get().isLoaded("alexscavesenriched")) {
-                            NeutronBombEntity bomb = ACEEntityRegistry.NEUTRON_BOMB.get().create(player.level());
-                            if (bomb == null)
-                                return;
-                            bomb.setPos(player.getPosition(1).add(0,-2,0));
-                            bomb.level().addFreshEntity(bomb);
-                            bomb.setFuse(300);
-                        }
+                        ACEnrichedCompat.enrichedBomb(player,200,2);
                     }
                     case "black_hole_bomb" -> {
-                        if (!level.isClientSide() && ModList.get().isLoaded("alexscavesenriched")) {
-                            BlackHoleBombEntity bomb = ACEEntityRegistry.BLACK_HOLE_BOMB.get().create(player.level());
-                            if (bomb == null)
-                                return;
-                            bomb.setPos(player.getPosition(1).add(0,-2,0));
-                            bomb.level().addFreshEntity(bomb);
-                            bomb.setFuse(300);
-                        }
+                        ACEnrichedCompat.enrichedBomb(player,400,3);
                     }
                     default -> {
                         succeeded = false;
