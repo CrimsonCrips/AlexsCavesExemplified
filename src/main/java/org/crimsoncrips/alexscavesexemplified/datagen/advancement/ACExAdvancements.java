@@ -15,7 +15,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyC
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExItemRegistry;
 
 import java.util.function.Consumer;
 
@@ -391,7 +391,7 @@ public class ACExAdvancements implements ForgeAdvancementProvider.AdvancementGen
 				.save(consumer, "alexscavesexemplified:iced_freeze");
 
 		Advancement ice_cream = (Advancement.Builder.advancement().parent(iced_freeze).display(
-						ACEItemRegistry.ICE_CREAM_CONE.get(),
+						ACExItemRegistry.ICE_CREAM_CONE.get(),
 						Component.translatable("advancement.alexscavesexemplified.ice_cream"),
 						Component.translatable("advancement.alexscavesexemplified.ice_cream.desc"),
 						null, FrameType.TASK, true, true, false)
@@ -449,7 +449,7 @@ public class ACExAdvancements implements ForgeAdvancementProvider.AdvancementGen
 				.save(consumer, "alexscavesexemplified:primordial");
 
 		Advancement egg_stealing = (Advancement.Builder.advancement().parent(primordial).display(
-						ACEItemRegistry.DINO_EGGS.get(),
+						ACExItemRegistry.DINO_EGGS.get(),
 						Component.translatable("advancement.alexscavesexemplified.egg_stealing"),
 						Component.translatable("advancement.alexscavesexemplified.egg_stealing.desc"),
 						null, FrameType.TASK, true, true, false)

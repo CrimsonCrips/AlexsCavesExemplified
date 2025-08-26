@@ -20,7 +20,7 @@ import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
-import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.Gammafied;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -63,7 +63,7 @@ public abstract class ACExNuclearExplosion2EntityMixin extends Entity implements
         if(entity instanceof TremorzillaEntity tremorzilla && AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && !((Gammafied) tremorzilla).isGamma() && isGamma()){
             ((Gammafied) tremorzilla).setGamma(isGamma());
             for (Player player : this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(100))) {
-                ACEUtils.awardAdvancement(player,"gamma_tremorzilla","gamma");
+                ACExUtils.awardAdvancement(player,"gamma_tremorzilla","gamma");
             }
         }
     }

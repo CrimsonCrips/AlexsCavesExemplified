@@ -14,11 +14,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 
-public class PurpleSodaCauldronBlock extends ACECauldron {
+public class PurpleSodaCauldronBlock extends ACExCauldron {
 
 
     public PurpleSodaCauldronBlock(Properties p_153498_) {
-        super(p_153498_, ACECauldronInteraction.PURPLE_SODA);
+        super(p_153498_, ACExCauldronInteraction.PURPLE_SODA);
     }
 
     protected double getContentHeight(BlockState p_153500_) {

@@ -9,7 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.crimsoncrips.alexscavesexemplified.ACECommonProxy;
+import org.crimsoncrips.alexscavesexemplified.ACExCommonProxy;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.client.entity.GammaNuclearBombRenderer;
 import org.crimsoncrips.alexscavesexemplified.client.particle.*;
@@ -17,7 +17,7 @@ import org.crimsoncrips.alexscavesexemplified.server.entity.ACExEntityRegistry;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = AlexsCavesExemplified.MODID, value = Dist.CLIENT)
-public class ACExClientProxy extends ACECommonProxy {
+public class ACExClientProxy extends ACExCommonProxy {
 
     public void init() {
         MinecraftForge.EVENT_BUS.register(new ACExClientEvents());

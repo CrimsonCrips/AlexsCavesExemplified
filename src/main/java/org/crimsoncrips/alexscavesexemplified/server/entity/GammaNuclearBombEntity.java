@@ -9,7 +9,6 @@ import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntit
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.google.common.base.Predicates;
 import net.hellomouse.alexscavesenriched.AlexsCavesEnriched;
-import net.hellomouse.alexscavesenriched.entity.NuclearExplosion2Entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -32,7 +31,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PlayMessages;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.compat.ACEnrichedCompat;
-import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.Gammafied;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 
@@ -97,7 +96,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
     public InteractionResult interact(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         if (itemStack.is(Tags.Items.SHEARS)) {
-            ACEUtils.awardOutsideAdvancement(player,"alexscaves/defuse_nuclear_bomb","interact",AlexsCaves.MODID);
+            ACExUtils.awardOutsideAdvancement(player,"alexscaves/defuse_nuclear_bomb","interact",AlexsCaves.MODID);
 
             player.swing(hand);
             this.playSound((SoundEvent) ACSoundRegistry.NUCLEAR_BOMB_DEFUSE.get());
@@ -111,7 +110,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
         } else if (player.isSecondaryUseActive()) {
             return InteractionResult.PASS;
         } else if (!this.level().isClientSide) {
-            ACEUtils.awardOutsideAdvancement(player,"alexscaves/ride_nuclear_bomb","ride_a_boat_with_a_goat",AlexsCaves.MODID);
+            ACExUtils.awardOutsideAdvancement(player,"alexscaves/ride_nuclear_bomb","ride_a_boat_with_a_goat",AlexsCaves.MODID);
 
             return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
         } else {

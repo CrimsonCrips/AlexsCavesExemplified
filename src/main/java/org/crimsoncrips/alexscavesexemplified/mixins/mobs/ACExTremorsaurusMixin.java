@@ -1,0 +1,123 @@
+package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
+
+import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
+import com.github.alexmodguy.alexscaves.server.entity.living.*;
+import com.github.alexmodguy.alexscaves.server.entity.util.TargetsDroppedItems;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.goal.*;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.Level;
+import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.misc.interfaces.TremorConsumption;
+import org.crimsoncrips.alexscavesexemplified.server.effect.ACExEffects;
+import org.crimsoncrips.alexscavesexemplified.server.goals.ACExDinosaurEggAttack;
+import org.crimsoncrips.alexscavesexemplified.server.goals.ACExTremorDroppedEatBlock;
+import org.crimsoncrips.alexscavesexemplified.server.goals.ACExTremorEatBlock;
+import org.crimsoncrips.alexscavesexemplified.server.goals.ACExTremorTempt;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+
+@Mixin(TremorsaurusEntity.class)
+public abstract class ACExTremorsaurusMixin extends DinosaurEntity implements TargetsDroppedItems, TremorConsumption {
+
+
+    protected ACExTremorsaurusMixin(EntityType<? extends Monster> pEntityType, Level pLevel) {
+        super(pEntityType, pLevel);
+    }
+
+    @Inject(method = "registerGoals", at = @At("HEAD"))
+    private void registerGoals(CallbackInfo ci) {
+        TremorsaurusEntity tremorsaurus = (TremorsaurusEntity)(Object)this;
+        if (AlexsCavesExemplified.COMMON_CONFIG.EGG_ANGER_ENABLED.get()){
+            tremorsaurus.targetSelector.addGoal(4, new ACExDinosaurEggAttack<>(tremorsaurus, LivingEntity.class, true));
+        }
+
+        if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get()) {
+            this.goalSelector.addGoal(2, new ACExTremorTempt(tremorsaurus, 1.1, Ingredient.of(new ItemLike[]{ACBlockRegistry.COOKED_DINOSAUR_CHOP.get(), ACBlockRegistry.DINOSAUR_CHOP.get()}), false));
+        }
+
+
+        if (AlexsCavesExemplified.COMMON_CONFIG.SCAVENGING_ENABLED.get()){
+            tremorsaurus.goalSelector.addGoal(3, new ACExTremorEatBlock(tremorsaurus, 1, 30,3));
+
+            tremorsaurus.targetSelector.addGoal(2, new ACExTremorDroppedEatBlock(tremorsaurus,true,true,200 + tremorsaurus.getRandom().nextInt(150),30));
+
+        }
+    }
+
+    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/TremorsaurusEntity;playSound(Lnet/minecraft/sounds/SoundEvent;FF)V"))
+    private void stomp(CallbackInfo ci) {
+        TremorsaurusEntity tremorsaurus = (TremorsaurusEntity)(Object)this;
+        for (LivingEntity entity : tremorsaurus.level().getEntitiesOfClass(LivingEntity.class, tremorsaurus.getBoundingBox().expandTowards(1, -2, 1))) {
+            if (entity != tremorsaurus && entity.getBbHeight() <= 0.8F) {
+                entity.hurt(tremorsaurus.damageSources().mobAttack(tremorsaurus), 3.0F);
+            }
+        }
+    }
+
+
+    @WrapWithCondition(method = "registerGoals", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/goal/GoalSelector;addGoal(ILnet/minecraft/world/entity/ai/goal/Goal;)V",ordinal = 6))
+    private boolean tempt(GoalSelector instance, int pPriority, Goal pGoal) {
+        return !AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get();
+    }
+
+
+
+
+
+    public boolean canTargetItem(ItemStack itemStack) {
+        return itemStack.is(ACBlockRegistry.DINOSAUR_CHOP.get().asItem()) || itemStack.is(ACBlockRegistry.COOKED_DINOSAUR_CHOP.get().asItem());
+    }
+
+
+
+
+    private static final EntityDataAccessor<Boolean> SNIFFED = SynchedEntityData.defineId(TremorsaurusEntity.class, EntityDataSerializers.BOOLEAN);;
+
+    @Inject(method = "defineSynchedData", at = @At("TAIL"))
+    private void defineSynched(CallbackInfo ci){
+        this.entityData.define(SNIFFED, false);
+    }
+
+    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
+    private void addAdditional(CompoundTag compound, CallbackInfo ci){
+        compound.putBoolean("Sniffed", this.isSniffed());
+    }
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    private void readAdditional(CompoundTag compound, CallbackInfo ci){
+        this.setSniffed(compound.getBoolean("Sniffed"));
+    }
+
+
+
+    @Override
+    public boolean isSniffed() {
+        return this.entityData.get(SNIFFED);
+    }
+
+
+    @Override
+    public void setSniffed(boolean value) {
+        this.entityData.set(SNIFFED,value);
+    }
+
+    public boolean isSeethed(TremorsaurusEntity tremorsaurus){
+        return tremorsaurus.hasEffect(ACExEffects.SERENED.get());
+    }
+
+
+
+
+}

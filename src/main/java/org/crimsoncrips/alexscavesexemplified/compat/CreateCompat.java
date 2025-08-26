@@ -1,11 +1,8 @@
 package org.crimsoncrips.alexscavesexemplified.compat;
 
-import biomesoplenty.api.block.BOPBlocks;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.FrostmintSpearEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllFluids;
 import com.simibubi.create.AllItems;
 import net.minecraft.core.BlockPos;
@@ -14,12 +11,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.fluids.FluidType;
-import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
-import org.spongepowered.asm.mixin.Unique;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 
 public class CreateCompat {
 
@@ -41,7 +35,7 @@ public class CreateCompat {
                         frostmintSpear.discard();
                         explode(level,frostmintSpear);
                     }
-                    ACEUtils.awardAdvancement(frostmintSpear.getOwner(),"frostmint_freeze","freeze");
+                    ACExUtils.awardAdvancement(frostmintSpear.getOwner(),"frostmint_freeze","freeze");
                 }
             }
         }

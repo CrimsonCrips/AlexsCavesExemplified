@@ -17,7 +17,7 @@ import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron.AcidCauldronBlock;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron.MetalCauldronBlock;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron.PurpleSodaCauldronBlock;
-import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExItemRegistry;
 
 import java.util.function.Supplier;
 
@@ -29,7 +29,7 @@ public class ACExBlockRegistry {
 
     public static final RegistryObject<Block> METAL_CAULDRON = registerBlockAndItem("metal_cauldron", () -> new MetalCauldronBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(ACSoundTypes.SCRAP_METAL).noOcclusion()));
 
-    public static final RegistryObject<Block> GAMMA_NUCLEAR_BOMB = registerBlockAndItemAnomaly("gamma_nuclear_bomb", () -> new ACEGammaNuke(),RARITY_GAMMA);
+    public static final RegistryObject<Block> GAMMA_NUCLEAR_BOMB = registerBlockAndItemAnomaly("gamma_nuclear_bomb", () -> new ACExGammaNuke(),RARITY_GAMMA);
 
     public static final RegistryObject<Block> ACID_CAULDRON = DEF_REG.register("acid_cauldron", () -> new AcidCauldronBlock(BlockBehaviour.Properties.copy(METAL_CAULDRON.get()).lightLevel((p_50870_) -> 13)));
 
@@ -50,19 +50,19 @@ public class ACExBlockRegistry {
 
     private static RegistryObject<Block> registerBlockAndItem(String name, Supplier<Block> block) {
         RegistryObject<Block> blockObj = DEF_REG.register(name, block);
-        ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplier(blockObj, new Item.Properties()));
+        ACExItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplier(blockObj, new Item.Properties()));
         return blockObj;
     }
 
     private static RegistryObject<Block> registerBlockAndItemAnomaly(String name, Supplier<Block> block,Rarity rarity) {
         RegistryObject<Block> blockObj = DEF_REG.register(name, block);
-        ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplierLore(blockObj, new Item.Properties().rarity(rarity)));
+        ACExItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplierLore(blockObj, new Item.Properties().rarity(rarity)));
         return blockObj;
     }
 
     private static RegistryObject<Block> registerBlockAndItemLored(String name, Supplier<Block> block) {
         RegistryObject<Block> blockObj = DEF_REG.register(name, block);
-        ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplierLore(blockObj, new Item.Properties()));
+        ACExItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplierLore(blockObj, new Item.Properties()));
         return blockObj;
     }
     

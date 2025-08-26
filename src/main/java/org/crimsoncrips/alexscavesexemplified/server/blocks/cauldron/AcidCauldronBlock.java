@@ -20,11 +20,11 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class AcidCauldronBlock extends ACECauldron {
+public class AcidCauldronBlock extends ACExCauldron {
 
 
     public AcidCauldronBlock(BlockBehaviour.Properties p_153498_) {
-        super(p_153498_, ACECauldronInteraction.ACID);
+        super(p_153498_, ACExCauldronInteraction.ACID);
     }
 
     protected double getContentHeight(BlockState p_153500_) {
