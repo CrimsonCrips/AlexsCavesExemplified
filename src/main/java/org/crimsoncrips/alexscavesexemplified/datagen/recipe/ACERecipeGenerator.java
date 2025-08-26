@@ -18,14 +18,14 @@ public class ACERecipeGenerator extends ACERecipeHelper {
 	@Override
 	protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
 
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ACExBlockRegistry.METAL_CAULDRON.get(), 2)
-				.pattern("s s")
-				.pattern("i i")
-				.pattern("iii")
-				.define('s', Ingredient.of(ACBlockRegistry.SCRAP_METAL_PLATE.get()))
-				.define('i', Ingredient.of(ItemTags.IRON_ORES))
-				.unlockedBy("has_item", has(ACBlockRegistry.SCRAP_METAL_PLATE.get()))
-				.save(consumer);
+//		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ACExBlockRegistry.METAL_CAULDRON.get(), 2)
+//				.pattern("s s")
+//				.pattern("i i")
+//				.pattern("iii")
+//				.define('s', Ingredient.of(ACBlockRegistry.SCRAP_METAL_PLATE.get()))
+//				.define('i', Ingredient.of(ItemTags.IRON_ORES))
+//				.unlockedBy("has_item", has(ACBlockRegistry.SCRAP_METAL_PLATE.get()))
+//				.save(consumer);
 
 
 
