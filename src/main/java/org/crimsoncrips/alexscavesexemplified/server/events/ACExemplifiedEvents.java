@@ -333,6 +333,7 @@ public class ACExemplifiedEvents {
             died.discard();
         }
 
+
         if (AlexsCavesExemplified.COMMON_CONFIG.CAT_MUTATION_ENABLED.get() && died.getFeetBlockState().is(ACBlockRegistry.ACID.get()) && died.getType().is(ACEEntityTagGenerator.ACID_TO_CAT)  && !died.level().isClientSide() && died.getRandom().nextDouble() < 1){
             ACEntityRegistry.RAYCAT.get().spawn((ServerLevel) level, BlockPos.containing(died.getX(), died.getY(), died.getZ()), MobSpawnType.MOB_SUMMONED);
             for (Player players : level.getEntitiesOfClass(Player.class, died.getBoundingBox().inflate(8))) {
