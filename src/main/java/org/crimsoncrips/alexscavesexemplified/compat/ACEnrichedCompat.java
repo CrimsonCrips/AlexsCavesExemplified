@@ -9,6 +9,7 @@ import com.github.alexthe666.alexsmobs.entity.EntityTiger;
 import com.github.alexthe666.alexsmobs.entity.util.VineLassoUtil;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import net.hellomouse.alexscavesenriched.ACEEntityRegistry;
+import net.hellomouse.alexscavesenriched.AlexsCavesEnriched;
 import net.hellomouse.alexscavesenriched.entity.BlackHoleBombEntity;
 import net.hellomouse.alexscavesenriched.entity.MiniNukeEntity;
 import net.hellomouse.alexscavesenriched.entity.NeutronBombEntity;
@@ -33,8 +34,10 @@ public class ACEnrichedCompat {
         ((Gammafied) enrichedNuke).setGamma(true);
         enrichedNuke.copyPosition(entity);
         level.addFreshEntity(enrichedNuke);
+    }
 
-
+    public static boolean config(){
+        return AlexsCavesEnriched.CONFIG.nuclear.useNewNuke;
     }
 
     public static void enrichedBomb(LivingEntity entity,int fuse,int type){

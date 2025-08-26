@@ -1,6 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.server.entity;
 
 import com.github.alexmodguy.alexscaves.AlexsCaves;
+import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.NuclearSirenBlockEntity;
 import com.github.alexmodguy.alexscaves.server.block.poi.ACPOIRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
@@ -8,7 +9,6 @@ import com.github.alexmodguy.alexscaves.server.entity.item.NuclearBombEntity;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.google.common.base.Predicates;
-import net.hellomouse.alexscavesenriched.AlexsCavesEnriched;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -52,6 +52,10 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
         this.setBoundingBox(this.makeBoundingBox());
     }
 
+    public ItemStack getPickResult() {
+        return new ItemStack((ItemLike) ACExBlockRegistry.GAMMA_NUCLEAR_BOMB.get());
+    }
+
     public void tick() {
         if (!this.isNoGravity()) {
             this.setDeltaMovement(this.getDeltaMovement().add(0.0D, -0.04D, 0.0D));
@@ -82,7 +86,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
     }
 
     private void explode() {
-        if (ModList.get().isLoaded("alexscavesenriched") && AlexsCavesEnriched.CONFIG.nuclear.useNewNuke){
+        if (ModList.get().isLoaded("alexscavesenriched") && ACEnrichedCompat.config()){
             ACEnrichedCompat.summonNuclearExplosion2(level(),this);
         } else {
             NuclearExplosionEntity vanillaNuke = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(level());

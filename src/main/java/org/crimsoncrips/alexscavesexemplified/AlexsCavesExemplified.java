@@ -86,6 +86,7 @@ public class AlexsCavesExemplified {
 
     private void setup(final FMLCommonSetupEvent event) {
         ACExEffects.init();
+        ACExItemRegistry.setup();
 
         event.enqueueWork(() -> PROXY.clientInit());
 
