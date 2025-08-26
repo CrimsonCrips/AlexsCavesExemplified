@@ -71,12 +71,6 @@ public class ACEManualLoot implements LootTableSubProvider {
                         .add(LootItem.lootTableItem(ACItemRegistry.DESOLATE_DAGGER.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1))).setWeight(8))
                 ));
 
-        consumer.accept(ACELootTables.GOSSAMER_DROPS, LootTable.lootTable()
-                .withPool(LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1))
-                        .add(LootItem.lootTableItem(ACItemRegistry.BIOLUMINESSCENCE.get()).apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2))))
-                ));
-
         consumer.accept(ACELootTables.NUCLEEPER_DEFUSION, LootTable.lootTable()
                 .withPool(LootPool.lootPool()
                         .setRolls(ConstantValue.exactly(5))

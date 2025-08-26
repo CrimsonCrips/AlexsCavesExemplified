@@ -88,6 +88,16 @@ public class ACEUtils {
         }
     }
 
+    public static void awardOutsideAdvancement(Entity entity, String advancementName, String criteria,String modId){
+        if(entity instanceof ServerPlayer serverPlayer){
+            System.out.println(modId);
+            Advancement advancement = serverPlayer.serverLevel().getServer().getAdvancements().getAdvancement(new ResourceLocation(modId, advancementName));
+            if (advancement != null) {
+                serverPlayer.getAdvancements().award(advancement, criteria);
+            }
+        }
+    }
+
     public static Entity getLookingAtEntity(Player player) {
         Entity closestValid = null;
         HitResult hitresult = ProjectileUtil.getHitResultOnViewVector(player, Entity::isAlive, 50);

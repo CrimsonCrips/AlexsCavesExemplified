@@ -15,16 +15,17 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.commons.lang3.tuple.Pair;
-import org.crimsoncrips.alexscavesexemplified.client.ACEClientConfig;
-import org.crimsoncrips.alexscavesexemplified.client.ACEClientProxy;
-import org.crimsoncrips.alexscavesexemplified.client.particle.ACEParticleRegistry;
+import org.crimsoncrips.alexscavesexemplified.client.ACExClientConfig;
+import org.crimsoncrips.alexscavesexemplified.client.ACExClientProxy;
+import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDatagen;
 import org.crimsoncrips.alexscavesexemplified.server.ACEServerConfig;
-import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
-import org.crimsoncrips.alexscavesexemplified.client.ACESoundRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.client.ACExSoundRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron.ACECauldronInteraction;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 import org.crimsoncrips.alexscavesexemplified.server.enchantment.ACEEnchants;
+import org.crimsoncrips.alexscavesexemplified.server.entity.ACExEntityRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.events.ACEModEvents;
 import org.crimsoncrips.alexscavesexemplified.server.events.ACExemplifiedEvents;
 import org.crimsoncrips.alexscavesexemplified.loot.ACELootModifiers;
@@ -37,18 +38,18 @@ import java.util.Locale;
 public class AlexsCavesExemplified {
 
     public static final String MODID = "alexscavesexemplified";
-    public static final ACECommonProxy PROXY = DistExecutor.runForDist(() -> ACEClientProxy::new, () -> ACECommonProxy::new);
+    public static final ACECommonProxy PROXY = DistExecutor.runForDist(() -> ACExClientProxy::new, () -> ACECommonProxy::new);
 
     public static final ACEServerConfig COMMON_CONFIG;
     private static final ForgeConfigSpec COMMON_CONFIG_SPEC;
-    public static final ACEClientConfig CLIENT_CONFIG;
+    public static final ACExClientConfig CLIENT_CONFIG;
     private static final ForgeConfigSpec CLIENT_CONFIG_SPEC;
 
     static {
         final Pair<ACEServerConfig, ForgeConfigSpec> serverPair = new ForgeConfigSpec.Builder().configure(ACEServerConfig::new);
         COMMON_CONFIG = serverPair.getLeft();
         COMMON_CONFIG_SPEC = serverPair.getRight();
-        final Pair<ACEClientConfig, ForgeConfigSpec> clientPair = new ForgeConfigSpec.Builder().configure(ACEClientConfig::new);
+        final Pair<ACExClientConfig, ForgeConfigSpec> clientPair = new ForgeConfigSpec.Builder().configure(ACExClientConfig::new);
         CLIENT_CONFIG = clientPair.getLeft();
         CLIENT_CONFIG_SPEC = clientPair.getRight();
     }
@@ -60,18 +61,18 @@ public class AlexsCavesExemplified {
 
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(ACEDatagen::generateData);
-
+        ACExEntityRegistry.DEF_REG.register(modEventBus);
         ACELootModifiers.register(modEventBus);
         ACEEnchants.DEF_REG.register(modEventBus);
         modEventBus.register(new ACEModEvents());
         MinecraftForge.EVENT_BUS.register(new ACExemplifiedEvents());
         MinecraftForge.EVENT_BUS.register(this);
-        ACEParticleRegistry.DEF_REG.register(modEventBus);
-        ACEBlockRegistry.DEF_REG.register(modEventBus);
+        ACExParticleRegistry.DEF_REG.register(modEventBus);
+        ACExBlockRegistry.DEF_REG.register(modEventBus);
         ACEItemRegistry.DEF_REG.register(modEventBus);
         PROXY.init();
         ACEEffects.EFFECT_REGISTER.register(modEventBus);
-        ACESoundRegistry.DEF_REG.register(modEventBus);
+        ACExSoundRegistry.DEF_REG.register(modEventBus);
         ACEEffects.POTION_REGISTER.register(modEventBus);
         modEventBus.addListener(this::setup);
 
@@ -81,8 +82,12 @@ public class AlexsCavesExemplified {
 
 
 
+
+
     private void setup(final FMLCommonSetupEvent event) {
         ACEEffects.init();
+
+        event.enqueueWork(() -> PROXY.clientInit());
 
         FireBlock fireblock = (FireBlock) Blocks.FIRE;
         if (AlexsCavesExemplified.COMMON_CONFIG.ADDITIONAL_FLAMMABILITY_ENABLED.get()){

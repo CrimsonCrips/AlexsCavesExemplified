@@ -1,7 +1,8 @@
 package org.crimsoncrips.alexscavesexemplified.datagen.language;
 
 import net.minecraft.data.PackOutput;
-import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.entity.ACExEntityRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 
 public class ACELangGen extends ACELangProvider {
@@ -26,6 +27,8 @@ public class ACELangGen extends ACELangProvider {
 		this.addEffect("sugar_crash","Sugar Crash","Sugar Crashed");
 		this.addEffect("serened","Serened","Serene");
 
+		this.addEntityType(ACExEntityRegistry.GAMMA_NUCLEAR_BOMB,"Gamma Nuclear Bomb");
+
 		this.addDeathMessage("rabial_end","%s died to Rabies");
 		this.addDeathMessage("sugar_crash","%s died from a sugar overdose");
 		this.addDeathMessage("stomach_damage","%s's stomach exploded");
@@ -39,19 +42,22 @@ public class ACELangGen extends ACELangProvider {
 		this.addSubtitle("sweet_punished","Comeuppance served");
 		this.addSubtitle("pspspsps","Pspspspspsps");
 
-		this.addBlock(ACEBlockRegistry.METAL_CAULDRON,"Metal Cauldron");
-		this.addBlock(ACEBlockRegistry.PURPLE_SODA_CAULDRON,"Purple Soda Cauldron");
-		this.addBlock(ACEBlockRegistry.ACID_CAULDRON,"Acid Cauldron");
+		this.addBlock(ACExBlockRegistry.METAL_CAULDRON,"Metal Cauldron");
+		this.addBlock(ACExBlockRegistry.PURPLE_SODA_CAULDRON,"Purple Soda Cauldron");
+		this.addBlock(ACExBlockRegistry.ACID_CAULDRON,"Acid Cauldron");
+		this.addBlock(ACExBlockRegistry.GAMMA_NUCLEAR_BOMB,"Gamma Nuclear Bomb");
 
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_1.getId().toLanguageKey(), "\"Sacrifice I\"");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_2.getId().toLanguageKey(), "\"Sacrifice II\"");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_3.getId().toLanguageKey(), "\"Sacrifice III\"");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_4.getId().toLanguageKey(), "\"Sacrifice IV\"");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_5.getId().toLanguageKey(), "\"Sacrifice V\"");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_6.getId().toLanguageKey(), "\"Sacrifice VII\"");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_7.getId().toLanguageKey(), "\"Sacrifice VII\"");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_8.getId().toLanguageKey(), "\"Sacrifice VIII\"");
-		this.addCavePainting(ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_9.getId().toLanguageKey(), "\"Sacrifice IX\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_1.getId().toLanguageKey(), "\"Sacrifice I\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_2.getId().toLanguageKey(), "\"Sacrifice II\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_3.getId().toLanguageKey(), "\"Sacrifice III\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_4.getId().toLanguageKey(), "\"Sacrifice IV\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_5.getId().toLanguageKey(), "\"Sacrifice V\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_6.getId().toLanguageKey(), "\"Sacrifice VII\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_7.getId().toLanguageKey(), "\"Sacrifice VII\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_8.getId().toLanguageKey(), "\"Sacrifice VIII\"");
+		this.addLoreBlock(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_9.getId().toLanguageKey(), "\"Sacrifice IX\"");
+
+		this.addLoreBlock(ACExBlockRegistry.GAMMA_NUCLEAR_BOMB.getId().toLanguageKey(), "The Embodiment of Desolation.");
 
 		this.addItem(ACEItemRegistry.ICE_CREAM_CONE, "Ice Cream Cone");
 

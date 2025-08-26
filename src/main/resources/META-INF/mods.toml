@@ -95,3 +95,10 @@ versionRange="[1.20.1-84.1-FORGE,)"
 ordering="NONE"
 side="BOTH"
 
+[[dependencies."${mod_id}"]]
+modId="alexscavesenriched"
+mandatory=false
+versionRange="[1.0.1,)"
+ordering="NONE"
+side="BOTH"
+

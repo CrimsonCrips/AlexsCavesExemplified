@@ -2,6 +2,8 @@ package org.crimsoncrips.alexscavesexemplified.mixins.mobs.nucleeper;
 
 import com.github.alexmodguy.alexscaves.client.model.NucleeperModel;
 import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
+import com.github.alexthe666.alexsmobs.entity.EntityMurmur;
+import com.github.alexthe666.alexsmobs.entity.EntityTiger;
 import com.github.alexthe666.citadel.client.model.AdvancedEntityModel;
 import com.github.alexthe666.citadel.client.model.AdvancedModelBox;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;

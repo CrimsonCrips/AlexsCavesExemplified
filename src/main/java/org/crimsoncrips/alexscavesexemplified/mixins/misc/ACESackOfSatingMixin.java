@@ -82,15 +82,18 @@ public abstract class ACESackOfSatingMixin extends Item {
                 ItemStack itemStack1 = PotionUtils.setCustomEffects(new ItemStack(ACItemRegistry.JELLY_BEAN.get()), mobEffects);
                 for (int i = 0; i < inv.getContainerSize(); i++) {
                     ItemStack current = inv.getItem(i);
-                    if (current.is(ACEItemTagGenerator.GELATIN) && current.getCount() >= 10) {
+                    if ((current.is(ACEItemTagGenerator.GELATIN) && current.getCount() >= 10) || player.isCreative()) {
                         itemStack1.getTag().putBoolean("Rainbow", true);
-                        current.shrink(10);
+                        if (!player.isCreative()) {
+                            current.shrink(10);
+                        }
                         if (!player.addItem(itemStack1)) {
                             player.drop(itemStack1, false);
                         }
                         break;
                     }
                 }
+
 
             }
         }

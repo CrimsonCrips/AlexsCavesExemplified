@@ -1,4 +1,5 @@
-// 1.20.1	2025-07-03T05:15:27.977133195	AMI Block Tags
+// 1.20.1	2025-08-19T20:39:58.448305273	AMI Block Tags
+67b28380d7e9c2a8380e5f8fba1129ad93f14307 data/alexscaves/tags/blocks/remote_detonator_activates.json
 a871bcb2b044535d25eb4b8e6ec65016c476cd35 data/alexscavesexemplified/tags/blocks/abyssal_ecosystem.json
 f86e915635bd4d1054b79dd50017d22d35f15c23 data/alexscavesexemplified/tags/blocks/burst_blocks.json
 4136d89c862cb53eb3df4fd86fc050613df31d43 data/alexscavesexemplified/tags/blocks/consumable_blocks.json
@@ -6,5 +7,5 @@ b8289dd85f4404c0c7516d62cc8138035350c0e2 data/alexscavesexemplified/tags/blocks/
 96bf0d79d8c2f879c28cc9f97dc96b9b6ab17171 data/alexscavesexemplified/tags/blocks/gelatin_fire.json
 fb640eaebbbeb78ee1f2c7d9f27dce828d0d3deb data/alexscavesexemplified/tags/blocks/radioactive.json
 808cbde01f9b861e4ed7774c2547db01369cfdc7 data/alexscavesexemplified/tags/blocks/remineding_material.json
-00188a01add53dce771c189e22f980e2df591310 data/minecraft/tags/blocks/mineable/pickaxe.json
-00188a01add53dce771c189e22f980e2df591310 data/minecraft/tags/blocks/needs_iron_tool.json
+36e9a036eb6550b98c4b236aae721171124cd696 data/minecraft/tags/blocks/mineable/pickaxe.json
+36e9a036eb6550b98c4b236aae721171124cd696 data/minecraft/tags/blocks/needs_iron_tool.json

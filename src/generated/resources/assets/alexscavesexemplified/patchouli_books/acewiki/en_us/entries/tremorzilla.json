@@ -10,6 +10,16 @@
       ],
       "text": "Born from pure condensed energy, Gamma Tremorzilla is an ascension above its former self",
       "title": "Gamma Tremorzilla"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscavesexemplified:gamma_nuclear_bomb",
+      "text": "Gamma Nuclear Bombs can be made by blasting a dropped nuclear bomb with a gamma raygun",
+      "title": "Gamma Nuke Making"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Gamma Tremorzilla can be summoned by lighting a gamma nuclear bomb near them"
     }
   ]
 }

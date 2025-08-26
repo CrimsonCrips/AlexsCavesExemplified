@@ -2,7 +2,6 @@ package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tesla_bulb;
 
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.TeslaBulbBlockEntity;
-import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -10,7 +9,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ParticleUtils;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -25,7 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.client.ACESoundRegistry;
+import org.crimsoncrips.alexscavesexemplified.client.ACExSoundRegistry;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACEBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,7 +46,7 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;setBlockAndUpdate(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)Z"))
     private static void alexsCavesExemplified$tick1(Level level, BlockPos blockPos, BlockState state, TeslaBulbBlockEntity entity, CallbackInfo ci) {
         if(AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
-            level.playLocalSound(blockPos, ACESoundRegistry.TESLA_FIRE.get(), SoundSource.BLOCKS, 2, 1, false);
+            level.playLocalSound(blockPos, ACExSoundRegistry.TESLA_FIRE.get(), SoundSource.BLOCKS, 2, 1, false);
         }
     }
 
@@ -96,7 +94,7 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                 }
                 tickAccesor.setCharge(tickAccesor.getCharge() + 1);
                 if (tickAccesor.getCharge() == 5 && AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
-                    level.playLocalSound(blockPos, ACESoundRegistry.TESLA_POWERUP.get(), SoundSource.AMBIENT, 2, 1, false);
+                    level.playLocalSound(blockPos, ACExSoundRegistry.TESLA_POWERUP.get(), SoundSource.AMBIENT, 2, 1, false);
                 }
                 if (tickAccesor.getCharge() == 32){
                     Vec3 vec3 = findTargetPos(blockPos, target);
@@ -109,7 +107,7 @@ public abstract class ACETeslaBulbEntityMixin extends BlockEntity implements ACE
                         target.setRemainingFireTicks(30);
                         ACEUtils.awardAdvancement(target,"tesla_shock","shock");
                     }
-                    target.playSound( ACESoundRegistry.TESLA_FIRE.get());
+                    target.playSound( ACExSoundRegistry.TESLA_FIRE.get());
                     tickAccesor.setCharge(-30);
                 }
             } else {

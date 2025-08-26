@@ -8,10 +8,10 @@ import net.minecraftforge.common.data.ForgeAdvancementProvider;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class ACEAdvancementProvider extends ForgeAdvancementProvider {
+public class ACExAdvancementProvider extends ForgeAdvancementProvider {
 
-	public ACEAdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, ExistingFileHelper existingFileHelper) {
-		super(output, registries, existingFileHelper, List.of(new ACEAdvancements()));
+	public ACExAdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, ExistingFileHelper existingFileHelper) {
+		super(output, registries, existingFileHelper, List.of(new ACExAdvancements()));
 	}
 
 }

@@ -8,7 +8,7 @@
       "images": [
         "alexscavesexemplified:textures/gui/wiki/toxic_caves/brainiac/waste_pickup.png"
       ],
-      "text": "Brainiacs pickup dropped waste drums when non",
+      "text": "Brainiacs pickups dropped waste drums when unarmed",
       "title": "Waste Pickup"
     }
   ]

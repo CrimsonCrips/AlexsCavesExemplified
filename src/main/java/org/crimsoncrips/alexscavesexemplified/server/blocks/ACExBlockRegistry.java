@@ -1,20 +1,15 @@
 package org.crimsoncrips.alexscavesexemplified.server.blocks;
 
-import biomesoplenty.init.ModItems;
 import com.github.alexmodguy.alexscaves.server.block.ACSoundTypes;
 import com.github.alexmodguy.alexscaves.server.block.CavePaintingBlock;
-import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.item.BlockItemWithSupplierLore;
-import com.github.alexthe666.alexsmobs.item.AMBlockItem;
-import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
-import com.github.alexthe666.alexsmobs.item.BlockItemAMRender;
 import com.github.alexthe666.citadel.item.BlockItemWithSupplier;
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.ChatFormatting;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -26,13 +21,15 @@ import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 
 import java.util.function.Supplier;
 
-public class ACEBlockRegistry {
+public class ACExBlockRegistry {
 
    public static final DeferredRegister<Block> DEF_REG = DeferredRegister.create(ForgeRegistries.BLOCKS, AlexsCavesExemplified.MODID);
 
-
+    public static final Rarity RARITY_GAMMA = Rarity.create("alexscavesexemplified:gamma", ChatFormatting.AQUA);
 
     public static final RegistryObject<Block> METAL_CAULDRON = registerBlockAndItem("metal_cauldron", () -> new MetalCauldronBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).sound(ACSoundTypes.SCRAP_METAL).noOcclusion()));
+
+    public static final RegistryObject<Block> GAMMA_NUCLEAR_BOMB = registerBlockAndItemAnomaly("gamma_nuclear_bomb", () -> new ACEGammaNuke(),RARITY_GAMMA);
 
     public static final RegistryObject<Block> ACID_CAULDRON = DEF_REG.register("acid_cauldron", () -> new AcidCauldronBlock(BlockBehaviour.Properties.copy(METAL_CAULDRON.get()).lightLevel((p_50870_) -> 13)));
 
@@ -54,6 +51,12 @@ public class ACEBlockRegistry {
     private static RegistryObject<Block> registerBlockAndItem(String name, Supplier<Block> block) {
         RegistryObject<Block> blockObj = DEF_REG.register(name, block);
         ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplier(blockObj, new Item.Properties()));
+        return blockObj;
+    }
+
+    private static RegistryObject<Block> registerBlockAndItemAnomaly(String name, Supplier<Block> block,Rarity rarity) {
+        RegistryObject<Block> blockObj = DEF_REG.register(name, block);
+        ACEItemRegistry.DEF_REG.register(name, () -> new BlockItemWithSupplierLore(blockObj, new Item.Properties().rarity(rarity)));
         return blockObj;
     }
 

@@ -23,6 +23,6 @@ Feel free to use it yourself
 
 ## IMPORTANT NOTICE
 
-**DO NOT REPORT ANY ISSUES SPECIFIC TO THE MOD TO ALEX'S TEAM GITHUB REPORT THEM IN**\-[HERE](https://github.com/CrimsonCrips/AlexsMobsInteraction/issues)
+**DO NOT REPORT ANY ISSUES SPECIFIC TO THE MOD TO ALEX'S TEAM GITHUB REPORT THEM IN**\-[HERE](https://github.com/CrimsonCrips/AlexsCavesExemplified/issues)
 
 [![](https://cdn.modrinth.com/data/cached_images/9ed54d41f40b03d6266de16ef110291e86e2c81f.png)](https://discord.gg/S9kUFsmw2f)

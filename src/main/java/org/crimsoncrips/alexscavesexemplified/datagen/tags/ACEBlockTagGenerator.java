@@ -1,6 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.datagen.tags;
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
+import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -41,16 +42,22 @@ public class ACEBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 				ACBlockRegistry.SCRAP_METAL.get()
 		);
 
+		tag(ACTagRegistry.REMOTE_DETONATOR_ACTIVATES).add(
+				ACExBlockRegistry.GAMMA_NUCLEAR_BOMB.get()
+		);
+
 		tag(BlockTags.NEEDS_IRON_TOOL).add(
-				ACEBlockRegistry.METAL_CAULDRON.get(),
-				ACEBlockRegistry.ACID_CAULDRON.get(),
-				ACEBlockRegistry.PURPLE_SODA_CAULDRON.get()
+				ACExBlockRegistry.METAL_CAULDRON.get(),
+				ACExBlockRegistry.ACID_CAULDRON.get(),
+				ACExBlockRegistry.PURPLE_SODA_CAULDRON.get(),
+				ACExBlockRegistry.GAMMA_NUCLEAR_BOMB.get()
 		);
 
 		tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
-				ACEBlockRegistry.METAL_CAULDRON.get(),
-				ACEBlockRegistry.ACID_CAULDRON.get(),
-				ACEBlockRegistry.PURPLE_SODA_CAULDRON.get()
+				ACExBlockRegistry.METAL_CAULDRON.get(),
+				ACExBlockRegistry.ACID_CAULDRON.get(),
+				ACExBlockRegistry.PURPLE_SODA_CAULDRON.get(),
+				ACExBlockRegistry.GAMMA_NUCLEAR_BOMB.get()
 		);
 
 		tag(ABYSSAL_ECOSYSTEM).add(

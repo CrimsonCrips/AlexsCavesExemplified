@@ -2,12 +2,10 @@ package org.crimsoncrips.alexscavesexemplified.mixins.external_mobs;
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
-import com.github.alexmodguy.alexscaves.server.entity.living.VesperEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.item.SackOfSatingItem;
 import com.github.alexmodguy.alexscaves.server.misc.ACAdvancementTriggerRegistry;
-import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -15,7 +13,6 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Ravager;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
@@ -60,14 +57,13 @@ public abstract class ACEItemEntity extends Entity {
 
     int timeToCook = 0;
 
-    @Inject(method = "playerTouch", at = @At("TAIL"))
+    @Inject(method = "playerTouch", at = @At("HEAD"))
     private void playerTouch(Player pEntity, CallbackInfo ci){
         ItemEntity itemEntity = (ItemEntity)(Object)this;
         if (!this.level().isClientSide && AlexsCavesExemplified.COMMON_CONFIG.TUNED_SATING_ENABLED.get()) {
             ItemStack itemstack = itemEntity.getItem();
-            if (ForgeEventFactory.onItemPickup(itemEntity,pEntity) < 0)
-                return;
-            if (this.pickupDelay <= 0 && (this.target == null || this.target.equals(pEntity.getUUID()))  && !pEntity.isCreative() && itemstack.isEdible()) {
+            int hook = net.minecraftforge.event.ForgeEventFactory.onItemPickup(itemEntity, pEntity);
+            if (this.pickupDelay <= 0 && (hook == 0 || itemstack.getCount() <= 0) && itemstack.isEdible() && !pEntity.getInventory().add(itemstack)) {
                 Inventory inv = pEntity.getInventory();
                 for (int i = 0; i < inv.getContainerSize(); i++) {
                     ItemStack current = inv.getItem(i);

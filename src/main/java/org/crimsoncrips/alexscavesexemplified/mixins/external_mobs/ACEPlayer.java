@@ -15,7 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.client.ACESoundRegistry;
+import org.crimsoncrips.alexscavesexemplified.client.ACExSoundRegistry;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACEDamageTypes;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACEItemTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
@@ -117,7 +117,7 @@ public abstract class ACEPlayer extends LivingEntity implements ACEBaseInterface
         }
         if (sweets >= 10) {
             sweets = 0;
-            player.playSound(ACESoundRegistry.SWEET_PUNISHED.get(), 1, 1);
+            player.playSound(ACExSoundRegistry.SWEET_PUNISHED.get(), 1, 1);
             this.die(ACEDamageTypes.getDamageSource(level(),ACEDamageTypes.SWEET_PUNISH));
         }
     }
@@ -128,9 +128,6 @@ public abstract class ACEPlayer extends LivingEntity implements ACEBaseInterface
             sweets = sweets + value;
             if (sweets == 8 && !this.level().isClientSide) {
                 if (this.level().getRandom().nextBoolean()) {
-                    if (!this.level().isClientSide) {
-                        this.displayClientMessage(Component.translatable("item.alexscavesexemplified.locator_protection"), true);
-                    }
                     this.displayClientMessage(Component.translatable("misc.alexscavesexemplified.candy_warn_0"), true);
                 } else this.displayClientMessage(Component.nullToEmpty("misc.alexscavesexemplified.candy_warn_1"), true);
             }

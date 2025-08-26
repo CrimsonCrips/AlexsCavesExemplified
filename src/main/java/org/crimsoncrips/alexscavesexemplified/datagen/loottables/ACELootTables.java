@@ -40,7 +40,7 @@ public class ACELootTables {
 
 	public static final ResourceLocation NUCLEEPER_DEFUSION = register("entities/nucleeper_defusion");
 
-	public static final ResourceLocation GOSSAMER_DROPS = register("entities/gossamer_drops");
+
 	public final ResourceLocation lootTable;
 
 	private ACELootTables(String path) {

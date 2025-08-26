@@ -30,7 +30,7 @@ public abstract class ACEAtlatitan extends SauropodBaseEntity {
     private void alexsCavesExemplified$onStep(CallbackInfo ci) {
         AtlatitanEntity atlatitan = (AtlatitanEntity)(Object)this;
         for (LivingEntity entity : atlatitan.level().getEntitiesOfClass(LivingEntity.class, atlatitan.getBoundingBox().move(0,-2,0).inflate(0.5,0,0.5))) {
-            if (entity != atlatitan && !atlatitan.isBaby() && entity.getBbHeight() <= 2.2F && AlexsCavesExemplified.COMMON_CONFIG.STOMPING_ENABLED.get() && !(entity instanceof AtlatitanEntity)) {
+            if (entity != atlatitan.getPassengers() && entity != atlatitan && !atlatitan.isBaby() && entity.getBbHeight() <= 2.2F && AlexsCavesExemplified.COMMON_CONFIG.STOMPING_ENABLED.get() && !(entity instanceof AtlatitanEntity)) {
                 entity.hurt(atlatitan.damageSources().mobAttack(atlatitan), 6.0F);
                 ACEUtils.awardAdvancement(entity,"splat","stepped");
                 ACEUtils.awardAdvancement(atlatitan.getControllingPassenger(),"riding_splat","ride_stepped");

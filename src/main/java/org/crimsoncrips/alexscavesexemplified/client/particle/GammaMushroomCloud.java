@@ -65,11 +65,11 @@ public class GammaMushroomCloud extends MushroomCloudParticle {
             for (int i = 0; i < (1 + random.nextInt(2)) * scale; i++) {
                 Vec3 from = new Vec3(level.random.nextFloat() - 0.5F, level.random.nextFloat() - 0.5F, level.random.nextFloat() - 0.5F).scale(scale * 1.4F).add(this.x, this.y, this.z);
                 Vec3 away = new Vec3(level.random.nextFloat() - 0.5F, level.random.nextFloat() - 0.5F, level.random.nextFloat() - 0.5F).scale(2.34F);
-                this.level.addParticle(ACEParticleRegistry.TREMORZILLA_GAMMA_EXPLOSION.get(), from.x, from.y, from.z, away.x, away.y, away.z);
+                this.level.addParticle(ACExParticleRegistry.TREMORZILLA_GAMMA_EXPLOSION.get(), from.x, from.y, from.z, away.x, away.y, away.z);
             }
             for (int j = 0; j < scale * scale; j++) {
                 Vec3 explosionBase = new Vec3((level.random.nextFloat() - 0.5F) * explosionSpread, (-0.6F + level.random.nextFloat() * 0.5F) * explosionSpread * 0.1F, (level.random.nextFloat() - 0.5F) * explosionSpread).add(this.x, this.y, this.z);
-                this.level.addParticle(ACEParticleRegistry.TREMORZILLA_GAMMA_EXPLOSION.get(), explosionBase.x, explosionBase.y, explosionBase.z, 0, 0, 0);
+                this.level.addParticle(ACExParticleRegistry.TREMORZILLA_GAMMA_EXPLOSION.get(), explosionBase.x, explosionBase.y, explosionBase.z, 0, 0, 0);
             }
             if(age > BALL_FOR){
                 if(!playedRumble){

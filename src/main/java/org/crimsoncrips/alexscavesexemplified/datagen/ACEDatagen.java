@@ -7,7 +7,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.datagen.advancement.ACEAdvancementProvider;
+import org.crimsoncrips.alexscavesexemplified.datagen.advancement.ACExAdvancementProvider;
 import org.crimsoncrips.alexscavesexemplified.datagen.language.ACELangGen;
 import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACELootGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.patchouli.ACEBookProvider;
@@ -32,7 +32,7 @@ public class ACEDatagen {
         ExistingFileHelper helper = event.getExistingFileHelper();
         generator.addProvider(event.includeClient(), new ACESoundGenerator(output, helper));
         generator.addProvider(event.includeServer(), new ACERegistryDataGenerator(output, provider));
-        generator.addProvider(event.includeServer(), new ACEAdvancementProvider(output, provider, helper));
+        generator.addProvider(event.includeServer(), new ACExAdvancementProvider(output, provider, helper));
         generator.addProvider(event.includeServer(), new ACELootGenerator(output));
         generator.addProvider(event.includeServer(), new ACERecipeGenerator(output));
         generator.addProvider(event.includeServer(), new ACEBookProvider("alexscavesexemplified",provider,output));

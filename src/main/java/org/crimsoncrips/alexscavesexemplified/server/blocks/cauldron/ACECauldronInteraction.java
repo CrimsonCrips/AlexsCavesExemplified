@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
-import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 
 public interface ACECauldronInteraction {
     Map<Item, ACECauldronInteraction> EMPTY = newInteractionMap();
@@ -33,8 +33,8 @@ public interface ACECauldronInteraction {
 
 
 
-    ACECauldronInteraction FILL_ACID = (p_175676_, p_175677_, p_175678_, p_175679_, p_175680_, p_175681_) -> emptyBucket(p_175677_, p_175678_, p_175679_, p_175680_, p_175681_, ACEBlockRegistry.ACID_CAULDRON.get().defaultBlockState(), ACSoundRegistry.ACID_CORROSION.get());
-    ACECauldronInteraction FILL_SODA = (p_175676_, p_175677_, p_175678_, p_175679_, p_175680_, p_175681_) -> emptyBucket(p_175677_, p_175678_, p_175679_, p_175680_, p_175681_, ACEBlockRegistry.PURPLE_SODA_CAULDRON.get().defaultBlockState(), ACSoundRegistry.PURPLE_SODA_SWIM.get());
+    ACECauldronInteraction FILL_ACID = (p_175676_, p_175677_, p_175678_, p_175679_, p_175680_, p_175681_) -> emptyBucket(p_175677_, p_175678_, p_175679_, p_175680_, p_175681_, ACExBlockRegistry.ACID_CAULDRON.get().defaultBlockState(), ACSoundRegistry.ACID_CORROSION.get());
+    ACECauldronInteraction FILL_SODA = (p_175676_, p_175677_, p_175678_, p_175679_, p_175680_, p_175681_) -> emptyBucket(p_175677_, p_175678_, p_175679_, p_175680_, p_175681_, ACExBlockRegistry.PURPLE_SODA_CAULDRON.get().defaultBlockState(), ACSoundRegistry.PURPLE_SODA_SWIM.get());
 
 
     static Object2ObjectOpenHashMap<Item, ACECauldronInteraction> newInteractionMap() {
@@ -56,7 +56,7 @@ public interface ACECauldronInteraction {
                     p_175735_.awardStat(Stats.USE_CAULDRON);
                     p_175735_.awardStat(Stats.ITEM_USED.get(p_175737_.getItem()));
                     ACEUtils.awardAdvancement(p_175735_,"soda_replication","replicate");
-                    p_175733_.setBlockAndUpdate(p_175734_, ACEBlockRegistry.PURPLE_SODA_CAULDRON.get().defaultBlockState());
+                    p_175733_.setBlockAndUpdate(p_175734_, ACExBlockRegistry.PURPLE_SODA_CAULDRON.get().defaultBlockState());
                     p_175733_.playSound((Player) null, p_175734_, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
                     p_175733_.gameEvent((Entity) null, GameEvent.FLUID_PLACE, p_175734_);
                 }
@@ -97,7 +97,7 @@ public interface ACECauldronInteraction {
                 pPlayer.setItemInHand(pHand, ItemUtils.createFilledResult(pEmptyStack, pPlayer, pFilledStack));
                 pPlayer.awardStat(Stats.USE_CAULDRON);
                 pPlayer.awardStat(Stats.ITEM_USED.get(item));
-                pLevel.setBlockAndUpdate(pPos, ACEBlockRegistry.METAL_CAULDRON.get().defaultBlockState());
+                pLevel.setBlockAndUpdate(pPos, ACExBlockRegistry.METAL_CAULDRON.get().defaultBlockState());
                 pLevel.playSound((Player)null, pPos, pFillSound, SoundSource.BLOCKS, 1.0F, 1.0F);
                 pLevel.gameEvent((Entity)null, GameEvent.FLUID_PICKUP, pPos);
             }

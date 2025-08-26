@@ -7,7 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 
-public class ACESoundRegistry {
+public class ACExSoundRegistry {
     public static final DeferredRegister<SoundEvent> DEF_REG = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, AlexsCavesExemplified.MODID);
 
     public static final RegistryObject<SoundEvent> TESLA_POWERUP = createSoundEvent("tesla_powerup");

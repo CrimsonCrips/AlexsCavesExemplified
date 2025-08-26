@@ -1,12 +1,8 @@
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
-import com.github.alexmodguy.alexscaves.server.entity.living.CaramelCubeEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
-import org.crimsoncrips.alexscavesexemplified.client.ACESoundRegistry;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
 
 import java.util.EnumSet;

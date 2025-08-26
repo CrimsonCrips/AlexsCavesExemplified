@@ -4,27 +4,23 @@ import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.reimnop.pgen.PGenBookProvider;
-import com.reimnop.pgen.builder.PGenEntryBuilder;
 import com.reimnop.pgen.builder.page.PGenSpotlightPageBuilder;
 import com.reimnop.pgen.data.PGenMultiblock;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
-import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACEItemRegistry;
 
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
-
+@SuppressWarnings("Deprecated")
 public class ACEBookProvider extends PGenBookProvider {
 
     public ACEBookProvider(String modId, CompletableFuture<HolderLookup.Provider> lookupProvider, PackOutput packOutput) {
@@ -79,7 +75,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                     entry
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/general/charged_caves.png")
-                                                                        .withText("AC Creepers have a chance to be charged when summoning")
+                                                                        .withText("AC Creepers have a chance to be charged when summoned")
                                                                         .withTitle("Charged Caves");
                                                             });
                                                 })
@@ -194,15 +190,14 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Gluttony
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/candy_cavity/gluttony.png")
-                                                                        .withText("Eat candy blocks by right clicking while crouching," +
-                                                                                "has a chance to give sugar rush when consuming")
+                                                                        .withText("Eat candy blocks by right clicking while crouching")
                                                                         .withTitle("Gluttony");
                                                             })
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/candy_cavity/gluttony2.png")
                                                                         .withText("Adds minor interactions with eating food");
                                                             })
-                                                            .addTextPage("Consuming frostmint and purple soda will cause a minor explosion", page -> {
+                                                            .addTextPage("Consuming frostmint and purple soda will also cause a minor explosion", page -> {
                                                             })
 
                                                             //Sticky Soda
@@ -222,8 +217,11 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Tuned Sating
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/candy_cavity/tuned_sating.png")
-                                                                        .withText("Drop foods directly onto a Sack Of Sating, Will also eat food that cant be picked up when in inventory")
+                                                                        .withText("Upgrades Sack Of Sating, adding new interactions and features")
                                                                         .withTitle("Tuned Sating");
+                                                            })
+
+                                                            .addTextPage("Can drop items onto a dropped sack, \n Can eat food that cant be picked up when in inventory, \n Creates a jellybean when giving it a food with effects at the cost of 10 gelatin in inventory", page -> {
                                                             })
 
                                                             //Sugar Crash
@@ -288,7 +286,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Purple Leathered
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/candy_cavity/purple_leathered.png")
-                                                                        .withText("Tints an uncolored armor into purple, when submerged in soda," +
+                                                                        .withText("Tints uncolored armor to purple, when in soda," +
                                                                                 "(Compatible with modded armor)")
                                                                         .withTitle("Purple Leathered");
                                                             })
@@ -296,10 +294,10 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Amplified Frostmint
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/candy_cavity/amplified_frostmint.png")
-                                                                        .withText("Adds interactibility with frostmint items, in item form and spear form")
+                                                                        .withText("Adds interactibility with frostmint items, in item and spear form")
                                                                         .withTitle("Amplified Frostmint");
                                                             })
-                                                            .addTextPage("Dropped Frostmint items will explode simillar to falling frostmint \n" +
+                                                            .addTextPage("Dropped Frostmint items will explode similar to falling frostmint \n" +
                                                                     "Frostmint Spears when in collision will solidify nearby liquids", page -> {
                                                             });
 
@@ -313,7 +311,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                     entry
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/candy_cavity/caniac/caniac_maniac.png")
-                                                                        .withText("Caniacs do unhinged things like lighting placed explosives,destroying beds,and attacking random entities")
+                                                                        .withText("Caniacs do unhinged things like light placed explosives,destroying beds,and attack random entities")
                                                                         .withTitle("Caniac Maniac");
                                                             });
                                                 })
@@ -431,8 +429,8 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Rabies
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/forlorn_hollows/rabies.png")
-                                                                        .withText("Rabies are discovered within Forlorn mobs," +
-                                                                                "becoming sensitive to water, and attack most mobs randomly")
+                                                                        .withText("Seldomly discovered within Forlorn mobs," +
+                                                                                "becoming sensitive to water, and spreading to any hurt by one")
                                                                         .withTitle("Rabies");
                                                             })
                                                             .addTextPage("Those afflicted with Rabies will suffer damage at the end of its cycle", page -> {
@@ -558,7 +556,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                                         .withText("When reaching a certain level of irradiation, severe side effects are afflicted")
                                                                         .withTitle("Exemplified Irradiation");
                                                             })
-                                                            .addTextPage("Side effects are as follows /n" +
+                                                            .addTextPage("Side effects are as follows \n" +
                                                                     "Weakness, Hunger, Nausea, Slowness, (If Alex's Mobs is present) Exsanguination", page -> {
 
                                                             })
@@ -566,8 +564,13 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Kirov Reporting
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/toxic_caves/kirov_reporting.png")
-                                                                        .withText("Allows the dropping of TnT, Tnt Minecarts and Nukes when airborne, with a flint and steel off-hand")
+                                                                        .withText("Allows the dropping of explosives when airborne, with a flint and steel on the other hand")
                                                                         .withTitle("Kirov Reporting!");
+                                                            })
+
+                                                            .addTextPage("Usable explosives are as follows \n "+
+                                                                    "TNT,TNT Minecarts, Nuclear Bombs, Gamma Nuclear Bombs, (If AC Enriched is present) Bombs from Enriched", page -> {
+
                                                             })
 
                                                             //Armored Liquidators
@@ -580,14 +583,14 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Rearayngement
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/toxic_caves/rearayngement.png")
-                                                                        .withText("Improves upon Rayguns to be more destructive")
+                                                                        .withText("Improves Rayguns to be more destructive,(Compatible with AC Enriched,Mk2 version")
                                                                         .withTitle("Rearayngement");
                                                             })
 
                                                             //Irradiation Washoff
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/toxic_caves/irradiation_washoff.png")
-                                                                        .withText("Douse yourself in water to wash off irradiation,(If Supplementaries is present) Can use soap to further wash off such")
+                                                                        .withText("Douse yourself in water to reduce irradiation,(If Supplementaries present) Can use soap to further wash off such")
                                                                         .withTitle("Irradiation Washoff");
                                                             })
 
@@ -609,7 +612,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Waste Pickup
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/toxic_caves/brainiac/waste_pickup.png")
-                                                                        .withText("Brainiacs pickup dropped waste drums when non")
+                                                                        .withText("Brainiacs pickups dropped waste drums when unarmed")
                                                                         .withTitle("Waste Pickup");
                                                             });
 
@@ -715,7 +718,15 @@ public class ACEBookProvider extends PGenBookProvider {
                                                                 page.addImage("textures/gui/wiki/toxic_caves/tremorzilla/gamma_tremorzilla.png")
                                                                         .withText("Born from pure condensed energy, Gamma Tremorzilla is an ascension above its former self")
                                                                         .withTitle("Gamma Tremorzilla");
-                                                            });
+                                                            })
+
+                                                            .addSpotlightPage(
+                                                                    itemIconGiver(ACExBlockRegistry.GAMMA_NUCLEAR_BOMB),
+                                                                    page -> page.withText(
+                                                                            "Gamma Nuclear Bombs can be made by blasting a dropped nuclear bomb with a gamma raygun").withTitle("Gamma Nuke Making")
+                                                            )
+
+                                                            .addTextPage("Gamma Tremorzilla can be summoned by lighting a gamma nuclear bomb near them",page ->{});
                                                 });
 
                                 lang.addCategory("primordial_caves",
@@ -757,7 +768,7 @@ public class ACEBookProvider extends PGenBookProvider {
                                                             //Stomping
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/primordial_caves/stomping.png")
-                                                                        .withText("Atlatitan/Luxtructosaurus deals damage when stepping")
+                                                                        .withText("Atlatitan/Luxtructosaurus deals damage when stomping")
                                                                         .withTitle("Stomping");
                                                             })
 
@@ -955,14 +966,14 @@ public class ACEBookProvider extends PGenBookProvider {
                                                                         .withTitle("Abyssal Crush");
                                                             })
 
-                                                            .addTextPage("To counterract the crushing effects, It is adviced to suit up with Diving Gear. Each increasing the ammount of reduction \n"+
+                                                            .addTextPage("To counteract the crushing effects, It is advised to traverse with a Submarine and suit up with Diving Gear. Each increasing the amount of reduction \n"+
                                                                     "(IF CREATE IS PRESENT) Create Diving Gear is a viable alternative to such,at the cost of slow movement native to the armor",page ->{})
 
 
                                                             //Ecological Reputation
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/abyssal_chasm/ecological_reputation.png")
-                                                                        .withText("Deep Ones will affect player reputation, depending on whether promoting or destroying the ecosystem")
+                                                                        .withText("Deep Ones affect player reputation, depending on whether promoting or destroying the ecosystem")
                                                                         .withTitle("Ecological Reputation");
                                                             })
 
@@ -972,6 +983,38 @@ public class ACEBookProvider extends PGenBookProvider {
                                                                         .withText("Submarine can bump into entities")
                                                                         .withTitle("Submarine Bump");
                                                             })
+
+
+                                                    ;
+
+
+                                                })
+
+                                        .addEntry("sea_pig",
+                                                "Sea Pig",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "abyssal_chasm"),
+                                                entry -> {
+                                                    entry
+                                                            //Poisonous Skin
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/abyssal_chasm/sea_pig/poisonous_skin.png")
+                                                                        .withText("Sea Pig can inflict poison when touched")
+                                                                        .withTitle("Poisonous Skin");
+                                                            });
+
+
+                                                })
+
+                                        .addEntry("mine_guardian",
+                                                "Mine Guardian",
+                                                new ResourceLocation("paper"),
+                                                new ResourceLocation(AlexsCavesExemplified.MODID, "abyssal_chasm"),
+                                                entry -> {
+                                                    entry
+                                                            //Noon Guardian
+                                                            .addEntityPage(new ResourceLocation(AlexsCaves.MODID,"mine_guardian"), nbtInt("Variant",-1), page ->{page.withText("Rename a mine guardian 'Noon' for a Noon Guardian in reference to the Head Artist of Alexs Caves").withScale(0.5F).withName("Noon Guardian");})
+
 
                                                             //Remineding
                                                             .addTextPage("Mine Guardians can be created which will cause them to not attack their creators \n Make sure to be near when creating them alone",page ->{page.withTitle("Remineding");})
@@ -993,39 +1036,16 @@ public class ACEBookProvider extends PGenBookProvider {
                                                                     ))
                                                             )
 
-                                                            //Noon Guardian
-                                                            .addEntityPage(new ResourceLocation(AlexsCaves.MODID,"mine_guardian"), nbtInt("Variant",-1), page ->{page.withText("Rename a mine guardian 'Noon' for a Noon Guardian in reference to the Head Artist of Alexs Caves").withScale(0.5F).withName("Noon Guardian");})
-
-
                                                             //Nuclear Warfare
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/abyssal_chasm/nuclear_warfare.png")
-                                                                        .withText("(REQUIRES REMINEDING) Arm owned mine guardians with a nuclear bomb to make nuclear mine guardians,Refer to the next page for the naming of specific skins")
+                                                                        .withText("(REQUIRES REMINEDING) Give owned mine guardians with nuclear bombs, converting to nuclear,Refer to the next page for the naming of specific skins")
                                                                         .withTitle("Nuclear Warfare");
                                                             })
 
                                                             .addEntityPage(new ResourceLocation(AlexsCaves.MODID,"mine_guardian"), nbtInt("Variant",1), page ->{page.withText("Rename to 'Ae'").withScale(0.5F).withName("Ae");})
-                                                            .addEntityPage(new ResourceLocation(AlexsCaves.MODID,"mine_guardian"), nbtInt("Variant",2), page ->{page.withText("Rename to 'Jesse'").withScale(0.5F).withName("Jesse");})
+                                                            .addEntityPage(new ResourceLocation(AlexsCaves.MODID,"mine_guardian"), nbtInt("Variant",2), page ->{page.withText("Rename to 'Jesse'").withScale(0.5F).withName("Jesse");});
 
-
-
-                                                    ;
-
-
-                                                })
-
-                                        .addEntry("sea_pig",
-                                                "Sea Pig",
-                                                new ResourceLocation("paper"),
-                                                new ResourceLocation(AlexsCavesExemplified.MODID, "abyssal_chasm"),
-                                                entry -> {
-                                                    entry
-                                                            //Poisonous Skin
-                                                            .addImagePage(page -> {
-                                                                page.addImage("textures/gui/wiki/abyssal_chasm/sea_pig/poisonous_skin.png")
-                                                                        .withText("Sea Pig can inflict poison when touched")
-                                                                        .withTitle("Poisonous Skin");
-                                                            });
 
 
                                                 });

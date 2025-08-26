@@ -1,8 +1,10 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
 import com.github.alexmodguy.alexscaves.server.entity.item.DarkArrowEntity;
+import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
 import com.github.alexmodguy.alexscaves.server.item.DreadbowItem;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.AbstractArrow;
@@ -52,6 +54,11 @@ public abstract class ACEDreadbowItem extends ProjectileWeaponItem {
                 darkArrowEntity.setSecondsOnFire(100);
             }
         }
+    }
+
+    @WrapWithCondition(method = "onUseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"))
+    private boolean alexsCavesExemplified$onUseTick1(ItemStack instance, int pDecrement,@Local(ordinal = 0) ItemStack bow) {
+        return !(EnchantmentHelper.getItemEnchantmentLevel(Enchantments.INFINITY_ARROWS, bow) == 1);
     }
 
 

@@ -17,9 +17,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACEUtils;
-import org.crimsoncrips.alexscavesexemplified.server.blocks.ACEBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -75,23 +74,23 @@ public class ACESmoothLimestoneMixin extends Block {
 
     private Block getSacrificeCavePainting(int i, int j) {
         if(i == -1 && j == -1){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_9.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_9.get();
         }else if(i == -1 && j == 0){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_8.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_8.get();
         }else if(i == -1 && j == 1){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_7.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_7.get();
         }else if(i == 0 && j == -1){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_6.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_6.get();
         }else if(i == 0 && j == 0){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_5.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_5.get();
         }else if(i == 0 && j == 1){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_4.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_4.get();
         }else if(i == 1 && j == -1){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_3.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_3.get();
         }else if(i == 1 && j == 0){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_2.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_2.get();
         }else if(i == 1 && j == 1){
-            return ACEBlockRegistry.CAVE_PAINTING_SACRIFICE_1.get();
+            return ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_1.get();
         }
         return ACBlockRegistry.CAVE_PAINTING_DARK.get();
     }

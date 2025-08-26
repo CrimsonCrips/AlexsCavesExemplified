@@ -27,7 +27,7 @@ public abstract class ACELuxtructosaurus extends SauropodBaseEntity {
 
         LuxtructosaurusEntity lux = (LuxtructosaurusEntity)(Object)this;
 
-        for (LivingEntity entity : lux.level().getEntitiesOfClass(LivingEntity.class, lux.getBoundingBox().expandTowards(1, -2, 1))) {
+        for (LivingEntity entity : lux.level().getEntitiesOfClass(LivingEntity.class, lux.getBoundingBox().inflate(1, -2, 1))) {
             if (entity != lux && entity.getBbHeight() <= 2.2F && AlexsCavesExemplified.COMMON_CONFIG.STOMPING_ENABLED.get()) {
                 entity.hurt(lux.damageSources().mobAttack(lux), 6.0F);
                 ACEUtils.awardAdvancement(entity,"splat","stepped");

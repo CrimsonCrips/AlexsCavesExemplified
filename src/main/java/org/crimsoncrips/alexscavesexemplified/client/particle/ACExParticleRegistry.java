@@ -7,7 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 
-public class ACEParticleRegistry {
+public class ACExParticleRegistry {
     public static final DeferredRegister<ParticleType<?>> DEF_REG = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, AlexsCavesExemplified.MODID);
 
     public static final RegistryObject<SimpleParticleType> TREMORZILLA_GAMMA_EXPLOSION = DEF_REG.register("tremorzilla_gamma_explosion", () -> new SimpleParticleType(false));

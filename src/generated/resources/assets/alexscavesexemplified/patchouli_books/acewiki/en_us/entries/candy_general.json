@@ -8,7 +8,7 @@
       "images": [
         "alexscavesexemplified:textures/gui/wiki/candy_cavity/gluttony.png"
       ],
-      "text": "Eat candy blocks by right clicking while crouching,has a chance to give sugar rush when consuming",
+      "text": "Eat candy blocks by right clicking while crouching",
       "title": "Gluttony"
     },
     {
@@ -20,7 +20,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Consuming frostmint and purple soda will cause a minor explosion"
+      "text": "Consuming frostmint and purple soda will also cause a minor explosion"
     },
     {
       "type": "patchouli:image",
@@ -43,8 +43,12 @@
       "images": [
         "alexscavesexemplified:textures/gui/wiki/candy_cavity/tuned_sating.png"
       ],
-      "text": "Drop foods directly onto a Sack Of Sating, Will also eat food that cant be picked up when in inventory",
+      "text": "Upgrades Sack Of Sating, adding new interactions and features",
       "title": "Tuned Sating"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Can drop items onto a dropped sack, \n Can eat food that cant be picked up when in inventory, \n Creates a jellybean when giving it a food with effects at the cost of 10 gelatin in inventory"
     },
     {
       "type": "patchouli:image",
@@ -133,7 +137,7 @@
       "images": [
         "alexscavesexemplified:textures/gui/wiki/candy_cavity/purple_leathered.png"
       ],
-      "text": "Tints an uncolored armor into purple, when submerged in soda,(Compatible with modded armor)",
+      "text": "Tints uncolored armor to purple, when in soda,(Compatible with modded armor)",
       "title": "Purple Leathered"
     },
     {
@@ -141,12 +145,12 @@
       "images": [
         "alexscavesexemplified:textures/gui/wiki/candy_cavity/amplified_frostmint.png"
       ],
-      "text": "Adds interactibility with frostmint items, in item form and spear form",
+      "text": "Adds interactibility with frostmint items, in item and spear form",
       "title": "Amplified Frostmint"
     },
     {
       "type": "patchouli:text",
-      "text": "Dropped Frostmint items will explode simillar to falling frostmint \nFrostmint Spears when in collision will solidify nearby liquids"
+      "text": "Dropped Frostmint items will explode similar to falling frostmint \nFrostmint Spears when in collision will solidify nearby liquids"
     }
   ]
 }

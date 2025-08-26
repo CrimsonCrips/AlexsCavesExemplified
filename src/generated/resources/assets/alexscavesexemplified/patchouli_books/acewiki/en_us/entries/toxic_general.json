@@ -13,15 +13,19 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Side effects are as follows /nWeakness, Hunger, Nausea, Slowness, (If Alex's Mobs is present) Exsanguination"
+      "text": "Side effects are as follows \nWeakness, Hunger, Nausea, Slowness, (If Alex's Mobs is present) Exsanguination"
     },
     {
       "type": "patchouli:image",
       "images": [
         "alexscavesexemplified:textures/gui/wiki/toxic_caves/kirov_reporting.png"
       ],
-      "text": "Allows the dropping of TnT, Tnt Minecarts and Nukes when airborne, with a flint and steel off-hand",
+      "text": "Allows the dropping of explosives when airborne, with a flint and steel on the other hand",
       "title": "Kirov Reporting!"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Usable explosives are as follows \n TNT,TNT Minecarts, Nuclear Bombs, Gamma Nuclear Bombs, (If AC Enriched is present) Bombs from Enriched"
     },
     {
       "type": "patchouli:image",
@@ -36,7 +40,7 @@
       "images": [
         "alexscavesexemplified:textures/gui/wiki/toxic_caves/rearayngement.png"
       ],
-      "text": "Improves upon Rayguns to be more destructive",
+      "text": "Improves Rayguns to be more destructive,(Compatible with AC Enriched,Mk2 version",
       "title": "Rearayngement"
     },
     {
@@ -44,7 +48,7 @@
       "images": [
         "alexscavesexemplified:textures/gui/wiki/toxic_caves/irradiation_washoff.png"
       ],
-      "text": "Douse yourself in water to wash off irradiation,(If Supplementaries is present) Can use soap to further wash off such",
+      "text": "Douse yourself in water to reduce irradiation,(If Supplementaries present) Can use soap to further wash off such",
       "title": "Irradiation Washoff"
     },
     {

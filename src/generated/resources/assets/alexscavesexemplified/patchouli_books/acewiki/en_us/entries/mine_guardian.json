@@ -1,0 +1,70 @@
+{
+  "category": "alexscavesexemplified:abyssal_chasm",
+  "icon": "minecraft:paper",
+  "name": "Mine Guardian",
+  "pages": [
+    {
+      "type": "patchouli:entity",
+      "entity": "alexscaves:mine_guardian{Variant:-1}",
+      "name": "Noon Guardian",
+      "scale": 0.5,
+      "text": "Rename a mine guardian 'Noon' for a Noon Guardian in reference to the Head Artist of Alexs Caves"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Mine Guardians can be created which will cause them to not attack their creators \n Make sure to be near when creating them alone",
+      "title": "Remineding"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "#": "#alexscavesexemplified:remineding_material",
+          "0": "#alexscavesexemplified:remineding_material",
+          "e": "alexscaves:enigmatic_engine",
+          "g": "alexscaves:depth_glass"
+        },
+        "pattern": [
+          [
+            " # ",
+            "###",
+            " # "
+          ],
+          [
+            "###",
+            "#eg",
+            "#0#"
+          ],
+          [
+            " # ",
+            "###",
+            " # "
+          ]
+        ]
+      },
+      "name": " "
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/abyssal_chasm/nuclear_warfare.png"
+      ],
+      "text": "(REQUIRES REMINEDING) Give owned mine guardians with nuclear bombs, converting to nuclear,Refer to the next page for the naming of specific skins",
+      "title": "Nuclear Warfare"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "alexscaves:mine_guardian{Variant:1}",
+      "name": "Ae",
+      "scale": 0.5,
+      "text": "Rename to 'Ae'"
+    },
+    {
+      "type": "patchouli:entity",
+      "entity": "alexscaves:mine_guardian{Variant:2}",
+      "name": "Jesse",
+      "scale": 0.5,
+      "text": "Rename to 'Jesse'"
+    }
+  ]
+}

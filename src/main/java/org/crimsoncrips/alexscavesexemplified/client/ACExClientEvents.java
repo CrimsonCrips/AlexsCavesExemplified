@@ -1,17 +1,16 @@
 package org.crimsoncrips.alexscavesexemplified.client;
 
 import com.github.alexmodguy.alexscaves.server.entity.living.CaniacEntity;
-import com.github.alexmodguy.alexscaves.server.entity.living.WatcherEntity;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.*;
-import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACEEffects;
 
 @OnlyIn(Dist.CLIENT)
-public class ACEClientEvents {
+public class ACExClientEvents {
 
     double vibrate = 0;
 
@@ -44,6 +43,14 @@ public class ACEClientEvents {
         }
         if (postEvent.getEntity() instanceof CaniacEntity && AlexsCavesExemplified.COMMON_CONFIG.CANIAC_MANIAC_ENABLED.get()) {
             postEvent.getPoseStack().popPose();
+        }
+    }
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public void logIn(ClientPlayerNetworkEvent.LoggingIn event) {
+        if (AlexsCavesExemplified.CLIENT_CONFIG.PATCHOULI_REMINDER_ENABLED.get()) {
+            event.getPlayer().displayClientMessage(Component.nullToEmpty("THE INGAME WIKI CAN ONLY BE PRESENT WITH PATCHOULI ENABLED, DISABLE THIS WARNING IN THE CLIENT CONFIG"),false);
         }
     }
 
