@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "Гаммаракан",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/gammaroach/roach_feeding.png"
+      ],
+      "text": "Гаммараканы едят брошенную еду",
+      "title": "Кормление таракана"
+    }
+  ]
+}

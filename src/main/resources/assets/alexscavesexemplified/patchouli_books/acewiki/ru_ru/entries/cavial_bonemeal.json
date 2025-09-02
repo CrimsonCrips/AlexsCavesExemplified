@@ -1,0 +1,19 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Пещерная костная мука",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/cavial_bonemeal.png"
+      ],
+      "text": "Удобряйте совместимую флору, чтобы улучшить или заселить участок флорой при внесении удобрений",
+      "title": "Пещерная костная мука"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Расставьте губки для увеличения дальность распространения флоры первобытных пещер"
+    }
+  ]
+}

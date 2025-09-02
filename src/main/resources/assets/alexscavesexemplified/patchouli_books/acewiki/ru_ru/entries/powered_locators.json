@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Усиленные локаторы",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/powered_locators.png"
+      ],
+      "text": "Принесите в жертву звезду Незера, чтобы усилить предмет-локатор и предотвратить божественное вмешательство",
+      "title": "Усиленные локаторы"
+    }
+  ]
+}

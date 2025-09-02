@@ -1,0 +1,19 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Дополнительная воспламеняемость",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/additional_flamability.png"
+      ],
+      "text": "Добавляет воспламеняемость блокам из Alex's Caves, которые изначально нельзя было поджечь",
+      "title": "Дополнительная воспламеняемость"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Янтарь, араукариевые и обтёсанные араукариевые блоки, архаичные лианы, побеги папоротника, вьющийся папоротник, мухоловка, саговник, древняя листва, сноп папоротника, терновые и обтёсанные терновые блоки, подсорняк, тотем забытого"
+    }
+  ]
+}

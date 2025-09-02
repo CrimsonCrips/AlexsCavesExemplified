@@ -1,0 +1,35 @@
+{
+  "category": "alexscavesexemplified:abyssal_chasm",
+  "icon": "minecraft:paper",
+  "name": "Общее",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/abyssal_chasm/abyssal_crush.png"
+      ],
+      "text": "Наносит урон, чем глубже вы погружаетесь в воду, а также сокращает задержку дыхания",
+      "title": "Глубинное давление"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Чтобы противостоять глубинному эффекту, рекомендуется исследовать глубины на подлодке и экипироваться водолазным снаряжением. Каждый из этих способов увеличивает улучшит задержку дыхания\n(ЕСЛИ УСТАНОВЛЕН CREATE) Водолазное снаряжение из Create является жизнеспособной альтернативой, ценой медленного передвижения, свойственного этой броне"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/abyssal_chasm/ecological_reputation.png"
+      ],
+      "text": "Глубиники влияют на репутацию игрока в зависимости от того, способствует он разрушению экосистемы или защищает её",
+      "title": "Экологическая репутация"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/abyssal_chasm/submarine_bump.png"
+      ],
+      "text": "Подлодка может сталкиваться с сущностями",
+      "title": "Столкновение подлодки"
+    }
+  ]
+}

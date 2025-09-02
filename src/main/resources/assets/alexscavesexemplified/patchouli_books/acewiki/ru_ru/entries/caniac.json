@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Тростоньяк",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/caniac/caniac_maniac.png"
+      ],
+      "text": "Тростоньяки делают неадекватные вещи, например, поджигают размещённую взрывчатку, уничтожают кровати и атакуют случайных существ",
+      "title": "Мания тростоньяка"
+    }
+  ]
+}

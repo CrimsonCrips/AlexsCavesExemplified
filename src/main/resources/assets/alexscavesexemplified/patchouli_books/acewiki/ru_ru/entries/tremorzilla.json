@@ -1,0 +1,25 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "Сотрясозилла",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/tremorzilla/gamma_tremorzilla.png"
+      ],
+      "text": "Рождённая из чистой конденсированной энергии, гамма-сотрясозилла представляет собой превосходство над своей прежней формой",
+      "title": "Гамма-сотрясозилла"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscavesexemplified:gamma_nuclear_bomb",
+      "text": "Гамма-ядерные бомбы можно создать, взорвав брошенную ядерную бомбу с помощью гамма-излучателя",
+      "title": "Создание гамма-бомбы"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Гамма-сотрясозиллу можно призвать, активировав гамма-ядерную бомбу рядом с ней"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:abyssal_chasm",
+  "icon": "minecraft:paper",
+  "name": "Морская свинья",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/abyssal_chasm/sea_pig/poisonous_skin.png"
+      ],
+      "text": "Морская свинья может накладывать яд при прикосновении",
+      "title": "Ядовитая кожа"
+    }
+  ]
+}
