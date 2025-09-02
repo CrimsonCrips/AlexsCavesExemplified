@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Карамельный куб",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/caramel_cube/sticky_caramel.png"
+      ],
+      "text": "Липкость карамельных кубов сказывается и на их атаке",
+      "title": "Липкая карамель"
+    }
+  ]
+}

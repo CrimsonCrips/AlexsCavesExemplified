@@ -1,0 +1,23 @@
+{
+  "category": "alexscavesexemplified:forlorn_hollows",
+  "icon": "minecraft:paper",
+  "name": "Разкрысатель",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/corrodent/knawing.png"
+      ],
+      "text": "Разкрысатели грызут предметы и еду",
+      "title": "Грызение"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/corrodent/corrodent_conversion.png"
+      ],
+      "text": "Разкрысатели могут быть ассимилированы в подзектантов",
+      "title": "Преображение разкрысателей"
+    }
+  ]
+}

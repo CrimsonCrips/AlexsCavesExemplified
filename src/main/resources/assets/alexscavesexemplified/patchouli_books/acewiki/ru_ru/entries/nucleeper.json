@@ -1,0 +1,23 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "Ядрипер",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/nucleeper/nuclear_chain.png"
+      ],
+      "text": "Взрывы ядриперов детонируют других ядриперов поблизости",
+      "title": "Ядерная цепь"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/nucleeper/defusion.png"
+      ],
+      "text": "Ядриперов можно обезвредить, превратив их в ходячих оболочек",
+      "title": "Обезвреживание"
+    }
+  ]
+}

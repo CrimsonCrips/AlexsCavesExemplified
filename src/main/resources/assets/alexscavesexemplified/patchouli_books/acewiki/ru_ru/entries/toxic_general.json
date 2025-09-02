@@ -1,0 +1,63 @@
+{
+  "category": "alexscavesexemplified:toxic_caves",
+  "icon": "minecraft:paper",
+  "name": "Общее",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/exemplified_irradiation.png"
+      ],
+      "text": "При достижении определённого уровня облучения проявляются серьёзные побочные эффекты",
+      "title": "Усиленное облучение"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Побочные эффекты следующие:\nслабость, голод, тошнота, замедление, (если установлены Alex's Mobs) обескровливание"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/kirov_reporting.png"
+      ],
+      "text": "Позволяет сбрасывать взрывчатку в полёте, с огнивом во второй руке",
+      "title": "Киров докладывает"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Используемая взрывчатка:\nдинамит, вагонетки с динамитом, ядерные бомбы, гамма-ядерные бомбы, (если установлены Alex's Caves: Enriched) обогащённые бомбы"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/armored_liquidators.png"
+      ],
+      "text": "Защитный костюм лучше сопротивляется источникам облучения",
+      "title": "Бронированные ликвидаторы"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/rearayngement.png"
+      ],
+      "text": "Улучшает излучатели, делая их более разрушительными, (совместимо с версией Мк. II из Alex's Caves: Enriched)",
+      "title": "Переизлучение"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/irradiation_washoff.png"
+      ],
+      "text": "Окатите себя водой, чтобы уменьшить облучение, (если установлен Supplementaries) можно использовать мыло для дополнительного смывания",
+      "title": "Смывание радиации"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/toxic_caves/geothermal_effects.png"
+      ],
+      "text": "Воздействует на тех, кто находится на геотермальных вентиляциях, в зависимости от выбрасываемой жидкости",
+      "title": "Геотермальные эффекты"
+    }
+  ]
+}

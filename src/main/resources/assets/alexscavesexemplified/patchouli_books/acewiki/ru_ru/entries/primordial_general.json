@@ -1,0 +1,63 @@
+{
+  "category": "alexscavesexemplified:primordial_caves",
+  "icon": "minecraft:paper",
+  "name": "Общее",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/serened.png"
+      ],
+      "text": "Спокойствие накладывается с помощью салата спокойствия на мобов, делая их нейтральными, ослабляя, но увеличивая здоровье",
+      "title": "Спокойствие"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/egg_anger.png"
+      ],
+      "text": "Взаимодействие с яйцами динозавров будет злить их",
+      "title": "Гнев из-за яиц"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/scavenging.png"
+      ],
+      "text": "Плотоядные динозавры будут собирать брошенное/размещённое мясо на земле",
+      "title": "Падальщичество"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Когда сотрясозавры находят еду, но окружены велоцирапторами, сотрясозавры громко ревут, чтобы отпугнуть конкурентов"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/stomping.png"
+      ],
+      "text": "Атлатитан и люкструктозавр наносят урон при растаптывании",
+      "title": "Растаптывание"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/preserved_amber.png"
+      ],
+      "text": "В натуральном янтаре можно обнаружить заточённых существ внутри,",
+      "title": "Сохранившийся янтарь"
+    },
+    {
+      "type": "patchouli:text",
+      "text": " от лягушек (если установлены Alex's Mobs) до мух и тараканов"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/fly_trapped.png"
+      ],
+      "text": "(ТРЕБУЕЮТСЯ ALEX'S MOBS) Мухоловки захлопываются при наличии мух",
+      "title": "Мухоловка"
+    }
+  ]
+}

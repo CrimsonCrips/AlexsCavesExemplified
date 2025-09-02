@@ -1,0 +1,67 @@
+{
+  "category": "alexscavesexemplified:magnetic_caves",
+  "icon": "minecraft:paper",
+  "name": "Общее",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/magneticism.png"
+      ],
+      "text": "Магнетизм — это зачарование, применяемое к механизмам из магнитных пещер, добавляющее новые механики",
+      "title": "Магнетизм"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscaves:galena_gauntlet",
+      "text": "Галенитовая перчатка теперь имеет способность забирать оружие у телеторов для собственного использования\nПритягивайте магнитные и кристаллические предметы издалека\n и вырывайте сердца магнетронов ценой значительного урона и перезарядки",
+      "title": " "
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscaves:resistor_shield",
+      "text": "Щит сопротивления теперь имеет способность воздействовать на брошенные предметы\nМожет запускать ближайшие самонаводящиеся стрелы в указанную цель, если щит лазурный\nЗакруживать ближайшие самонаводящиеся стрелы во время использования, если щит алый",
+      "title": " "
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/shocking_therapy.png"
+      ],
+      "text": "Плазменные лампы напрямую бьют током ближайших игроков в радиусе действия",
+      "title": "Шоковая терапия"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Также добавляет спецэффекты из франшизы Command and Conquer для плазменных ламп"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/scalable_hologram.png"
+      ],
+      "text": "Масштабируйте голограммы с помощью слитков лазурного и алого неодима",
+      "title": "Масштабируемая голограмма"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/magnetic_movement.png"
+      ],
+      "text": "(КЛИЕНТСКАЯ ЧАСТЬ) Магнитные предметы колеблются, если находятся в пределах магнитных пещер",
+      "title": "Магнитное движение"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/magnerip.png"
+      ],
+      "text": "Вырывает магнитные предметы из рук с помощью магнитных сил в купе с эффектом слабости",
+      "title": "Магнитный отрыв"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "(ЕСЛИ ВКЛЮЧЁНО В НАСТРОЙКАХ) Вырывает все магнитные предметы из вашего инвентаря, по умолчанию отключено"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:primordial_caves",
+  "icon": "minecraft:paper",
+  "name": "Сотрясозавр",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/tremorsaurus/seethed_taming.png"
+      ],
+      "text": "(ТРЕБУЕТ ПАДАЛЬЩИЧЕСТВО) Успокоенных сотрясозавров можно приручить, позволив им съесть мясо с вашей руки",
+      "title": "Приручение кормлением"
+    }
+  ]
+}

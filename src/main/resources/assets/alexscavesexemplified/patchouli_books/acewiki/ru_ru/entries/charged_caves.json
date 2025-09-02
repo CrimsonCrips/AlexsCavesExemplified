@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Заряженные пещеры",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/charged_caves.png"
+      ],
+      "text": "У криперов Alex's Caves есть шанс быть заряженными при появлении",
+      "title": "Заряженные пещеры"
+    }
+  ]
+}

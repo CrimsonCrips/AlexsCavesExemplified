@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Попытки спелеологии",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/spelunkery_attempts.png"
+      ],
+      "text": "Настраиваемое количество попыток для спелеологии в столе спелеолога",
+      "title": "Попытки спелеологии"
+    }
+  ]
+}

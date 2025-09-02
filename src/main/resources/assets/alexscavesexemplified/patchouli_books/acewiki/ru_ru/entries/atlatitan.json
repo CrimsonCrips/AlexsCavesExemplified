@@ -1,0 +1,19 @@
+{
+  "category": "alexscavesexemplified:primordial_caves",
+  "icon": "minecraft:paper",
+  "name": "Атлатитан",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/primordial_caves/atlatitan/volcanic_sacrifice.png"
+      ],
+      "text": "Принесите в жертву вулкану яйцо атлатитана или его детёныша, чтобы сбросить его перезарядку",
+      "title": "Вулканическая жертва"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Добавляет новую наскальную живопись в пространстве 3×3, связанную с этой функцией, после однократного убийства люкстрактозавр"
+    }
+  ]
+}

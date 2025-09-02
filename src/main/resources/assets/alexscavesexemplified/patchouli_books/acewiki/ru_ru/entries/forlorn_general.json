@@ -1,0 +1,59 @@
+{
+  "category": "alexscavesexemplified:forlorn_hollows",
+  "icon": "minecraft:paper",
+  "name": "Общее",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/forlorn_light_effect.png"
+      ],
+      "text": "Держа в руке свет, вы отпугиваете некоторых мобов забвенныхы пустот (совместимо с фонарями Curios)",
+      "title": "Эффект света забвенных"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/burst_out.png"
+      ],
+      "text": "Случайный наземный обитатель забвенных пустот может выскочить при раскопках в биоме",
+      "title": "Внезапное появление"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/rabies.png"
+      ],
+      "text": "Изредка обнаруживается у мобов забвенных пустот, делая их чувствительными к воде и распространяясь на всех, кого они ранят",
+      "title": "Бешенство"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Страдающие от бешенства будут получать урон в конце своего цикла"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/guaslowpoke.png"
+      ],
+      "text": "Гуано накладывает замедление, будь вы на нём или поражены им",
+      "title": "Гуазамедление"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/beholdent_stalking.png"
+      ],
+      "text": "Незанятые созерцатели преследуют ближайших игроков (чисто визуально)",
+      "title": "Наблюдение с преследованием"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/dreadbow_adaption.png"
+      ],
+      "text": "Зачарования ванильного лука работают на жутком луке",
+      "title": "Адаптация жуткого лука"
+    }
+  ]
+}

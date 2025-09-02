@@ -1,0 +1,27 @@
+{
+  "category": "alexscavesexemplified:forlorn_hollows",
+  "icon": "minecraft:paper",
+  "name": "Подзектант",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/underzealot/underzealot_respect.png"
+      ],
+      "text": "Ношение полного комплекта одежды подзектантов делает их нейтральными к вам",
+      "title": "Уважение подзектантов"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/underzealot/dark_offering.png"
+      ],
+      "text": "Позволяет игроку приносить в жертву пригодных обитателей на поводке и отдавать их подзектантам для их ритуалов, нажав ПКМ,",
+      "title": "Тёмное приношение"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "(ТРЕБУЕТ 'УВАЖЕНИЕ ПОДЗЕКТАНТОВ' ДЛЯ ЭТОЙ ЧАСТИ ФУНКЦИОНАЛА)\nЕсли вы нейтральны с подзектантами, они дадут предмет, характерный для забвенных пустот, в обмен на приношение в жертву. Что они дают в ответ, зависит от типа жертвы"
+    }
+  ]
+}

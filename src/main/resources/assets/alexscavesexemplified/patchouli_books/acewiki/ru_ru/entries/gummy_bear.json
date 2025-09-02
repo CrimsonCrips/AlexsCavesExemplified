@@ -1,0 +1,29 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Мармеладный мишка",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gummy_bear/jellybean_changes.png"
+      ],
+      "text": "Мармеладных мишек можно прервать во время спячки, что позволяет ускорить получение мармеладных бобов",
+      "title": "Изменения мармеладных бобов"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscaves:jelly_bean",
+      "text": "Количество производимых мармеладных бобов зависит от времени, затраченного на спячку, с максимумом в 12 бобов за полную продолжительность. Работает со сахарным ускорением",
+      "title": ""
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gummy_bear/sweetish_speedup.png"
+      ],
+      "text": "Накормите спящего мармеладного мишку рыбой соответствующего цвета, чтобы ускорить спячку",
+      "title": "Сладкое ускорение"
+    }
+  ]
+}

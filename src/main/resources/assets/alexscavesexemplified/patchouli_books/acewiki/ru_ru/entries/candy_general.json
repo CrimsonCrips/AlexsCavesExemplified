@@ -1,0 +1,140 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Общее",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gluttony.png"
+      ],
+      "text": "Поедайте конфетные блоки, нажимая ПКМ крадучись",
+      "title": "Обжорство"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gluttony2.png"
+      ],
+      "text": "Добавляет небольшие взаимодействия с поеданием еды"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Употребление мятной жвачки и фиолетовой газировки также вызовет небольшой взрыв"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/sticky_soda.png"
+      ],
+      "text": "Фиолетовая газировка накладывает замедление при нахождении в ней",
+      "title": "Липкая газировка"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/radiant_wrath.png"
+      ],
+      "text": "Усиливает способности вашего сахарного посоха ценой сияющей эссенции во второй руке",
+      "title": "Гнев сияния"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/tuned_sating.png"
+      ],
+      "text": "Улучшает мешок насыщения, добавляя новые взаимодействия и функции",
+      "title": "Настроенное насыщение"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Можно бросать предметы на брошенный мешок,\n Он может съедать еду, которую нельзя подобрать, когда находится в инвентаре,\n Создаёт мармеладный боб, когда ему дают еду с эффектами, ценой 10 желатина в инвентаре"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/sugar_crash.png"
+      ],
+      "text": "Накладывает на вас сахарный взрыв после эффектов сахарной лихорадки, нанося небольшой урон с замедлением",
+      "title": "Сахарный взрыв"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/iced_cream.png"
+      ],
+      "text": "Брошенные шарики мороженого замораживают",
+      "title": "За-мороженное"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/cryonic_cavity.png"
+      ],
+      "text": "Конфетный котлован медленно замораживает вас",
+      "title": "Криогенный котлован"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/breaking_candy.png"
+      ],
+      "text": "Позволяет варить желатин с помощью зажжённого котла",
+      "title": "Во все конфетные"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "tag:alexscavesexemplified:gelatinable",
+      "text": "Чтобы сварить желатин, бросьте краситель на выбор для цвета и кость в нагретый котёл и просто подождите",
+      "title": ""
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscavesexemplified:ice_cream_cone",
+      "text": "Собирайте вкусное мороженое (я люблю мороженое), обратите внимание, что последовательность мороженого не имеет значения, кроме рожка",
+      "title": "Рожок мороженого"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "alexscaves:wafer_cookie_wall",
+          "B": "alexscaves:wafer_cookie_block",
+          "C": "alexscaves:chocolate_ice_cream",
+          "S": "alexscaves:sweetberry_ice_cream",
+          "V": "alexscaves:vanilla_ice_cream"
+        },
+        "pattern": [["V"], ["S"], ["C"], ["B"], ["0"]]
+      },
+      "name": ""
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/overdrived_conversion.png"
+      ],
+      "text": "Позволяет перегрузить тигель трансформации, бросив в него сияющую эссенцию, чтобы увеличить его радиус",
+      "title": "Ускоренная реакция"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/purple_leathered.png"
+      ],
+      "text": "Окрашивает неокрашенную броню в фиолетовый цвет при погружении в газировку (совместимо с бронёй из модов)",
+      "title": "Фиолетовая краска"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/amplified_frostmint.png"
+      ],
+      "text": "Добавляет возможность взаимодействия с предметами из мятной жвачки, в виде предмета и копья",
+      "title": "Усиленная мятная жвачка"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Брошенные предметы из мятной жвачки взрываются как падающая жвачка\nКопьz морозной свежести при столкновении затвердевают ближайшую жидкость"
+    }
+  ]
+}
