@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Щадящая спелеология",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/forgiving_spelunking.png"
+      ],
+      "text": "Спелеогия становится более снисходительной, если вам не удаётся расшифровать табличку",
+      "title": "Щадящая спелеология"
+    }
+  ]
+}

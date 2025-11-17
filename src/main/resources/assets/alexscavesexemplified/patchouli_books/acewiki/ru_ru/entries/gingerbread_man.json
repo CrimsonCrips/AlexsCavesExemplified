@@ -1,0 +1,23 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Пряничный человечек",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gingerbread_man/amputation.png"
+      ],
+      "text": "Позволяет ампутировать конечности пряничного человечка",
+      "title": "Ампутация"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gingerbread_man/hive_mind.png"
+      ],
+      "text": "Атакуйте одного — сражайтесь со всеми.",
+      "title": "Коллективный разум"
+    }
+  ]
+}

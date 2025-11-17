@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:magnetic_caves",
+  "icon": "minecraft:paper",
+  "name": "Маячок",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/magnetic_caves/notor/self_destruct.png"
+      ],
+      "text": "Маячки бросаются на своего обидчика и инициируют самоуничтожение при получении урона",
+      "title": "Самоуничтожение"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Повторяемая спелеология",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alexscaves:spelunkery_table",
+      "text": "Позволяет выйти из стола спелеолога без разрушения таблички, что полезно при прерывании нежелательными вмешательствами",
+      "title": "Повторяемая спелеология"
+    }
+  ]
+}

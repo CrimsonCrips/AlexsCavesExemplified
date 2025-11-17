@@ -1,0 +1,33 @@
+{
+  "category": "alexscavesexemplified:general",
+  "icon": "minecraft:paper",
+  "name": "Воспроизведение жидкостей",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Позволяет воспроизводить жидкости из Alex's Caves с помощью специального котла и особых методов (совместимо с системой жидкостных труб из Create)",
+      "title": "Воспроизведение жидкостей"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/liquid_replication/metal_cauldron.png"
+      ],
+      "text": "Нажмите ПКМ по обычному котлу крадучись с металлическим блоком в руке"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/liquid_replication/acidic_cauldron.png"
+      ],
+      "text": "Поместите кислотный радиамень поверх металлического котла"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/liquid_replication/soda_cauldron.png"
+      ],
+      "text": "Нажмите ПКМ с бутылкой газировки, чтобы можно было свободно зачерпывать её ведром"
+    }
+  ]
+}

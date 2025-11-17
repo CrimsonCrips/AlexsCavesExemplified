@@ -1,0 +1,23 @@
+{
+  "category": "alexscavesexemplified:forlorn_hollows",
+  "icon": "minecraft:paper",
+  "name": "Веспер",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/vesper/anti_sacrifice.png"
+      ],
+      "text": "Весперы атакуют подзектантов, замеченных в принесении в жертву себе подобных",
+      "title": "Анти-жертвоприношение"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/forlorn_hollows/vesper/vesper_shotdown.png"
+      ],
+      "text": "Весперов можно сбить из лука",
+      "title": "Сбивание веспера"
+    }
+  ]
+}

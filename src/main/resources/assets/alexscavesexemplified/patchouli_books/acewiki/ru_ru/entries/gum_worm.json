@@ -1,0 +1,15 @@
+{
+  "category": "alexscavesexemplified:candy_cavity",
+  "icon": "minecraft:paper",
+  "name": "Мармеладный червь",
+  "pages": [
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/candy_cavity/gum_worm/pressured_hooks.png"
+      ],
+      "text": "Наносит урон через крюки при использовании с мармеладным червём",
+      "title": "Напряжённые крюки"
+    }
+  ]
+}
