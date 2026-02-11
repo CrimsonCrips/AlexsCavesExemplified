@@ -1,5 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.server;
 
+import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ACExServerConfig {
@@ -100,6 +102,7 @@ public class ACExServerConfig {
 
     public ACExServerConfig(final ForgeConfigSpec.Builder builder) {
         builder.push("General");
+
         this.ACE_WIKI_ENABLED = buildBoolean(builder, "ACE_WIKI_ENABLED", " ", true, "Gives you the ace wiki book at start");
         this.REDOABLE_SPELUNKY_ENABLED = buildBoolean(builder, "REDOABLE_SPELUNKY_ENABLED", " ", true, "Whether it gives you back the tablet when exiting the spelunky table");
          this.SPELUNKY_ATTEMPTS_AMOUNT = buildInt(builder, "SPELUNKY_ATTEMPTS_AMOUNT", " ", 5, 1, Integer.MAX_VALUE, "Amount of tries you get for the spelunky table per tablet");

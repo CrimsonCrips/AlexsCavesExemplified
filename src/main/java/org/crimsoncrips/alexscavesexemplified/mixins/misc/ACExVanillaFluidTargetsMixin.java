@@ -22,6 +22,8 @@ public abstract class ACExVanillaFluidTargetsMixin {
             return ACExBlockRegistry.ACID_CAULDRON.getHolder().isPresent();
         } else if (blockState.is(ACExBlockRegistry.PURPLE_SODA_CAULDRON.get())) {
             return ACExBlockRegistry.PURPLE_SODA_CAULDRON.getHolder().isPresent();
+        } else if (blockState.is(ACExBlockRegistry.METAL_CAULDRON.get())) {
+            return ACExBlockRegistry.METAL_CAULDRON.getHolder().isPresent();
         }
         return original;
     }

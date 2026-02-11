@@ -21,6 +21,7 @@ public class ACExEntityTagGenerator extends EntityTypeTagsProvider {
 	public static final TagKey<EntityType<?>> CAN_RABIES = create(AlexsCavesExemplified.prefix("can_rabies"));
 	public static final TagKey<EntityType<?>> VESPER_HUNT = create(AlexsCavesExemplified.prefix("vesper_hunt"));
 	public static final TagKey<EntityType<?>> LICOWITCH_HATE = create(AlexsCavesExemplified.prefix("licowitch_hate"));
+	public static final TagKey<EntityType<?>> GUANO_IMMUNITY = create(AlexsCavesExemplified.prefix("guano_immunity"));
 
 
 	public ACExEntityTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper helper) {
@@ -29,6 +30,14 @@ public class ACExEntityTagGenerator extends EntityTypeTagsProvider {
 
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
+
+		tag(GUANO_IMMUNITY).add(
+				ACEntityRegistry.UNDERZEALOT.get(),
+				ACEntityRegistry.CORRODENT.get(),
+				ACEntityRegistry.FORSAKEN.get(),
+				ACEntityRegistry.WATCHER.get(),
+				ACEntityRegistry.VESPER.get()
+		);
 
 		tag(ACID_TO_CAT).add(
 				EntityType.CAT,

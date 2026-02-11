@@ -33,6 +33,8 @@ import org.crimsoncrips.alexscavesexemplified.compat.CreateCompat;
 import org.joml.AxisAngle4f;
 import org.joml.Quaternionf;
 
+import java.util.Random;
+
 import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.getEntityMagneticDelta;
 import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.setEntityMagneticDelta;
 
@@ -48,6 +50,13 @@ public class ACExUtils {
         if (player instanceof ServerPlayer serverPlayer){
             ACExUtils.awardAdvancement(serverPlayer,"magnerip","ripped");
         }
+    }
+
+    public boolean chanceTrue(int level,int max) {
+        if(level >= max) return true;   // 10 = 100%
+        Random r = new Random();
+        int roll = r.nextInt(max) + 1;  // 1-10
+        return roll <= level;
     }
 
     public static int getDivingAmount(LivingEntity entity) {

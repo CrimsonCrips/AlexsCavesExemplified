@@ -315,7 +315,7 @@ public class ACExemplifiedEvents {
             }
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.FISH_MUTATION_ENABLED.get() && died.getFeetBlockState().is(ACBlockRegistry.ACID.get()) && died.getType().is(ACExEntityTagGenerator.ACID_TO_FISH)  && !died.level().isClientSide() && died.getRandom().nextDouble() < 1){
+        if (AlexsCavesExemplified.COMMON_CONFIG.FISH_MUTATION_ENABLED.get() && deathEvent.getSource().is(ACDamageTypes.ACID) && died.getType().is(ACExEntityTagGenerator.ACID_TO_FISH) && !died.level().isClientSide() && died.getRandom().nextDouble() < 0.2){
             ACEntityRegistry.RADGILL.get().spawn((ServerLevel) level, BlockPos.containing(died.getX(), died.getY(), died.getZ()), MobSpawnType.MOB_SUMMONED);
             for (Player players : level.getEntitiesOfClass(Player.class, died.getBoundingBox().inflate(8))) {
                 ACExUtils.awardAdvancement(players,"convert_fish","convert");
@@ -324,7 +324,7 @@ public class ACExemplifiedEvents {
         }
 
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.CAT_MUTATION_ENABLED.get() && died.getFeetBlockState().is(ACBlockRegistry.ACID.get()) && died.getType().is(ACExEntityTagGenerator.ACID_TO_CAT)  && !died.level().isClientSide() && died.getRandom().nextDouble() < 1){
+        if (AlexsCavesExemplified.COMMON_CONFIG.CAT_MUTATION_ENABLED.get() && deathEvent.getSource().is(ACDamageTypes.ACID) && died.getType().is(ACExEntityTagGenerator.ACID_TO_CAT)  && !died.level().isClientSide() && died.getRandom().nextDouble() < 0.2){
             ACEntityRegistry.RAYCAT.get().spawn((ServerLevel) level, BlockPos.containing(died.getX(), died.getY(), died.getZ()), MobSpawnType.MOB_SUMMONED);
             for (Player players : level.getEntitiesOfClass(Player.class, died.getBoundingBox().inflate(8))) {
                 ACExUtils.awardAdvancement(players,"convert_cat","convert");
@@ -370,36 +370,36 @@ public class ACExemplifiedEvents {
         LivingEntity livingEntity = livingTickEvent.getEntity();
         Level level = livingEntity.level();
 
-        if (livingEntity instanceof SeaPigEntity seaPigEntity && level.random.nextDouble() < 0.01 && AlexsCavesExemplified.COMMON_CONFIG.POISONOUS_SKIN_ENABLED.get()) {
+        if (livingEntity instanceof SeaPigEntity seaPigEntity && AlexsCavesExemplified.COMMON_CONFIG.POISONOUS_SKIN_ENABLED.get()) {
             for (LivingEntity entity : seaPigEntity.level().getEntitiesOfClass(LivingEntity.class, seaPigEntity.getBoundingBox().inflate(0.5))) {
-                if (entity != seaPigEntity && entity.getBbHeight() <= 3.5F && !(entity instanceof SeaPigEntity)) {
+                if (entity != seaPigEntity && entity.getBbHeight() <= 3.5F && !(entity instanceof SeaPigEntity) && level.random.nextDouble() < 0.01) {
                     entity.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0));
                     ACExUtils.awardAdvancement(entity,"poisonous_skin","touched");
                 }
             }
         }
 
-        if (livingEntity instanceof Player player && level.getBiome(player.blockPosition()).is(ACBiomeRegistry.ABYSSAL_CHASM) && AlexsCavesExemplified.COMMON_CONFIG.ABYSSAL_CRUSH_ENABLED.get() && !(player.getVehicle() instanceof SubmarineEntity)){
-            int aboveWater = 0;
-            BlockPos pos = new BlockPos(player.getBlockX(), (int) (player.getBlockY() + 2),player.getBlockZ());
-            while (level.getBlockState(pos).is(Blocks.WATER)){
-                pos = pos.above();
-                aboveWater++;
-            }
-            int diving = ACExUtils.getDivingAmount(livingEntity);
+        if (livingEntity instanceof Player player){
+            if (AlexsCavesExemplified.COMMON_CONFIG.ABYSSAL_CRUSH_ENABLED.get() && !(player.getVehicle() instanceof SubmarineEntity)){
+                if(level.getBiome(player.blockPosition()).is(ACBiomeRegistry.ABYSSAL_CHASM)){
+                    int aboveWater = 0;
+                    BlockPos pos = new BlockPos(player.getBlockX(), (int) (player.getBlockY() + 2), player.getBlockZ());
+                    while (level.getBlockState(pos).is(Blocks.WATER)) {
+                        pos = pos.above();
+                        aboveWater++;
+                    }
+                    int diving = ACExUtils.getDivingAmount(livingEntity);
 
-            if (level.random.nextDouble() < (0.1 - (0.030 * diving))){
-                if (aboveWater > 50 && diving <= 10){
-                    player.hurt(ACExDamageTypes.getDamageSource(player.level(), ACExDamageTypes.DEPTH_CRUSH), (float) (0.025 * (aboveWater - 40)));
-                    player.setAirSupply(player.getAirSupply() + (int) (0.025 * (aboveWater - 100)));
+                    if (level.random.nextDouble() < (0.1 - (0.030 * diving))) {
+                        if (aboveWater > 50 && diving <= 10) {
+                            player.hurt(ACExDamageTypes.getDamageSource(player.level(), ACExDamageTypes.DEPTH_CRUSH), (float) (0.025 * (aboveWater - 40)));
+                            player.setAirSupply(player.getAirSupply() + (int) (0.025 * (aboveWater - 100)));
+                        }
+                    }
                 }
             }
-        }
 
-
-
-        if (AlexsCavesExemplified.COMMON_CONFIG.PRESSURED_HOOKS_ENABLED.get()){
-            if (livingEntity instanceof Player player) {
+            if (AlexsCavesExemplified.COMMON_CONFIG.PRESSURED_HOOKS_ENABLED.get()){
                 boolean trueMainhand = livingEntity.getMainHandItem().is(ACItemRegistry.CANDY_CANE_HOOK.get());
                 boolean trueOffhand = livingEntity.getOffhandItem().is(ACItemRegistry.CANDY_CANE_HOOK.get());
                 if (livingEntity.getVehicle() instanceof GumWormSegmentEntity && trueMainhand) {
@@ -421,7 +421,9 @@ public class ACExemplifiedEvents {
         }
 
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.GUASLOWPOKE_ENABLED.get() && (livingEntity.getFeetBlockState().is(ACBlockRegistry.GUANO_BLOCK.get()) || livingEntity.getFeetBlockState().is(ACBlockRegistry.GUANO_LAYER.get()))){
+
+
+        if (AlexsCavesExemplified.COMMON_CONFIG.GUASLOWPOKE_ENABLED.get() && livingEntity.getType().is(ACExEntityTagGenerator.GUANO_IMMUNITY) && (livingEntity.getFeetBlockState().is(ACBlockRegistry.GUANO_BLOCK.get()) || livingEntity.getFeetBlockState().is(ACBlockRegistry.GUANO_LAYER.get()))){
             livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0));
         }
 
