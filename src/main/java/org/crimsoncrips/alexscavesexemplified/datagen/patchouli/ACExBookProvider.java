@@ -164,11 +164,10 @@ public class ACExBookProvider extends PGenBookProvider {
                                                 new ResourceLocation(AlexsCavesExemplified.MODID, "general"),
                                                 entry -> {
                                                     entry
-                                                            .addTextPage("Adds extra targets for mobs to improve immersion \n" +
-                                                                    "Licowitch - Iron Golem, Villagers \n" +
-                                                                    "Vesper - Cockroach, Bat, Spiders \n" +
-                                                                    "Deep Ones - Fish" +
-                                                                    "Grotocerotops/Relicheirus - Players holding Limespears", page -> {
+                                                            .addImagePage(page -> {
+                                                                page.addImage("textures/gui/wiki/general/add_targets.png")
+                                                                        .withText("Adds extra targets for mobs to improve immersion \n")
+                                                                        .withTitle("Add Targets");
                                                             });
                                                 })
                                 ;
