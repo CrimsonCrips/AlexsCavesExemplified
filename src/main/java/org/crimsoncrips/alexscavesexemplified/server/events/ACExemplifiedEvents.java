@@ -108,6 +108,7 @@ public class ACExemplifiedEvents {
         Player player = event.getEntity();
         ItemStack itemStack = event.getItemStack();
 
+
         if (AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get() && blockState.is(ACExBlockTagGenerator.CONSUMABLE_BLOCKS)) {
             ParticleOptions particle = new BlockParticleOption(ParticleTypes.BLOCK, blockState);
             if (player.isCrouching()) {

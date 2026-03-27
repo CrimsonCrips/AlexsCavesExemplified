@@ -130,8 +130,8 @@ public class AlexsCavesExemplified {
             fireblock.setFlammable(ACBlockRegistry.UNDERWEED.get(), 5, 20);
             fireblock.setFlammable(ACBlockRegistry.FORSAKEN_IDOL.get(), 5, 20);
 
-            ACExCauldronInteraction.bootStrap();
         }
+        ACExCauldronInteraction.bootStrap();
 
     }
 
