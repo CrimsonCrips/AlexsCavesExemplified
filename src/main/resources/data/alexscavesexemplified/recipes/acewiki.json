@@ -2,7 +2,7 @@
   "type": "patchouli:shapeless_book_recipe",
   "ingredients": [
     {
-      "item": "minecraft:red_dye"
+      "item": "minecraft:crimson_fungus"
     },
     {
       "item": "minecraft:book"
