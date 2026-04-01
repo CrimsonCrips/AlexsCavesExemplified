@@ -261,7 +261,7 @@ public class ACExBookProvider extends PGenBookProvider {
                                                             .addSpotlightPage(
                                                                     itemIconGiver(ACExItemRegistry.ICE_CREAM_CONE),
                                                                     page -> page.withText(
-                                                                            "Assemble tasty ice creams (i love ice cream), Note that the Ice Cream sequence doesnt matter apart from the cone").withTitle("Ice Cream Cone")
+                                                                            "Assemble ice creams (i love ice cream), Note that the sequence doesn't matter apart from the cone").withTitle("Ice Cream Cone")
                                                             )
                                                             .addMultiblockPage(" ", page -> page.withMultiblock(new PGenMultiblock(
                                                                             List.of(
