@@ -1,6 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.server.events;
 
 import com.github.alexmodguy.alexscaves.server.block.*;
+import com.github.alexmodguy.alexscaves.server.block.blockentity.NuclearSirenBlockEntity;
 import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.MeltedCaramelEntity;
@@ -380,8 +381,11 @@ public class ACExemplifiedEvents {
             }
         }
 
+        NuclearSirenBlockEntity
+
         if (livingEntity instanceof Player player){
-            if (AlexsCavesExemplified.COMMON_CONFIG.ABYSSAL_CRUSH_ENABLED.get() && !(player.getVehicle() instanceof SubmarineEntity)){
+            Entity vehicle = player.getVehicle();
+            if (AlexsCavesExemplified.COMMON_CONFIG.ABYSSAL_CRUSH_ENABLED.get() && vehicle != null && !(vehicle.getType().is(ACExEntityTagGenerator.CRUSH_IMMUNITY))){
                 if(level.getBiome(player.blockPosition()).is(ACBiomeRegistry.ABYSSAL_CHASM)){
                     int aboveWater = 0;
                     BlockPos pos = new BlockPos(player.getBlockX(), (int) (player.getBlockY() + 2), player.getBlockZ());
