@@ -32,7 +32,7 @@
     "misc.ACExDreadbowItemMixin",
     "misc.ACExEnigmaticEngineMixin",
     "misc.ACExGauntletItemMixin",
-    "misc.ACExGrassBlockMixin",
+    "blocks.ACExGrassBlockMixin",
     "misc.ACExHullbreakerGoalMixin",
     "misc.ACExMagnetUtilMixin",
     "misc.ACExMarineSnowMixin",
@@ -115,5 +115,8 @@
   ],
   "injectors": {
     "defaultRequire": 1
+  },
+  "mixinextras": {
+    "minVersion": "0.5.4"
   }
 }

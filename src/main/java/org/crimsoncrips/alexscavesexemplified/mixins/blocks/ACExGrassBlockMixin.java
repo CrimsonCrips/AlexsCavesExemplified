@@ -1,4 +1,4 @@
-package org.crimsoncrips.alexscavesexemplified.mixins.misc;
+package org.crimsoncrips.alexscavesexemplified.mixins.blocks;
 
 import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
@@ -19,15 +19,9 @@ import org.spongepowered.asm.mixin.injection.*;
 import java.util.Optional;
 
 @Mixin(GrassBlock.class)
-public abstract class ACExGrassBlockMixin extends SpreadingSnowyDirtBlock implements BonemealableBlock {
+public abstract class ACExGrassBlockMixin  {
 
-
-    protected ACExGrassBlockMixin(Properties pProperties) {
-        super(pProperties);
-    }
-
-
-    @ModifyVariable(method = "performBonemeal", at = @At(value = "STORE"))
+    @ModifyVariable(method = "performBonemeal", at = @At(value = "STORE"),remap = true)
     private Optional<Holder.Reference<PlacedFeature>> alexsMobsInteraction$performBonemeal(Optional<Holder.Reference<PlacedFeature>> value, @Local ServerLevel level,@Local(ordinal = 0) BlockPos blockPos) {
         if (level.getBiome(blockPos).is(ACBiomeRegistry.PRIMORDIAL_CAVES) && AlexsCavesExemplified.COMMON_CONFIG.CAVIAL_BONEMEAL_ENABLED.get()){
             return level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(ACExFeatures.PLACED_PRIMORDIAL_BONEMEAL);
@@ -35,7 +29,7 @@ public abstract class ACExGrassBlockMixin extends SpreadingSnowyDirtBlock implem
         return value;
     }
 
-    @ModifyExpressionValue(method = "performBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I",ordinal = 5))
+    @ModifyExpressionValue(method = "performBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I",ordinal = 5),remap = true)
     private int alexsMobsInteraction$performBonemeal1(int amount, @Local ServerLevel level,@Local(ordinal = 0) BlockPos blockPos) {
         if (level.getBiome(blockPos).is(ACBiomeRegistry.PRIMORDIAL_CAVES) && AlexsCavesExemplified.COMMON_CONFIG.CAVIAL_BONEMEAL_ENABLED.get()){
             return 1;

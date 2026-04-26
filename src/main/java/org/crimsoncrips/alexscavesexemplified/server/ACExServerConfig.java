@@ -65,7 +65,6 @@ public class ACExServerConfig {
     public final ForgeConfigSpec.BooleanValue ECOLOGICAL_REPUTATION_ENABLED ;
     public final ForgeConfigSpec.BooleanValue CAVIAL_BONEMEAL_ENABLED ;
     public final ForgeConfigSpec.BooleanValue COOKIE_CRUMBLE_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue CRYONIC_CAVITY_ENABLED ;
     public final ForgeConfigSpec.BooleanValue BREAKING_CANDY_ENABLED ;
     public final ForgeConfigSpec.BooleanValue REMINEDING_ENABLED ;
     public final  ForgeConfigSpec.BooleanValue SHOCKING_THERAPY_ENABLED;
@@ -123,7 +122,6 @@ public class ACExServerConfig {
         this.TUNED_SATING_ENABLED = buildBoolean(builder, "TUNED_SATING_ENABLED", " ", true, "Dropping foods in a dropped sack of sating will consume the dropped foods");
         this.SUGAR_CRASH_ENABLED = buildBoolean(builder, "SUGAR_CRASH_ENABLED", " ", true, "Sugar Rushes at the end will cause sugar crashed dealing damage and temporary slowness");
         this.ICED_CREAM_ENABLED = buildBoolean(builder, "ICED_CREAM_ENABLED", " ", true, "Thrown ice cream slightly freezes those that are hit");
-        this.CRYONIC_CAVITY_ENABLED = buildBoolean(builder, "CRYONIC_CAVITY_ENABLED", " ", true, "Makes the candy cavity freeze outsiders slowly");
         this.BREAKING_CANDY_ENABLED = buildBoolean(builder, "BREAKING_CANDY_ENABLED", " ", true, "Allows the creation of gelatin with bone blocks");
         this.ICE_CREAM_CONE_ENABLED = buildBoolean(builder, "ICE_CREAM_CONE_ENABLED", " ", true, "You can make Ice Cream Cones");
         this.OVERDRIVED_CONVERSION_ENABLED = buildBoolean(builder, "OVERDRIVED_CONVERSION_ENABLED", " ", true, "You can amplify conversion crucibles with radiant essences");

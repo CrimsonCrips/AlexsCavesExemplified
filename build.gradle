@@ -190,7 +190,6 @@ dependencies {
     implementation fg.deobf("maven.modrinth:supplementaries:LAQ22yJj")
     implementation fg.deobf("maven.modrinth:moonlight:1.20-2.16.16-forge")
     implementation fg.deobf("curse.maven:farmers-delight-398521:6154802")
-    implementation fg.deobf("curse.maven:cave-delight-1226620:6348847")
 
     runtimeOnly fg.deobf("maven.modrinth:glitchcore:0.0.1.1")
     runtimeOnly fg.deobf("maven.modrinth:cloth-config:11.1.136+forge")
@@ -210,8 +209,10 @@ dependencies {
 
     runtimeOnly fg.deobf("curse.maven:natures-compass-252848:4712189")
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
-    implementation("io.github.llamalad7:mixinextras-forge:0.4.1")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.4"))
+    implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.4")) {
+        jarJar.ranged(it, "[0.5.4,)")
+    }
 
     implementation(fg.deobf("com.simibubi.create:create-${minecraft_version}:${create_version}:slim") { transitive = false })
     implementation(fg.deobf("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}"))

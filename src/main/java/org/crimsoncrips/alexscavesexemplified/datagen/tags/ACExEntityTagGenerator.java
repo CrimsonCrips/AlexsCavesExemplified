@@ -69,6 +69,7 @@ public class ACExEntityTagGenerator extends EntityTypeTagsProvider {
 
 
 		tag(CAN_RABIES).add(
+				EntityType.PLAYER,
 				EntityType.BAT,
 				EntityType.CAMEL,
 				EntityType.CAT,

@@ -35,14 +35,6 @@ import static org.crimsoncrips.alexscavesexemplified.compat.AMCompat.amberReset;
 public abstract class ACExLivingEntityMixin extends Entity {
 
 
-    @Shadow public abstract boolean isDeadOrDying();
-
-    @Shadow public abstract boolean isSensitiveToWater();
-
-    @Shadow public abstract boolean hasEffect(MobEffect pEffect);
-
-    @Shadow @Nullable public abstract MobEffectInstance getEffect(MobEffect pEffect);
-
     public ACExLivingEntityMixin(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -116,26 +108,5 @@ public abstract class ACExLivingEntityMixin extends Entity {
         return original || (!(livingEntity instanceof WaterAnimal) && livingEntity.hasEffect(ACExEffects.RABIAL.get()) && AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get());
     }
 
-    @ModifyExpressionValue(method = "aiStep", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;isDeadOrDying()Z"))
-    private boolean alexsCavesExemplified$aiStep(boolean original) {
-        return AlexsCavesExemplified.COMMON_CONFIG.CRYONIC_CAVITY_ENABLED.get();
-    }
-
-    @Inject(method = "aiStep", at = @At(value = "TAIL"))
-    private void alexsCavesExemplified$aiStep2(CallbackInfo ci) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.CRYONIC_CAVITY_ENABLED.get()){
-            if (!this.level().isClientSide && !this.isDeadOrDying()) {
-                int i = this.getTicksFrozen();
-                if (this.isInPowderSnow && this.canFreeze()) {
-                    this.setTicksFrozen(Math.min(this.getTicksRequiredToFreeze(), i + 1));
-                } else if (!this.level().getBiome(this.blockPosition()).is(ACBiomeRegistry.CANDY_CAVITY)) {
-                    this.setTicksFrozen(Math.max(0, i - 2));
-                }
-                if (this.level().getBiome(this.blockPosition()).is(ACBiomeRegistry.CANDY_CAVITY) && this.level().random.nextDouble() < 0.01 && !this.isOnFire() && !this.getType().is(ACTagRegistry.CANDY_MOBS)){
-                    this.setTicksFrozen(Math.min(this.getTicksRequiredToFreeze(), getTicksFrozen() + 1));
-                }
-            }
-        }
-    }
 
 }

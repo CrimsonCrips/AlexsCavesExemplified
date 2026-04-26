@@ -4,8 +4,12 @@
   "name": "Add Targets",
   "pages": [
     {
-      "type": "patchouli:text",
-      "text": "Adds extra targets for mobs to improve immersion \nLicowitch - Iron Golem, Villagers \nVesper - Cockroach, Bat, Spiders \nDeep Ones - FishGrotocerotops/Relicheirus - Players holding Limespears"
+      "type": "patchouli:image",
+      "images": [
+        "alexscavesexemplified:textures/gui/wiki/general/add_targets.png"
+      ],
+      "text": "Adds extra targets for mobs to improve immersion \n",
+      "title": "Add Targets"
     }
   ]
 }

@@ -15,7 +15,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.compat.CaveDelightCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.FarmersDelightCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACExBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.interfaces.TremorConsumption;
@@ -60,7 +59,7 @@ public class ACExTremorEatBlock extends MoveToBlockGoal {
             }
 
             if (tremorsaurus.getAnimation() == TremorsaurusEntity.ANIMATION_BITE && tremorsaurus.getAnimationTick() >= 10 && tremorsaurus.getAnimationTick() <= 15){
-                if (isValidTarget(level, blockPos) && !CaveDelightCompat.roastedCheck(tremorsaurus,blockPos)){
+                if (isValidTarget(level, blockPos)){
                     tremorsaurus.heal(4);
                     tremorsaurus.playSound(ACSoundRegistry.TREMORSAURUS_BITE.get(), 1F, 1F);
                     level.destroyBlock(blockPos, false);
@@ -73,15 +72,6 @@ public class ACExTremorEatBlock extends MoveToBlockGoal {
                         mob.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), 2400, 0));
                     }
                 }
-                if (CaveDelightCompat.roastedCheck(tremorsaurus,blockPos)){
-                    tremorsaurus.heal(4);
-                    tremorsaurus.playSound(ACSoundRegistry.TREMORSAURUS_BITE.get(), 1F, 1F);
-                    CaveDelightCompat.roastedConsume(tremorsaurus,blockPos);
-
-                    if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && level.getRandom().nextDouble() < 0.8) {
-                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), 5400, 0));
-                    }
-                }
                 this.stop();
             }
         }
@@ -91,8 +81,7 @@ public class ACExTremorEatBlock extends MoveToBlockGoal {
     @Override
     protected boolean isValidTarget(LevelReader worldIn, BlockPos pos) {
         BlockState blockState = worldIn.getBlockState(pos);
-        boolean hasEntityFood = CaveDelightCompat.roastedCheck(tremorsaurus,pos);
-        return blockState.is(ACExBlockTagGenerator.DINO_SCAVENGE) || (hasEntityFood);
+        return blockState.is(ACExBlockTagGenerator.DINO_SCAVENGE);
     }
 
     public void stop() {

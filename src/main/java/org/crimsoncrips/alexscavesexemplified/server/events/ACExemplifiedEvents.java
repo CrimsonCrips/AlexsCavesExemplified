@@ -68,6 +68,8 @@ import net.minecraft.core.Direction;
 import org.crimsoncrips.alexscavesexemplified.server.entity.ACExEntityRegistry;
 import vazkii.patchouli.common.item.PatchouliItems;
 
+import java.util.Optional;
+
 import static net.minecraft.world.entity.EntityType.*;
 
 
@@ -381,8 +383,6 @@ public class ACExemplifiedEvents {
             }
         }
 
-        NuclearSirenBlockEntity
-
         if (livingEntity instanceof Player player){
             Entity vehicle = player.getVehicle();
             if (AlexsCavesExemplified.COMMON_CONFIG.ABYSSAL_CRUSH_ENABLED.get() && vehicle != null && !(vehicle.getType().is(ACExEntityTagGenerator.CRUSH_IMMUNITY))){
@@ -554,59 +554,32 @@ public class ACExemplifiedEvents {
 
         if (AlexsCavesExemplified.COMMON_CONFIG.KIROV_REPORTING_ENABLED.get() && player.isFallFlying() && (player.getItemInHand(hand).is(Items.FLINT_AND_STEEL) || player.getItemInHand(hand).is(Items.FIRE_CHARGE))){
 
-            boolean succeeded = true;
-
             InteractionHand otherHand = hand.equals(InteractionHand.MAIN_HAND) ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
             ItemStack otherStack = player.getItemInHand(otherHand);
 
-            if(!player.getCooldowns().isOnCooldown(otherStack.getItem())){
-                switch (otherStack.getItem().toString()) {
-                    case "tnt" -> {
-                        System.out.println("test");
-                        if (!level.isClientSide()) {
-                            TNT.spawn((ServerLevel) level, BlockPos.containing(player.getX(), player.getY() - 2, player.getZ()), MobSpawnType.MOB_SUMMONED);
-                        }
-                    }
-                    case "tnt_minecart" -> {
-                        if (!level.isClientSide()) {
-                            TNT_MINECART.spawn((ServerLevel) level, BlockPos.containing(player.getX(), player.getY() - 2, player.getZ()), MobSpawnType.MOB_SUMMONED);
-                        }
-                    }
-                    case "nuclear_bomb" -> {
-                        if (!level.isClientSide()) {
-                            ACEntityRegistry.NUCLEAR_BOMB.get().spawn((ServerLevel) level, BlockPos.containing(player.getX(), player.getY() - 2, player.getZ()), MobSpawnType.MOB_SUMMONED);
-                        }
-                    }
-                    case "gamma_nuclear_bomb" -> {
-                        if (!level.isClientSide()) {
-                            ACExEntityRegistry.GAMMA_NUCLEAR_BOMB.get().spawn((ServerLevel) level, BlockPos.containing(player.getX(), player.getY() - 2, player.getZ()), MobSpawnType.MOB_SUMMONED);
-                        }
-                    }
-                    case "mini_nuke" -> {
-                        ACEnrichedCompat.enrichedBomb(player,200,1);
-                    }
-                    case "neutron_bomb" -> {
-                        ACEnrichedCompat.enrichedBomb(player,200,2);
-                    }
-                    case "black_hole_bomb" -> {
-                        ACEnrichedCompat.enrichedBomb(player,400,3);
-                    }
-                    default -> {
-                        succeeded = false;
-                    }
-                }
+            String bombLocation = switch (otherStack.getItem().toString()) {
+                case "tnt" -> "minecraft:tnt";
+                case "nuclear_bomb" -> "alexscaves:nuclear_bomb";
+                case "gamma_nuclear_bomb" -> "alexscavesexemplified:gamma_nuclear_bomb";
+                default -> null;
+            };
 
-                if (succeeded) {
-                    player.level().gameEvent(player, GameEvent.PRIME_FUSE, player.blockPosition());
-                    player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
-                    player.getCooldowns().addCooldown(player.getItemInHand(hand).getItem(), 60);
-                    player.swing(hand);
 
-                    if (!player.isCreative()) {
-                        otherStack.shrink(1);
-                    }
-                    ACExUtils.awardAdvancement(player, "kirov_reporting", "kirov");
+            if (bombLocation == null)
+                return;
+            Optional<EntityType<?>> test = EntityType.byString(bombLocation);
+
+            if (test.isPresent() && !player.level().isClientSide && !player.getCooldowns().isOnCooldown(otherStack.getItem())){
+                EntityType bomb2 = test.get();
+                player.level().gameEvent(player, GameEvent.PRIME_FUSE, player.blockPosition());
+                player.level().playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
+                player.getCooldowns().addCooldown(player.getItemInHand(hand).getItem(), 60);
+                player.swing(hand);
+                bomb2.spawn((ServerLevel) level, BlockPos.containing(player.getX(), player.getY() - 0.5, player.getZ()), MobSpawnType.MOB_SUMMONED);
+                if (!player.isCreative()) {
+                    otherStack.shrink(1);
                 }
+                ACExUtils.awardAdvancement(player, "kirov_reporting", "kirov");
             }
 
         }

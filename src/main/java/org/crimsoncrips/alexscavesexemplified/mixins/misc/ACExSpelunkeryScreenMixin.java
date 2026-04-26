@@ -145,13 +145,12 @@ public abstract class ACExSpelunkeryScreenMixin extends AbstractContainerScreen<
 
     @Override
     public void onClose() {
-        if (AlexsCavesExemplified.COMMON_CONFIG.REDOABLE_SPELUNKY_ENABLED.get()) {
-            super.onClose();
-        } else {
+        if (!AlexsCavesExemplified.COMMON_CONFIG.REDOABLE_SPELUNKY_ENABLED.get()) {
             if (hasPaper() && hasTablet() && hasClickedAnyWord() && level < 3) {
                 AlexsCaves.NETWORK_WRAPPER.sendToServer(new SpelunkeryTableChangeMessage(false));
             }
         }
+        super.onClose();
 
     }
 
