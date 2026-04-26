@@ -6,6 +6,7 @@
 package org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;

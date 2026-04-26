@@ -28,7 +28,7 @@ public abstract class ACExLicowitchMixin extends Monster {
 
     @Inject(method = "registerGoals", at = @At("TAIL"))
     private void registerGoals(CallbackInfo ci) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()) {
+        if (AlexsCavesExemplified.TARGETS_CONFIG.LICOWITCH_ENABLED.get()) {
             this.targetSelector.addGoal(2, new NearestAttackableTargetGoal(this, Villager.class, true, buildPredicateFromTag(ACExEntityTagGenerator.LICOWITCH_HATE)));
         }
 

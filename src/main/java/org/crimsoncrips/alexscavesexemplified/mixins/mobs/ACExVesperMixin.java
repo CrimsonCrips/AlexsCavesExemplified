@@ -61,7 +61,7 @@ public abstract class ACExVesperMixin extends Monster {
             }));
         }
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){
+        if (AlexsCavesExemplified.TARGETS_CONFIG.VESPER_ENABLED.get()){
             this.targetSelector.addGoal(3, new ACExVesperTarget<>(vesper, 32.0F, LivingEntity.class, buildPredicateFromTag(ACExEntityTagGenerator.VESPER_HUNT)));
         }
 

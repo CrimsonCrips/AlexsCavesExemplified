@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -19,33 +20,23 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 
-public interface ACExCauldronInteraction {
-    Map<Item, ACExCauldronInteraction> EMPTY = newInteractionMap();
-    Map<Item, ACExCauldronInteraction> ACID = newInteractionMap();
-    Map<Item, ACExCauldronInteraction> PURPLE_SODA = newInteractionMap();
+public interface ACExCauldronInteraction extends CauldronInteraction {
+    Map<Item, CauldronInteraction> ACID = CauldronInteraction.newInteractionMap();
+    Map<Item, CauldronInteraction> PURPLE_SODA = CauldronInteraction.newInteractionMap();
 
-
-
-    ACExCauldronInteraction FILL_ACID = (p_175676_, p_175677_, p_175678_, p_175679_, p_175680_, p_175681_) -> emptyBucket(p_175677_, p_175678_, p_175679_, p_175680_, p_175681_, ACExBlockRegistry.ACID_CAULDRON.get().defaultBlockState(), ACSoundRegistry.ACID_CORROSION.get());
-    ACExCauldronInteraction FILL_SODA = (p_175676_, p_175677_, p_175678_, p_175679_, p_175680_, p_175681_) -> emptyBucket(p_175677_, p_175678_, p_175679_, p_175680_, p_175681_, ACExBlockRegistry.PURPLE_SODA_CAULDRON.get().defaultBlockState(), ACSoundRegistry.PURPLE_SODA_SWIM.get());
-
-
-    static Object2ObjectOpenHashMap<Item, ACExCauldronInteraction> newInteractionMap() {
-        return Util.make(new Object2ObjectOpenHashMap<>(), (p_175646_) -> {
-            p_175646_.defaultReturnValue((p_175739_, p_175740_, p_175741_, p_175742_, p_175743_, p_175744_) -> {
-                return InteractionResult.PASS;
-            });
-        });
-    }
-
-    InteractionResult interact(BlockState pBlockState, Level pLevel, BlockPos pBlockPos, Player pPlayer, InteractionHand pHand, ItemStack pStack);
+    CauldronInteraction FILL_ACID = (p_175676_, p_175677_, p_175678_, p_175679_, p_175680_, p_175681_) -> CauldronInteraction.emptyBucket(p_175677_, p_175678_, p_175679_, p_175680_, p_175681_, ACExBlockRegistry.ACID_CAULDRON.get().defaultBlockState(), ACSoundRegistry.ACID_CORROSION.get());
+    CauldronInteraction FILL_SODA = (p_175676_, p_175677_, p_175678_, p_175679_, p_175680_, p_175681_) -> CauldronInteraction.emptyBucket(p_175677_, p_175678_, p_175679_, p_175680_, p_175681_, ACExBlockRegistry.PURPLE_SODA_CAULDRON.get().defaultBlockState(), ACSoundRegistry.PURPLE_SODA_SWIM.get());
 
     static void bootStrap() {
         addDefaultInteractions(EMPTY);
@@ -83,7 +74,7 @@ public interface ACExCauldronInteraction {
         addDefaultInteractions(PURPLE_SODA);
     }
 
-    static void addDefaultInteractions(Map<Item, ACExCauldronInteraction> pInteractionsMap) {
+    static void addDefaultInteractions(Map<Item, CauldronInteraction> pInteractionsMap) {
         pInteractionsMap.put(ACItemRegistry.ACID_BUCKET.get(), FILL_ACID);
         pInteractionsMap.put(ACItemRegistry.PURPLE_SODA_BUCKET.get(), FILL_SODA);
     }
@@ -106,17 +97,4 @@ public interface ACExCauldronInteraction {
         }
     }
 
-    static InteractionResult emptyBucket(Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, ItemStack pFilledStack, BlockState pState, SoundEvent pEmptySound) {
-        if (!pLevel.isClientSide) {
-            Item item = pFilledStack.getItem();
-            pPlayer.setItemInHand(pHand, ItemUtils.createFilledResult(pFilledStack, pPlayer, new ItemStack(Items.BUCKET)));
-            pPlayer.awardStat(Stats.FILL_CAULDRON);
-            pPlayer.awardStat(Stats.ITEM_USED.get(item));
-            pLevel.setBlockAndUpdate(pPos, pState);
-            pLevel.playSound((Player)null, pPos, pEmptySound, SoundSource.BLOCKS, 1.0F, 1.0F);
-            pLevel.gameEvent((Entity)null, GameEvent.FLUID_PLACE, pPos);
-        }
-
-        return InteractionResult.sidedSuccess(pLevel.isClientSide);
-    }
 }

@@ -24,7 +24,7 @@ public abstract class ACExDeepKnightMixin extends DeepOneBaseEntity {
 
     @Inject(method = "registerGoals", at = @At("HEAD"))
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){
+        if (AlexsCavesExemplified.TARGETS_CONFIG.DEEP_ONES_ENABLED.get()){
             this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, TripodfishEntity.class, true, true));
             this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, LanternfishEntity.class, true, true));
         }

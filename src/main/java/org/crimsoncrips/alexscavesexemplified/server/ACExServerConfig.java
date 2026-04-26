@@ -94,7 +94,6 @@ public class ACExServerConfig {
 
     public final  ForgeConfigSpec.BooleanValue SHOTNUKE_ENABLED;
     public final  ForgeConfigSpec.BooleanValue SERENED_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue ADD_TARGETS_ENABLED;
 
 
 
@@ -111,7 +110,6 @@ public class ACExServerConfig {
         this.CAVIAL_BONEMEAL_ENABLED = buildBoolean(builder, "CAVIAL_BONEMEAL_ENABLED", " ", true, "Whether it adds new interactions of bone meal with Alex's Cave's flora");
         this.LIQUID_REPLICATION_ENABLED = buildBoolean(builder, "LIQUID_REPLICATION_ENABLED", " ", true, "Whether AC liquids can be renewable");
         this.POWERED_LOCATORS_ENABLED = buildBoolean(builder, "POWERED_LOCATORS_ENABLED", " ", true, "Using a wither star to nullify godly interventions.To allow you to use natures compass and alike to find biomes");
-        this.ADD_TARGETS_ENABLED = buildBoolean(builder, "ADD_TARGETS_ENABLED", " ", true, "Adds extra targets for mobs");
 
 
         builder.pop();

@@ -31,8 +31,8 @@ public abstract class ACExConversionCrucibleMixin extends BaseEntityBlock {
     @ModifyReturnValue(method = "use", at = @At("RETURN"))
     private InteractionResult alexsMobsInteraction$use(InteractionResult original,@Local Level worldIn,@Local BlockPos pos,@Local Player player,@Local InteractionHand handIn) {
         ItemStack playerItem = player.getItemInHand(handIn);
-        if (worldIn.getBlockEntity(pos) instanceof ConversionCrucibleBlockEntity crucible && !player.isShiftKeyDown()) {
-            if(playerItem.is(ACItemRegistry.RADIANT_ESSENCE.get())){
+        if (worldIn.getBlockEntity(pos) instanceof ConversionCrucibleBlockEntity crucible && !player.isShiftKeyDown() && !crucible.isWitchMode()) {
+            if(playerItem.is(ACItemRegistry.RADIANT_ESSENCE.get()) && crucible.getConvertingToBiome() == null && !((ConversionAmplified)crucible).isOverdrived()){
                 crucible.setFilledLevel(1);
                 ACExUtils.awardAdvancement(player,"overdrived_conversion","overdrived");
                 ((ConversionAmplified) crucible).setStack(ACItemRegistry.BIOME_TREAT.get().getDefaultInstance());

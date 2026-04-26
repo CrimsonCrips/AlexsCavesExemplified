@@ -30,7 +30,7 @@ public abstract class ACExRelicheirusMixin extends DinosaurEntity {
         if (AlexsCavesExemplified.COMMON_CONFIG.EGG_ANGER_ENABLED.get()){
             relicheirus.targetSelector.addGoal(4, new ACExDinosaurEggAttack<>(relicheirus, LivingEntity.class, true));
         }
-        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){
+        if (AlexsCavesExemplified.TARGETS_CONFIG.RELICHERIRUS_ENABLED.get()){
             relicheirus.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(relicheirus, LivingEntity.class, 300, true, false, livingEntity -> {
                 return livingEntity.isHolding(Ingredient.of(ACItemRegistry.LIMESTONE_SPEAR.get()));
             }){

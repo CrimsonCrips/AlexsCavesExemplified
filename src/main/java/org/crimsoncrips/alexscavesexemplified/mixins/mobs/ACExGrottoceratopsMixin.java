@@ -30,7 +30,7 @@ public abstract class ACExGrottoceratopsMixin extends DinosaurEntity {
         if (AlexsCavesExemplified.COMMON_CONFIG.EGG_ANGER_ENABLED.get()){
             grottoceratops.targetSelector.addGoal(4, new ACExDinosaurEggAttack<>(grottoceratops, LivingEntity.class, true));
         }
-        if (AlexsCavesExemplified.COMMON_CONFIG.ADD_TARGETS_ENABLED.get()){
+        if (AlexsCavesExemplified.TARGETS_CONFIG.GROTTOCERATOPS_ENABLED.get()){
             grottoceratops.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(grottoceratops, LivingEntity.class, 150, true, false, livingEntity -> {
                 return livingEntity.isHolding(Ingredient.of(ACItemRegistry.LIMESTONE_SPEAR.get()));
             }){

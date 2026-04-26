@@ -237,13 +237,6 @@ public class ACExBookProvider extends PGenBookProvider {
                                                                         .withTitle("Iced Cream");
                                                             })
 
-                                                            //Cryonic Cavity
-                                                            .addImagePage(page -> {
-                                                                page.addImage("textures/gui/wiki/candy_cavity/cryonic_cavity.png")
-                                                                        .withText("Candy Cavity slowly freezes you")
-                                                                        .withTitle("Cryonic Cavity");
-                                                            })
-
                                                             //Breaking Candy
                                                             .addImagePage(page -> {
                                                                 page.addImage("textures/gui/wiki/candy_cavity/breaking_candy.png")

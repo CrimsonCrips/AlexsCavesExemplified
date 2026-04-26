@@ -206,8 +206,10 @@ dependencies {
     runtimeOnly fg.deobf("maven.modrinth:jei:92XfryJj")
     runtimeOnly fg.deobf("maven.modrinth:collective:1.20.1-7.87-fabric+forge+neo")
     runtimeOnly fg.deobf("maven.modrinth:superflat-world-no-slimes:1.20.1-3.4-fabric+forge+neo")
-
     runtimeOnly fg.deobf("curse.maven:natures-compass-252848:4712189")
+
+    runtimeOnly fg.deobf("curse.maven:itemphysic-258587:7804467")
+    runtimeOnly fg.deobf("curse.maven:creativecore-257814:7976407")
 
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.4"))
     implementation(jarJar("io.github.llamalad7:mixinextras-forge:0.5.4")) {

@@ -19,6 +19,7 @@ import org.crimsoncrips.alexscavesexemplified.client.ACExClientConfig;
 import org.crimsoncrips.alexscavesexemplified.client.ACExClientProxy;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACExDatagen;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAddTargetsConfig;
 import org.crimsoncrips.alexscavesexemplified.server.ACExServerConfig;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.client.ACExSoundRegistry;
@@ -44,6 +45,8 @@ public class AlexsCavesExemplified {
     private static final ForgeConfigSpec COMMON_CONFIG_SPEC;
     public static final ACExClientConfig CLIENT_CONFIG;
     private static final ForgeConfigSpec CLIENT_CONFIG_SPEC;
+    public static final ACExAddTargetsConfig TARGETS_CONFIG;
+    private static final ForgeConfigSpec TARGETS_CONFIG_SPEC;
 
     static {
         final Pair<ACExServerConfig, ForgeConfigSpec> serverPair = new ForgeConfigSpec.Builder().configure(ACExServerConfig::new);
@@ -52,6 +55,9 @@ public class AlexsCavesExemplified {
         final Pair<ACExClientConfig, ForgeConfigSpec> clientPair = new ForgeConfigSpec.Builder().configure(ACExClientConfig::new);
         CLIENT_CONFIG = clientPair.getLeft();
         CLIENT_CONFIG_SPEC = clientPair.getRight();
+        final Pair<ACExAddTargetsConfig, ForgeConfigSpec> targetPair = new ForgeConfigSpec.Builder().configure(ACExAddTargetsConfig::new);
+        TARGETS_CONFIG = targetPair.getLeft();
+        TARGETS_CONFIG_SPEC = targetPair.getRight();
     }
 
     public AlexsCavesExemplified() {
