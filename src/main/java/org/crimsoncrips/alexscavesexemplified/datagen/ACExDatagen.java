@@ -30,6 +30,7 @@ public class ACExDatagen {
         PackOutput output = generator.getPackOutput();
         CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
         ExistingFileHelper helper = event.getExistingFileHelper();
+
         generator.addProvider(event.includeClient(), new ACExSoundGenerator(output, helper));
         generator.addProvider(event.includeServer(), new ACExRegistryDataGenerator(output, provider));
         generator.addProvider(event.includeServer(), new ACExAdvancementProvider(output, provider, helper));

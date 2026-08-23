@@ -167,8 +167,7 @@ public class ACExBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 		tag(DINO_SCAVENGE).add(
 				ACBlockRegistry.COOKED_DINOSAUR_CHOP.get(),
 				ACBlockRegistry.DINOSAUR_CHOP.get()
-		)
-				.addOptional(new ResourceLocation("cavedelight:roasted_dino_chop"));
+		);
 
 		tag(RADIOACTIVE).add(
 				ACBlockRegistry.RADROCK_URANIUM_ORE.get(),
