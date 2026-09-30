@@ -1,14 +1,11 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
-import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.FrostmintSpearEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
-import com.github.alexmodguy.alexscaves.server.misc.ACAdvancementTriggerRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -49,26 +46,6 @@ public abstract class ACExFrostmintSpearMixin extends AbstractArrow {
         return AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get() && this.getPersistentData().getBoolean("FrostRadiant");
     }
 
-
-    @Inject(method = "tick", at = @At("TAIL"))
-    private void tick(CallbackInfo ci) {
-        Level level = this.level();
-        if (this.isInFluidType()){
-            if (AlexsCavesExemplified.COMMON_CONFIG.AMPLIFIED_FROSTMINT_ENABLED.get() && this.isInFluidType(ACFluidRegistry.PURPLE_SODA_FLUID_TYPE.get()) && !level.isClientSide) {
-                FrostmintExplosion explosion = new FrostmintExplosion(level, this, this.getX() + 0.5F, this.getY() + 0.5F, this.getZ() + 0.5F, 4.0F, Explosion.BlockInteraction.DESTROY_WITH_DECAY, false);
-                explosion.explode();
-                explosion.finalizeExplosion(true);
-                if (this.getOwner() instanceof Player) {
-                    ACAdvancementTriggerRegistry.FROSTMINT_EXPLOSION.get().triggerForEntity(this.getOwner());
-                }
-                this.discard();
-            }
-        }
-
-        if (AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get() && this.getPersistentData().getBoolean("FrostRadiant") && this.tickCount > 100){
-            this.discard();
-        }
-    }
 
     @Inject(method = "onHit", at = @At("HEAD"))
     private void hit(HitResult hitResult, CallbackInfo ci) {

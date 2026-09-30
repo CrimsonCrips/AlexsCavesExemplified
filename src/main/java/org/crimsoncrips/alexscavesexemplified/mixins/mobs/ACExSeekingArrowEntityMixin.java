@@ -1,11 +1,9 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.entity.item.SeekingArrowEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.level.Level;
@@ -26,7 +24,6 @@ public abstract class ACExSeekingArrowEntityMixin extends AbstractArrow implemen
     @Shadow protected abstract void setArcTowardsID(int id);
 
 
-
     int launchDelay = 0;
     protected ACExSeekingArrowEntityMixin(EntityType<? extends AbstractArrow> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -34,7 +31,7 @@ public abstract class ACExSeekingArrowEntityMixin extends AbstractArrow implemen
 
     @Inject(method = "tick", at = @At(value = "HEAD"))
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
-        int test = getLaunchedTargetID();
+        int test = this.getData(ACExAttachments.LAUNCHED_TARGET_ID);
         if (test != -1 && launchDelay <= 10){
             launchDelay++;
         }
@@ -42,45 +39,17 @@ public abstract class ACExSeekingArrowEntityMixin extends AbstractArrow implemen
             this.playSound(ACSoundRegistry.SEEKING_ARROW_LOCKON.get(), 5.0F, 1.0F);
             inGround = false;
             setStopSeeking(false);
-            setArcTowardsID(getLaunchedTargetID());
-            setLaunchedTargetID(-1);
+            setArcTowardsID(this.getData(ACExAttachments.LAUNCHED_TARGET_ID));
+            ACExAttachments.set(this, ACExAttachments.LAUNCHED_TARGET_ID, -1);
             launchDelay = 0;
         }
     }
 
     @WrapWithCondition(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/item/SeekingArrowEntity;setArcTowardsID(I)V"))
     private boolean alexsCavesExemplified$tick1(SeekingArrowEntity instance, int id) {
-        return getLaunchedTargetID() == -1;
+        return this.getData(ACExAttachments.LAUNCHED_TARGET_ID) == -1;
     }
 
-    private static final EntityDataAccessor<Integer> LAUNCHED_TARGET_ID = SynchedEntityData.defineId(SeekingArrowEntity.class, EntityDataSerializers.INT);;
-    private static final EntityDataAccessor<Float> SPIN_ANGLE = SynchedEntityData.defineId(SeekingArrowEntity.class, EntityDataSerializers.FLOAT);;
-
-    @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci){
-        builder.define(LAUNCHED_TARGET_ID, -1);
-        builder.define(SPIN_ANGLE, (float)this.random.nextInt(0,361));
-    }
-
-    @Override
-    public void setLaunchedTargetID(int var) {
-        this.entityData.set(LAUNCHED_TARGET_ID, var);
-    }
-
-    @Override
-    public void setSpinAngle(float var) {
-        this.entityData.set(SPIN_ANGLE, var);
-    }
-
-    @Override
-    public float getSpinAngle() {
-        return this.entityData.get(SPIN_ANGLE);
-    }
-
-    @Override
-    public int getLaunchedTargetID() {
-        return this.entityData.get(LAUNCHED_TARGET_ID);
-    }
 
     @Override
     public void setStopSeeking(boolean stopSeeking) {

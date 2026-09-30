@@ -1,13 +1,10 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.boundroid;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.living.BoundroidEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.BoundroidWinchEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -15,7 +12,6 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,11 +19,10 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BoundroidEntity.class)
-public abstract class ACExBoundroidMixin extends Monster implements ACExBaseInterface {
+public abstract class ACExBoundroidMixin extends Monster {
 
     @Shadow public int stopSlammingFor;
 
-    private static final EntityDataAccessor<Boolean> MAGNETIZING = SynchedEntityData.defineId(BoundroidEntity.class, EntityDataSerializers.BOOLEAN);
 
     protected ACExBoundroidMixin(EntityType<? extends Monster> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -38,7 +33,7 @@ public abstract class ACExBoundroidMixin extends Monster implements ACExBaseInte
     @Inject(method = "tick", at = @At("TAIL"))
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
         BoundroidEntity boundroidEntity = (BoundroidEntity) (Object) this;
-        if (isMagnetizing() && boundroidEntity.getRandom().nextDouble() < 0.01){
+        if (this.getData(ACExAttachments.MAGNETIZING) && boundroidEntity.getRandom().nextDouble() < 0.01){
             for (int i = 0;i < 10;i++){
                 Vec3 vec3 = new Vec3((boundroidEntity.getRandom().nextFloat() - 0.5) * 0.3F, (boundroidEntity.getRandom().nextFloat() - 0.5) * 0.3F + boundroidEntity.getRandom().nextInt(-2,3), 2 * 0.5F + 2 * 0.5F * boundroidEntity.getRandom().nextFloat()).yRot((float) ((i / 10F) * Math.PI * 2)).add(boundroidEntity.position());
                 boundroidEntity.level().addParticle(ACParticleRegistry.SCARLET_SHIELD_LIGHTNING.get(), vec3.x, vec3.y, vec3.z, boundroidEntity.getX(), boundroidEntity.getY(), boundroidEntity.getZ());
@@ -50,16 +45,16 @@ public abstract class ACExBoundroidMixin extends Monster implements ACExBaseInte
 
             LivingEntity target = boundroidEntity.getTarget();
             BoundroidWinchEntity boundroidWinch = (BoundroidWinchEntity) boundroidEntity.getWinch();
-            if (isMagnetizing() && target != null && MagnetUtil.isPulledByMagnets(target) && MagnetUtil.isPulledByMagnets(target) && boundroidWinch.distanceTo(target) < 3 && boundroidWinch.isLatched()) {
+            if (this.getData(ACExAttachments.MAGNETIZING) && target != null && MagnetUtil.isPulledByMagnets(target) && MagnetUtil.isPulledByMagnets(target) && boundroidWinch.distanceTo(target) < 3 && boundroidWinch.isLatched()) {
                 activateDelay = 100;
-                setMagnetizing(false);
+                ACExAttachments.set(this, ACExAttachments.MAGNETIZING, false);
                 stopSlammingFor = 110;
             }
-            if (activateDelay > 0 && !isMagnetizing()) {
+            if (activateDelay > 0 && !this.getData(ACExAttachments.MAGNETIZING)) {
                 activateDelay--;
             }
-            if (activateDelay <= 0 && !isMagnetizing() && !boundroidEntity.level().isClientSide()) {
-                setMagnetizing(true);
+            if (activateDelay <= 0 && !this.getData(ACExAttachments.MAGNETIZING) && !boundroidEntity.level().isClientSide()) {
+                ACExAttachments.set(this, ACExAttachments.MAGNETIZING, true);
             }
 
 
@@ -81,7 +76,7 @@ public abstract class ACExBoundroidMixin extends Monster implements ACExBaseInte
                         pull = new Vec3(0, 0, pull.z);
                     }
                     entity1.fallDistance = 0.0F;
-                    if (!MagnetUtil.isEntityOnMovingMetal(entity1) && isMagnetizing()) {
+                    if (!MagnetUtil.isEntityOnMovingMetal(entity1) && this.getData(ACExAttachments.MAGNETIZING)) {
                         if (entity1 == boundroidEntity.getTarget()) {
                             stopSlammingFor = 30 + random.nextInt(20);
                         }
@@ -94,34 +89,6 @@ public abstract class ACExBoundroidMixin extends Monster implements ACExBaseInte
             }
         }
     }
-
-
-    @Override
-    public boolean isMagnetizing() {
-        return this.entityData.get(MAGNETIZING);
-    }
-
-
-    public void setMagnetizing(boolean val){
-        this.entityData.set(MAGNETIZING, Boolean.valueOf(val));
-    }
-
-    @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci) {
-        builder.define(MAGNETIZING, true);
-    }
-
-    @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
-    private void alexsCavesExemplified$add(CompoundTag compound, CallbackInfo ci) {
-        compound.putBoolean("Magnetizing", this.isMagnetizing());
-    }
-
-    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
-    private void alexsCavesExemplified$read(CompoundTag compound, CallbackInfo ci) {
-        this.setMagnetizing(compound.getBoolean("Magnetizing"));
-    }
-
-
 
 
 }

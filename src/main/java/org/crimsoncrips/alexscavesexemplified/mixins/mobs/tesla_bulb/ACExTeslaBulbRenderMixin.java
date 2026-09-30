@@ -1,5 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tesla_bulb;
 
+import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
+
 import net.minecraft.util.FastColor;
 import com.github.alexmodguy.alexscaves.client.model.TeslaBulbModel;
 import com.github.alexmodguy.alexscaves.client.render.ACRenderTypes;
@@ -11,7 +13,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

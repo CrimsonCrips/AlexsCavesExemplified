@@ -1,15 +1,22 @@
 package org.crimsoncrips.alexscavesexemplified.server.events;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.block.*;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.NuclearSirenBlockEntity;
 import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
+import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
+import com.github.alexmodguy.alexscaves.server.entity.item.FrostmintSpearEntity;
+import com.github.alexmodguy.alexscaves.server.entity.item.MagneticWeaponEntity;
 import com.github.alexmodguy.alexscaves.server.entity.item.MeltedCaramelEntity;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntity;
 import com.github.alexmodguy.alexscaves.server.entity.item.SubmarineEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.*;
+import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
+import com.github.alexmodguy.alexscaves.server.entity.util.UnderzealotSacrifice;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
+import com.github.alexmodguy.alexscaves.server.misc.ACAdvancementTriggerRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACDamageTypes;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
@@ -21,11 +28,14 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -33,10 +43,16 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.animal.Ocelot;
 import net.minecraft.world.entity.animal.Parrot;
+import net.minecraft.world.entity.animal.frog.Frog;
+import net.minecraft.world.entity.animal.frog.Tadpole;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.component.DyedItemColor;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
@@ -54,14 +70,13 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
+import org.crimsoncrips.alexscavesexemplified.compat.CuriosCompat;
 import org.crimsoncrips.alexscavesexemplified.compat.SupplementariesCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACExDamageTypes;
+import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACExLootTables;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACExBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACExEntityTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACExEffects;
 
@@ -117,7 +132,7 @@ public class ACExemplifiedEvents {
             if (player.isCrouching()) {
                 MobEffectInstance hunger = player.getEffect(MobEffects.HUNGER);
                 if (hunger != null) {
-                    ((ACExBaseInterface) player).addSweets(1);
+                    ACExUtils.addSweets(player, 1);
 
                     if (!hunger.isInfiniteDuration()) {
                         player.removeEffect(MobEffects.HUNGER);
@@ -136,7 +151,7 @@ public class ACExemplifiedEvents {
 
 
                 } else if (player.getFoodData().needsFood()) {
-                    ((ACExBaseInterface) player).addSweets(1);
+                    ACExUtils.addSweets(player, 1);
 
                     player.getFoodData().eat(2, 2);
                     player.playSound(SoundEvents.GENERIC_EAT, 1F, 1F);
@@ -262,7 +277,39 @@ public class ACExemplifiedEvents {
         Entity killer = deathEvent.getSource().getEntity();
         Level level = died.level();
 
-        if (died instanceof NucleeperEntity nucleeper && AlexsCavesExemplified.COMMON_CONFIG.NUCLEAR_CHAIN_ENABLED.get() && !((NucleeperXtra)nucleeper).isDefused()){
+        if (died instanceof Player player) {
+            player.setData(ACExAttachments.SWEETS, 0);
+        }
+
+        if (died instanceof MagnetronEntity magnetron && magnetron.getData(ACExAttachments.RIPPED_HEART) >= 100 && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get()){
+            float range = 5F;
+            RandomSource random = magnetron.getRandom();
+            Vec3 particlesFrom = magnetron.position().add(0, 0.2, 0);
+            float particleMax = 10 + random.nextInt(5);
+            for (int particles = 0; particles < particleMax; particles++) {
+                Vec3 vec3 = new Vec3((random.nextFloat() - 0.5) * 0.3F, (random.nextFloat() - 0.5) * 0.3F, range * 0.5F + range * 0.5F * random.nextFloat()).yRot((float) ((particles / particleMax) * Math.PI * 2)).add(particlesFrom);
+                if (random.nextBoolean()) {
+                    level.addParticle(ACParticleRegistry.SCARLET_SHIELD_LIGHTNING.get(), vec3.x, vec3.y, vec3.z, particlesFrom.x, particlesFrom.y, particlesFrom.z);
+                } else {
+                    level.addParticle(ACParticleRegistry.AZURE_SHIELD_LIGHTNING.get(), particlesFrom.x, particlesFrom.y, particlesFrom.z, vec3.x, vec3.y, vec3.z);
+                }
+            }
+            level.explode(null, magnetron.blockPosition().getX() + 0.5D, magnetron.blockPosition().getY() + 0.5D, magnetron.blockPosition().getZ() + 0.5D, 1, false, Level.ExplosionInteraction.NONE);
+            if (magnetron.isFormed()) {
+                for (MagnetronPartEntity part : magnetron.allParts) {
+                    if (part.getBlockState() != null && level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING)) {
+                        BlockPos placeAt = part.blockPosition();
+                        while (!level.getBlockState(placeAt).isAir() && placeAt.getY() < level.getMaxBuildHeight()) {
+                            placeAt = placeAt.above();
+                        }
+                        FallingBlockEntity.fall(level, placeAt, part.getBlockState());
+                        part.setBlockState(null);
+                    }
+                }
+            }
+        }
+
+        if (died instanceof NucleeperEntity nucleeper && AlexsCavesExemplified.COMMON_CONFIG.NUCLEAR_CHAIN_ENABLED.get() && !nucleeper.getData(ACExAttachments.DEFUSED)){
             if (deathEvent.getSource().is(DamageTypes.PLAYER_EXPLOSION) || deathEvent.getSource().is(DamageTypes.EXPLOSION) || deathEvent.getSource().is(ACDamageTypes.NUKE) || deathEvent.getSource().is(ACDamageTypes.TREMORZILLA_BEAM)){
                 NuclearExplosionEntity explosionMain = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(nucleeper.level());
                 explosionMain.copyPosition(nucleeper);
@@ -275,7 +322,7 @@ public class ACExemplifiedEvents {
 
                 int amount = 0;
                 for (NucleeperEntity nucleepers : level.getEntitiesOfClass(NucleeperEntity.class, nucleeper.getBoundingBox().inflate(13))) {
-                    if (AlexsCavesExemplified.COMMON_CONFIG.NUCLEAR_CHAIN_ENABLED.get() && !((NucleeperXtra)nucleepers).isDefused()){
+                    if (AlexsCavesExemplified.COMMON_CONFIG.NUCLEAR_CHAIN_ENABLED.get() && !nucleepers.getData(ACExAttachments.DEFUSED)){
                         amount++;
                         NuclearExplosionEntity explosion = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(level);
                         explosion.copyPosition(nucleepers);
@@ -298,7 +345,7 @@ public class ACExemplifiedEvents {
             }
         }
 
-        if (died instanceof MineGuardianEntity mineGuardianEntity && ((MineGuardianXtra)mineGuardianEntity).alexsCavesExemplified$getVariant() >= 1) {
+        if (died instanceof MineGuardianEntity mineGuardianEntity && mineGuardianEntity.getData(ACExAttachments.MINE_GUARDIAN_VARIANT) >= 1) {
             ACExUtils.awardAdvancement(killer,"nuclear_kill","killed");
         }
 
@@ -375,6 +422,10 @@ public class ACExemplifiedEvents {
             return;
         }
         Level level = livingEntity.level();
+
+        if (livingEntity instanceof NucleeperEntity nucleeper && !AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get() && nucleeper.getData(ACExAttachments.DEFUSED)){
+            ACExAttachments.set(nucleeper, ACExAttachments.DEFUSED, false);
+        }
 
         if (livingEntity instanceof SeaPigEntity seaPigEntity && AlexsCavesExemplified.COMMON_CONFIG.POISONOUS_SKIN_ENABLED.get()) {
             for (LivingEntity entity : seaPigEntity.level().getEntitiesOfClass(LivingEntity.class, seaPigEntity.getBoundingBox().inflate(0.5))) {
@@ -528,6 +579,230 @@ public class ACExemplifiedEvents {
         }
 
 
+    }
+
+    @SubscribeEvent
+    public void mobTickPostEvents(EntityTickEvent.Post entityTickEvent){
+        Entity tickingEntity = entityTickEvent.getEntity();
+        Level level = tickingEntity.level();
+
+        if (tickingEntity instanceof FrostmintSpearEntity frostmintSpear) {
+            if (frostmintSpear.isInFluidType() && AlexsCavesExemplified.COMMON_CONFIG.AMPLIFIED_FROSTMINT_ENABLED.get() && frostmintSpear.isInFluidType(ACFluidRegistry.PURPLE_SODA_FLUID_TYPE.get()) && !level.isClientSide) {
+                FrostmintExplosion explosion = new FrostmintExplosion(level, frostmintSpear, frostmintSpear.getX() + 0.5F, frostmintSpear.getY() + 0.5F, frostmintSpear.getZ() + 0.5F, 4.0F, Explosion.BlockInteraction.DESTROY_WITH_DECAY, false);
+                explosion.explode();
+                explosion.finalizeExplosion(true);
+                if (frostmintSpear.getOwner() instanceof Player) {
+                    ACAdvancementTriggerRegistry.FROSTMINT_EXPLOSION.get().triggerForEntity(frostmintSpear.getOwner());
+                }
+                frostmintSpear.discard();
+            }
+            if (AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get() && frostmintSpear.getPersistentData().getBoolean("FrostRadiant") && frostmintSpear.tickCount > 100){
+                frostmintSpear.discard();
+            }
+        }
+
+        if (!(tickingEntity instanceof LivingEntity livingEntity)) {
+            return;
+        }
+
+        //Props to Drullkus for assistance
+        if (level.getBlockState(livingEntity.blockPosition()).getBlock() != ACBlockRegistry.AMBER.get()) {
+            if (ModList.get().isLoaded("alexsmobs")) {
+                AMCompat.amberReset(livingEntity);
+            }
+            if ((livingEntity instanceof Frog || livingEntity instanceof Tadpole) && livingEntity instanceof Mob mob && mob.isNoAi()) {
+                mob.setNoAi(false);
+                mob.setInvulnerable(false);
+                mob.setSilent(false);
+                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1,false,false));
+            }
+        }
+
+        if ((livingEntity instanceof UnderzealotEntity || livingEntity instanceof VesperEntity || livingEntity instanceof CorrodentEntity) && livingEntity instanceof Mob mob && AlexsCavesExemplified.COMMON_CONFIG.FORLORN_LIGHT_EFFECT_ENABLED.get()) {
+            LivingEntity target = mob.getTarget();
+            if (target != null && target != mob.getLastHurtByMob() && CuriosCompat.hasLight(target)) {
+                mob.setTarget(null);
+                ACExUtils.awardAdvancement(target,"light_repel","repelled");
+            }
+        }
+
+        if (livingEntity instanceof MagnetronEntity magnetron) {
+            int delay = magnetron.getData(ACExAttachments.RIPPED_HEART_DELAY) - 1;
+            magnetron.setData(ACExAttachments.RIPPED_HEART_DELAY, delay);
+            if (delay <= 0 && magnetron.getData(ACExAttachments.RIPPED_HEART) > 0) {
+                ACExUtils.ripMagnetronHeart(magnetron, 0);
+            }
+        }
+
+        if (livingEntity instanceof TeletorEntity teletor && AlexsCavesExemplified.COMMON_CONFIG.TELETOR_ARMORY_ENABLED.get() && !teletor.isDeadOrDying()){
+            for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, teletor.getBoundingBox().inflate(8))) {
+                if (item.getItem().is(ACTagRegistry.TELETOR_SPAWNS_WITH) && teletor.getWeapon() == null) {
+                    ItemStack stolen = item.getItem();
+                    MagneticWeaponEntity magneticWeapon = ACEntityRegistry.MAGNETIC_WEAPON.get().create(level);
+                    CustomData.update(DataComponents.CUSTOM_DATA, stolen, tag -> tag.putBoolean("Stolen", true));
+                    magneticWeapon.setItemStack(stolen);
+                    magneticWeapon.setControllerUUID(teletor.getUUID());
+                    teletor.setWeaponUUID(magneticWeapon.getUUID());
+                    level.addFreshEntity(magneticWeapon);
+                    magneticWeapon.setPos(item.position());
+                    item.discard();
+                    ACExUtils.awardAdvancement(item.getOwner(),"teletor_rearm","rearm");
+                }
+            }
+        }
+
+        if (livingEntity instanceof NotorEntity notor) {
+            int destructTime = notor.getData(ACExAttachments.SELF_DESTRUCT_TIME);
+            if (destructTime > 0) {
+                //Thank you Reimnop and ChatGPT for the math, shame im too retarded to know how shit works
+                ACExAttachments.set(notor, ACExAttachments.SELF_DESTRUCT_TIME, destructTime - Math.min((destructTime / 5) + 1, Math.max(1, (int) Math.pow(2, Math.log(200 / destructTime) / Math.log(2)))));
+            }
+            if (destructTime == 1){
+                ACExUtils.awardAdvancement(notor.getLastHurtByMob(),"self_destruct","explode");
+                level.explode(notor,notor.getX(),notor.getY(),notor.getZ(),2, Level.ExplosionInteraction.NONE);
+                notor.discard();
+            }
+        }
+
+        if (livingEntity instanceof MineGuardianEntity mineGuardian) {
+            String name = mineGuardian.getName().getString();
+            if (mineGuardian.getData(ACExAttachments.MINE_GUARDIAN_VARIANT) >= 1){
+                if (name.equals("Ae")){
+                    ACExAttachments.set(mineGuardian, ACExAttachments.MINE_GUARDIAN_VARIANT, 1);
+                }
+                if (name.equals("Jesse")){
+                    ACExAttachments.set(mineGuardian, ACExAttachments.MINE_GUARDIAN_VARIANT, 2);
+                }
+            }
+            if (mineGuardian.getData(ACExAttachments.MINE_GUARDIAN_VARIANT) > 0){
+                RandomSource random = mineGuardian.getRandom();
+                if (random.nextInt(80) == 0) {
+                    level.playLocalSound(mineGuardian.getX() + 0.5D, mineGuardian.getY() + 0.5D, mineGuardian.getZ() + 0.5D, ACSoundRegistry.URANIUM_HUM.get(), SoundSource.BLOCKS, 0.5F, random.nextFloat() * 0.4F + 0.8F, false);
+                }
+                if (random.nextInt(10) == 0) {
+                    level.addParticle(ACParticleRegistry.PROTON.get(), mineGuardian.getX(), mineGuardian.getY() + 0.5, mineGuardian.getZ(), mineGuardian.getX(), mineGuardian.getY(), mineGuardian.getZ());
+                }
+            }
+            if (AlexsCavesExemplified.COMMON_CONFIG.NOON_GUARDIAN_ENABLED.get() && name.equals("Noon") && mineGuardian.getData(ACExAttachments.MINE_GUARDIAN_VARIANT) == 0){
+                ACExAttachments.set(mineGuardian, ACExAttachments.MINE_GUARDIAN_VARIANT, -1);
+                for (Player deepOne : level.getEntitiesOfClass(Player.class, mineGuardian.getBoundingBox().inflate(10))) {
+                    ACExUtils.awardAdvancement(deepOne,"noon_guardian","noon");
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void mobInteractEvents(PlayerInteractEvent.EntityInteract event) {
+        Player player = event.getEntity();
+        ItemStack itemStack = event.getItemStack();
+        InteractionHand hand = event.getHand();
+        Level level = event.getLevel();
+        Entity target = event.getTarget();
+
+        if (!target.isAlive())
+            return;
+
+        if (target instanceof NucleeperEntity nucleeper && itemStack.is(Items.SHEARS) && !nucleeper.getData(ACExAttachments.DEFUSED) && AlexsCavesExemplified.COMMON_CONFIG.DEFUSION_ENABLED.get()){
+            ACExUtils.awardAdvancement(player,"defusing","defuse");
+            nucleeper.setTriggered(false);
+            ACExUtils.spawnLoot(ACExLootTables.NUCLEEPER_DEFUSION,nucleeper,player,1);
+            nucleeper.playSound(ACSoundRegistry.NUCLEAR_BOMB_DEFUSE.get());
+            ACExAttachments.set(nucleeper, ACExAttachments.DEFUSED, true);
+            player.swing(hand);
+            if (!player.isCreative()) {
+                itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+            }
+        }
+
+        if (target instanceof MineGuardianEntity mineGuardian && AlexsCavesExemplified.COMMON_CONFIG.NAVAL_NUCLEARITY_ENABLED.get() && itemStack.is(ACBlockRegistry.NUCLEAR_BOMB.get().asItem()) && mineGuardian.getData(ACExAttachments.MINE_GUARDIAN_VARIANT) == 0 && !mineGuardian.getData(ACExAttachments.MINE_GUARDIAN_OWNER).equals("-1")){
+            ACExAttachments.set(mineGuardian, ACExAttachments.MINE_GUARDIAN_VARIANT, mineGuardian.getRandom().nextBoolean() ? 1 : 2);
+            if (!player.isCreative()){
+                itemStack.shrink(1);
+            }
+            mineGuardian.playSound(SoundEvents.SMITHING_TABLE_USE, 8.0F, 1.0F);
+            ACExUtils.awardAdvancement(player,"nuclear_mines","nuke_mine");
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            event.setCanceled(true);
+        }
+
+        if (target instanceof UnderzealotEntity underzealot && underzealot.getPassengers().isEmpty() && !underzealot.isPraying() && AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get()) {
+            boolean respect = (player.getItemBySlot(EquipmentSlot.CHEST).is(ACItemRegistry.CLOAK_OF_DARKNESS.get()) && player.getItemBySlot(EquipmentSlot.HEAD).is(ACItemRegistry.HOOD_OF_DARKNESS.get()));
+            for (Mob leashedEntities : level.getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(10))) {
+                boolean lasso = ModList.get().isLoaded("alexsmobs") && AMCompat.isLeashed(leashedEntities,player);
+                if ((leashedEntities.getLeashHolder() == player || lasso)  && leashedEntities instanceof UnderzealotSacrifice && underzealot.getTarget() != player && !leashedEntities.getPersistentData().getBoolean("SacrificeGiven")) {
+                    int tradeDeterminer = 0;
+                    if (leashedEntities instanceof GloomothEntity) {
+                        tradeDeterminer = 1;
+                        ACExUtils.awardAdvancement(player, "gloomoth_trade", "gloomoth");
+                    } else if (leashedEntities instanceof CorrodentEntity) {
+                        tradeDeterminer = 2;
+                        ACExUtils.awardAdvancement(player, "corrodent_trade", "corrodent");
+                    } else if (leashedEntities instanceof VesperEntity) {
+                        tradeDeterminer = 3;
+                        ACExUtils.awardAdvancement(player, "vesper_trade", "vesper");
+                    }
+                    if (lasso){
+                        leashedEntities.spawnAtLocation(new ItemStack(AMCompat.amItemRegistry(1)));
+                        AMCompat.vineLassoTo(null,leashedEntities);
+                    } else {
+                        leashedEntities.dropLeash(true,true);
+                    }
+                    leashedEntities.getPersistentData().putBoolean("SacrificeGiven", true);
+                    if (!leashedEntities.level().isClientSide()) {
+                        leashedEntities.startRiding(underzealot);
+                    }
+                    boolean happy;
+                    if (AlexsCavesExemplified.COMMON_CONFIG.UNDERZEALOT_RESPECT_ENABLED.get() && respect){
+                        ACExUtils.awardAdvancement(player,"dark_respect","respect");
+                        ResourceLocation resourceLocation = switch (tradeDeterminer) {
+                            case 1 -> ACExLootTables.GLOOMOTH_TRADE;
+                            case 2 -> ACExLootTables.CORRODENT_TRADE;
+                            default -> ACExLootTables.VESPER_TRADE;
+                        };
+                        ACExUtils.spawnLoot(resourceLocation,underzealot,player,0);
+                        happy = true;
+                    } else {
+                        happy = false;
+                    }
+                    for(int i = 0; i < 5; ++i) {
+                        double d0 = underzealot.getRandom().nextGaussian() * 0.02D;
+                        double d1 = underzealot.getRandom().nextGaussian() * 0.02D;
+                        double d2 = underzealot.getRandom().nextGaussian() * 0.02D;
+                        level.addParticle((happy ? ParticleTypes.HAPPY_VILLAGER : ParticleTypes.ANGRY_VILLAGER), underzealot.getRandomX(1.0D), underzealot.getRandomY() + 1.0D, underzealot.getRandomZ(1.0D), d0, d1, d2);
+                    }
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                    event.setCanceled(true);
+                    break;
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void livingIncomingDamage(LivingIncomingDamageEvent incomingDamageEvent) {
+        LivingEntity damaged = incomingDamageEvent.getEntity();
+        DamageSource source = incomingDamageEvent.getSource();
+
+        if (source.getEntity() instanceof LivingEntity && damaged.hasEffect(ACExEffects.SERENED)){
+            MobEffectInstance serene = damaged.getEffect(ACExEffects.SERENED);
+            if (serene != null) {
+                damaged.removeEffect(serene.getEffect());
+                if (serene.getDuration() > 100) {
+                    damaged.addEffect(new MobEffectInstance(serene.getEffect(), serene.getDuration() - 1000, serene.getAmplifier()));
+                }
+            }
+        }
+
+        if (damaged instanceof NotorEntity notor && AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTRUCT_ENABLED.get() && notor.getData(ACExAttachments.SELF_DESTRUCT_TIME) <= 0) {
+            ACExAttachments.set(notor, ACExAttachments.SELF_DESTRUCT_TIME, 200);
+        }
+
+        if (damaged instanceof VesperEntity vesper && source.is(DamageTypes.ARROW) && AlexsCavesExemplified.COMMON_CONFIG.VESPER_SHOTDOWN_ENABLED.get()){
+            vesper.setHanging(false);
+            vesper.groundedFor = 1000;
+            ACExUtils.awardAdvancement(source.getEntity(),"shot_down","shot");
+        }
     }
 
     @SubscribeEvent

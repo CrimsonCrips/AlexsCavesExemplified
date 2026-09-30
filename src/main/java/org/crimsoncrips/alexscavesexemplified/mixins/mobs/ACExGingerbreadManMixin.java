@@ -26,13 +26,6 @@ public abstract class ACExGingerbreadManMixin extends Monster {
         super(pEntityType, pLevel);
     }
 
-    @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void registerGoals(CallbackInfo ci) {
-        GingerbreadManEntity gingerbreadMan = (GingerbreadManEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.HIVE_MIND_ENABLED.get()) gingerbreadMan.targetSelector.addGoal(1, (new ACExHurtByTargetGoal(gingerbreadMan)).setAlertOthers(new Class[0]));
-    }
-
-
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);

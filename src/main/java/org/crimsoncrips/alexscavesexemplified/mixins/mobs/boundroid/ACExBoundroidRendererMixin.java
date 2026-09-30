@@ -1,12 +1,12 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.boundroid;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.client.model.BoundroidModel;
 import com.github.alexmodguy.alexscaves.client.render.entity.BoundroidRenderer;
 import com.github.alexmodguy.alexscaves.server.entity.living.BoundroidEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(BoundroidRenderer.class)
@@ -22,7 +22,7 @@ public abstract class ACExBoundroidRendererMixin extends MobRenderer<BoundroidEn
 
 
     public ResourceLocation getTextureLocation(BoundroidEntity entity) {
-        return !((ACExBaseInterface)entity).isMagnetizing() ? TEXTURE_DISABLED : entity.isScared() ? TEXTURE_SCARED : TEXTURE;
+        return !entity.getData(ACExAttachments.MAGNETIZING) ? TEXTURE_DISABLED : entity.isScared() ? TEXTURE_SCARED : TEXTURE;
     }
 
 }

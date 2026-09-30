@@ -22,7 +22,7 @@ public abstract class ACExLuxtructosaurusMixin extends SauropodBaseEntity {
     }
 
     @Inject(method = "onStep", at = @At("TAIL"),remap = false)
-    private void registerGoals(CallbackInfo ci) {
+    private void alexsCavesExemplified$onStep(CallbackInfo ci) {
 
         LuxtructosaurusEntity lux = (LuxtructosaurusEntity)(Object)this;
 

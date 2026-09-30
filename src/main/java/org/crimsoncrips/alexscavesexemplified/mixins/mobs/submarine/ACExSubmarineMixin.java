@@ -28,7 +28,7 @@ public abstract class ACExSubmarineMixin extends Entity {
     }
 
     @Inject(method = "tickController", at = @At("TAIL"),remap = false)
-    private void alexsCavesExemplified$registerGoals(Player passenger, CallbackInfo ci) {
+    private void alexsCavesExemplified$tickController(Player passenger, CallbackInfo ci) {
         SubmarineEntity submarineEntity = (SubmarineEntity)(Object)this;
         if (passenger.xxa != 0 || passenger.zza != 0){
             for (LivingEntity entity : submarineEntity.level().getEntitiesOfClass(LivingEntity.class, submarineEntity.getBoundingBox().inflate(1.6))) {

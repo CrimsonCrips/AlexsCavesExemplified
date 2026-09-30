@@ -28,7 +28,6 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.Gammafied;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 
 import java.util.stream.Stream;
@@ -78,7 +77,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
     private void explode() {
         NuclearExplosionEntity vanillaNuke = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(level());
         vanillaNuke.setSize(AlexsCaves.COMMON_CONFIG.nukeExplosionSizeModifier.get().floatValue() * 1.5F);
-        ((Gammafied) vanillaNuke).setGamma(true);
+        ACExUtils.setGamma(vanillaNuke, true);
         vanillaNuke.copyPosition(this);
         level().addFreshEntity(vanillaNuke);
     }

@@ -1,5 +1,9 @@
 package org.crimsoncrips.alexscavesexemplified.misc;
 
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import com.github.alexmodguy.alexscaves.server.entity.living.TremorzillaEntity;
+import net.minecraft.network.chat.Component;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.entity.living.DeepOneBaseEntity;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.potion.ACEffectRegistry;
@@ -30,6 +34,8 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.network.PacketDistributor;
+import org.crimsoncrips.alexscavesexemplified.networking.ACExToastPacket;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.CreateCompat;
 import org.joml.AxisAngle4f;
@@ -41,6 +47,16 @@ import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.get
 import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.setEntityMagneticDelta;
 
 public class ACExUtils {
+    public static void sendToast(Player player, Component message) {
+        sendToast(player, message, ACExToastPacket.DISPLAY_TIME_MS);
+    }
+
+    public static void sendToast(Player player, Component message, long displayTimeMs) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            PacketDistributor.sendToPlayer(serverPlayer, new ACExToastPacket(message, displayTimeMs));
+        }
+    }
+
     public static void dropMagneticItem(Player player, ItemStack item){
         ItemEntity itementity = new ItemEntity(player.level(), player.getX(), player.getEyeY(), player.getZ(), item);
         itementity.setPickUpDelay(60);
@@ -130,6 +146,40 @@ public class ACExUtils {
                 if (!rewards.isEmpty()) {
                     rewards.forEach(stack -> BehaviorUtils.throwItem(entity, rewards.get(0), owner.position().add(0.0D, 1.0D, 0.0D)));
                 }
+            }
+        }
+    }
+
+    public static void setGamma(TremorzillaEntity tremorzilla, boolean gamma){
+        if (gamma) {
+            tremorzilla.getAttribute(Attributes.MAX_HEALTH).setBaseValue(750F);
+            tremorzilla.getAttribute(Attributes.ARMOR).setBaseValue(18F);
+            tremorzilla.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(50F);
+        }
+        ACExAttachments.set(tremorzilla, ACExAttachments.GAMMA, gamma);
+    }
+
+    public static void setGamma(Entity entity, boolean gamma){
+        if (entity instanceof TremorzillaEntity tremorzilla) {
+            setGamma(tremorzilla, gamma);
+        } else {
+            ACExAttachments.set(entity, ACExAttachments.GAMMA, gamma);
+        }
+    }
+
+    public static void ripMagnetronHeart(Entity magnetron, int value){
+        magnetron.setData(ACExAttachments.RIPPED_HEART_DELAY, 15);
+        ACExAttachments.set(magnetron, ACExAttachments.RIPPED_HEART, value);
+    }
+
+    public static void addSweets(Player player, int value){
+        if (AlexsCavesExemplified.COMMON_CONFIG.SWEET_PUNISHMENT_ENABLED.get()) {
+            int sweets = player.getData(ACExAttachments.SWEETS) + value;
+            player.setData(ACExAttachments.SWEETS, sweets);
+            if (sweets == 8 && !player.level().isClientSide) {
+                if (player.getRandom().nextBoolean()) {
+                    player.displayClientMessage(Component.translatable("misc.alexscavesexemplified.candy_warn_0"), true);
+                } else player.displayClientMessage(Component.nullToEmpty("misc.alexscavesexemplified.candy_warn_1"), true);
             }
         }
     }

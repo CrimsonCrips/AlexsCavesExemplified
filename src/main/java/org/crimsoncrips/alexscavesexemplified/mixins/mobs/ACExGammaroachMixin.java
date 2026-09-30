@@ -34,13 +34,6 @@ public abstract class ACExGammaroachMixin extends PathfinderMob implements Targe
         super(pEntityType, pLevel);
     }
 
-    @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void registerGoals(CallbackInfo ci) {
-        GammaroachEntity gammaroach = (GammaroachEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.ROACH_FEEDING_ENABLED.get()) {
-            gammaroach.targetSelector.addGoal(1, new MobTargetItemGoal<>(this, false));
-        }
-    }
 
     @Override
     public boolean canTargetItem(ItemStack itemStack) {

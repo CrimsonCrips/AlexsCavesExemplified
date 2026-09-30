@@ -5,10 +5,10 @@
 
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.entity.living.MineGuardianEntity;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.player.Player;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
 
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public class ACExMineGuardianHurtBy extends HurtByTargetGoal {
 
     @Override
     public void start() {
-        if (this.mob.getLastHurtByMob() instanceof Player player && !Objects.equals(player.getUUID().toString(), ((MineGuardianXtra)mineGuardian).alexsCavesExemplified$getOwner())) {
+        if (this.mob.getLastHurtByMob() instanceof Player player && !Objects.equals(player.getUUID().toString(), mineGuardian.getData(ACExAttachments.MINE_GUARDIAN_OWNER))) {
             this.mob.setTarget(this.mob.getLastHurtByMob());
         }
         this.targetMob = this.mob.getTarget();

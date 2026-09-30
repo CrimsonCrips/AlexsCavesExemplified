@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.nucleeper;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import net.minecraft.util.FastColor;
 import com.github.alexmodguy.alexscaves.client.model.NucleeperModel;
 import com.github.alexmodguy.alexscaves.client.render.ACRenderTypes;
@@ -13,7 +14,6 @@ import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.NeoForgeRenderTypes;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
 import org.spongepowered.asm.mixin.Mixin;
 
 @Mixin(targets = "com.github.alexmodguy.alexscaves.client.render.entity.NucleeperRenderer$LayerGlow")
@@ -51,7 +51,7 @@ public abstract class ACExNucleeperRenderRenderMixin extends RenderLayer<Nucleep
         }
 
         ResourceLocation buttons;
-        if (!((NucleeperXtra)entitylivingbaseIn).isDefused()){
+        if (!entitylivingbaseIn.getData(ACExAttachments.DEFUSED)){
             if (buttonDiv < 2) {
                 buttons = TEXTURE_BUTTONS_0;
             } else if (buttonDiv < 4) {

@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.mine_guardian;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.client.model.MineGuardianModel;
 import com.github.alexmodguy.alexscaves.client.render.ACRenderTypes;
 import com.github.alexmodguy.alexscaves.client.render.entity.MineGuardianRenderer;
@@ -12,7 +13,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
 import org.joml.Matrix4f;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -81,7 +81,7 @@ public abstract class ACExMineRendererMixin extends MobRenderer<MineGuardianEnti
 
     @Override
     public ResourceLocation getTextureLocation(MineGuardianEntity entity) {
-        return switch (((MineGuardianXtra) entity).alexsCavesExemplified$getVariant()) {
+        return switch (entity.getData(ACExAttachments.MINE_GUARDIAN_VARIANT)) {
             case -1 -> entity.isEyeClosed() ? TEXTURE_NOON_SLEEPING : (entity.isScanning() ? TEXTURE_NOON : TEXTURE_NOON_ACTIVE);
             case 1 -> entity.isEyeClosed() ? TEXTURE_AE_NUCLEAR_SLEEPING : TEXTURE_AE_NUCLEAR;
             case 2 -> entity.isEyeClosed() ? TEXTURE_JESSE_NUCLEAR_SLEEPING : TEXTURE_JESSE_NUCLEAR;
@@ -91,10 +91,9 @@ public abstract class ACExMineRendererMixin extends MobRenderer<MineGuardianEnti
 
     @Inject(method = "render(Lcom/github/alexmodguy/alexscaves/server/entity/living/MineGuardianEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;translate(FFF)V" ,ordinal = 2),locals = LocalCapture.CAPTURE_FAILHARD, cancellable = true)
     private void alexsCavesExemplified$render(MineGuardianEntity entityIn, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, int packedLightIn, CallbackInfo ci, float bodyYaw, float scanProgress, float ticks, float length, float width, float extraX) {
-        MineGuardianXtra accesor = (MineGuardianXtra) entityIn;
         assert Minecraft.getInstance().player != null;
-        if (!Minecraft.getInstance().player.getStringUUID().equals(accesor.alexsCavesExemplified$getOwner())) {
-            if (accesor.alexsCavesExemplified$getVariant() == -1) {
+        if (!Minecraft.getInstance().player.getStringUUID().equals(entityIn.getData(ACExAttachments.MINE_GUARDIAN_OWNER))) {
+            if (entityIn.getData(ACExAttachments.MINE_GUARDIAN_VARIANT) == -1) {
                 ci.cancel();
                 poseStack.translate(0.3F, -0.5F, -0.1F);
                 PoseStack.Pose posestack$pose = poseStack.last();
@@ -107,7 +106,7 @@ public abstract class ACExMineRendererMixin extends MobRenderer<MineGuardianEnti
                 poseStack.popPose();
                 poseStack.popPose();
             }
-            if (accesor.alexsCavesExemplified$getVariant() > 0) {
+            if (entityIn.getData(ACExAttachments.MINE_GUARDIAN_VARIANT) > 0) {
                 ci.cancel();
                 poseStack.translate(0.0F, -0.5F, 0.0F);
                 PoseStack.Pose posestack$pose = poseStack.last();
@@ -122,7 +121,7 @@ public abstract class ACExMineRendererMixin extends MobRenderer<MineGuardianEnti
             }
         } else {
             ci.cancel();
-            if (accesor.alexsCavesExemplified$getVariant() == -1) {
+            if (entityIn.getData(ACExAttachments.MINE_GUARDIAN_VARIANT) == -1) {
                 poseStack.translate(0.3F, -0.5F, -0.1F);
             } else {
                 poseStack.translate(0.0F, -0.5F, 0.0F);

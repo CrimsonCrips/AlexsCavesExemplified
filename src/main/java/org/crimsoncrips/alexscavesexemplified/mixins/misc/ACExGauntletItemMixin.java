@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.enchantment.ACEnchantmentHelper;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.enchantment.ACEnchantmentRegistry;
@@ -28,7 +29,6 @@ import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MagnetronMagneticism;
 import org.crimsoncrips.alexscavesexemplified.server.enchantment.ACExEnchants;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -104,9 +104,8 @@ public abstract class ACExGauntletItemMixin extends Item {
                 if (!level.isClientSide && player.getRandom().nextDouble() < 0.15) {
                     ((ServerLevel) level).sendParticles(ACExParticleRegistry.AZURE_FOCUSED_LIGHTNING.get(), from.x, from.y, from.z, 0, -vec3.x, -vec3.y + 1, -vec3.z, 0.5D);
                 }
-                    MagnetronMagneticism accesor = (MagnetronMagneticism) magnetronEntity;
-                if (accesor.getRippedHeart() <= 100){
-                    accesor.setRippedHeart(accesor.getRippedHeart() + 1);
+                if (magnetronEntity.getData(ACExAttachments.RIPPED_HEART) <= 100){
+                    ACExUtils.ripMagnetronHeart(magnetronEntity, magnetronEntity.getData(ACExAttachments.RIPPED_HEART) + 1);
                     if(!player.isCreative()){
                         magnetronEntity.setTarget(player);
                     }

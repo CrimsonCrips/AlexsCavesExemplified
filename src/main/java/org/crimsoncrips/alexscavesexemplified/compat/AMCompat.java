@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.compat;
 
+import org.crimsoncrips.alexscavesexemplified.server.goals.ACExFlyToTrap;
 import com.github.alexthe666.alexsmobs.effect.AMEffectRegistry;
 import com.github.alexthe666.alexsmobs.entity.*;
 import com.github.alexthe666.alexsmobs.entity.util.VineLassoUtil;
@@ -76,6 +77,12 @@ public class AMCompat {
 
     public static Holder<MobEffect> exsanguination(){
         return AMEffectRegistry.EXSANGUINATION;
+    }
+
+    public static void addFlyGoals(Entity entity){
+        if (entity instanceof EntityFly fly) {
+            fly.goalSelector.addGoal(4, new ACExFlyToTrap(fly, 0.7, 10));
+        }
     }
 
 }

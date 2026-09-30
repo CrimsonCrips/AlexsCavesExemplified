@@ -15,6 +15,11 @@ public class ACExLangGen extends ACExLangProvider {
 	@Override
 	protected void addTranslations() {
 		this.addMisc("feature_disabled", "Feature Disabled");
+		this.addMisc("config_title", "Alex's Caves Exemplified Config");
+		this.addMisc("config_tab_client", "Client");
+		this.addMisc("config_tab_general", "General");
+		this.addMisc("config_tab_targets", "Targets");
+		this.addMisc("config_note_remote", "Connected to a server, these settings can only be changed on the server");
 		this.addMisc("ace_book.title","Alexs Caves Exemplified");
 		this.addMisc("ace_book.description","Welcome to an exemplified reality!");
 		this.addMisc("locator_protection","Your locator has been infused with the star.");

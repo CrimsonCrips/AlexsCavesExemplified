@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.EnigmaticEngineBlockEntity;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
@@ -18,7 +19,6 @@ import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACExBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -82,7 +82,7 @@ public abstract class ACExEnigmaticEngineMixin extends BlockEntity {
                 mineGuardian.setPos(vec31.x, vec31.y, vec31.z);
                 if (owner != null) {
                     ACExUtils.awardAdvancement(owner,"mine_ownership","own");
-                    ((MineGuardianXtra) mineGuardian).alexsCavesExemplified$setOwner(owner.getUUID().toString());
+                    ACExAttachments.set(mineGuardian, ACExAttachments.MINE_GUARDIAN_OWNER, owner.getUUID().toString());
                 }
                 level.addFreshEntity(mineGuardian);
             }

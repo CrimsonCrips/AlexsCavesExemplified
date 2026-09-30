@@ -23,13 +23,6 @@ public abstract class ACExBrainiacMixin extends Monster implements ACExBaseInter
         super(pEntityType, pLevel);
     }
     
-    @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void registerGoals(CallbackInfo ci) {
-        BrainiacEntity brainiac = (BrainiacEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.WASTE_PICKUP_ENABLED.get()){
-            brainiac.targetSelector.addGoal(4, new ACExPickupDroppedBarrels<>(brainiac,true));
-        }
-    }
 
     @Override
     public boolean canTargetItem(ItemStack itemStack) {

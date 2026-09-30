@@ -35,16 +35,4 @@ public abstract class ACExAtlatitanMixin extends SauropodBaseEntity {
         }
     }
 
-    @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void alexsCavesExemplified$registerGoals(CallbackInfo ci) {
-        AtlatitanEntity atlatitan = (AtlatitanEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.EGG_ANGER_ENABLED.get()){
-            atlatitan.targetSelector.addGoal(4, new ACExDinosaurEggAttack<>(atlatitan, LivingEntity.class, true){
-                @Override
-                public boolean canContinueToUse() {
-                    return super.canContinueToUse() && atlatitan.getRideableFor() <= 0 ;
-                }
-            });
-        }
-    }
 }

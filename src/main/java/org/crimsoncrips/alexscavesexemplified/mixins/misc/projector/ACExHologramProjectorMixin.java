@@ -1,5 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc.projector;
 
+import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
+
 import com.github.alexmodguy.alexscaves.server.block.HologramProjectorBlock;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.HologramProjectorBlockEntity;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
@@ -16,7 +18,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

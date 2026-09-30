@@ -2,11 +2,7 @@ package org.crimsoncrips.alexscavesexemplified.misc.interfaces;
 
 public interface ACExBaseInterface {
 
-    boolean isMagnetizing();
-
     boolean isPowered();
-
-    void addSweets(int value);
 
     int getCharge();
 
@@ -15,7 +11,4 @@ public interface ACExBaseInterface {
     int getProjectionScale();
 
     void setProjectionScale(int var);
-
-    int getSelfDestructTime();
-
 }

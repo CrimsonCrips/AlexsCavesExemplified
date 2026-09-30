@@ -21,7 +21,7 @@ public class ACExMarineSnowMixin extends Item {
     }
 
     @Inject(method = "useOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/context/UseOnContext;getLevel()Lnet/minecraft/world/level/Level;",ordinal = 8))
-    private void registerGoals(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
+    private void alexsCavesExemplified$useOn(UseOnContext context, CallbackInfoReturnable<InteractionResult> cir) {
         if (AlexsCavesExemplified.COMMON_CONFIG.ECOLOGICAL_REPUTATION_ENABLED.get() && context.getLevel().getBiome(context.getClickedPos()).is(ACBiomeRegistry.ABYSSAL_CHASM)) {
             if(context.getPlayer() != null){
                 ACExUtils.deepReputation(context.getPlayer(), 1);
