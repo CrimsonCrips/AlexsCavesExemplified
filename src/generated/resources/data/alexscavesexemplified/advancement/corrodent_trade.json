@@ -1,0 +1,32 @@
+{
+  "parent": "alexscavesexemplified:dark_respect",
+  "criteria": {
+    "corrodent": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.corrodent_trade.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/corrodent_trade.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.corrodent_trade"
+    }
+  },
+  "requirements": [
+    [
+      "corrodent"
+    ]
+  ],
+  "rewards": {
+    "experience": 70
+  },
+  "sends_telemetry_event": true
+}

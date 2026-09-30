@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:interrupt",
+  "criteria": {
+    "feed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.feed_speedup.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/feed_speedup.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.feed_speedup"
+    }
+  },
+  "requirements": [
+    [
+      "feed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

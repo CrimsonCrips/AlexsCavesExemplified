@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:primordial",
+  "criteria": {
+    "bonemeal": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.propogate.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscaves:flytrap"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.propogate"
+    }
+  },
+  "requirements": [
+    [
+      "bonemeal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

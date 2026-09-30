@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:gluttony",
+  "criteria": {
+    "crashed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.sugar_crashed.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/mob_effect/sugar_crash.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.sugar_crashed"
+    }
+  },
+  "requirements": [
+    [
+      "crashed"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

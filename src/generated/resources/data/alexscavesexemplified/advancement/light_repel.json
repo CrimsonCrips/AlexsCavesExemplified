@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:forlorn",
+  "criteria": {
+    "repelled": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.light_repel.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/light_repel.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.light_repel"
+    }
+  },
+  "requirements": [
+    [
+      "repelled"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

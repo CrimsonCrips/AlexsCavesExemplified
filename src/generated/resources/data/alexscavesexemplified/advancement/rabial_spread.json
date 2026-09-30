@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:rabial",
+  "criteria": {
+    "spread": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.rabial_spread.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/rabial_spread.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.rabial_spread"
+    }
+  },
+  "requirements": [
+    [
+      "spread"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

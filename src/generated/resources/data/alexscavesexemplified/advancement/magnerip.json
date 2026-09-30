@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:teletor_rearm",
+  "criteria": {
+    "ripped": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.magnerip.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/magnerip.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.magnerip"
+    }
+  },
+  "requirements": [
+    [
+      "ripped"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

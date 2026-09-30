@@ -1,0 +1,33 @@
+{
+  "parent": "alexscavesexemplified:ecological_reputation",
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.hullbreaker_reputation.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/hullbreaker_reputation.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.hullbreaker_reputation"
+    }
+  },
+  "requirements": [
+    [
+      "killed"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  },
+  "sends_telemetry_event": true
+}

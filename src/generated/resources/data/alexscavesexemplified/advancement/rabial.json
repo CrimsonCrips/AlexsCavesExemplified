@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:forlorn",
+  "criteria": {
+    "has_rabies": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.rabial.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/rabial.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.rabial"
+    }
+  },
+  "requirements": [
+    [
+      "has_rabies"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

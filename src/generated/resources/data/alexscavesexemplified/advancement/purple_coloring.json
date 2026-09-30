@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:sticky_soda",
+  "criteria": {
+    "colored": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.purple_coloring.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:purple_dye"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.purple_coloring"
+    }
+  },
+  "requirements": [
+    [
+      "colored"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

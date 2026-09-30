@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:sacrifice_painting",
+  "criteria": {
+    "egg_sacrifice": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.egg_sacrifice.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscaves:atlatitan_egg"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.egg_sacrifice"
+    }
+  },
+  "requirements": [
+    [
+      "egg_sacrifice"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

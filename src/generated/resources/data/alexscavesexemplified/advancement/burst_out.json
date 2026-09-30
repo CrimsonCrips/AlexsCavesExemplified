@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:forlorn",
+  "criteria": {
+    "burst": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.burst_out.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/burst_out.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.burst_out"
+    }
+  },
+  "requirements": [
+    [
+      "burst"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

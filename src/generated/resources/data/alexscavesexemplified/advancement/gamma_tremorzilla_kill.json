@@ -1,0 +1,33 @@
+{
+  "parent": "alexscavesexemplified:gamma_tremorzilla",
+  "criteria": {
+    "gamma_kill": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.gamma_tremorzilla_kill.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/gamma_tremorzilla.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.gamma_tremorzilla_kill"
+    }
+  },
+  "requirements": [
+    [
+      "gamma_kill"
+    ]
+  ],
+  "rewards": {
+    "experience": 10000
+  },
+  "sends_telemetry_event": true
+}

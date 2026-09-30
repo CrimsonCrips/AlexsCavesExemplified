@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:abyssal",
+  "criteria": {
+    "touched": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.poisonous_skin.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscaves:sea_pig"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.poisonous_skin"
+    }
+  },
+  "requirements": [
+    [
+      "touched"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

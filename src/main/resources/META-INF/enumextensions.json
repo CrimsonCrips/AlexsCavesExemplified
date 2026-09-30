@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/world/item/Rarity",
+      "name": "ALEXSCAVESEXEMPLIFIED_GAMMA",
+      "constructor": "(ILjava/lang/String;Ljava/util/function/UnaryOperator;)V",
+      "parameters": {
+        "class": "org/crimsoncrips/alexscavesexemplified/server/item/ACExRarity",
+        "field": "GAMMA"
+      }
+    }
+  ]
+}

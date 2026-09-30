@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:toxic",
+  "criteria": {
+    "convert": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.convert_fish.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/convert_fish.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.convert_fish"
+    }
+  },
+  "requirements": [
+    [
+      "convert"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:toxic",
+  "criteria": {
+    "defuse": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.defusing.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:shears"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.defusing"
+    }
+  },
+  "requirements": [
+    [
+      "defuse"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

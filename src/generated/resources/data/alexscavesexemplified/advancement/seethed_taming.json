@@ -1,0 +1,33 @@
+{
+  "parent": "alexscavesexemplified:drop_food",
+  "criteria": {
+    "tame": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.seethed_taming.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/seethed_taming.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.seethed_taming"
+    }
+  },
+  "requirements": [
+    [
+      "tame"
+    ]
+  ],
+  "rewards": {
+    "experience": 200
+  },
+  "sends_telemetry_event": true
+}

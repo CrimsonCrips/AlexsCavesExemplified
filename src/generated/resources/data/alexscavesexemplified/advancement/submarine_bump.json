@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:abyssal",
+  "criteria": {
+    "bump": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.submarine_bump.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscaves:submarine"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.submarine_bump"
+    }
+  },
+  "requirements": [
+    [
+      "bump"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

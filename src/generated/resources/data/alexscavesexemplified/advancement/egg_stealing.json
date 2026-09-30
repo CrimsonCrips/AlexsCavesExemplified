@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:primordial",
+  "criteria": {
+    "stole": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.egg_stealing.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscavesexemplified:dino_eggs"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.egg_stealing"
+    }
+  },
+  "requirements": [
+    [
+      "stole"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

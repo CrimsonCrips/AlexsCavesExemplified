@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:iced_freeze",
+  "criteria": {
+    "made": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.ice_cream.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscavesexemplified:ice_cream_cone"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.ice_cream"
+    }
+  },
+  "requirements": [
+    [
+      "made"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

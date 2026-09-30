@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:sacrifice_painting",
+  "criteria": {
+    "live_sacrifice": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.volcanic_sacrifice.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscaves:textures/misc/advancement/icon/summon_luxtructosaurus.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.volcanic_sacrifice"
+    }
+  },
+  "requirements": [
+    [
+      "live_sacrifice"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:metal_cauldron",
+  "criteria": {
+    "replicate": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.soda_replication.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/soda_cauldron.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.soda_replication"
+    }
+  },
+  "requirements": [
+    [
+      "replicate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

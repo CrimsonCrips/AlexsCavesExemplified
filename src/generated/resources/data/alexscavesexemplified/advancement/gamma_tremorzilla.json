@@ -1,0 +1,30 @@
+{
+  "parent": "alexscavesexemplified:toxic",
+  "criteria": {
+    "gamma": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.gamma_tremorzilla.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/gamma_tremorzilla.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.gamma_tremorzilla"
+    }
+  },
+  "requirements": [
+    [
+      "gamma"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "alexscavesexemplified:dark_respect",
+  "criteria": {
+    "gloomoth": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.gloomoth_trade.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/gloomoth_trade.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.gloomoth_trade"
+    }
+  },
+  "requirements": [
+    [
+      "gloomoth"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

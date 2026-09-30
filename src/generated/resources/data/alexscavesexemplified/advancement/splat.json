@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:primordial",
+  "criteria": {
+    "stepped": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.splat.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/splat.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.splat"
+    }
+  },
+  "requirements": [
+    [
+      "stepped"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

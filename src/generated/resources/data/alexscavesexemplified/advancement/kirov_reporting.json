@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:toxic",
+  "criteria": {
+    "kirov": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.kirov_reporting.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscaves:nuclear_bomb"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.kirov_reporting"
+    }
+  },
+  "requirements": [
+    [
+      "kirov"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

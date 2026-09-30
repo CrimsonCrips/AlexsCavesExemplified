@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:primordial",
+  "criteria": {
+    "paint": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.paint_effects.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscaves:tectonic_shard"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.paint_effects"
+    }
+  },
+  "requirements": [
+    [
+      "paint"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

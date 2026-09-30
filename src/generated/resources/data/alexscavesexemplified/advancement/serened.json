@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:propogate",
+  "criteria": {
+    "serened": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.serened.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscaves:serene_salad"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.serened"
+    }
+  },
+  "requirements": [
+    [
+      "serened"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

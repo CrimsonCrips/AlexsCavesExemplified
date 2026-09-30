@@ -1,0 +1,33 @@
+{
+  "parent": "alexscavesexemplified:chain_reaction",
+  "criteria": {
+    "nuke_chained": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.nucleeper_annhilation.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/nucleeper_annhilation.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.nucleeper_annhilation"
+    }
+  },
+  "requirements": [
+    [
+      "nuke_chained"
+    ]
+  ],
+  "rewards": {
+    "experience": 1000
+  },
+  "sends_telemetry_event": true
+}

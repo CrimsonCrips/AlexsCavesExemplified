@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:toxic",
+  "criteria": {
+    "radiate": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.deathly_radiation.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/deathly_radiation.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.deathly_radiation"
+    }
+  },
+  "requirements": [
+    [
+      "radiate"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:galena_steal",
+  "criteria": {
+    "rearm": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.teletor_rearm.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/teletor_rearm.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.teletor_rearm"
+    }
+  },
+  "requirements": [
+    [
+      "rearm"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

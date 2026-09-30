@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:tesla_shock",
+  "criteria": {
+    "explode": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.self_destruct.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/self_destruct.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.self_destruct"
+    }
+  },
+  "requirements": [
+    [
+      "explode"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

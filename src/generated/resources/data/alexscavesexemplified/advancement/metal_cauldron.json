@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:magnetic",
+  "criteria": {
+    "metal": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.metal_cauldron.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/metal_cauldron.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.metal_cauldron"
+    }
+  },
+  "requirements": [
+    [
+      "metal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

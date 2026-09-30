@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:frostmint_explode",
+  "criteria": {
+    "freeze": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.frostmint_freeze.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/frostmint_freeze.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.frostmint_freeze"
+    }
+  },
+  "requirements": [
+    [
+      "freeze"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

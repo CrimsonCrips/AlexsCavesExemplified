@@ -1,0 +1,10 @@
+{
+  "values": [
+    "minecraft:packed_mud",
+    "minecraft:dirt",
+    "alexscaves:guanostone",
+    "alexscaves:coprolith",
+    "alexscaves:coprolith_coal_ore",
+    "alexscaves:guanostone_redstone_ore"
+  ]
+}

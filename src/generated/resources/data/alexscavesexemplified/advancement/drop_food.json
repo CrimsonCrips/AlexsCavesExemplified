@@ -1,0 +1,26 @@
+{
+  "parent": "alexscavesexemplified:primordial",
+  "criteria": {
+    "drop": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.drop_food.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alexscaves:cooked_dinosaur_chop"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.drop_food"
+    }
+  },
+  "requirements": [
+    [
+      "drop"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,29 @@
+{
+  "parent": "alexscavesexemplified:magnetic",
+  "criteria": {
+    "shock": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.alexscavesexemplified.tesla_shock.desc"
+    },
+    "icon": {
+      "components": {
+        "citadel:icon_location": "alexscavesexemplified:textures/gui/adv_icon/tesla_shock.png"
+      },
+      "count": 1,
+      "id": "citadel:icon_item"
+    },
+    "title": {
+      "translate": "advancement.alexscavesexemplified.tesla_shock"
+    }
+  },
+  "requirements": [
+    [
+      "shock"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
