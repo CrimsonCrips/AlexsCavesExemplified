@@ -21,7 +21,7 @@ public class SelfDestructLayer extends RenderLayer<NotorEntity, NotorModel> {
         super(pRenderer);
     }
 
-    private static final ResourceLocation SELF_DESTRUCT_LAYER = new ResourceLocation(AlexsCavesExemplified.MODID, "textures/entity/self_destruct_layer.png");
+    private static final ResourceLocation SELF_DESTRUCT_LAYER = ResourceLocation.fromNamespaceAndPath(AlexsCavesExemplified.MODID, "textures/entity/self_destruct_layer.png");
 
 
     @Override
@@ -34,7 +34,7 @@ public class SelfDestructLayer extends RenderLayer<NotorEntity, NotorModel> {
 
             entitymodel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
             VertexConsumer magmaGlow = pBuffer.getBuffer(ACRenderTypes.getEyesAlphaEnabled(SELF_DESTRUCT_LAYER));
-            entitymodel.renderToBuffer(pPoseStack, magmaGlow, pPackedLight, LivingEntityRenderer.getOverlayCoords(pLivingEntity, 0), 1.0F, 1.0F, 1.0F, 1.0F);
+            entitymodel.renderToBuffer(pPoseStack, magmaGlow, pPackedLight, LivingEntityRenderer.getOverlayCoords(pLivingEntity, 0), -1);
 
         }
     }

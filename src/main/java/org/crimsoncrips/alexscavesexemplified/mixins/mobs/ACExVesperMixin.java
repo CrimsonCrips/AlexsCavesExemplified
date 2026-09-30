@@ -81,8 +81,8 @@ public abstract class ACExVesperMixin extends Monster {
     }
 
     @Override
-    public boolean canBeLeashed(Player pPlayer) {
-        return super.canBeLeashed(pPlayer) || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && !isPassenger());
+    public boolean canBeLeashed() {
+        return super.canBeLeashed() || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && !isPassenger());
     }
 
     @Override

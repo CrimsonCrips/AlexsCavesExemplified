@@ -5,6 +5,7 @@ import com.github.alexthe666.alexsmobs.entity.*;
 import com.github.alexthe666.alexsmobs.entity.util.VineLassoUtil;
 import com.github.alexthe666.alexsmobs.item.AMItemRegistry;
 import net.minecraft.util.RandomSource;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -73,8 +74,8 @@ public class AMCompat {
         };
     }
 
-    public static MobEffect exsanguination(){
-        return AMEffectRegistry.EXSANGUINATION.get();
+    public static Holder<MobEffect> exsanguination(){
+        return AMEffectRegistry.EXSANGUINATION;
     }
 
 }

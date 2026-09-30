@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(ClientEvents.class)
 public class ACExClientEventsMixin {
 
-    private static final ResourceLocation GAMMA_HUD_OVERLAYS = new ResourceLocation(AlexsCavesExemplified.MODID, "textures/gui/gamma_hud_overlays.png");
+    private static final ResourceLocation GAMMA_HUD_OVERLAYS = ResourceLocation.fromNamespaceAndPath(AlexsCavesExemplified.MODID, "textures/gui/gamma_hud_overlays.png");
 
 
     @ModifyArg(method = "onPostRenderGuiOverlay", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;blit(Lnet/minecraft/resources/ResourceLocation;IIIFFIIII)V",ordinal = 0),index = 0)

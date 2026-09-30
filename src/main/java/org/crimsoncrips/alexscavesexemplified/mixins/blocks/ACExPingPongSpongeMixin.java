@@ -14,14 +14,14 @@ import org.spongepowered.asm.mixin.Mixin;
 
 
 @Mixin(PingPongSpongeBlock.class)
-public class ACExPingPongSpongeMixin extends BushBlock implements BonemealableBlock {
+public abstract class ACExPingPongSpongeMixin extends BushBlock implements BonemealableBlock {
 
     public ACExPingPongSpongeMixin(Properties pProperties) {
         super(pProperties);
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
+    public boolean isValidBonemealTarget(LevelReader pLevel, BlockPos pPos, BlockState pState) {
         return pLevel.getBlockState(pPos.above()).is(Blocks.WATER) && pState.getValue(PingPongSpongeBlock.TOP);
     }
 

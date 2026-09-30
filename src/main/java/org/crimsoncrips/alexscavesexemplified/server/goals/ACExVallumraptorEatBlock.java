@@ -29,7 +29,7 @@ public class ACExVallumraptorEatBlock extends MoveToBlockGoal {
     public void tick() {
         super.tick();
 
-        for (TremorsaurusEntity tremorsaurus : vallumraptor.level().getEntitiesOfClass(TremorsaurusEntity.class, new AABB(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)))) {
+        for (TremorsaurusEntity tremorsaurus : vallumraptor.level().getEntitiesOfClass(TremorsaurusEntity.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-5, -5, -5)), Vec3.atLowerCornerOf(blockPos.offset(5, 5, 5))))) {
             stop();
         }
         vallumraptor.lookAt(EntityAnchorArgument.Anchor.EYES, Vec3.atCenterOf(blockPos));

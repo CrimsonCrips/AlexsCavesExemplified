@@ -63,7 +63,7 @@ public class ACExTremorDroppedEatBlock extends MobTargetItemGoal {
                     tremorsaurus.playSound(ACSoundRegistry.TREMORSAURUS_BITE.get(), 1F, 1F);
                     targetEntity.kill();
                     if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && tremorsaurus.level().getRandom().nextDouble() < 0.8) {
-                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), 2400, 0));
+                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED, 2400, 0));
                     }
                 }
                 this.stop();

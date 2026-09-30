@@ -1,12 +1,15 @@
 package org.crimsoncrips.alexscavesexemplified.datagen.loottables;
 
 import com.google.common.collect.Sets;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.LootTable;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 
 
-import java.util.Collections;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class ACExLootTables {
 	//Props to Drull and TF for assistance//
@@ -39,8 +42,12 @@ public class ACExLootTables {
 		}
 	}
 
-	public static Set<ResourceLocation> allBuiltin() {
-		return Collections.unmodifiableSet(ACE_LOOT_TABLES);
+	public static Set<ResourceKey<LootTable>> allBuiltin() {
+		return ACE_LOOT_TABLES.stream().map(ACExLootTables::key).collect(Collectors.toUnmodifiableSet());
+	}
+
+	public static ResourceKey<LootTable> key(ResourceLocation location) {
+		return ResourceKey.create(Registries.LOOT_TABLE, location);
 	}
 
 

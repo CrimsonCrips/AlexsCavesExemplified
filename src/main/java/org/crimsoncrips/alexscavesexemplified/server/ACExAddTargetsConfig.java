@@ -1,17 +1,17 @@
 package org.crimsoncrips.alexscavesexemplified.server;
 
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ACExAddTargetsConfig {
 
-    public final ForgeConfigSpec.BooleanValue LICOWITCH_ENABLED;
-    public final ForgeConfigSpec.BooleanValue DEEP_ONES_ENABLED;
-    public final ForgeConfigSpec.BooleanValue GROTTOCERATOPS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue VESPER_ENABLED;
-    public final ForgeConfigSpec.BooleanValue RELICHERIRUS_ENABLED;
+    public final ModConfigSpec.BooleanValue LICOWITCH_ENABLED;
+    public final ModConfigSpec.BooleanValue DEEP_ONES_ENABLED;
+    public final ModConfigSpec.BooleanValue GROTTOCERATOPS_ENABLED;
+    public final ModConfigSpec.BooleanValue VESPER_ENABLED;
+    public final ModConfigSpec.BooleanValue RELICHERIRUS_ENABLED;
 
 
-    public ACExAddTargetsConfig(final ForgeConfigSpec.Builder builder) {
+    public ACExAddTargetsConfig(final ModConfigSpec.Builder builder) {
 
         builder.push("Alexs Caves");
         this.LICOWITCH_ENABLED = buildMob(builder, "LICOWITCH_ENABLED");
@@ -23,11 +23,11 @@ public class ACExAddTargetsConfig {
 
     }
 
-    private static ForgeConfigSpec.BooleanValue buildBoolean(ForgeConfigSpec.Builder builder, String name, boolean defaultValue,String comment){
+    private static ModConfigSpec.BooleanValue buildBoolean(ModConfigSpec.Builder builder, String name, boolean defaultValue,String comment){
         return builder.translation(name).define(name, defaultValue);
     }
 
-    private static ForgeConfigSpec.BooleanValue buildMob(ForgeConfigSpec.Builder builder, String name){
+    private static ModConfigSpec.BooleanValue buildMob(ModConfigSpec.Builder builder, String name){
         return builder.translation(name).define(name, true);
     }
 

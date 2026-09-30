@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.external_mobs;
 
+import net.minecraft.world.food.FoodProperties;
 import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.message.WorldEventMessage;
@@ -53,7 +54,7 @@ public abstract class ACExPlayerMixin extends LivingEntity implements ACExBaseIn
     }
 
     @Inject(method = "eat", at = @At(value = "HEAD"))
-    private void alexsCavesExemplified$eat(Level pLevel, ItemStack pFood, CallbackInfoReturnable<ItemStack> cir) {
+    private void alexsCavesExemplified$eat(Level pLevel, ItemStack pFood, FoodProperties foodProperties, CallbackInfoReturnable<ItemStack> cir) {
         if (!pLevel.isClientSide){
             if (lastAte[0] != null) {
                 lastAte[1] = lastAte[0];
@@ -82,7 +83,7 @@ public abstract class ACExPlayerMixin extends LivingEntity implements ACExBaseIn
         }
 
         if (pFood.is(ACItemRegistry.SERENE_SALAD.get()) && AlexsCavesExemplified.COMMON_CONFIG.SERENED_ENABLED.get()){
-            this.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), 1200, 0));
+            this.addEffect(new MobEffectInstance(ACExEffects.SERENED, 1200, 0));
             ACExUtils.awardAdvancement(this,"serened","serened");
         }
     }

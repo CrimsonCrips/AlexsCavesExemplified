@@ -49,8 +49,8 @@ public abstract class ACExMagnetronMixin extends Monster implements MagnetronMag
     }
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void alexsCavesExemplified$defineSynchedData(CallbackInfo ci) {
-        this.entityData.define(RIPPED_HEART, 0);
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(RIPPED_HEART, 0);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))

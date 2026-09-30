@@ -9,7 +9,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BowlFoodItem;
+import com.github.alexmodguy.alexscaves.server.item.ACBowlFoodItem;
 import net.minecraft.world.item.ItemStack;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(PrehistoricMixtureItem.class)
-public abstract class ACExPrehistoricItemMixin extends BowlFoodItem {
+public abstract class ACExPrehistoricItemMixin extends ACBowlFoodItem {
 
     public ACExPrehistoricItemMixin(Properties pProperties) {
         super(pProperties);
@@ -31,7 +31,7 @@ public abstract class ACExPrehistoricItemMixin extends BowlFoodItem {
     private void alexsCavesExemplified$interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (AlexsCavesExemplified.COMMON_CONFIG.SERENED_ENABLED.get() && itemStack.is(ACItemRegistry.SERENE_SALAD.get()) && livingEntity instanceof Mob mob){
             if ((mob instanceof TamableAnimal tamableAnimal && tamableAnimal.isTame()) || (mob.getRandom().nextInt(1) > 1/mob.getBoundingBox().getSize())){
-                mob.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), 1200, 0));
+                mob.addEffect(new MobEffectInstance(ACExEffects.SERENED, 1200, 0));
                 ACExUtils.awardAdvancement(player, "serened", "serened");
             }
 

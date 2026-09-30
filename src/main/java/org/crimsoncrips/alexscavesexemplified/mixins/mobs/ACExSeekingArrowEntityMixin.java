@@ -57,9 +57,9 @@ public abstract class ACExSeekingArrowEntityMixin extends AbstractArrow implemen
     private static final EntityDataAccessor<Float> SPIN_ANGLE = SynchedEntityData.defineId(SeekingArrowEntity.class, EntityDataSerializers.FLOAT);;
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void defineSynched(CallbackInfo ci){
-        this.entityData.define(LAUNCHED_TARGET_ID, -1);
-        this.entityData.define(SPIN_ANGLE, (float)this.random.nextInt(0,361));
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci){
+        builder.define(LAUNCHED_TARGET_ID, -1);
+        builder.define(SPIN_ANGLE, (float)this.random.nextInt(0,361));
     }
 
     @Override

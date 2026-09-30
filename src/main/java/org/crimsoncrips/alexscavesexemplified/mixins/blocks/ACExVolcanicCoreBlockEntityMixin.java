@@ -73,7 +73,7 @@ public abstract class ACExVolcanicCoreBlockEntityMixin extends BlockEntity{
             }
 
 
-            for (AtlatitanEntity atlatitan : level.getEntitiesOfClass(AtlatitanEntity.class, new AABB(blockPos.offset(-12, -12, -12), blockPos.offset(12, 32, 12)))) {
+            for (AtlatitanEntity atlatitan : level.getEntitiesOfClass(AtlatitanEntity.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-12, -12, -12)), Vec3.atLowerCornerOf(blockPos.offset(12, 32, 12))))) {
                 if (atlatitan.isBaby()){
                     double dist = Mth.sqrt((float) atlatitan.distanceToSqr(vec3));
                     if (dist < maxDist) {

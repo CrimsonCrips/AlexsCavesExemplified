@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import net.minecraft.core.HolderLookup;
 import com.github.alexmodguy.alexscaves.server.block.ConversionCrucibleBlock;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.ConversionCrucibleBlockEntity;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
@@ -114,13 +115,13 @@ public abstract class ACExConversionCrucibleEntityMixin extends BlockEntity impl
         return overdrived;
     }
 
-    @Inject(method = "loadAdditional", at = @At(value = "TAIL"),remap = false)
-    private void alexsCavesExemplified$loadAdditional(CompoundTag compound, CallbackInfo ci) {
+    @Inject(method = "loadAdditional", at = @At(value = "TAIL"))
+    private void alexsCavesExemplified$loadAdditional(CompoundTag compound, HolderLookup.Provider registries, CallbackInfo ci) {
         this.overdrived = compound.getBoolean("Overdrived");
     }
 
     @Inject(method = "saveAdditional", at = @At(value = "TAIL"))
-    private void alexsCavesExemplified$saveAdditional(CompoundTag compound, CallbackInfo ci) {
+    private void alexsCavesExemplified$saveAdditional(CompoundTag compound, HolderLookup.Provider registries, CallbackInfo ci) {
         compound.putBoolean("Overdrived", this.overdrived);
     }
 

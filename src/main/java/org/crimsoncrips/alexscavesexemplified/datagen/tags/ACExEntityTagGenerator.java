@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -61,11 +61,11 @@ public class ACExEntityTagGenerator extends EntityTypeTagsProvider {
 				EntityType.PUFFERFISH,
 				ACEntityRegistry.TRIPODFISH.get()
 		)
-				.addOptional(new ResourceLocation("alexsmobs:flying_fish"))
-				.addOptional(new ResourceLocation("alexsmobs:blob_fish"))
-				.addOptional(new ResourceLocation("alexsmobs:cosmic_cod"))
-				.addOptional(new ResourceLocation("alexsmobs:devils_hole_pupfish"))
-				.addOptional(new ResourceLocation("alexsmobs:catfish"));
+				.addOptional(ResourceLocation.parse("alexsmobs:flying_fish"))
+				.addOptional(ResourceLocation.parse("alexsmobs:blob_fish"))
+				.addOptional(ResourceLocation.parse("alexsmobs:cosmic_cod"))
+				.addOptional(ResourceLocation.parse("alexsmobs:devils_hole_pupfish"))
+				.addOptional(ResourceLocation.parse("alexsmobs:catfish"));
 
 
 		tag(CAN_RABIES).add(
@@ -109,43 +109,43 @@ public class ACExEntityTagGenerator extends EntityTypeTagsProvider {
 				ACEntityRegistry.TREMORSAURUS.get(),
 				ACEntityRegistry.VALLUMRAPTOR.get()
 		).addTag(EntityTypeTags.RAIDERS)
-				.addOptional(new ResourceLocation("alexsmobs:anteater"))
-				.addOptional(new ResourceLocation("alexsmobs:bison"))
-				.addOptional(new ResourceLocation("alexsmobs:cachalot_whale"))
-				.addOptional(new ResourceLocation("alexsmobs:capuchin_monkey"))
-				.addOptional(new ResourceLocation("alexsmobs:dropbear"))
-				.addOptional(new ResourceLocation("alexsmobs:elephant"))
-				.addOptional(new ResourceLocation("alexsmobs:froststalker"))
-				.addOptional(new ResourceLocation("alexsmobs:gazelle"))
-				.addOptional(new ResourceLocation("alexsmobs:gelada_monkey"))
-				.addOptional(new ResourceLocation("alexsmobs:gorilla"))
-				.addOptional(new ResourceLocation("alexsmobs:grizzly_bear"))
-				.addOptional(new ResourceLocation("alexsmobs:jerboa"))
-				.addOptional(new ResourceLocation("alexsmobs:kangaroo"))
-				.addOptional(new ResourceLocation("alexsmobs:maned_wolf"))
-				.addOptional(new ResourceLocation("alexsmobs:moose"))
-				.addOptional(new ResourceLocation("alexsmobs:bunfungus"))
-				.addOptional(new ResourceLocation("alexsmobs:murmur"))
-				.addOptional(new ResourceLocation("alexsmobs:orca"))
-				.addOptional(new ResourceLocation("alexsmobs:platypus"))
-				.addOptional(new ResourceLocation("alexsmobs:raccoon"))
-				.addOptional(new ResourceLocation("alexsmobs:rhinoceros"))
-				.addOptional(new ResourceLocation("alexsmobs:sea_bear"))
-				.addOptional(new ResourceLocation("alexsmobs:seal"))
-				.addOptional(new ResourceLocation("alexsmobs:skunk"))
-				.addOptional(new ResourceLocation("alexsmobs:maned_wolf"))
-				.addOptional(new ResourceLocation("alexsmobs:snow_leopard"))
-				.addOptional(new ResourceLocation("alexsmobs:sugar_glider"))
-				.addOptional(new ResourceLocation("alexsmobs:tasmanian_devil"))
-				.addOptional(new ResourceLocation("alexsmobs:tiger"))
-				.addOptional(new ResourceLocation("alexsmobs:tusklin"));
+				.addOptional(ResourceLocation.parse("alexsmobs:anteater"))
+				.addOptional(ResourceLocation.parse("alexsmobs:bison"))
+				.addOptional(ResourceLocation.parse("alexsmobs:cachalot_whale"))
+				.addOptional(ResourceLocation.parse("alexsmobs:capuchin_monkey"))
+				.addOptional(ResourceLocation.parse("alexsmobs:dropbear"))
+				.addOptional(ResourceLocation.parse("alexsmobs:elephant"))
+				.addOptional(ResourceLocation.parse("alexsmobs:froststalker"))
+				.addOptional(ResourceLocation.parse("alexsmobs:gazelle"))
+				.addOptional(ResourceLocation.parse("alexsmobs:gelada_monkey"))
+				.addOptional(ResourceLocation.parse("alexsmobs:gorilla"))
+				.addOptional(ResourceLocation.parse("alexsmobs:grizzly_bear"))
+				.addOptional(ResourceLocation.parse("alexsmobs:jerboa"))
+				.addOptional(ResourceLocation.parse("alexsmobs:kangaroo"))
+				.addOptional(ResourceLocation.parse("alexsmobs:maned_wolf"))
+				.addOptional(ResourceLocation.parse("alexsmobs:moose"))
+				.addOptional(ResourceLocation.parse("alexsmobs:bunfungus"))
+				.addOptional(ResourceLocation.parse("alexsmobs:murmur"))
+				.addOptional(ResourceLocation.parse("alexsmobs:orca"))
+				.addOptional(ResourceLocation.parse("alexsmobs:platypus"))
+				.addOptional(ResourceLocation.parse("alexsmobs:raccoon"))
+				.addOptional(ResourceLocation.parse("alexsmobs:rhinoceros"))
+				.addOptional(ResourceLocation.parse("alexsmobs:sea_bear"))
+				.addOptional(ResourceLocation.parse("alexsmobs:seal"))
+				.addOptional(ResourceLocation.parse("alexsmobs:skunk"))
+				.addOptional(ResourceLocation.parse("alexsmobs:maned_wolf"))
+				.addOptional(ResourceLocation.parse("alexsmobs:snow_leopard"))
+				.addOptional(ResourceLocation.parse("alexsmobs:sugar_glider"))
+				.addOptional(ResourceLocation.parse("alexsmobs:tasmanian_devil"))
+				.addOptional(ResourceLocation.parse("alexsmobs:tiger"))
+				.addOptional(ResourceLocation.parse("alexsmobs:tusklin"));
 
 		tag(VESPER_HUNT).add(
 				EntityType.BAT,
 				EntityType.SPIDER,
 				EntityType.CAVE_SPIDER
 		)
-				.addOptional(new ResourceLocation("alexsmobs:cockroach"));
+				.addOptional(ResourceLocation.parse("alexsmobs:cockroach"));
 	}
 
 	private static TagKey<EntityType<?>> create(ResourceLocation rl) {

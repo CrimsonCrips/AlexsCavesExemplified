@@ -1,5 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.Holder;
 import com.github.alexmodguy.alexscaves.server.entity.ACFrogRegistry;
 import com.github.alexmodguy.alexscaves.server.level.feature.AmbersolFeature;
 import com.llamalad7.mixinextras.sugar.Local;
@@ -16,7 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.AMCompat;
 import org.spongepowered.asm.mixin.Mixin;
@@ -77,11 +79,11 @@ public abstract class ACExAmberFeatureMixin extends Feature<NoneFeatureConfigura
         entity.setSilent(true);
 
         if (entity instanceof Frog frog){
-            FrogVariant frogVariant = switch (random.nextInt(0, 4)) {
-                case 0 -> FrogVariant.COLD;
-                case 1 -> FrogVariant.WARM;
-                case 2 -> FrogVariant.TEMPERATE;
-                default -> ACFrogRegistry.PRIMORDIAL.get();
+            Holder<FrogVariant> frogVariant = switch (random.nextInt(0, 4)) {
+                case 0 -> BuiltInRegistries.FROG_VARIANT.getHolderOrThrow(FrogVariant.COLD);
+                case 1 -> BuiltInRegistries.FROG_VARIANT.getHolderOrThrow(FrogVariant.WARM);
+                case 2 -> BuiltInRegistries.FROG_VARIANT.getHolderOrThrow(FrogVariant.TEMPERATE);
+                default -> ACFrogRegistry.PRIMORDIAL;
             };
             frog.setVariant(frogVariant);
         }

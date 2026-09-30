@@ -36,33 +36,33 @@ public abstract class ACExTremorzillaRenderMixin extends MobRenderer<Tremorzilla
     @Shadow @Final private static HashMap<Integer, Vec3> mouthParticlePositions;
     @Shadow @Final private static Vec3 MOUTH_TRANSFORM_POS;
     @Shadow private boolean sepia;
-    private static final ResourceLocation TEXTURE = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla.png");
-    private static final ResourceLocation TEXTURE_BEAM_INNER = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_inner.png");
-    private static final ResourceLocation TEXTURE_BEAM_OUTER = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_outer.png");
-    private static final ResourceLocation TEXTURE_BEAM_END_0 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_end_0.png");
-    private static final ResourceLocation TEXTURE_BEAM_END_1 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_end_1.png");
-    private static final ResourceLocation TEXTURE_BEAM_END_2 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_end_2.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla.png");
+    private static final ResourceLocation TEXTURE_BEAM_INNER = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_inner.png");
+    private static final ResourceLocation TEXTURE_BEAM_OUTER = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_outer.png");
+    private static final ResourceLocation TEXTURE_BEAM_END_0 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_end_0.png");
+    private static final ResourceLocation TEXTURE_BEAM_END_1 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_end_1.png");
+    private static final ResourceLocation TEXTURE_BEAM_END_2 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_beam_end_2.png");
 
-    private static final ResourceLocation TEXTURE_RETRO = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_retro.png");
-    private static final ResourceLocation TEXTURE_RETRO_BEAM_INNER = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_retro_beam_inner.png");
-    private static final ResourceLocation TEXTURE_RETRO_BEAM_OUTER = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_retro_beam_outer.png");
-    private static final ResourceLocation TEXTURE_RETRO_BEAM_END_0 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_gamma_lbeam_end_0.png");
-    private static final ResourceLocation TEXTURE_RETRO_BEAM_END_1 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_gamma_lbeam_end_1.png");
-    private static final ResourceLocation TEXTURE_RETRO_BEAM_END_2 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_gamma_lbeam_end_2.png");
+    private static final ResourceLocation TEXTURE_RETRO = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_retro.png");
+    private static final ResourceLocation TEXTURE_RETRO_BEAM_INNER = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_retro_beam_inner.png");
+    private static final ResourceLocation TEXTURE_RETRO_BEAM_OUTER = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_retro_beam_outer.png");
+    private static final ResourceLocation TEXTURE_RETRO_BEAM_END_0 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_gamma_lbeam_end_0.png");
+    private static final ResourceLocation TEXTURE_RETRO_BEAM_END_1 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_gamma_lbeam_end_1.png");
+    private static final ResourceLocation TEXTURE_RETRO_BEAM_END_2 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_gamma_lbeam_end_2.png");
     
-    private static final ResourceLocation TEXTURE_TECTONIC = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic.png");
-    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_INNER = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_inner.png");
-    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_OUTER = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_outer.png");
-    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_END_0 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_end_0.png");
-    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_END_1 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_end_1.png");
-    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_END_2 = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_end_2.png");
+    private static final ResourceLocation TEXTURE_TECTONIC = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic.png");
+    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_INNER = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_inner.png");
+    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_OUTER = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_outer.png");
+    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_END_0 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_end_0.png");
+    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_END_1 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_end_1.png");
+    private static final ResourceLocation TEXTURE_TECTONIC_BEAM_END_2 = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_beam_end_2.png");
 
-    private static final ResourceLocation TEXTURE_GAMMA = new ResourceLocation("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma.png");
-    private static final ResourceLocation TEXTURE_GAMMA_BEAM_INNER = new ResourceLocation("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_inner.png");
-    private static final ResourceLocation TEXTURE_GAMMA_BEAM_OUTER = new ResourceLocation("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_outer.png");
-    private static final ResourceLocation TEXTURE_GAMMA_BEAM_END_0 = new ResourceLocation("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_end_0.png");
-    private static final ResourceLocation TEXTURE_GAMMA_BEAM_END_1 = new ResourceLocation("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_end_1.png");
-    private static final ResourceLocation TEXTURE_GAMMA_BEAM_END_2 = new ResourceLocation("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_end_2.png");
+    private static final ResourceLocation TEXTURE_GAMMA = ResourceLocation.parse("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma.png");
+    private static final ResourceLocation TEXTURE_GAMMA_BEAM_INNER = ResourceLocation.parse("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_inner.png");
+    private static final ResourceLocation TEXTURE_GAMMA_BEAM_OUTER = ResourceLocation.parse("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_outer.png");
+    private static final ResourceLocation TEXTURE_GAMMA_BEAM_END_0 = ResourceLocation.parse("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_end_0.png");
+    private static final ResourceLocation TEXTURE_GAMMA_BEAM_END_1 = ResourceLocation.parse("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_end_1.png");
+    private static final ResourceLocation TEXTURE_GAMMA_BEAM_END_2 = ResourceLocation.parse("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_beam_end_2.png");
 
     public ACExTremorzillaRenderMixin(EntityRendererProvider.Context pContext, TremorzillaModel pModel, float pShadowRadius) {
         super(pContext, pModel, pShadowRadius);

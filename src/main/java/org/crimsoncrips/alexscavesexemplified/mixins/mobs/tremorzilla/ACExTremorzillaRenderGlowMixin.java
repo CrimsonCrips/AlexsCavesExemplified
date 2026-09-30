@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tremorzilla;
 
+import net.minecraft.util.FastColor;
 import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.client.ClientProxy;
 import com.github.alexmodguy.alexscaves.client.model.TremorzillaModel;
@@ -21,17 +22,17 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(targets = "com.github.alexmodguy.alexscaves.client.render.entity.TremorzillaRenderer$LayerGlow")
 public abstract class ACExTremorzillaRenderGlowMixin extends RenderLayer<TremorzillaEntity, TremorzillaModel> {
 
-    private static final ResourceLocation TEXTURE_GLOW = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_glow.png");
-    private static final ResourceLocation TEXTURE_GLOW_POWERED = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_glow_powered.png");
+    private static final ResourceLocation TEXTURE_GLOW = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_glow.png");
+    private static final ResourceLocation TEXTURE_GLOW_POWERED = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_glow_powered.png");
 
-    private static final ResourceLocation TEXTURE_RETRO_GLOW = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_retro_glow.png");
-    private static final ResourceLocation TEXTURE_RETRO_GLOW_POWERED = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_retro_glow_powered.png");
+    private static final ResourceLocation TEXTURE_RETRO_GLOW = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_retro_glow.png");
+    private static final ResourceLocation TEXTURE_RETRO_GLOW_POWERED = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_retro_glow_powered.png");
 
-    private static final ResourceLocation TEXTURE_TECTONIC_GLOW = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_glow.png");
-    private static final ResourceLocation TEXTURE_TECTONIC_GLOW_POWERED = new ResourceLocation("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_glow_powered.png");
+    private static final ResourceLocation TEXTURE_TECTONIC_GLOW = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_glow.png");
+    private static final ResourceLocation TEXTURE_TECTONIC_GLOW_POWERED = ResourceLocation.parse("alexscaves:textures/entity/tremorzilla/tremorzilla_tectonic_glow_powered.png");
 
-    private static final ResourceLocation TEXTURE_GAMMA_GLOW = new ResourceLocation("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_glow.png");
-    private static final ResourceLocation TEXTURE_GAMMA_GLOW_POWERED = new ResourceLocation("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_glow_powered.png");
+    private static final ResourceLocation TEXTURE_GAMMA_GLOW = ResourceLocation.parse("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_glow.png");
+    private static final ResourceLocation TEXTURE_GAMMA_GLOW_POWERED = ResourceLocation.parse("alexscavesexemplified:textures/entity/tremorzilla/tremorzilla_gamma_glow_powered.png");
 
     public ACExTremorzillaRenderGlowMixin(RenderLayerParent<TremorzillaEntity, TremorzillaModel> pRenderer) {
         super(pRenderer);
@@ -47,7 +48,7 @@ public abstract class ACExTremorzillaRenderGlowMixin extends RenderLayer<Tremorz
         float normalAlpha = (float)Math.sin((double)(ageInTicks * 0.2F)) * 0.15F + 0.5F;
         float spikeDownAmount = tremorzilla.getClientSpikeDownAmount(partialTicks);
         VertexConsumer normalGlowConsumer = bufferIn.getBuffer(ACRenderTypes.getEyesAlphaEnabled(tremorzilla.isPowered() ? AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_GLOW_POWERED :tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_GLOW_POWERED : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_GLOW_POWERED : TEXTURE_GLOW_POWERED) : (AlexsCavesExemplified.COMMON_CONFIG.GAMMA_TREMORZILLA_ENABLED.get() && myAccessor.isGamma() ? TEXTURE_GAMMA_GLOW : tremorzilla.getAltSkin() == 2 ? TEXTURE_TECTONIC_GLOW : (tremorzilla.getAltSkin() == 1 ? TEXTURE_RETRO_GLOW : TEXTURE_GLOW))));
-        ((TremorzillaModel)this.getParentModel()).renderToBuffer(matrixStackIn, normalGlowConsumer, packedLightIn, LivingEntityRenderer.getOverlayCoords(tremorzilla, 0.0F), 1.0F, 1.0F, 1.0F, normalAlpha);
+        ((TremorzillaModel)this.getParentModel()).renderToBuffer(matrixStackIn, normalGlowConsumer, packedLightIn, LivingEntityRenderer.getOverlayCoords(tremorzilla, 0.0F), FastColor.ARGB32.colorFromFloat(normalAlpha, 1.0F, 1.0F, 1.0F));
         if (spikeDownAmount > 0.0F) {
             VertexConsumer spikeGlowConsumer;
             if ((Boolean) AlexsCaves.CLIENT_CONFIG.radiationGlowEffect.get()) {
@@ -58,7 +59,7 @@ public abstract class ACExTremorzillaRenderGlowMixin extends RenderLayer<Tremorz
             }
 
             ((TremorzillaModel)this.getParentModel()).showSpikesBasedOnProgress(spikeDownAmount, 0.0F);
-            ((TremorzillaModel)this.getParentModel()).renderToBuffer(matrixStackIn, spikeGlowConsumer, packedLightIn, LivingEntityRenderer.getOverlayCoords(tremorzilla, 0.0F), 1.0F, 1.0F, 1.0F, 1.0F);
+            ((TremorzillaModel)this.getParentModel()).renderToBuffer(matrixStackIn, spikeGlowConsumer, packedLightIn, LivingEntityRenderer.getOverlayCoords(tremorzilla, 0.0F), -1);
             ((TremorzillaModel)this.getParentModel()).showAllSpikes();
         }
 

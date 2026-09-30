@@ -1,28 +1,28 @@
 package org.crimsoncrips.alexscavesexemplified.client;
 
 import com.github.alexmodguy.alexscaves.client.particle.TephraParticle;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.gui.ConfigurationScreen;
+import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import org.crimsoncrips.alexscavesexemplified.ACExCommonProxy;
-import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.client.entity.GammaNuclearBombRenderer;
 import org.crimsoncrips.alexscavesexemplified.client.particle.*;
 import org.crimsoncrips.alexscavesexemplified.server.entity.ACExEntityRegistry;
 
 @OnlyIn(Dist.CLIENT)
-@Mod.EventBusSubscriber(modid = AlexsCavesExemplified.MODID, value = Dist.CLIENT)
 public class ACExClientProxy extends ACExCommonProxy {
 
-    public void init() {
-        MinecraftForge.EVENT_BUS.register(new ACExClientEvents());
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        bus.addListener(this::setupParticles);
+    public void init(IEventBus modEventBus, ModContainer modContainer) {
+        NeoForge.EVENT_BUS.register(new ACExClientEvents());
+        modEventBus.addListener(this::setupParticles);
+        modEventBus.addListener(this::registerRenderers);
+        modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 
 
@@ -45,8 +45,8 @@ public class ACExClientProxy extends ACExCommonProxy {
 
     }
 
-    public void clientInit() {
-        EntityRenderers.register(ACExEntityRegistry.GAMMA_NUCLEAR_BOMB.get(), GammaNuclearBombRenderer::new);
+    public void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(ACExEntityRegistry.GAMMA_NUCLEAR_BOMB.get(), GammaNuclearBombRenderer::new);
     }
 
 

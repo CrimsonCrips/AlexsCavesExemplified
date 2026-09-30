@@ -17,7 +17,7 @@ import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.frog.Tadpole;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACExEffects;
 import org.spongepowered.asm.mixin.Mixin;
@@ -66,8 +66,8 @@ public abstract class ACExLivingEntityMixin extends Entity {
     @Inject(method = "hurt", at = @At("HEAD"))
     private void alexsCavesExemplified$hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity livingEntity = (LivingEntity)(Object)this;
-        if (pSource.getEntity() instanceof LivingEntity && livingEntity.hasEffect(ACExEffects.SERENED.get())){
-            MobEffectInstance serene = livingEntity.getEffect(ACExEffects.SERENED.get());
+        if (pSource.getEntity() instanceof LivingEntity && livingEntity.hasEffect(ACExEffects.SERENED)){
+            MobEffectInstance serene = livingEntity.getEffect(ACExEffects.SERENED);
             if (serene != null) {
                 livingEntity.removeEffect(serene.getEffect());
                 if (serene.getDuration() > 100) {
@@ -105,7 +105,7 @@ public abstract class ACExLivingEntityMixin extends Entity {
     @ModifyReturnValue(method = "isSensitiveToWater", at = @At("RETURN"))
     private boolean alexsCavesExemplified$isValidSacrifice(boolean original) {
         LivingEntity livingEntity = (LivingEntity)(Object)this;
-        return original || (!(livingEntity instanceof WaterAnimal) && livingEntity.hasEffect(ACExEffects.RABIAL.get()) && AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get());
+        return original || (!(livingEntity instanceof WaterAnimal) && livingEntity.hasEffect(ACExEffects.RABIAL) && AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get());
     }
 
 

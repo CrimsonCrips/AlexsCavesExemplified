@@ -110,10 +110,10 @@ public abstract class ACExTremorzillaMixin extends DinosaurEntity implements Gam
     }
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void alexsCavesExemplified$defineSynchedData(CallbackInfo ci) {
-        this.entityData.define(GAMMA, false);
-        this.entityData.define(SECOND_PHASE, false);
-        this.entityData.define(ANIMATION_BEAMING, false);
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(GAMMA, false);
+        builder.define(SECOND_PHASE, false);
+        builder.define(ANIMATION_BEAMING, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))

@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.CreateCompat;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
@@ -45,7 +45,7 @@ public abstract class ACExFrostmintSpearMixin extends AbstractArrow {
     }
 
     @Override
-    public boolean ignoreExplosion() {
+    public boolean ignoreExplosion(Explosion explosion) {
         return AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get() && this.getPersistentData().getBoolean("FrostRadiant");
     }
 
@@ -59,7 +59,7 @@ public abstract class ACExFrostmintSpearMixin extends AbstractArrow {
                 explosion.explode();
                 explosion.finalizeExplosion(true);
                 if (this.getOwner() instanceof Player) {
-                    ACAdvancementTriggerRegistry.FROSTMINT_EXPLOSION.triggerForEntity(this.getOwner());
+                    ACAdvancementTriggerRegistry.FROSTMINT_EXPLOSION.get().triggerForEntity(this.getOwner());
                 }
                 this.discard();
             }

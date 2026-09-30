@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import com.github.alexmodguy.alexscaves.server.enchantment.ACEnchantmentHelper;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.enchantment.ACEnchantmentRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
@@ -48,10 +49,10 @@ public abstract class ACExGauntletItemMixin extends Item {
     private boolean alexsCavesExemplified$use(boolean original, @Local Player player, @Local InteractionHand interactionHand) {
         ItemStack itemstack = player.getItemInHand(interactionHand);
         Entity entityLook = ACExUtils.getLookingAtEntity(player);
-        return original || ((entityLook instanceof ItemEntity item && grabableItems(item.getItem(),itemstack)) || (entityLook instanceof MagnetronEntity || entityLook instanceof MagnetronPartEntity) || (entityLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity)) && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && itemstack.getEnchantmentLevel(ACExEnchants.MAGNETICISM.get()) > 0;
+        return original || ((entityLook instanceof ItemEntity item && grabableItems(item.getItem(),itemstack)) || (entityLook instanceof MagnetronEntity || entityLook instanceof MagnetronPartEntity) || (entityLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity)) && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && ACEnchantmentHelper.getEnchantmentLevelFromStack(ACExEnchants.MAGNETICISM, itemstack) > 0;
     }
 
-        @Inject(method = "onUseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getEnchantmentLevel(Lnet/minecraft/world/item/enchantment/Enchantment;)I"))
+        @Inject(method = "onUseTick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/enchantment/ACEnchantmentHelper;hasEnchantment(Lnet/minecraft/world/level/Level;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/world/item/ItemStack;)Z"))
     private void alexsCavesExemplified$onUseTick(Level level, LivingEntity living, ItemStack stack, int timeUsing, CallbackInfo ci, @Local(ordinal = 1) ItemStack otherStack, @Local boolean otherMagneticWeaponsInUse) {
         Entity entityLook = null;
 
@@ -67,7 +68,7 @@ public abstract class ACExGauntletItemMixin extends Item {
         }
 
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && living instanceof Player player && !otherMagneticWeaponsInUse && stack.getEnchantmentLevel(ACExEnchants.MAGNETICISM.get()) > 0 && !grabableItems(otherStack, stack)) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && living instanceof Player player && !otherMagneticWeaponsInUse && ACEnchantmentHelper.getEnchantmentLevelFromStack(ACExEnchants.MAGNETICISM, stack) > 0 && !grabableItems(otherStack, stack)) {
             if (entityLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity teletor) {
                 magneticWeaponEntity.setControllerUUID(player.getUUID());
                 teletor.setWeaponUUID(null);
@@ -111,7 +112,7 @@ public abstract class ACExGauntletItemMixin extends Item {
                     }
                 } else {
                     if (!player.isCreative()){
-                        stack.hurtAndBreak(80,player,livingEntity -> {});
+                        stack.hurtAndBreak(80, player, LivingEntity.getSlotForHand(player.getUsedItemHand()));
                         player.getCooldowns().addCooldown(stack.getItem(),500);
                     }
                     MagneticWeaponEntity magneticWeapon = (MagneticWeaponEntity)((EntityType)ACEntityRegistry.MAGNETIC_WEAPON.get()).create(level);
@@ -132,7 +133,7 @@ public abstract class ACExGauntletItemMixin extends Item {
 
 
     public boolean grabableItems(ItemStack item, ItemStack gauntlet){
-        boolean crystallization = gauntlet.getEnchantmentLevel(ACEnchantmentRegistry.CRYSTALLIZATION.get()) > 0;
+        boolean crystallization = ACEnchantmentHelper.getEnchantmentLevelFromStack(ACEnchantmentRegistry.CRYSTALLIZATION, gauntlet) > 0;
         return item.is(crystallization ? ACTagRegistry.GALENA_GAUNTLET_CRYSTALLIZATION_ITEMS : (ACTagRegistry.MAGNETIC_ITEMS));
     }
 

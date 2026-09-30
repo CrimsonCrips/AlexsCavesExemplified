@@ -16,7 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.entity.GammaNuclearBombEntity;
 
@@ -46,7 +46,7 @@ public class GammaNuclearBombRenderer extends EntityRenderer<GammaNuclearBombEnt
         float f1 = 1.0F + progress;
         float f2 = 1.0F - progress;
         for (net.minecraft.client.renderer.RenderType rt : bakedmodel.getRenderTypes(state, RandomSource.create(42), ModelData.EMPTY)) {
-            renderModel(poseStack.last(), source.getBuffer(net.minecraftforge.client.RenderTypeHelper.getEntityRenderType(rt, false)), state, bakedmodel, 1.0F - progress, f1, 1.0F + progress, 240, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, rt);
+            renderModel(poseStack.last(), source.getBuffer(net.neoforged.neoforge.client.RenderTypeHelper.getEntityRenderType(rt, false)), state, bakedmodel, 1.0F - progress, f1, 1.0F + progress, 240, OverlayTexture.NO_OVERLAY, ModelData.EMPTY, rt);
         }
         poseStack.popPose();
         poseStack.popPose();
@@ -73,7 +73,7 @@ public class GammaNuclearBombRenderer extends EntityRenderer<GammaNuclearBombEnt
             f = Mth.clamp(p_111061_, 0.0F, 1.0F);
             f1 = Mth.clamp(p_111062_, 0.0F, 1.0F);
             f2 = Mth.clamp(p_111063_, 0.0F, 1.0F);
-            p_111060_.putBulkData(p_111059_, bakedquad, f, f1, f2, p_111065_, p_111066_);
+            p_111060_.putBulkData(p_111059_, bakedquad, f, f1, f2, 1.0F, p_111065_, p_111066_);
         }
 
     }

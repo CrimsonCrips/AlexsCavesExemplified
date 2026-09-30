@@ -43,7 +43,7 @@ public class ACExBeholderMixin extends BlockEntity {
         if (AlexsCavesExemplified.COMMON_CONFIG.BEHOLDENT_STALKING_ENABLED.get()) {
             ci.cancel();
 
-            List<Player> list = level.getEntitiesOfClass(Player.class, new AABB(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)));
+            List<Player> list = level.getEntitiesOfClass(Player.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-5, -5, -5)), Vec3.atLowerCornerOf(blockPos.offset(5, 5, 5))));
             if (!list.isEmpty()) {
                 if (list.size() == 1) {
                     looking = list.get(0);

@@ -15,8 +15,8 @@ public class ACExRabial extends MobEffect {
     public ACExRabial() {
         super(MobEffectCategory.HARMFUL, 0Xe6b0ac);
         
-        this.addAttributeModifier(Attributes.ATTACK_DAMAGE, "52c22265-593c-4007-a838-91593d75c690", 0.1000000596046448, AttributeModifier.Operation.MULTIPLY_TOTAL);
-        this.addAttributeModifier(Attributes.ARMOR, "7405588f-6b0b-43b9-8acf-c4f765ceccbd", -2, AttributeModifier.Operation.ADDITION);
+        this.addAttributeModifier(Attributes.ATTACK_DAMAGE, AlexsCavesExemplified.prefix("effect.rabial.attack_damage"), 0.1000000596046448, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        this.addAttributeModifier(Attributes.ARMOR, AlexsCavesExemplified.prefix("effect.rabial.armor"), -2, AttributeModifier.Operation.ADD_VALUE);
 
 
     }
@@ -31,7 +31,7 @@ public class ACExRabial extends MobEffect {
 
     private int lastDuration = -1;
 
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
+    public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         if (lastDuration <= 1) {
             int rabialLevel = amplifier + 1;
             entity.hurt(ACExDamageTypes.getDamageSource(entity.level(), ACExDamageTypes.RABIAL_END), rabialLevel * 10);
@@ -39,10 +39,10 @@ public class ACExRabial extends MobEffect {
         if (entity instanceof ServerPlayer serverPlayer){
             ACExUtils.awardAdvancement(serverPlayer,"rabial","has_rabies");
         }
-
+        return true;
     }
 
-    public boolean isDurationEffectTick(int duration, int amplifier) {
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         lastDuration = duration;
         return duration > 0;
     }

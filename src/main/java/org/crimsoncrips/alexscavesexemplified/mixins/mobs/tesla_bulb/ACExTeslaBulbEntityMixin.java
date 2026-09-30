@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tesla_bulb;
 
+import net.minecraft.core.HolderLookup;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.TeslaBulbBlockEntity;
 import net.minecraft.core.BlockPos;
@@ -60,19 +61,19 @@ public abstract class ACExTeslaBulbEntityMixin extends BlockEntity implements AC
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet) {
-        if (packet != null && packet.getTag() != null) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider lookupProvider) {
+        if (packet != null) {
             charge = packet.getTag().getInt("TeslaCharge");
         }
     }
 
-    public void load(CompoundTag tag) {
-        super.load(tag);
+    @Inject(method = "loadAdditional", at = @At("TAIL"))
+    private void alexsCavesExemplified$loadAdditional(CompoundTag tag, HolderLookup.Provider registries, CallbackInfo ci) {
         charge = tag.getInt("TeslaCharge");
     }
 
-    protected void saveAdditional(CompoundTag tag) {
-        super.saveAdditional(tag);
+    @Inject(method = "saveAdditional", at = @At("TAIL"))
+    private void alexsCavesExemplified$saveAdditional(CompoundTag tag, HolderLookup.Provider registries, CallbackInfo ci) {
         tag.putInt("TeslaCharge", charge);
     }
 
@@ -83,7 +84,7 @@ public abstract class ACExTeslaBulbEntityMixin extends BlockEntity implements AC
             ACExBaseInterface tickAccesor = (ACExBaseInterface)entity;
 
             Player target = null;
-            for (Player livingEntity : level.getEntitiesOfClass(Player.class, new AABB(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)))) {
+            for (Player livingEntity : level.getEntitiesOfClass(Player.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-5, -5, -5)), Vec3.atLowerCornerOf(blockPos.offset(5, 5, 5))))) {
                 target = livingEntity;
             }
 

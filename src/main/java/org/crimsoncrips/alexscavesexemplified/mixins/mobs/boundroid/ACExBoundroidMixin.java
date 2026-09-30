@@ -107,8 +107,8 @@ public abstract class ACExBoundroidMixin extends Monster implements ACExBaseInte
     }
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void alexsCavesExemplified$define(CallbackInfo ci) {
-        this.entityData.define(MAGNETIZING, true);
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(MAGNETIZING, true);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))

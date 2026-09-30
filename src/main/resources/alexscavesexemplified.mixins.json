@@ -2,8 +2,7 @@
   "required": true,
   "minVersion": "0.8",
   "package": "org.crimsoncrips.alexscavesexemplified.mixins",
-  "compatibilityLevel": "JAVA_17",
-  "refmap": "alexscavesexemplified.refmap.json",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "blocks.ACExBeholderMixin",
     "blocks.ACExConversionCrucibleMixin",
@@ -16,13 +15,11 @@
     "blocks.ACExSmoothLimestoneMixin",
     "blocks.ACExTeslaBulbMixin",
     "blocks.ACExVolcanicCoreBlockEntityMixin",
-    "external_misc.ACExRaygunMK2Mixin",
     "external_mobs.ACExAgeableMobMixin",
     "external_mobs.ACExFlyMixin",
     "external_mobs.ACExItemEntityMixin",
     "external_mobs.ACExLivingEntityMixin",
     "external_mobs.ACExMobMixin",
-    "external_mobs.ACExNuclearExplosion2EntityMixin",
     "external_mobs.ACExPlayerMixin",
     "external_mobs.ACExThrownPotionMixin",
     "misc.ACExAmberFeatureMixin",
@@ -31,7 +28,6 @@
     "misc.ACExCommonEventsMixin",
     "misc.ACExConversionCrucibleEntityMixin",
     "misc.ACExDreadbowItemMixin",
-    "misc.ACExEnchantmentMixin",
     "misc.ACExEnigmaticEngineMixin",
     "misc.ACExGauntletItemMixin",
     "misc.ACExHullbreakerGoalMixin",
@@ -117,6 +113,6 @@
     "defaultRequire": 1
   },
   "mixinextras": {
-    "minVersion": "0.5.4"
+    "minVersion": "0.5.0"
   }
 }

@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 
 @Mixin(SugarRushEffect.class)
@@ -29,10 +29,10 @@ public class ACExSugarRushMixin extends MobEffect {
     }
 
     @Inject(method = "applyEffectTick", at = @At("HEAD"))
-    private void alexsCavesExemplified$applyEffectTick(LivingEntity entity, int amplifier, CallbackInfo ci) {
+    private void alexsCavesExemplified$applyEffectTick(LivingEntity entity, int amplifier, CallbackInfoReturnable<Boolean> cir) {
         if (lastDuration <= 2 && AlexsCavesExemplified.COMMON_CONFIG.SUGAR_CRASH_ENABLED.get() && (entity.getRandom().nextDouble() < 0.3 || amplifier >= 2)) {
             int sugarcrashLevel = amplifier + 1;
-            entity.addEffect(new MobEffectInstance(ACExEffects.SUGAR_CRASH.get(), 400, amplifier));
+            entity.addEffect(new MobEffectInstance(ACExEffects.SUGAR_CRASH, 400, amplifier));
             entity.hurt(ACExDamageTypes.getDamageSource(entity.level(), ACExDamageTypes.SUGAR_CRASH), sugarcrashLevel * 2);
 
             if (sugarcrashLevel > 3){
@@ -42,9 +42,9 @@ public class ACExSugarRushMixin extends MobEffect {
         }
     }
 
-    public boolean isDurationEffectTick(int duration, int amplifier) {
+    @Inject(method = "shouldApplyEffectTickThisTick", at = @At("HEAD"))
+    private void alexsCavesExemplified$shouldApplyEffectTickThisTick(int duration, int amplifier, CallbackInfoReturnable<Boolean> cir) {
         lastDuration = duration;
-        return duration > 0;
     }
 
 

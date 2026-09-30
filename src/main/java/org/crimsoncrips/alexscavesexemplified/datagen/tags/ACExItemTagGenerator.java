@@ -11,7 +11,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACExItemRegistry;
 
@@ -24,6 +24,7 @@ public class ACExItemTagGenerator extends ItemTagsProvider {
 	public static final TagKey<Item> LIGHT = create("light");
 	public static final TagKey<Item> SWEETS = create("sweets");
 	public static final TagKey<Item> GELATIN = create("gelatin");
+	public static final TagKey<Item> MAGNETICISM_ENCHANTABLE = create("magneticism_enchantable");
 
     public ACExItemTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> future, CompletableFuture<TagLookup<Block>> provider, ExistingFileHelper helper) {
         super(output, future, provider, AlexsCavesExemplified.MODID, helper);
@@ -32,6 +33,11 @@ public class ACExItemTagGenerator extends ItemTagsProvider {
 	@SuppressWarnings("unchecked")
     @Override
 	protected void addTags(HolderLookup.Provider provider) {
+
+		tag(MAGNETICISM_ENCHANTABLE).add(
+				ACItemRegistry.GALENA_GAUNTLET.get(),
+				ACItemRegistry.RESISTOR_SHIELD.get()
+		);
 
 		tag(GELATIN).add(
 				ACItemRegistry.GELATIN_BLUE.get(),
@@ -63,8 +69,8 @@ public class ACExItemTagGenerator extends ItemTagsProvider {
 				ACBlockRegistry.BONE_RIBS.get().asItem(),
 				ACBlockRegistry.BALEEN_BONE.get().asItem()
 		)
-				.addOptional(new ResourceLocation("alexsmobs:fish_bones"))
-				.addOptional(new ResourceLocation("alexsmobs:skelewag_sword"));
+				.addOptional(ResourceLocation.parse("alexsmobs:fish_bones"))
+				.addOptional(ResourceLocation.parse("alexsmobs:skelewag_sword"));
 
 		tag(KNAWING).add(
 				Items.LEATHER,
@@ -103,8 +109,8 @@ public class ACExItemTagGenerator extends ItemTagsProvider {
                 ItemTags.BAMBOO_BLOCKS,
                 ItemTags.SMALL_FLOWERS
         )
-				.addOptional(new ResourceLocation("create:fluid_pipe"))
-				.addOptional(new ResourceLocation("create:smart_fluid_pipe"));
+				.addOptional(ResourceLocation.parse("create:fluid_pipe"))
+				.addOptional(ResourceLocation.parse("create:smart_fluid_pipe"));
 
 
 		tag(LIGHT).add(
@@ -229,6 +235,6 @@ public class ACExItemTagGenerator extends ItemTagsProvider {
 	}
 
 	public static TagKey<Item> makeForgeTag(String tagName) {
-		return ItemTags.create(new ResourceLocation("forge", tagName));
+		return ItemTags.create(ResourceLocation.fromNamespaceAndPath("forge", tagName));
 	}
 }

@@ -13,7 +13,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.FarmersDelightCompat;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACExBlockTagGenerator;
@@ -36,7 +36,7 @@ public class ACExTremorEatBlock extends MoveToBlockGoal {
         Level level = tremorsaurus.level();
 
         tremorsaurus.lookAt(EntityAnchorArgument.Anchor.EYES, Vec3.atCenterOf(blockPos));
-        for (VallumraptorEntity vallumraptor : level.getEntitiesOfClass(VallumraptorEntity.class, new AABB(blockPos.offset(-3, -3, -3), blockPos.offset(3, 3, 3)))) {
+        for (VallumraptorEntity vallumraptor : level.getEntitiesOfClass(VallumraptorEntity.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-3, -3, -3)), Vec3.atLowerCornerOf(blockPos.offset(3, 3, 3))))) {
             if (tremorsaurus.distanceToSqr(this.mob.position()) < 10){
                 tremorsaurus.tryRoar();
             }
@@ -69,7 +69,7 @@ public class ACExTremorEatBlock extends MoveToBlockGoal {
                     }
 
                     if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && level.getRandom().nextDouble() < 0.4) {
-                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), 2400, 0));
+                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED, 2400, 0));
                     }
                 }
                 this.stop();

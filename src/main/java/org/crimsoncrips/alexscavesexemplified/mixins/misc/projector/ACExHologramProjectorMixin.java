@@ -31,10 +31,10 @@ public abstract class ACExHologramProjectorMixin extends BaseEntityBlock {
         super(pProperties);
     }
 
-    @Inject(method = "use", at = @At(value = "TAIL"))
-    private void alexsCavesExemplified$use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
+    @Inject(method = "useWithoutItem", at = @At(value = "TAIL"))
+    private void alexsCavesExemplified$useWithoutItem(BlockState state, Level worldIn, BlockPos pos, Player player, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
         if (worldIn.getBlockEntity(pos) instanceof HologramProjectorBlockEntity projectorBlockEntity && AlexsCavesExemplified.COMMON_CONFIG.SCALABLE_HOLOGRAM_ENABLED.get() && !player.isShiftKeyDown()) {
-            ItemStack heldItem = player.getItemInHand(handIn);
+            ItemStack heldItem = player.getMainHandItem();
             ACExBaseInterface accesor = (ACExBaseInterface)projectorBlockEntity;
             if (heldItem.is(ACItemRegistry.SCARLET_NEODYMIUM_INGOT.get())) {
                 worldIn.playSound((Player) null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);

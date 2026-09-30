@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import net.minecraft.core.component.DataComponents;
 import com.github.alexmodguy.alexscaves.server.entity.living.GummyBearEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.GummyColors;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
@@ -17,7 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
@@ -71,12 +72,13 @@ public abstract class ACExGummybearMixin extends Animal {
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (isDigestiblePotion(itemstack) && !isDigesting()) {
+        PotionContents potionContents = itemstack.get(DataComponents.POTION_CONTENTS);
+        if (isDigestiblePotion(itemstack) && !isDigesting() && potionContents != null && potionContents.potion().isPresent()) {
             if (AlexsCavesExemplified.COMMON_CONFIG.JELLYBEAN_CHANGES_ENABLED.get()) {
                 this.jellybeansToMake = 0;
             }
             this.setDigesting(true);
-            this.digestEffect(PotionUtils.getPotion(itemstack));
+            this.digestEffect(potionContents.potion().get().value());
             this.usePlayerItem(player, hand, itemstack);
             if (!player.getAbilities().instabuild) {
                 player.addItem(new ItemStack(Items.GLASS_BOTTLE));

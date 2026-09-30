@@ -84,8 +84,8 @@ public abstract class ACExNotorMixin extends PathfinderMob implements ACExBaseIn
     private static final EntityDataAccessor<Integer> SELF_DESTRUCT_TIME = SynchedEntityData.defineId(NotorEntity.class, EntityDataSerializers.INT);
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void alexsCavesExemplified$defineSynchedData(CallbackInfo ci) {
-        this.entityData.define(SELF_DESTRUCT_TIME, 0);
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(SELF_DESTRUCT_TIME, 0);
     }
 
 

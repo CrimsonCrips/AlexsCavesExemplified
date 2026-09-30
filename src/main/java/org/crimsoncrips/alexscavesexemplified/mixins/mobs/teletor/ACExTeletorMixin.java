@@ -1,5 +1,8 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.teletor;
 
+import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
+import net.minecraft.world.item.component.CustomData;
+import net.minecraft.core.component.DataComponents;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.MagneticWeaponEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.*;
@@ -40,7 +43,7 @@ public abstract class ACExTeletorMixin extends Monster {
                 if (item.getItem().is(ACTagRegistry.TELETOR_SPAWNS_WITH) && teletor.getWeapon() == null) {
                     ItemStack stolen = item.getItem();
                     MagneticWeaponEntity magneticWeapon = ACEntityRegistry.MAGNETIC_WEAPON.get().create(this.level());
-                    stolen.getTag().putBoolean("Stolen", true);
+                    CustomData.update(DataComponents.CUSTOM_DATA, stolen, tag -> tag.putBoolean("Stolen", true));
                     magneticWeapon.setItemStack(stolen);
                     magneticWeapon.setControllerUUID(teletor.getUUID());
                     teletor.setWeaponUUID(magneticWeapon.getUUID());
@@ -60,7 +63,7 @@ public abstract class ACExTeletorMixin extends Monster {
         if (weapon instanceof MagneticWeaponEntity magneticWeapon) {
             ItemStack itemstack = magneticWeapon.getItemStack();
             float f1 = this.getEquipmentDropChance(EquipmentSlot.MAINHAND);
-            if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack) && !(this.random.nextFloat() < f1) && itemstack.getTag().getBoolean("Stolen")) {
+            if (!itemstack.isEmpty() && !EnchantmentHelper.has(itemstack, EnchantmentEffectComponents.PREVENT_EQUIPMENT_DROP) && !(this.random.nextFloat() < f1) && itemstack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag().getBoolean("Stolen")) {
                 ItemEntity stolenItem = new ItemEntity(this.level(), this.getX(), this.getEyeY(), this.getZ(), itemstack);
                 stolenItem.setGlowingTag(true);
                 this.level().addFreshEntity(stolenItem);

@@ -71,7 +71,7 @@ public abstract class ACExEnigmaticEngineMixin extends BlockEntity {
                 }
             }
             Player owner = null;
-            for (Player player : level.getEntitiesOfClass(Player.class, new AABB(blockPos.offset(-6, -6, -6), blockPos.offset(6, 6, 6)))) {
+            for (Player player : level.getEntitiesOfClass(Player.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-6, -6, -6)), Vec3.atLowerCornerOf(blockPos.offset(6, 6, 6))))) {
                 owner = player;
                 break;
             }

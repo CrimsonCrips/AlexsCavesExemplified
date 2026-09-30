@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACExItemRegistry;
@@ -53,7 +54,7 @@ public class ACExIceCreamBlockMixin extends Block {
                 itementity.setDefaultPickUpDelay();
 
                 level.addFreshEntity(itementity);
-                for (Player player : level.getEntitiesOfClass(Player.class, new AABB(blockPos.offset(-12, -12, -12), blockPos.offset(12, 12, 12)))) {
+                for (Player player : level.getEntitiesOfClass(Player.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-12, -12, -12)), Vec3.atLowerCornerOf(blockPos.offset(12, 12, 12))))) {
                     ACExUtils.awardAdvancement(player,"ice_cream","made");
                 }
                 level.playLocalSound(blockPos, ACSoundRegistry.FROSTMINT_SPEAR_HIT.get(), SoundSource.AMBIENT, 2, 1, false);

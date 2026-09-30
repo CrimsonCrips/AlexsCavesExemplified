@@ -1,8 +1,8 @@
 package org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron;
 
-import java.util.Map;
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.server.level.ServerLevel;
@@ -33,8 +33,15 @@ import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 public class ACExCauldron extends AbstractCauldronBlock {
 
 
-    public ACExCauldron(Properties pProperties, Map<Item, CauldronInteraction> pInteractions) {
+    public static final MapCodec<ACExCauldron> CODEC = simpleCodec(properties -> new ACExCauldron(properties, CauldronInteraction.EMPTY));
+
+    public ACExCauldron(Properties pProperties, CauldronInteraction.InteractionMap pInteractions) {
         super(pProperties, pInteractions);
+    }
+
+    @Override
+    protected MapCodec<? extends AbstractCauldronBlock> codec() {
+        return CODEC;
     }
 
     @Override

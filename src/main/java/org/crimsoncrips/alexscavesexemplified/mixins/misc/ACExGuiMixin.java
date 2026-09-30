@@ -1,5 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.core.component.DataComponents;
 import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -16,7 +18,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 import org.spongepowered.asm.mixin.Final;
@@ -38,14 +40,12 @@ public abstract class ACExGuiMixin {
 
     @Shadow @Final protected RandomSource random;
 
-    @Shadow protected int screenWidth;
-
     @Shadow protected ItemStack lastToolHighlight;
 
     @Shadow public abstract Font getFont();
 
-    @WrapOperation(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;IIFLnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;I)V",ordinal = 0))
-    private void alexsCavesExemplified$renderHotbar1(Gui instance, GuiGraphics pGuiGraphics, int j1, int k1, float pX, Player player, ItemStack pPartialTick, int l, Operation<Void> original,@Local(ordinal = 4) int i1) {
+    @WrapOperation(method = "renderItemHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/client/DeltaTracker;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;I)V",ordinal = 0))
+    private void alexsCavesExemplified$renderItemHotbar1(Gui instance, GuiGraphics pGuiGraphics, int j1, int k1, DeltaTracker pX, Player player, ItemStack pPartialTick, int l, Operation<Void> original,@Local(ordinal = 4) int i1) {
         if(magneticMove(player.getInventory().items.get(i1))){
             int t = minecraft.player.tickCount;
             double speed = 0.1;
@@ -62,8 +62,8 @@ public abstract class ACExGuiMixin {
         }
     }
 
-    @Inject(method = "renderSelectedItemName(Lnet/minecraft/client/gui/GuiGraphics;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;fill(IIIII)V"))
-    private void alexsCavesExemplified$renderslectedItemName2(GuiGraphics pGuiGraphics, int yShift, CallbackInfo ci, @Local(ordinal = 1) int i, @Local(ordinal = 2) int j, @Local(ordinal = 3) int k, @Local(ordinal = 4) int l){
+    @Inject(method = "renderSelectedItemName(Lnet/minecraft/client/gui/GuiGraphics;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawStringWithBackdrop(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIII)I"))
+    private void alexsCavesExemplified$renderSelectedItemName2(GuiGraphics pGuiGraphics, int yShift, CallbackInfo ci, @Local(ordinal = 1) int i, @Local(ordinal = 2) int j, @Local(ordinal = 3) int k, @Local(ordinal = 4) int l){
         Minecraft minecraft = this.minecraft;
         if (minecraft.player != null){
             //Thanks Drullkus for the help and TerriblyBadCoder for the inspiration
@@ -73,7 +73,7 @@ public abstract class ACExGuiMixin {
             Font font = IClientItemExtensions.of(lastToolHighlight).getFont(lastToolHighlight, IClientItemExtensions.FontContext.SELECTED_ITEM_NAME);
 
             MutableComponent mutablecomponent = Component.empty().append(this.lastToolHighlight.getHoverName()).withStyle(this.lastToolHighlight.getRarity().getStyleModifier());
-            if (this.lastToolHighlight.hasCustomHoverName()) {
+            if (this.lastToolHighlight.has(DataComponents.CUSTOM_NAME)) {
                 mutablecomponent.withStyle(ChatFormatting.ITALIC);
             }
 
@@ -88,13 +88,13 @@ public abstract class ACExGuiMixin {
                     pGuiGraphics.pose().translate(movement, 0, 0);
                     int newl = l / (t);
 
-                    int jC = (this.screenWidth - this.getFont().width(component)) / 2;
+                    int jC = (pGuiGraphics.guiWidth() - this.getFont().width(component)) / 2;
 
 
                     if (font == null) {
                         pGuiGraphics.drawString(this.getFont(), component, jC, k, 16777215 + (newl << 24));
                     } else {
-                        jC = (this.screenWidth - font.width(component)) / 2;
+                        jC = (pGuiGraphics.guiWidth() - font.width(component)) / 2;
                         pGuiGraphics.drawString(font, component, jC, k, 16777215 + (newl << 24));
                     }
                     pGuiGraphics.pose().popPose();
@@ -107,14 +107,14 @@ public abstract class ACExGuiMixin {
 
 
 
-    @WrapWithCondition(method = "renderSelectedItemName(Lnet/minecraft/client/gui/GuiGraphics;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawString(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)I"))
-    private boolean alexsCavesExemplified$renderSelectedItemName(GuiGraphics instance, Font pFont, Component pText, int pX, int pY, int pColor){
+    @WrapWithCondition(method = "renderSelectedItemName(Lnet/minecraft/client/gui/GuiGraphics;I)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiGraphics;drawStringWithBackdrop(Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIII)I"))
+    private boolean alexsCavesExemplified$renderSelectedItemName(GuiGraphics instance, Font pFont, Component pText, int pX, int pY, int pWidth, int pColor){
         return this.lastToolHighlight.getItem() != ACExBlockRegistry.GAMMA_NUCLEAR_BOMB.get().asItem();
     }
 
 
-    @WrapOperation(method = "renderHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;IIFLnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;I)V",ordinal = 1))
-    private void alexsCavesExemplified$renderHotbar(Gui instance, GuiGraphics pGuiGraphics, int i, int f, float pX, Player pY, ItemStack itemStack, int pPlayer, Operation<Void> original) {
+    @WrapOperation(method = "renderItemHotbar", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/Gui;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/client/DeltaTracker;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;I)V",ordinal = 1))
+    private void alexsCavesExemplified$renderItemHotbar(Gui instance, GuiGraphics pGuiGraphics, int i, int f, DeltaTracker pX, Player pY, ItemStack itemStack, int pPlayer, Operation<Void> original) {
         if(magneticMove(itemStack)){
             int t = minecraft.player.tickCount;
             double speed = 0.1;

@@ -49,6 +49,6 @@ public class ACExTremorTempt extends TemptGoal {
 
     @Override
     public boolean canUse() {
-        return super.canUse() && tremorsaurus.hasEffect(ACExEffects.SERENED.get());
+        return super.canUse() && tremorsaurus.hasEffect(ACExEffects.SERENED);
     }
 }

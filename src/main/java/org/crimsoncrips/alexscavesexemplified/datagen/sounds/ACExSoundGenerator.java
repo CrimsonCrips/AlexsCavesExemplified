@@ -1,7 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.datagen.sounds;
 
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.crimsoncrips.alexscavesexemplified.client.ACExSoundRegistry;
 
 

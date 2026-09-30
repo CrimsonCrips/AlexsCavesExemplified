@@ -1,18 +1,19 @@
 package org.crimsoncrips.alexscavesexemplified.datagen.recipe;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 
 
-import java.util.function.Consumer;
+import java.util.concurrent.CompletableFuture;
 
 public class ACExRecipeGenerator extends ACExRecipeHelper {
-	public ACExRecipeGenerator(PackOutput output) {
-		super(output);
+	public ACExRecipeGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> provider) {
+		super(output, provider);
 	}
 
 	@Override
-	protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+	protected void buildRecipes(RecipeOutput consumer) {
 
 //		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ACExBlockRegistry.METAL_CAULDRON.get(), 2)
 //				.pattern("s s")

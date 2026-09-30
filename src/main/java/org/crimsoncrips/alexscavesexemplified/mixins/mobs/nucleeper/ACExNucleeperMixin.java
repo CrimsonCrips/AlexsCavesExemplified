@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.nucleeper;
 
+import net.minecraft.world.entity.LivingEntity;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
@@ -50,8 +51,8 @@ public abstract class ACExNucleeperMixin extends Monster implements NucleeperXtr
     private static final EntityDataAccessor<Boolean> DEFUSED = SynchedEntityData.defineId(NucleeperEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void alexsCavesExemplified$defineSynchedData(CallbackInfo ci) {
-        this.entityData.define(DEFUSED, false);
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(DEFUSED, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -75,7 +76,7 @@ public abstract class ACExNucleeperMixin extends Monster implements NucleeperXtr
             setDefused(true);
             player.swing(hand);
             if (!player.isCreative()) {
-                player.getItemInHand(hand).hurtAndBreak(1, player, (p_233654_0_) -> {});
+                player.getItemInHand(hand).hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
             }
 
         }

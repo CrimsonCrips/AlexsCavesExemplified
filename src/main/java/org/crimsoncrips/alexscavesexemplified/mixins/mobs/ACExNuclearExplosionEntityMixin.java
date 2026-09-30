@@ -49,8 +49,8 @@ public abstract class ACExNuclearExplosionEntityMixin extends Entity implements 
 
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void define(CallbackInfo ci) {
-        this.entityData.define(GAMMA, false);
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(GAMMA, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -68,7 +68,7 @@ public abstract class ACExNuclearExplosionEntityMixin extends Entity implements 
         }
     }
 
-    @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffectInstance;<init>(Lnet/minecraft/world/effect/MobEffect;IIZZZ)V"),index = 2)
+    @ModifyArg(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/effect/MobEffectInstance;<init>(Lnet/minecraft/core/Holder;IIZZZ)V"),index = 2)
     private int alexsCavesExemplified$tick1(int amplifier) {
         return isGamma() ? amplifier * 2 : amplifier;
     }

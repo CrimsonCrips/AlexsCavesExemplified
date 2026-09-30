@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tesla_bulb;
 
+import net.minecraft.util.FastColor;
 import com.github.alexmodguy.alexscaves.client.model.TeslaBulbModel;
 import com.github.alexmodguy.alexscaves.client.render.ACRenderTypes;
 import com.github.alexmodguy.alexscaves.client.render.blockentity.TelsaBulbBlockRenderer;
@@ -21,11 +22,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ACExTeslaBulbRenderMixin<T extends TeslaBulbBlockEntity> implements BlockEntityRenderer<T> {
 
     private static final TeslaBulbModel MODEL = new TeslaBulbModel();
-    private static final ResourceLocation TEXTURE = new ResourceLocation("alexscaves", "textures/entity/tesla_bulb.png");
-    private static final ResourceLocation TEXTURE_CHARGE_1 = new ResourceLocation("alexscavesexemplified", "textures/entity/tesla/tesla_charge_1.png");
-    private static final ResourceLocation TEXTURE_CHARGE_2 = new ResourceLocation("alexscavesexemplified", "textures/entity/tesla/tesla_charge_2.png");
-    private static final ResourceLocation TEXTURE_CHARGE_3 = new ResourceLocation("alexscavesexemplified", "textures/entity/tesla/tesla_charge_3.png");
-    private static final ResourceLocation TEXTURE_CHARGE_4 = new ResourceLocation("alexscavesexemplified", "textures/entity/tesla/tesla_charge_4.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("alexscaves", "textures/entity/tesla_bulb.png");
+    private static final ResourceLocation TEXTURE_CHARGE_1 = ResourceLocation.fromNamespaceAndPath("alexscavesexemplified", "textures/entity/tesla/tesla_charge_1.png");
+    private static final ResourceLocation TEXTURE_CHARGE_2 = ResourceLocation.fromNamespaceAndPath("alexscavesexemplified", "textures/entity/tesla/tesla_charge_2.png");
+    private static final ResourceLocation TEXTURE_CHARGE_3 = ResourceLocation.fromNamespaceAndPath("alexscavesexemplified", "textures/entity/tesla/tesla_charge_3.png");
+    private static final ResourceLocation TEXTURE_CHARGE_4 = ResourceLocation.fromNamespaceAndPath("alexscavesexemplified", "textures/entity/tesla/tesla_charge_4.png");
 
 
     @Inject(method = "render(Lcom/github/alexmodguy/alexscaves/server/block/blockentity/TeslaBulbBlockEntity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;II)V", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/client/model/TeslaBulbModel;setupAnim(Lnet/minecraft/world/entity/Entity;FFFFF)V"), cancellable = true)
@@ -34,7 +35,7 @@ public abstract class ACExTeslaBulbRenderMixin<T extends TeslaBulbBlockEntity> i
             ci.cancel();
             MODEL.setupAnim(null, 0.0F, teslaBulb.getExplodeProgress(partialTicks), (float)teslaBulb.age + partialTicks, 0.0F, 0.0F);
             int charge = ((ACExBaseInterface)teslaBulb).getCharge();
-            MODEL.renderToBuffer(poseStack, bufferIn.getBuffer(ACRenderTypes.getTeslaBulb(charge > 25 ? TEXTURE_CHARGE_4 : charge > 20 ? TEXTURE_CHARGE_3 : charge > 15 ? TEXTURE_CHARGE_2 : charge > 10 ? TEXTURE_CHARGE_1 : TEXTURE)), combinedLightIn, combinedOverlayIn, r, g, b, 1.0F);
+            MODEL.renderToBuffer(poseStack, bufferIn.getBuffer(ACRenderTypes.getTeslaBulb(charge > 25 ? TEXTURE_CHARGE_4 : charge > 20 ? TEXTURE_CHARGE_3 : charge > 15 ? TEXTURE_CHARGE_2 : charge > 10 ? TEXTURE_CHARGE_1 : TEXTURE)), combinedLightIn, combinedOverlayIn, FastColor.ARGB32.colorFromFloat(1.0F, r, g, b));
             poseStack.popPose();
         }
     }

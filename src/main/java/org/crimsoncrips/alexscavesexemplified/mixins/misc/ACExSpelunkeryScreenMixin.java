@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -78,13 +79,13 @@ public abstract class ACExSpelunkeryScreenMixin extends AbstractContainerScreen<
             this.doneWithTutorial = true;
             SpelunkeryTableMenu var10000 = (SpelunkeryTableMenu)this.menu;
             SpelunkeryTableMenu.setTutorialComplete(Minecraft.getInstance().player, true);
-            AlexsCaves.NETWORK_WRAPPER.sendToServer(new SpelunkeryTableChangeMessage(true));
+            PacketDistributor.sendToServer(new SpelunkeryTableChangeMessage(true));
             this.level = 0;
             this.fullResetWords();
         } else if (this.finishedLevel && this.passLevelProgress >= 10.0F && this.attemptsLeft <= 0) {
             if (AlexsCavesExemplified.COMMON_CONFIG.FORGIVING_SPELUKING_ENABLED.get()) {
                 if (level <= 0) {
-                    AlexsCaves.NETWORK_WRAPPER.sendToServer(new SpelunkeryTableChangeMessage(false));
+                    PacketDistributor.sendToServer(new SpelunkeryTableChangeMessage(false));
                     fullResetWords();
                     Minecraft.getInstance().setScreen(null);
                 } else {
@@ -97,7 +98,7 @@ public abstract class ACExSpelunkeryScreenMixin extends AbstractContainerScreen<
                 }
             } else {
                 level = 0;
-                AlexsCaves.NETWORK_WRAPPER.sendToServer(new SpelunkeryTableChangeMessage(false));
+                PacketDistributor.sendToServer(new SpelunkeryTableChangeMessage(false));
                 fullResetWords();
                 Minecraft.getInstance().setScreen(null);
             }
@@ -147,7 +148,7 @@ public abstract class ACExSpelunkeryScreenMixin extends AbstractContainerScreen<
     public void onClose() {
         if (!AlexsCavesExemplified.COMMON_CONFIG.REDOABLE_SPELUNKY_ENABLED.get()) {
             if (hasPaper() && hasTablet() && hasClickedAnyWord() && level < 3) {
-                AlexsCaves.NETWORK_WRAPPER.sendToServer(new SpelunkeryTableChangeMessage(false));
+                PacketDistributor.sendToServer(new SpelunkeryTableChangeMessage(false));
             }
         }
         super.onClose();

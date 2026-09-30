@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(NucleeperRenderer.class)
 public abstract class ACExNucleeperRenderMixin extends MobRenderer<NucleeperEntity, NucleeperModel> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation("alexscaves:textures/entity/nucleeper/nucleeper.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.parse("alexscaves:textures/entity/nucleeper/nucleeper.png");
 
     public ACExNucleeperRenderMixin(EntityRendererProvider.Context pContext, NucleeperModel pModel, float pShadowRadius) {
         super(pContext, pModel, pShadowRadius);

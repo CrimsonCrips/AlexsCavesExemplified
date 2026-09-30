@@ -87,8 +87,8 @@ public abstract class ACExTremorsaurusMixin extends DinosaurEntity implements Ta
     private static final EntityDataAccessor<Boolean> SNIFFED = SynchedEntityData.defineId(TremorsaurusEntity.class, EntityDataSerializers.BOOLEAN);;
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void defineSynched(CallbackInfo ci){
-        this.entityData.define(SNIFFED, false);
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci){
+        builder.define(SNIFFED, false);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))
@@ -114,7 +114,7 @@ public abstract class ACExTremorsaurusMixin extends DinosaurEntity implements Ta
     }
 
     public boolean isSeethed(TremorsaurusEntity tremorsaurus){
-        return tremorsaurus.hasEffect(ACExEffects.SERENED.get());
+        return tremorsaurus.hasEffect(ACExEffects.SERENED);
     }
 
 

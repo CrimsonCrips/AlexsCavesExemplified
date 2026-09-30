@@ -2,106 +2,104 @@ package org.crimsoncrips.alexscavesexemplified.server;
 
 import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.common.ForgeConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class ACExServerConfig {
-    public final ForgeConfigSpec.BooleanValue GLUTTONY_ENABLED;
-    public final ForgeConfigSpec.BooleanValue REDOABLE_SPELUNKY_ENABLED;
-    public final ForgeConfigSpec.BooleanValue KNAWING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue AMPUTATION_ENABLED;
-    public final ForgeConfigSpec.IntValue EXEMPLIFIED_IRRADIATION_AMOUNT;
-    public final ForgeConfigSpec.BooleanValue FORLORN_LIGHT_EFFECT_ENABLED;
-    public final ForgeConfigSpec.BooleanValue BURST_OUT_ENABLED;
-    public final ForgeConfigSpec.BooleanValue CORRODENT_CONVERSION_ENABLED;
-    public final ForgeConfigSpec.BooleanValue NUCLEAR_PISTONATION_ENABLED;
-    public final ForgeConfigSpec.BooleanValue HIVE_MIND_ENABLED;
-    public final ForgeConfigSpec.BooleanValue ANTI_SACRIFICE_ENABLED;
-    public final ForgeConfigSpec.BooleanValue DREAD_ADDAPTIONS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue JELLYBEAN_CHANGES_ENABLED;
-    public final ForgeConfigSpec.BooleanValue SWEETISH_SPEEDUP_ENABLED;
-    public final ForgeConfigSpec.BooleanValue FLY_TRAPPED_ENABLED;
-    public final ForgeConfigSpec.BooleanValue RATATATATATA_ENABLED;
-    public final ForgeConfigSpec.BooleanValue GEOTHERMAL_EFFECTS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue RABIES_ENABLED;
-    public final ForgeConfigSpec.BooleanValue AMPLIFIED_FROSTMINT_ENABLED;
-    public final ForgeConfigSpec.BooleanValue IRRADIATION_WASHOFF_ENABLED;
-    public final ForgeConfigSpec.BooleanValue ROACH_FEEDING_ENABLED;
-    public final ForgeConfigSpec.DoubleValue CHARGED_CAVE_CREEPER_CHANCE;
-    public final ForgeConfigSpec.BooleanValue MAGNETICISM_ENABLED;
-    public final ForgeConfigSpec.BooleanValue PURPLE_LEATHERED_ENABLED;
-    public final ForgeConfigSpec.BooleanValue FISH_MUTATION_ENABLED;
-    public final ForgeConfigSpec.BooleanValue STICKY_CARAMEL_ENABLED;
-    public final ForgeConfigSpec.BooleanValue STICKY_SODA_ENABLED;
-    public final ForgeConfigSpec.BooleanValue VOLCANIC_SACRIFICE_ENABLED;
-    public final ForgeConfigSpec.BooleanValue RADIANT_WRATH_ENABLED;
-    public final ForgeConfigSpec.BooleanValue PRESSURED_HOOKS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue EGG_ANGER_ENABLED;
-    public final ForgeConfigSpec.BooleanValue NUCLEAR_CHAIN_ENABLED;
-    public final ForgeConfigSpec.BooleanValue WASTE_PICKUP_ENABLED;
-    public final ForgeConfigSpec.BooleanValue CAT_MUTATION_ENABLED;
-    public final ForgeConfigSpec.BooleanValue UNDERZEALOT_RESPECT_ENABLED;
-    public final ForgeConfigSpec.BooleanValue SCAVENGING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue VESPER_SHOTDOWN_ENABLED;
-    public final ForgeConfigSpec.BooleanValue GUASLOWPOKE_ENABLED;
-    public final ForgeConfigSpec.BooleanValue ADDITIONAL_FLAMMABILITY_ENABLED;
-    public final ForgeConfigSpec.BooleanValue STOMPING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue KIROV_REPORTING_ENABLED;
-    public final ForgeConfigSpec.IntValue SPELUNKY_ATTEMPTS_AMOUNT;
-    public final ForgeConfigSpec.BooleanValue CANIAC_MANIAC_ENABLED;
-    public final ForgeConfigSpec.BooleanValue TUNED_SATING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue SUGAR_CRASH_ENABLED;
-    public final ForgeConfigSpec.BooleanValue ICED_CREAM_ENABLED;
-    public final ForgeConfigSpec.BooleanValue SOLIDIFIED_ENABLED;
-    public final ForgeConfigSpec.BooleanValue PRESERVED_AMBER_ENABLED;
-    public final ForgeConfigSpec.BooleanValue SEETHED_TAMING_ENABLED;
-    public final ForgeConfigSpec.BooleanValue ARMORED_LIQUIDATORS_ENABLED;
-    public final ForgeConfigSpec.BooleanValue BRAINDEAD_MODE_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue FORGIVING_SPELUKING_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue REARAYNGEMENT_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue GAMMA_TREMORZILLA_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue CANDICORN_HEAL_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue POISONOUS_SKIN_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue ABYSSAL_CRUSH_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue ECOLOGICAL_REPUTATION_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue CAVIAL_BONEMEAL_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue COOKIE_CRUMBLE_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue BREAKING_CANDY_ENABLED ;
-    public final ForgeConfigSpec.BooleanValue REMINEDING_ENABLED ;
-    public final  ForgeConfigSpec.BooleanValue SHOCKING_THERAPY_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue LIQUID_REPLICATION_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue ICE_CREAM_CONE_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue BEHOLDENT_STALKING_ENABLED;
+    public final ModConfigSpec.BooleanValue GLUTTONY_ENABLED;
+    public final ModConfigSpec.BooleanValue REDOABLE_SPELUNKY_ENABLED;
+    public final ModConfigSpec.BooleanValue KNAWING_ENABLED;
+    public final ModConfigSpec.BooleanValue AMPUTATION_ENABLED;
+    public final ModConfigSpec.IntValue EXEMPLIFIED_IRRADIATION_AMOUNT;
+    public final ModConfigSpec.BooleanValue FORLORN_LIGHT_EFFECT_ENABLED;
+    public final ModConfigSpec.BooleanValue BURST_OUT_ENABLED;
+    public final ModConfigSpec.BooleanValue CORRODENT_CONVERSION_ENABLED;
+    public final ModConfigSpec.BooleanValue NUCLEAR_PISTONATION_ENABLED;
+    public final ModConfigSpec.BooleanValue HIVE_MIND_ENABLED;
+    public final ModConfigSpec.BooleanValue ANTI_SACRIFICE_ENABLED;
+    public final ModConfigSpec.BooleanValue DREAD_ADDAPTIONS_ENABLED;
+    public final ModConfigSpec.BooleanValue JELLYBEAN_CHANGES_ENABLED;
+    public final ModConfigSpec.BooleanValue SWEETISH_SPEEDUP_ENABLED;
+    public final ModConfigSpec.BooleanValue FLY_TRAPPED_ENABLED;
+    public final ModConfigSpec.BooleanValue RATATATATATA_ENABLED;
+    public final ModConfigSpec.BooleanValue GEOTHERMAL_EFFECTS_ENABLED;
+    public final ModConfigSpec.BooleanValue RABIES_ENABLED;
+    public final ModConfigSpec.BooleanValue AMPLIFIED_FROSTMINT_ENABLED;
+    public final ModConfigSpec.BooleanValue IRRADIATION_WASHOFF_ENABLED;
+    public final ModConfigSpec.BooleanValue ROACH_FEEDING_ENABLED;
+    public final ModConfigSpec.DoubleValue CHARGED_CAVE_CREEPER_CHANCE;
+    public final ModConfigSpec.BooleanValue MAGNETICISM_ENABLED;
+    public final ModConfigSpec.BooleanValue PURPLE_LEATHERED_ENABLED;
+    public final ModConfigSpec.BooleanValue FISH_MUTATION_ENABLED;
+    public final ModConfigSpec.BooleanValue STICKY_CARAMEL_ENABLED;
+    public final ModConfigSpec.BooleanValue STICKY_SODA_ENABLED;
+    public final ModConfigSpec.BooleanValue VOLCANIC_SACRIFICE_ENABLED;
+    public final ModConfigSpec.BooleanValue RADIANT_WRATH_ENABLED;
+    public final ModConfigSpec.BooleanValue PRESSURED_HOOKS_ENABLED;
+    public final ModConfigSpec.BooleanValue EGG_ANGER_ENABLED;
+    public final ModConfigSpec.BooleanValue NUCLEAR_CHAIN_ENABLED;
+    public final ModConfigSpec.BooleanValue WASTE_PICKUP_ENABLED;
+    public final ModConfigSpec.BooleanValue CAT_MUTATION_ENABLED;
+    public final ModConfigSpec.BooleanValue UNDERZEALOT_RESPECT_ENABLED;
+    public final ModConfigSpec.BooleanValue SCAVENGING_ENABLED;
+    public final ModConfigSpec.BooleanValue VESPER_SHOTDOWN_ENABLED;
+    public final ModConfigSpec.BooleanValue GUASLOWPOKE_ENABLED;
+    public final ModConfigSpec.BooleanValue ADDITIONAL_FLAMMABILITY_ENABLED;
+    public final ModConfigSpec.BooleanValue STOMPING_ENABLED;
+    public final ModConfigSpec.BooleanValue KIROV_REPORTING_ENABLED;
+    public final ModConfigSpec.IntValue SPELUNKY_ATTEMPTS_AMOUNT;
+    public final ModConfigSpec.BooleanValue CANIAC_MANIAC_ENABLED;
+    public final ModConfigSpec.BooleanValue TUNED_SATING_ENABLED;
+    public final ModConfigSpec.BooleanValue SUGAR_CRASH_ENABLED;
+    public final ModConfigSpec.BooleanValue ICED_CREAM_ENABLED;
+    public final ModConfigSpec.BooleanValue SOLIDIFIED_ENABLED;
+    public final ModConfigSpec.BooleanValue PRESERVED_AMBER_ENABLED;
+    public final ModConfigSpec.BooleanValue SEETHED_TAMING_ENABLED;
+    public final ModConfigSpec.BooleanValue ARMORED_LIQUIDATORS_ENABLED;
+    public final ModConfigSpec.BooleanValue BRAINDEAD_MODE_ENABLED ;
+    public final ModConfigSpec.BooleanValue FORGIVING_SPELUKING_ENABLED ;
+    public final ModConfigSpec.BooleanValue REARAYNGEMENT_ENABLED ;
+    public final ModConfigSpec.BooleanValue GAMMA_TREMORZILLA_ENABLED ;
+    public final ModConfigSpec.BooleanValue CANDICORN_HEAL_ENABLED ;
+    public final ModConfigSpec.BooleanValue POISONOUS_SKIN_ENABLED ;
+    public final ModConfigSpec.BooleanValue ABYSSAL_CRUSH_ENABLED ;
+    public final ModConfigSpec.BooleanValue ECOLOGICAL_REPUTATION_ENABLED ;
+    public final ModConfigSpec.BooleanValue CAVIAL_BONEMEAL_ENABLED ;
+    public final ModConfigSpec.BooleanValue COOKIE_CRUMBLE_ENABLED ;
+    public final ModConfigSpec.BooleanValue BREAKING_CANDY_ENABLED ;
+    public final ModConfigSpec.BooleanValue REMINEDING_ENABLED ;
+    public final  ModConfigSpec.BooleanValue SHOCKING_THERAPY_ENABLED;
+    public final  ModConfigSpec.BooleanValue LIQUID_REPLICATION_ENABLED;
+    public final  ModConfigSpec.BooleanValue ICE_CREAM_CONE_ENABLED;
+    public final  ModConfigSpec.BooleanValue BEHOLDENT_STALKING_ENABLED;
 
-    public final  ForgeConfigSpec.BooleanValue NOON_GUARDIAN_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue SWEET_PUNISHMENT_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue TOUGH_ROACHES_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue OVERDRIVED_CONVERSION_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue DEFUSION_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue NAVAL_NUCLEARITY_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue POWERED_LOCATORS_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue CATTASTROPHE_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue BOUNDED_MAGNETISM_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue DARK_OFFERING_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue MAGNERIP_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue SUBMARINE_BUMP_ENABLED;
+    public final  ModConfigSpec.BooleanValue NOON_GUARDIAN_ENABLED;
+    public final  ModConfigSpec.BooleanValue SWEET_PUNISHMENT_ENABLED;
+    public final  ModConfigSpec.BooleanValue TOUGH_ROACHES_ENABLED;
+    public final  ModConfigSpec.BooleanValue OVERDRIVED_CONVERSION_ENABLED;
+    public final  ModConfigSpec.BooleanValue DEFUSION_ENABLED;
+    public final  ModConfigSpec.BooleanValue NAVAL_NUCLEARITY_ENABLED;
+    public final  ModConfigSpec.BooleanValue POWERED_LOCATORS_ENABLED;
+    public final  ModConfigSpec.BooleanValue CATTASTROPHE_ENABLED;
+    public final  ModConfigSpec.BooleanValue BOUNDED_MAGNETISM_ENABLED;
+    public final  ModConfigSpec.BooleanValue DARK_OFFERING_ENABLED;
+    public final  ModConfigSpec.BooleanValue MAGNERIP_ENABLED;
+    public final  ModConfigSpec.BooleanValue SUBMARINE_BUMP_ENABLED;
 
-    public final  ForgeConfigSpec.BooleanValue HARDCORE_MAGNERIP_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue IP_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue ACE_WIKI_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue SCALABLE_HOLOGRAM_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue TELETOR_ARMORY_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue SELF_DESTRUCT_ENABLED;
+    public final  ModConfigSpec.BooleanValue HARDCORE_MAGNERIP_ENABLED;
+    public final  ModConfigSpec.BooleanValue IP_ENABLED;
+    public final  ModConfigSpec.BooleanValue SCALABLE_HOLOGRAM_ENABLED;
+    public final  ModConfigSpec.BooleanValue TELETOR_ARMORY_ENABLED;
+    public final  ModConfigSpec.BooleanValue SELF_DESTRUCT_ENABLED;
 
-    public final  ForgeConfigSpec.BooleanValue SHOTNUKE_ENABLED;
-    public final  ForgeConfigSpec.BooleanValue SERENED_ENABLED;
-
+    public final  ModConfigSpec.BooleanValue SHOTNUKE_ENABLED;
+    public final  ModConfigSpec.BooleanValue SERENED_ENABLED;
 
 
 
-    public ACExServerConfig(final ForgeConfigSpec.Builder builder) {
+
+    public ACExServerConfig(final ModConfigSpec.Builder builder) {
         builder.push("General");
 
-        this.ACE_WIKI_ENABLED = buildBoolean(builder, "ACE_WIKI_ENABLED", " ", true, "Gives you the ace wiki book at start");
         this.REDOABLE_SPELUNKY_ENABLED = buildBoolean(builder, "REDOABLE_SPELUNKY_ENABLED", " ", true, "Whether it gives you back the tablet when exiting the spelunky table");
          this.SPELUNKY_ATTEMPTS_AMOUNT = buildInt(builder, "SPELUNKY_ATTEMPTS_AMOUNT", " ", 5, 1, Integer.MAX_VALUE, "Amount of tries you get for the spelunky table per tablet");
          this.CHARGED_CAVE_CREEPER_CHANCE = buildDouble(builder, "CHARGED_CAVE_CREEPER_CHANCE", " ", 0.2,0.0,1.0, "Chances of creepers from caves to be charged (0 for disable)");
@@ -155,7 +153,7 @@ public class ACExServerConfig {
 
         builder.pop();
         builder.push("Forlorn Hollows");
-        builder.comment("--Compatible with Curios Lanterns--");
+        builder.comment("--Compatible with Curios--");
         this.FORLORN_LIGHT_EFFECT_ENABLED = buildBoolean(builder, "FORLORN_LIGHT_EFFECT_ENABLED", " ", true, "Whether most forlorn mammals are effected when a player holds light");
         this.BURST_OUT_ENABLED = buildBoolean(builder, "BURST_OUT_ENABLED", " ", true, "Whether breaking Forlorn Hollows blocks has a chance to burst out Underzealots or Corrodents");
         this.RABIES_ENABLED = buildBoolean(builder, "RABIES_ENABLED", " ", true, "Rabies Effects for Forlorn Hollows");
@@ -290,15 +288,15 @@ public class ACExServerConfig {
 
     }
 
-    private static ForgeConfigSpec.BooleanValue buildBoolean(ForgeConfigSpec.Builder builder, String name, String catagory, boolean defaultValue, String comment){
+    private static ModConfigSpec.BooleanValue buildBoolean(ModConfigSpec.Builder builder, String name, String catagory, boolean defaultValue, String comment){
         return builder.comment(comment).translation(name).define(name, defaultValue);
     }
 
-    private static ForgeConfigSpec.IntValue buildInt(ForgeConfigSpec.Builder builder, String name, String catagory, int defaultValue, int min, int max, String comment){
+    private static ModConfigSpec.IntValue buildInt(ModConfigSpec.Builder builder, String name, String catagory, int defaultValue, int min, int max, String comment){
         return builder.comment(comment).translation(name).defineInRange(name, defaultValue, min, max);
     }
 
-    private static ForgeConfigSpec.DoubleValue buildDouble(ForgeConfigSpec.Builder builder, String name, String catagory, double defaultValue, double min, double max, String comment){
+    private static ModConfigSpec.DoubleValue buildDouble(ModConfigSpec.Builder builder, String name, String catagory, double defaultValue, double min, double max, String comment){
         return builder.comment(comment).translation(name).defineInRange(name, defaultValue, min, max);
     }
 }

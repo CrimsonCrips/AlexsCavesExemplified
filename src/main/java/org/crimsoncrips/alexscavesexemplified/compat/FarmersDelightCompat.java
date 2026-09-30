@@ -23,7 +23,7 @@ public class FarmersDelightCompat {
         if (blockState.getBlock() instanceof FeastBlock feastBlock){
             int servings = blockState.getValue(feastBlock.getServingsProperty());
             level.setBlock(blockPos, blockState.setValue(feastBlock.getServingsProperty(), Math.min(0, servings - 3)), 3);
-            level.playSound(null, blockPos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.BLOCKS, 1.0F, 1.0F);
+            level.playSound(null, blockPos, SoundEvents.ARMOR_EQUIP_GENERIC.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
 

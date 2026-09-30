@@ -12,9 +12,9 @@ import org.spongepowered.asm.mixin.Mixin;
 @Mixin(BoundroidRenderer.class)
 public abstract class ACExBoundroidRendererMixin extends MobRenderer<BoundroidEntity, BoundroidModel> {
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation("alexscaves:textures/entity/boundroid.png");
-    private static final ResourceLocation TEXTURE_SCARED = new ResourceLocation("alexscaves:textures/entity/boundroid_scared.png");
-    private static final ResourceLocation TEXTURE_DISABLED = new ResourceLocation("alexscavesexemplified:textures/entity/boundroid_disabled.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.parse("alexscaves:textures/entity/boundroid.png");
+    private static final ResourceLocation TEXTURE_SCARED = ResourceLocation.parse("alexscaves:textures/entity/boundroid_scared.png");
+    private static final ResourceLocation TEXTURE_DISABLED = ResourceLocation.parse("alexscavesexemplified:textures/entity/boundroid_disabled.png");
 
     public ACExBoundroidRendererMixin(EntityRendererProvider.Context pContext, BoundroidModel pModel, float pShadowRadius) {
         super(pContext, pModel, pShadowRadius);

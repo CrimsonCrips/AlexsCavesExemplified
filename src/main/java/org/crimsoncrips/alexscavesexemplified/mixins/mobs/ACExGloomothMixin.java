@@ -17,8 +17,8 @@ public abstract class ACExGloomothMixin extends PathfinderMob {
     }
 
     @Override
-    public boolean canBeLeashed(Player pPlayer) {
-        return super.canBeLeashed(pPlayer) && !isPassenger();
+    public boolean canBeLeashed() {
+        return super.canBeLeashed() && !isPassenger();
     }
 
 

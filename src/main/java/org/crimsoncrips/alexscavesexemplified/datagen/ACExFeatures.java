@@ -3,7 +3,7 @@ package org.crimsoncrips.alexscavesexemplified.datagen;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -23,13 +23,13 @@ import java.util.List;
 
 public class ACExFeatures {
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PRIMORDIAL_BONEMEAL = ResourceKey.create(Registries.CONFIGURED_FEATURE, new ResourceLocation(AlexsCavesExemplified.MODID, "primordial_bonemeal"));
-    public static final ResourceKey<PlacedFeature> PLACED_PRIMORDIAL_BONEMEAL = ResourceKey.create(Registries.PLACED_FEATURE, new ResourceLocation(AlexsCavesExemplified.MODID, "placed_primordial_bonemeal"));
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PRIMORDIAL_BONEMEAL = ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(AlexsCavesExemplified.MODID, "primordial_bonemeal"));
+    public static final ResourceKey<PlacedFeature> PLACED_PRIMORDIAL_BONEMEAL = ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(AlexsCavesExemplified.MODID, "placed_primordial_bonemeal"));
 
 
-    static void generateFeatureConfigurations(BootstapContext<ConfiguredFeature<?, ?>> context) {
+    static void generateFeatureConfigurations(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         context.register(PRIMORDIAL_BONEMEAL, new ConfiguredFeature<>(Feature.RANDOM_PATCH, new RandomPatchConfiguration(1, 3, 3, PlacementUtils.filtered(Feature.SIMPLE_BLOCK, new SimpleBlockConfiguration(new WeightedStateProvider(SimpleWeightedRandomList.<BlockState>builder()
-                .add(Blocks.GRASS.defaultBlockState(), 10)
+                .add(Blocks.SHORT_GRASS.defaultBlockState(), 10)
                 .add(Blocks.FERN.defaultBlockState(), 5)
                 .add(Blocks.LARGE_FERN.defaultBlockState(), 3)
                 .add(ACBlockRegistry.FLYTRAP.get().defaultBlockState(), 4)
@@ -39,7 +39,7 @@ public class ACExFeatures {
         )), BlockPredicate.allOf(BlockPredicate.ONLY_IN_AIR_PREDICATE)))));
     }
 
-    static void generateFeaturePlacements(BootstapContext<PlacedFeature> context) {
+    static void generateFeaturePlacements(BootstrapContext<PlacedFeature> context) {
         HolderGetter<ConfiguredFeature<?, ?>> featureConfigLookup = context.lookup(Registries.CONFIGURED_FEATURE);
         context.register(PLACED_PRIMORDIAL_BONEMEAL, new PlacedFeature(featureConfigLookup.getOrThrow(PRIMORDIAL_BONEMEAL), List.of()));
     }

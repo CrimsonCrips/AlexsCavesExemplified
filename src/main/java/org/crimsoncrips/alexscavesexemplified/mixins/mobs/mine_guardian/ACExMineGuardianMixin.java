@@ -110,9 +110,9 @@ public abstract class ACExMineGuardianMixin extends Monster implements MineGuard
     }
 
     @Inject(method = "defineSynchedData", at = @At("TAIL"))
-    private void alexsCavesExemplified$define(CallbackInfo ci) {
-        this.entityData.define(OWNER, "-1");
-        this.entityData.define(VARIANT, 0);
+    private void alexsCavesExemplified$defineSynchedData(SynchedEntityData.Builder builder, CallbackInfo ci) {
+        builder.define(OWNER, "-1");
+        builder.define(VARIANT, 0);
     }
 
     @Inject(method = "addAdditionalSaveData", at = @At("TAIL"))

@@ -8,7 +8,7 @@ import com.github.alexmodguy.alexscaves.server.block.SmoothLimestoneBlock;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
-import net.minecraft.advancements.Advancement;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -32,10 +32,10 @@ public class ACExSmoothLimestoneMixin extends Block {
         super(pProperties);
     }
 
-    @WrapOperation(method = "use", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/block/SmoothLimestoneBlock;attemptPlaceMysteryCavePainting(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z",ordinal = 1))
-    private boolean alexsCavesExemplified$use(SmoothLimestoneBlock instance, Level level, BlockPos paintingPos, Direction direction, boolean j, Operation<Boolean> original, @Local Player player) {
+    @WrapOperation(method = "useItemOn", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/block/SmoothLimestoneBlock;attemptPlaceMysteryCavePainting(Lnet/minecraft/world/level/Level;Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;Z)Z",ordinal = 1))
+    private boolean alexsCavesExemplified$useItemOn(SmoothLimestoneBlock instance, Level level, BlockPos paintingPos, Direction direction, boolean j, Operation<Boolean> original, @Local(argsOnly = true) Player player) {
         if (player instanceof ServerPlayer serverPlayer){
-            Advancement luxDefeat = serverPlayer.getServer().getAdvancements().getAdvancement(new ResourceLocation(AlexsCaves.MODID, "alexscaves/defeat_luxtructosaurus"));
+            AdvancementHolder luxDefeat = serverPlayer.getServer().getAdvancements().get(ResourceLocation.fromNamespaceAndPath(AlexsCaves.MODID, "alexscaves/defeat_luxtructosaurus"));
             if (luxDefeat != null && serverPlayer.getAdvancements().getOrStartProgress(luxDefeat).isDone() && serverPlayer.getRandom().nextBoolean()) {
                 ACExUtils.awardAdvancement(serverPlayer,"sacrifice_painting","paint");
                 return attemptPlaceSacrificeCavePainting(level,paintingPos,direction,j);

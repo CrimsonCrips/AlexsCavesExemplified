@@ -1,5 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.core.component.DataComponents;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ai.MobTarget3DGoal;
 import com.github.alexmodguy.alexscaves.server.entity.living.CorrodentEntity;
@@ -75,8 +77,8 @@ public abstract class ACExCorrodentMixin extends Monster implements UnderzealotS
     }
 
     @Override
-    public boolean canBeLeashed(Player pPlayer) {
-        return super.canBeLeashed(pPlayer) || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && !isPassenger());
+    public boolean canBeLeashed() {
+        return super.canBeLeashed() || (AlexsCavesExemplified.COMMON_CONFIG.DARK_OFFERING_ENABLED.get() && !isPassenger());
     }
 
 
@@ -97,7 +99,7 @@ public abstract class ACExCorrodentMixin extends Monster implements UnderzealotS
                 UnderzealotEntity underzealot1 = this.convertTo(ACEntityRegistry.UNDERZEALOT.get(), true);
                 if (underzealot1 != null) {
                     this.playSound(ACSoundRegistry.CORRODENT_HURT.get(), 8.0F, 1.0F);
-                    net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, underzealot1);
+                    net.neoforged.neoforge.event.EventHooks.onLivingConvert(this, underzealot1);
                     underzealot1.triggerIdleDigging();
                     underzealot1.stopRiding();
                 }
@@ -123,17 +125,17 @@ public abstract class ACExCorrodentMixin extends Monster implements UnderzealotS
 
     @Override
     public boolean canTargetItem(ItemStack itemStack) {
-        return  (itemStack.isEdible() || itemStack.is(ACExItemTagGenerator.KNAWING));
+        return  (itemStack.has(DataComponents.FOOD) || itemStack.is(ACExItemTagGenerator.KNAWING));
     }
 
     public void onGetItem(ItemEntity itemEntity) {
         Item item = itemEntity.getItem().getItem();
-        if (item.isEdible()) {
+        if (itemEntity.getItem().has(DataComponents.FOOD)) {
             this.heal(5);
-            List<Pair<MobEffectInstance, Float>> test = Objects.requireNonNull(itemEntity.getItem().getFoodProperties(this)).getEffects();
+            List<FoodProperties.PossibleEffect> test = Objects.requireNonNull(itemEntity.getItem().getFoodProperties(this)).effects();
             if (!test.isEmpty()){
                 for (int i = 0; i < test.size(); i++){
-                    this.addEffect(new MobEffectInstance(test.get(i).getFirst()));
+                    this.addEffect(new MobEffectInstance(test.get(i).effect()));
                 }
             }
             itemEntity.getItem().shrink(1);
