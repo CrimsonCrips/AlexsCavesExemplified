@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.client.particle;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.client.render.entity.TremorzillaRenderer;
 import com.github.alexmodguy.alexscaves.server.entity.living.TremorzillaEntity;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -25,7 +26,7 @@ public class GammaTremorLightning extends TextureSheetParticle {
         this.yd = 0;
         this.zd = 0;
         this.quadSize *= 10F + random.nextFloat() * 10F;
-        this.lifetime = 2;
+        this.lifetime = ACExUtils.seconds(0.1F);
         this.setSpriteFromAge(sprites);
         this.hasPhysics = true;
         this.tremorzillaId = tremorzillaId;

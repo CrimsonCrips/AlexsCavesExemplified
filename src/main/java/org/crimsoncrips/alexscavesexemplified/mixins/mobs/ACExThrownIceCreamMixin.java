@@ -27,7 +27,7 @@ public abstract class ACExThrownIceCreamMixin extends ThrowableItemProjectile {
     private void getMaxLoadTime(EntityHitResult hitResult, CallbackInfo ci) {
         if (hitResult.getEntity() instanceof LivingEntity living && AlexsCavesExemplified.COMMON_CONFIG.ICED_CREAM_ENABLED.get()){
             living.setTicksFrozen(living.getTicksRequiredToFreeze() + 10);
-            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0));
+            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(3.0F), 0));
             ACExUtils.awardAdvancement(this.getOwner(),"iced_freeze","freezed");
         }
     }

@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.entity.living.TremorsaurusEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.VallumraptorEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
@@ -68,7 +69,7 @@ public class ACExTremorEatBlock extends MoveToBlockGoal {
                     }
 
                     if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && level.getRandom().nextDouble() < 0.4) {
-                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED, 2400, 0));
+                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED, ACExUtils.seconds(120.0F), 0));
                     }
                 }
                 this.stop();
@@ -95,6 +96,6 @@ public class ACExTremorEatBlock extends MoveToBlockGoal {
     }
 
     protected int nextStartTick(PathfinderMob mob) {
-        return reducedTickDelay(100 + tremorsaurus.getRandom().nextInt(100));
+        return reducedTickDelay(ACExUtils.seconds(5.0F) + tremorsaurus.getRandom().nextInt(ACExUtils.seconds(5.0F)));
     }
 }

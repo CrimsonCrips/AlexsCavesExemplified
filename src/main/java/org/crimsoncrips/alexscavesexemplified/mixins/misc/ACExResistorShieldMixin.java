@@ -1,6 +1,5 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.LaunchedSeeking;
 import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.enchantment.ACEnchantmentHelper;
 import com.github.alexmodguy.alexscaves.server.entity.item.SeekingArrowEntity;
@@ -39,7 +38,7 @@ public abstract class ACExResistorShieldMixin extends ShieldItem {
             int i = this.getUseDuration(stack, living) - timeUsing;
             boolean scarlet = isScarlet(stack);
             for (ItemEntity entity : living.level().getEntitiesOfClass(ItemEntity.class, living.getBoundingBox().inflate(5, 1, 5))) {
-                if (entity.distanceTo(living) <= 4 && (i >= 10 && i % 5 == 0) && (entity.getItem().is(ACTagRegistry.MAGNETIC_ITEMS) && ACEnchantmentHelper.getEnchantmentLevelFromStack(ACExEnchants.MAGNETICISM, stack) > 0)) {
+                if (entity.distanceTo(living) <= 4 && (i >= ACExUtils.seconds(0.5F) && i % ACExUtils.seconds(0.25F) == 0) && (entity.getItem().is(ACTagRegistry.MAGNETIC_ITEMS) && ACEnchantmentHelper.getEnchantmentLevelFromStack(ACExEnchants.MAGNETICISM, stack) > 0)) {
                     Vec3 arcVec = living.position().add(0, 0.65F * living.getBbHeight(), 0).subtract(entity.position());
                     if (scarlet) {
                         if (arcVec.length() > living.getBbWidth()) {
@@ -61,7 +60,7 @@ public abstract class ACExResistorShieldMixin extends ShieldItem {
                     seekingArrowEntity.inGround = false;
                     seekingArrowEntity.setOwner(living);
                     seekingArrowEntity.pickup = SeekingArrowEntity.Pickup.CREATIVE_ONLY;
-                    ((LaunchedSeeking) seekingArrowEntity).setStopSeeking(true);
+                    seekingArrowEntity.setData(ACExAttachments.STOP_SEEKING, true);
                     if (!isScarlet(stack) && i == 10){
                         seekingArrowEntity.setPos(seekingArrowEntity.getPosition(1).add(0, 2, 0));
                         seekingArrowEntity.setDeltaMovement(0, 1, 0);

@@ -95,6 +95,7 @@ dependencies {
     implementation "maven.modrinth:farmers-delight:XTVZDOol"
 
     runtimeOnly "maven.modrinth:jei:Tn0dgwL0"
+    compileOnly "maven.modrinth:jade:eYz2YBGT"
     runtimeOnly "maven.modrinth:jade:eYz2YBGT"
     runtimeOnly "maven.modrinth:spark:v5qtqRQi"
 

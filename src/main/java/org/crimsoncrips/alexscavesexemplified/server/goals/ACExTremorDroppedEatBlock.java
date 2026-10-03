@@ -61,7 +61,7 @@ public class ACExTremorDroppedEatBlock extends MobTargetItemGoal {
                     tremorsaurus.playSound(ACSoundRegistry.TREMORSAURUS_BITE.get(), 1F, 1F);
                     targetEntity.kill();
                     if (AlexsCavesExemplified.COMMON_CONFIG.SEETHED_TAMING_ENABLED.get() && tremorsaurus.level().getRandom().nextDouble() < 0.8) {
-                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED, 2400, 0));
+                        mob.addEffect(new MobEffectInstance(ACExEffects.SERENED, ACExUtils.seconds(120.0F), 0));
                     }
                 }
                 this.stop();
@@ -90,8 +90,8 @@ public class ACExTremorDroppedEatBlock extends MobTargetItemGoal {
                 return false;
             } else {
                 if (!this.mustUpdate) {
-                    long worldTime = this.mob.level().getGameTime() % 10L;
-                    if (this.mob.getNoActionTime() >= 100 && worldTime != 0L) {
+                    long worldTime = this.mob.level().getGameTime() % ACExUtils.seconds(0.5F);
+                    if (this.mob.getNoActionTime() >= ACExUtils.seconds(5.0F) && worldTime != 0L) {
                         return false;
                     }
 
@@ -117,6 +117,6 @@ public class ACExTremorDroppedEatBlock extends MobTargetItemGoal {
     }
 
     protected int nextStartTick(PathfinderMob mob) {
-        return reducedTickDelay(100 + tremorsaurus.getRandom().nextInt(100));
+        return reducedTickDelay(ACExUtils.seconds(5.0F) + tremorsaurus.getRandom().nextInt(ACExUtils.seconds(5.0F)));
     }
 }

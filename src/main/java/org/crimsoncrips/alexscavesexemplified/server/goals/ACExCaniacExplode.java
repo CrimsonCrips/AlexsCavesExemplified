@@ -5,6 +5,7 @@
 
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.block.NuclearBombBlock;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearBombEntity;
@@ -35,7 +36,7 @@ public class ACExCaniacExplode extends MoveToBlockGoal {
     }
 
     protected int nextStartTick(PathfinderMob mob) {
-        return reducedTickDelay(1000 + this.caniac.getRandom().nextInt(500));
+        return reducedTickDelay(ACExUtils.seconds(50.0F) + this.caniac.getRandom().nextInt(ACExUtils.seconds(25.0F)));
     }
 
     public double acceptedDistance() {

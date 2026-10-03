@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.entity.item.DarkArrowEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,7 +33,7 @@ public abstract class ACExDarkArrowMixin extends AbstractArrow {
                     livingEntity.igniteForSeconds(5);
                 }
 
-                int knockback = this.getPersistentData().getInt("alexscavesexemplified:knockback");
+                int knockback = this.getData(ACExAttachments.DARK_ARROW_KNOCKBACK);
                 if (knockback > 0) {
                     double d0 = Math.max(0.0, 1.0 - livingEntity.getAttributeValue(Attributes.KNOCKBACK_RESISTANCE));
                     Vec3 vec3 = this.getDeltaMovement().multiply(1.0, 0.0, 1.0).normalize().scale((double) knockback * 0.6 * d0);

@@ -84,7 +84,7 @@ public abstract class ACExGummybearMixin extends Animal {
                 player.addItem(new ItemStack(Items.GLASS_BOTTLE));
             }
 
-            this.sleepFor = 24000 * (2 + this.random.nextInt(2));
+            this.sleepFor = ACExUtils.seconds(1200.0F) * (2 + this.random.nextInt(2));
             if (AlexsCavesExemplified.COMMON_CONFIG.JELLYBEAN_CHANGES_ENABLED.get()) {
                 this.setVariable = sleepFor;
                 this.jellybeansToMake = 1 + setVariable / 8000;
@@ -145,8 +145,8 @@ public abstract class ACExGummybearMixin extends Animal {
     public void boost(Entity entity,ItemStack itemStack){
         itemStack.shrink(1);
         ACExUtils.awardAdvancement(entity,"feed_speedup","feed");
-        if (sleepFor >= 1000) {
-            this.sleepFor = sleepFor - 1000;
+        if (sleepFor >= ACExUtils.seconds(50.0F)) {
+            this.sleepFor = sleepFor - ACExUtils.seconds(50.0F);
         } else {
             this.sleepFor = 0;
         }

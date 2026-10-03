@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.DinosaurChopBlock;
 import com.github.alexmodguy.alexscaves.server.block.ThinBoneBlock;
@@ -73,6 +74,6 @@ public class ACExVallumraptorEatBlock extends MoveToBlockGoal {
 
     @Override
     protected int nextStartTick(PathfinderMob pCreature) {
-        return reducedTickDelay(100 + vallumraptor.getRandom().nextInt(100));
+        return reducedTickDelay(ACExUtils.seconds(5.0F) + vallumraptor.getRandom().nextInt(ACExUtils.seconds(5.0F)));
     }
 }

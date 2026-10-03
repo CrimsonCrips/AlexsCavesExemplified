@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.boundroid;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.living.BoundroidEntity;
@@ -46,9 +47,9 @@ public abstract class ACExBoundroidMixin extends Monster {
             LivingEntity target = boundroidEntity.getTarget();
             BoundroidWinchEntity boundroidWinch = (BoundroidWinchEntity) boundroidEntity.getWinch();
             if (this.getData(ACExAttachments.MAGNETIZING) && target != null && MagnetUtil.isPulledByMagnets(target) && MagnetUtil.isPulledByMagnets(target) && boundroidWinch.distanceTo(target) < 3 && boundroidWinch.isLatched()) {
-                activateDelay = 100;
+                activateDelay = ACExUtils.seconds(5.0F);
                 ACExAttachments.set(this, ACExAttachments.MAGNETIZING, false);
-                stopSlammingFor = 110;
+                stopSlammingFor = ACExUtils.seconds(5.5F);
             }
             if (activateDelay > 0 && !this.getData(ACExAttachments.MAGNETIZING)) {
                 activateDelay--;
@@ -78,7 +79,7 @@ public abstract class ACExBoundroidMixin extends Monster {
                     entity1.fallDistance = 0.0F;
                     if (!MagnetUtil.isEntityOnMovingMetal(entity1) && this.getData(ACExAttachments.MAGNETIZING)) {
                         if (entity1 == boundroidEntity.getTarget()) {
-                            stopSlammingFor = 30 + random.nextInt(20);
+                            stopSlammingFor = ACExUtils.seconds(1.5F) + random.nextInt(ACExUtils.seconds(1.0F));
                         }
                         Vec3 center = entity1.position();
                         entity1.level().addParticle(ACParticleRegistry.SCARLET_MAGNETIC_ORBIT.get(), center.x, center.y + 1, center.z, center.x, center.y, center.z);

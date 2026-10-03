@@ -1,6 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tesla_bulb;
 
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 
 import net.minecraft.util.FastColor;
 import com.github.alexmodguy.alexscaves.client.model.TeslaBulbModel;
@@ -35,7 +35,7 @@ public abstract class ACExTeslaBulbRenderMixin<T extends TeslaBulbBlockEntity> i
         if(AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
             ci.cancel();
             MODEL.setupAnim(null, 0.0F, teslaBulb.getExplodeProgress(partialTicks), (float)teslaBulb.age + partialTicks, 0.0F, 0.0F);
-            int charge = ((ACExBaseInterface)teslaBulb).getCharge();
+            int charge = teslaBulb.getData(ACExAttachments.TESLA_CHARGE).intValue();
             MODEL.renderToBuffer(poseStack, bufferIn.getBuffer(ACRenderTypes.getTeslaBulb(charge > 25 ? TEXTURE_CHARGE_4 : charge > 20 ? TEXTURE_CHARGE_3 : charge > 15 ? TEXTURE_CHARGE_2 : charge > 10 ? TEXTURE_CHARGE_1 : TEXTURE)), combinedLightIn, combinedOverlayIn, FastColor.ARGB32.colorFromFloat(1.0F, r, g, b));
             poseStack.popPose();
         }

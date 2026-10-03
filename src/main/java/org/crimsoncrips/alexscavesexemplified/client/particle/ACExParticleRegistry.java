@@ -18,6 +18,7 @@ public class ACExParticleRegistry {
 
 
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GAMMA_MUSHROOM_CLOUD = DEF_REG.register("gamma_mushroom_cloud", () -> new SimpleParticleType(false));
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> MINI_GAMMA_MUSHROOM_CLOUD = DEF_REG.register("mini_gamma_mushroom_cloud", () -> new SimpleParticleType(true));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GAMMA_TEPHRA = DEF_REG.register("gamma_tephra", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GAMMA_TEPHRA_SMALL = DEF_REG.register("gamma_tephra_small", () -> new SimpleParticleType(false));
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GAMMA_TEPHRA_FLAME = DEF_REG.register("gamma_tephra_flame", () -> new SimpleParticleType(false));

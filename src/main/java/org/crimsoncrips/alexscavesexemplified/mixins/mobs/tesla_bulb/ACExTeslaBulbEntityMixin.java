@@ -1,14 +1,10 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tesla_bulb;
 
-import net.minecraft.core.HolderLookup;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.TeslaBulbBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.Connection;
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ParticleUtils;
@@ -26,7 +22,8 @@ import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.client.ACExSoundRegistry;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
+import org.apache.commons.lang3.mutable.MutableInt;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -35,10 +32,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 
 @Mixin(TeslaBulbBlockEntity.class)
-public abstract class ACExTeslaBulbEntityMixin extends BlockEntity implements ACExBaseInterface {
-
-    @Unique
-    private int charge;
+public abstract class ACExTeslaBulbEntityMixin extends BlockEntity {
 
     public ACExTeslaBulbEntityMixin(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -52,36 +46,10 @@ public abstract class ACExTeslaBulbEntityMixin extends BlockEntity implements AC
     }
 
 
-    public int getCharge(){
-        return charge;
-    }
-
-    public void setCharge(int num){
-        charge = num;
-    }
-
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket packet, HolderLookup.Provider lookupProvider) {
-        if (packet != null) {
-            charge = packet.getTag().getInt("TeslaCharge");
-        }
-    }
-
-    @Inject(method = "loadAdditional", at = @At("TAIL"))
-    private void alexsCavesExemplified$loadAdditional(CompoundTag tag, HolderLookup.Provider registries, CallbackInfo ci) {
-        charge = tag.getInt("TeslaCharge");
-    }
-
-    @Inject(method = "saveAdditional", at = @At("TAIL"))
-    private void alexsCavesExemplified$saveAdditional(CompoundTag tag, HolderLookup.Provider registries, CallbackInfo ci) {
-        tag.putInt("TeslaCharge", charge);
-    }
-
-
     @Inject(method = "tick", at = @At(value = "HEAD"),remap = false)
     private static void alexsCavesExemplified$tick2(Level level, BlockPos blockPos, BlockState state, TeslaBulbBlockEntity entity, CallbackInfo ci) {
         if(AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
-            ACExBaseInterface tickAccesor = (ACExBaseInterface)entity;
+            MutableInt charge = entity.getData(ACExAttachments.TESLA_CHARGE);
 
             Player target = null;
             for (Player livingEntity : level.getEntitiesOfClass(Player.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-5, -5, -5)), Vec3.atLowerCornerOf(blockPos.offset(5, 5, 5))))) {
@@ -90,14 +58,14 @@ public abstract class ACExTeslaBulbEntityMixin extends BlockEntity implements AC
 
             if (target != null && !target.isCreative()) {
 
-                if (tickAccesor.getCharge() > 0) {
+                if (charge.intValue() > 0) {
                     ParticleUtils.spawnParticlesAlongAxis(Direction.UP.getAxis(), level, blockPos, 0.125D, ParticleTypes.ELECTRIC_SPARK, UniformInt.of(1, 2));
                 }
-                tickAccesor.setCharge(tickAccesor.getCharge() + 1);
-                if (tickAccesor.getCharge() == 5 && AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
+                charge.increment();
+                if (charge.intValue() == 5 && AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
                     level.playLocalSound(blockPos, ACExSoundRegistry.TESLA_POWERUP.get(), SoundSource.AMBIENT, 2, 1, false);
                 }
-                if (tickAccesor.getCharge() == 32){
+                if (charge.intValue() == 32){
                     Vec3 vec3 = findTargetPos(blockPos, target);
                     Vec3 from = Vec3.atCenterOf(blockPos);
                     if (!level.isClientSide) {
@@ -105,14 +73,14 @@ public abstract class ACExTeslaBulbEntityMixin extends BlockEntity implements AC
                         LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
                         lightningBolt.setDamage(7);
                         target.thunderHit((ServerLevel) level, lightningBolt);
-                        target.setRemainingFireTicks(30);
+                        target.setRemainingFireTicks(ACExUtils.seconds(1.5F));
                         ACExUtils.awardAdvancement(target,"tesla_shock","shock");
                     }
                     target.playSound( ACExSoundRegistry.TESLA_FIRE.get());
-                    tickAccesor.setCharge(-30);
+                    charge.setValue(-30);
                 }
             } else {
-                tickAccesor.setCharge(-30);
+                charge.setValue(-30);
             }
 
 

@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.blocks;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.VolcanicCoreBlockEntity;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
@@ -56,7 +57,7 @@ public abstract class ACExVolcanicCoreBlockEntityMixin extends BlockEntity{
 
                 double dist = Mth.sqrt((float) item.distanceToSqr(vec3));
                 if (dist < maxDist) {
-                    item.getPersistentData().putBoolean("DraggedProtection", true);
+                    item.setData(ACExAttachments.DRAGGED_PROTECTION, true);
                     item.setGlowingTag(true);
                     Vec3 sub = vec3.subtract(item.position()).normalize().scale(0.2F);
                     Vec3 delta = item.getDeltaMovement().scale(0.8F);

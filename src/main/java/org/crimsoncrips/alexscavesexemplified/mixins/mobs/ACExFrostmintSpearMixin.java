@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.FrostmintSpearEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
@@ -17,6 +18,7 @@ import net.neoforged.fml.ModList;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.compat.CreateCompat;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExSugarStaffAbilities;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -43,9 +45,19 @@ public abstract class ACExFrostmintSpearMixin extends AbstractArrow {
 
     @Override
     public boolean ignoreExplosion(Explosion explosion) {
-        return AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get() && this.getPersistentData().getBoolean("FrostRadiant");
+        return AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get() && this.getData(ACExAttachments.FROST_RADIANT);
     }
 
+
+    @Inject(method = "onHit", at = @At("HEAD"))
+    private void alexsCavesExemplified$onHit(HitResult hitResult, CallbackInfo ci) {
+        ACExSugarStaffAbilities.SPEAR_HITTING.set(this.getData(ACExAttachments.STAFF_SPEAR));
+    }
+
+    @Inject(method = "onHit", at = @At("RETURN"))
+    private void alexsCavesExemplified$onHit1(HitResult hitResult, CallbackInfo ci) {
+        ACExSugarStaffAbilities.SPEAR_HITTING.set(false);
+    }
 
     @Inject(method = "onHit", at = @At("HEAD"))
     private void hit(HitResult hitResult, CallbackInfo ci) {
@@ -82,7 +94,7 @@ public abstract class ACExFrostmintSpearMixin extends AbstractArrow {
                     BlockPos icePos = new BlockPos(blockPos.getX() + x, blockPos.getY() + y , blockPos.getZ() + z);
                     BlockState blockState = level.getBlockState(icePos);
                     if (blockState.is(block) && level.setBlock(icePos, output.defaultBlockState(), 3)) {
-                        level.scheduleTick(icePos, blockState.getBlock(), 2);
+                        level.scheduleTick(icePos, blockState.getBlock(), ACExUtils.seconds(0.1F));
                         this.discard();
                         ACExUtils.awardAdvancement(this.getOwner(),"frostmint_freeze","freeze");
                         explode();

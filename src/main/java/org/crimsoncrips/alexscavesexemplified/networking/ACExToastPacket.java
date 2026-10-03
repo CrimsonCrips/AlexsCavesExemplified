@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.networking;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
@@ -19,7 +20,7 @@ public record ACExToastPacket(Component message, long displayTimeMs) implements 
             ACExToastPacket::new
     );
 
-    public static final long DISPLAY_TIME_MS = 5000L;
+    public static final long DISPLAY_TIME_MS = ACExUtils.secondsInMillis(5.0F);
 
     public ACExToastPacket(Component message) {
         this(message, DISPLAY_TIME_MS);

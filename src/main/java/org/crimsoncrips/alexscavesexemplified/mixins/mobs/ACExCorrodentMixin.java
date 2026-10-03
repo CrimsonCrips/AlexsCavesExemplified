@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.core.component.DataComponents;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
@@ -59,7 +60,7 @@ public abstract class ACExCorrodentMixin extends Monster implements UnderzealotS
     private void alexsCavesExemplified$tick(CallbackInfo ci) {
         if (isBeingSacrificed && this.isPassenger() && !level().isClientSide && AlexsCavesExemplified.COMMON_CONFIG.CORRODENT_CONVERSION_ENABLED.get()) {
             sacrificeTime--;
-            if (sacrificeTime < 10) {
+            if (sacrificeTime < ACExUtils.seconds(0.5F)) {
                 this.level().broadcastEntityEvent(this, (byte) 61);
             }
             if (sacrificeTime < 0) {

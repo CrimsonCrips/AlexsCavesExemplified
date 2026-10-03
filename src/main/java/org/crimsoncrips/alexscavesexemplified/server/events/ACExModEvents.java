@@ -3,8 +3,11 @@ package org.crimsoncrips.alexscavesexemplified.server.events;
 import com.github.alexmodguy.alexscaves.server.misc.ACCreativeTabRegistry;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.entity.ACExEntityRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.entity.GumwirmEntity;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACExItemRegistry;
 
 
@@ -15,6 +18,10 @@ public class ACExModEvents {
     public void addCreativeTabs(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey().equals(ACCreativeTabRegistry.CANDY_CAVITY.getKey())){
             event.accept(ACExItemRegistry.ICE_CREAM_CONE.get());
+            event.accept(ACExItemRegistry.GUMWIRM_SPAWN_EGG.get());
+        }
+        if (event.getTabKey().equals(ACCreativeTabRegistry.TOXIC_CAVES.getKey())){
+            event.accept(ACExItemRegistry.GAMMA_TREMORZILLA_SPAWN_EGG.get());
         }
         if (event.getTabKey().equals(ACCreativeTabRegistry.PRIMORDIAL_CAVES.getKey())){
             event.accept(ACExBlockRegistry.CAVE_PAINTING_SACRIFICE_1.get());
@@ -35,7 +42,10 @@ public class ACExModEvents {
         }
     }
 
-
+    @SubscribeEvent
+    public void registerAttributes(EntityAttributeCreationEvent event) {
+        event.put(ACExEntityRegistry.GUMWIRM.get(), GumwirmEntity.createAttributes().build());
+    }
 
 }
 

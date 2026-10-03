@@ -17,5 +17,35 @@ public class ACExEntityRegistry {
                     .setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
                     .updateInterval(10).clientTrackingRange(20).build("gamma_nuclear_bomb"));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<SpikesEntity>> SPIKES = DEF_REG.register("spikes", () ->
+            EntityType.Builder.<SpikesEntity>of(SpikesEntity::new, MobCategory.MISC)
+                    .sized(1.2F, 2.0F)
+                    .clientTrackingRange(10).updateInterval(20)
+                    .fireImmune().build("spikes"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ToxicWasteEntity>> TOXIC_WASTE = DEF_REG.register("toxic_waste", () ->
+            EntityType.Builder.<ToxicWasteEntity>of(ToxicWasteEntity::new, MobCategory.MISC)
+                    .sized(0.98F, 0.98F)
+                    .clientTrackingRange(10).updateInterval(1)
+                    .fireImmune().build("toxic_waste"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ToxicBarrelEntity>> TOXIC_BARREL = DEF_REG.register("toxic_barrel", () ->
+            EntityType.Builder.<ToxicBarrelEntity>of(ToxicBarrelEntity::new, MobCategory.MISC)
+                    .sized(0.98F * ToxicBarrelEntity.SCALE, 0.98F * ToxicBarrelEntity.SCALE)
+                    .clientTrackingRange(12).updateInterval(1)
+                    .fireImmune().build("toxic_barrel"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<GumwirmEntity>> GUMWIRM = DEF_REG.register("gumwirm", () ->
+            EntityType.Builder.<GumwirmEntity>of(GumwirmEntity::new, MobCategory.MONSTER)
+                    .sized(3.5F, 2.7F)
+                    .setTrackingRange(14).setShouldReceiveVelocityUpdates(true).setUpdateInterval(1)
+                    .fireImmune().build("gumwirm"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<GumwirmSegmentEntity>> GUMWIRM_SEGMENT = DEF_REG.register("gumwirm_segment", () ->
+            EntityType.Builder.<GumwirmSegmentEntity>of(GumwirmSegmentEntity::new, MobCategory.MISC)
+                    .sized(0.2F, 0.2F)
+                    .setTrackingRange(14).setUpdateInterval(1).setShouldReceiveVelocityUpdates(true)
+                    .fireImmune().build("gumwirm_segment"));
+
 }
 

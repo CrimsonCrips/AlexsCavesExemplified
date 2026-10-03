@@ -1,6 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc.projector;
 
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 
 import com.github.alexmodguy.alexscaves.client.render.blockentity.HologramProjectorBlockRenderer;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.HologramProjectorBlockEntity;
@@ -22,31 +22,27 @@ public abstract class ACExHologramProjectorRenderMixin<T extends HologramProject
 
     @ModifyExpressionValue(method = "renderAt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;getBbWidth()F"))
     private static float alexsMobsInteraction$renderAt1(float original, @Local HologramProjectorBlockEntity projectorBlockEntity) {
-        ACExBaseInterface accesor = (ACExBaseInterface)projectorBlockEntity;
-
         if(AlexsCavesExemplified.COMMON_CONFIG.SCALABLE_HOLOGRAM_ENABLED.get()){
-            return original + ((float) accesor.getProjectionScale() / 2);
+            return original + ((float) projectorBlockEntity.getData(ACExAttachments.PROJECTION_SCALE) / 2);
         }
         return original;
     }
 
     @ModifyVariable(method = "renderAt", at = @At(value = "STORE"),ordinal = 5,remap = false)
     private static float alexsMobsInteraction$renderAt2(float value, @Local HologramProjectorBlockEntity projectorBlockEntity) {
-        ACExBaseInterface accesor = (ACExBaseInterface)projectorBlockEntity;
-        return value + ((float) accesor.getProjectionScale() / 2);
+        return value + ((float) projectorBlockEntity.getData(ACExAttachments.PROJECTION_SCALE) / 2);
     }
 
     @Inject(method = "renderAt", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;scale(FFF)V"))
     private static void alexsMobsInteraction$renderAt3(HologramProjectorBlockEntity projectorBlockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource bufferIn, CallbackInfo ci) {
-        ACExBaseInterface accesor = (ACExBaseInterface)projectorBlockEntity;
-        int scale =  accesor.getProjectionScale();
+        int scale = projectorBlockEntity.getData(ACExAttachments.PROJECTION_SCALE);
         poseStack.scale(scale, (scale), scale);
         poseStack.translate(0,-((scale - 1) * 0.5) ,0);
     }
 
     @Override
     public boolean shouldRender(T pBlockEntity, Vec3 pCameraPos) {
-        ACExBaseInterface accesor = (ACExBaseInterface)pBlockEntity;
-        return Vec3.atCenterOf(pBlockEntity.getBlockPos()).closerThan(pCameraPos, 128 * (accesor.getProjectionScale() > 0 ? accesor.getProjectionScale() : 1));
+        int scale = pBlockEntity.getData(ACExAttachments.PROJECTION_SCALE);
+        return Vec3.atCenterOf(pBlockEntity.getBlockPos()).closerThan(pCameraPos, 128 * (scale > 0 ? scale : 1));
     }
 }

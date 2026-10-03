@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.client.layer;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 
 import com.github.alexmodguy.alexscaves.client.model.NotorModel;
@@ -27,7 +28,7 @@ public class SelfDestructLayer extends RenderLayer<NotorEntity, NotorModel> {
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, NotorEntity pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         int destructTime = pLivingEntity.getData(ACExAttachments.SELF_DESTRUCT_TIME);
-        if ((destructTime / 5) % 2 == 0 && destructTime > 0){
+        if ((destructTime / ACExUtils.seconds(0.25F)) % 2 == 0 && destructTime > 0){
             NotorModel entitymodel = this.getParentModel();
             entitymodel.prepareMobModel(pLivingEntity, pLimbSwing, pLimbSwingAmount, pPartialTick);
             this.getParentModel().copyPropertiesTo(entitymodel);

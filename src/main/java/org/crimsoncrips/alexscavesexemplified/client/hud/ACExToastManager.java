@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.client.hud;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -20,7 +21,7 @@ public class ACExToastManager {
 
     public static final ResourceLocation DEFAULT_SPRITE = ResourceLocation.fromNamespaceAndPath("alexscavesexemplified", "toast/title_box");
 
-    private static final long ANIMATION_TIME_MS = 600L;
+    private static final long ANIMATION_TIME_MS = ACExUtils.secondsInMillis(0.6F);
     private static final int GAP = 0;
     private static final int TOP_MARGIN = 8;
     private static final int LEFT_MARGIN = 8;

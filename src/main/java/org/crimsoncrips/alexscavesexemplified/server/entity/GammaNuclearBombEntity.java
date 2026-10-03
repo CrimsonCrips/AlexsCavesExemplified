@@ -34,7 +34,7 @@ import java.util.stream.Stream;
 
 public class GammaNuclearBombEntity extends NuclearBombEntity {
 
-    public static final int MAX_TIME = 300;
+    public static final int MAX_TIME = ACExUtils.seconds(15.0F);
     private boolean spawnedExplosion = false;
 
     public GammaNuclearBombEntity(EntityType<?> entityType, Level level) {
@@ -54,7 +54,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
         if (this.onGround()) {
             this.setDeltaMovement(this.getDeltaMovement().multiply(0.7D, -0.7, 0.7D));
         }
-        if((tickCount + this.getId()) % 10 == 0 && level() instanceof ServerLevel serverLevel){
+        if((tickCount + this.getId()) % ACExUtils.seconds(0.5F) == 0 && level() instanceof ServerLevel serverLevel){
             getNearbySirens(serverLevel, (int) (256 * 1.5)).forEach(this::activateSiren);
         }
         int i = this.getTime() + 1;
@@ -67,7 +67,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
         } else {
             this.setTime(i);
             this.updateInWaterStateAndDoFluidPushing();
-            if (this.level().isClientSide && MAX_TIME - i > 10 && random.nextFloat() < 0.3F && this.onGround()) {
+            if (this.level().isClientSide && MAX_TIME - i > ACExUtils.seconds(0.5F) && random.nextFloat() < 0.3F && this.onGround()) {
                 Vec3 center = this.getEyePosition();
                 level().addParticle(ACExParticleRegistry.GAMMA_PROTON.get(), center.x, center.y, center.z, center.x, center.y, center.z);
             }

@@ -1,6 +1,16 @@
 package org.crimsoncrips.alexscavesexemplified.server.events;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExArmedUnderzealot;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExSubmarineRemote;
+import net.neoforged.neoforge.network.PacketDistributor;
+import org.crimsoncrips.alexscavesexemplified.networking.ACExRadiantConsumePacket;
+import net.neoforged.neoforge.event.level.BlockDropsEvent;
+import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.Unit;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExDataComponents;
 import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExSugarStaffAbilities;
 import com.github.alexmodguy.alexscaves.server.block.*;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.NuclearSirenBlockEntity;
 import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
@@ -91,11 +101,18 @@ import static net.minecraft.world.entity.EntityType.*;
 
 public class ACExemplifiedEvents {
 
+    private static final double ARMED_UNDERZEALOT_CHANCE = 0.25D;
+    private static final int IRRADIATED_CROP_TICKS = ACExUtils.seconds(10.0F);
+
     @SubscribeEvent
     public void onEntityFinalizeSpawn(FinalizeSpawnEvent event) {
         final var entity = event.getEntity();
 
         Double chargedChance = AlexsCavesExemplified.COMMON_CONFIG.CHARGED_CAVE_CREEPER_CHANCE.get();
+
+        if (entity instanceof UnderzealotEntity underzealot && AlexsCavesExemplified.COMMON_CONFIG.ARMED_UNDERZEALOT_ENABLED.get() && underzealot.getRandom().nextDouble() < ARMED_UNDERZEALOT_CHANCE) {
+            underzealot.setData(ACExAttachments.ARMED, true);
+        }
         if (entity instanceof GumbeeperEntity gumbeeper){
             if (entity.getRandom().nextDouble() < chargedChance){
                 gumbeeper.setCharged(true);
@@ -109,7 +126,7 @@ public class ACExemplifiedEvents {
 
         if (AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get() && entity.getRandom().nextDouble() < 0.05){
             if (entity instanceof CorrodentEntity || entity instanceof UnderzealotEntity || entity instanceof VesperEntity){
-                entity.addEffect(new MobEffectInstance(ACExEffects.RABIAL, 140000, 0));
+                entity.addEffect(new MobEffectInstance(ACExEffects.RABIAL, ACExUtils.seconds(7000.0F), 0));
             }
         }
 
@@ -136,7 +153,7 @@ public class ACExemplifiedEvents {
 
                     if (!hunger.isInfiniteDuration()) {
                         player.removeEffect(MobEffects.HUNGER);
-                        player.addEffect(new MobEffectInstance(MobEffects.HUNGER, hunger.getDuration() - 60, hunger.getAmplifier()));
+                        player.addEffect(new MobEffectInstance(MobEffects.HUNGER, hunger.getDuration() - ACExUtils.seconds(3.0F), hunger.getAmplifier()));
                     }
                     worldIn.destroyBlock(pos, true,player);
                     player.getFoodData().eat(1, 1);
@@ -147,7 +164,7 @@ public class ACExemplifiedEvents {
                     }
                     ACExUtils.awardAdvancement(player,"gluttony","eat");
                     if (random.nextDouble() < 0.01)
-                        player.addEffect(new MobEffectInstance(ACEffectRegistry.SUGAR_RUSH, 100, 0));
+                        player.addEffect(new MobEffectInstance(ACEffectRegistry.SUGAR_RUSH, ACExUtils.seconds(5.0F), 0));
 
 
                 } else if (player.getFoodData().needsFood()) {
@@ -161,7 +178,7 @@ public class ACExemplifiedEvents {
                     }
                     ACExUtils.awardAdvancement(player,"gluttony","eat");
                     if (random.nextDouble() < 0.01)
-                        player.addEffect(new MobEffectInstance(ACEffectRegistry.SUGAR_RUSH, 100, 0));
+                        player.addEffect(new MobEffectInstance(ACEffectRegistry.SUGAR_RUSH, ACExUtils.seconds(5.0F), 0));
 
                 }
             }
@@ -213,7 +230,7 @@ public class ACExemplifiedEvents {
                 level.addParticle(particle, player.getX(), player.getY() + 1.5, player.getZ(), lookAngle.x * 0.2, lookAngle.y * 0.6, lookAngle.z * 0.2);
 
                 player.getFoodData().setFoodLevel(player.getFoodData().getFoodLevel() + 3);
-                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0,false,false));
+                player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(3.0F), 0,false,false));
                 event.getTarget().discard();
                 player.playSound(SoundEvents.GENERIC_EAT, 1.0F, -2F);
 
@@ -255,7 +272,7 @@ public class ACExemplifiedEvents {
                 itemStack.shrink(1);
             }
 
-            parrot.addEffect(new MobEffectInstance(MobEffects.POISON, 900));
+            parrot.addEffect(new MobEffectInstance(MobEffects.POISON, ACExUtils.seconds(45.0F)));
             parrot.hurt(player.damageSources().playerAttack(player), Float.MAX_VALUE);
             parrot.level().explode(player,parrot.getX(),parrot.getY(),parrot.getZ(),3, Level.ExplosionInteraction.MOB);
         }
@@ -430,7 +447,7 @@ public class ACExemplifiedEvents {
         if (livingEntity instanceof SeaPigEntity seaPigEntity && AlexsCavesExemplified.COMMON_CONFIG.POISONOUS_SKIN_ENABLED.get()) {
             for (LivingEntity entity : seaPigEntity.level().getEntitiesOfClass(LivingEntity.class, seaPigEntity.getBoundingBox().inflate(0.5))) {
                 if (entity != seaPigEntity && entity.getBbHeight() <= 3.5F && !(entity instanceof SeaPigEntity) && level.random.nextDouble() < 0.01) {
-                    entity.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0));
+                    entity.addEffect(new MobEffectInstance(MobEffects.POISON, ACExUtils.seconds(3.0F), 0));
                     ACExUtils.awardAdvancement(entity,"poisonous_skin","touched");
                 }
             }
@@ -481,11 +498,11 @@ public class ACExemplifiedEvents {
 
 
         if (AlexsCavesExemplified.COMMON_CONFIG.GUASLOWPOKE_ENABLED.get() && livingEntity.getType().is(ACExEntityTagGenerator.GUANO_IMMUNITY) && (livingEntity.getInBlockState().is(ACBlockRegistry.GUANO_BLOCK.get()) || livingEntity.getInBlockState().is(ACBlockRegistry.GUANO_LAYER.get()))){
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0));
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(1.5F), 0));
         }
 
         if (AlexsCavesExemplified.COMMON_CONFIG.SOLIDIFIED_ENABLED.get() && livingEntity instanceof WatcherEntity watcherEntity){
-            if (watcherEntity.tickCount > 3000 && watcherEntity.getVehicle() == null && !watcherEntity.isVehicle()){
+            if (watcherEntity.tickCount > ACExUtils.seconds(150.0F) && watcherEntity.getVehicle() == null && !watcherEntity.isVehicle()){
                 BlockPos blockPos = watcherEntity.getOnPos().above();
 
                 for (int i = 0; i < 3; i++){
@@ -521,7 +538,7 @@ public class ACExemplifiedEvents {
 
         if (AlexsCavesExemplified.COMMON_CONFIG.STICKY_SODA_ENABLED.get() && !livingEntity.getType().is(ACTagRegistry.CANDY_MOBS)){
             if(livingEntity.getInBlockState().is(ACBlockRegistry.PURPLE_SODA.get())){
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 90, 0));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(4.5F), 0));
                 ACExUtils.awardAdvancement(livingEntity, "sticky_soda", "stick");
             }
         }
@@ -546,14 +563,14 @@ public class ACExemplifiedEvents {
             MobEffectInstance irradiated = livingEntity.getEffect(ACEffectRegistry.IRRADIATED);
             if (irradiated != null && irradiated.getAmplifier() >= irradiationAmmount - 1) {
                 ACExUtils.awardAdvancement(livingEntity,"deathly_radiation","radiate");
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 60, 0));
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 60, 0));
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, 60, 0));
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 60, 0));
-                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, ACExUtils.seconds(3.0F), 0));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, ACExUtils.seconds(3.0F), 0));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.HUNGER, ACExUtils.seconds(3.0F), 0));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, ACExUtils.seconds(3.0F), 0));
+                livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(3.0F), 0));
 
                 if (ModList.get().isLoaded("alexsmobs")) {
-                    livingEntity.addEffect(new MobEffectInstance(AMCompat.exsanguination(), 60, 0));
+                    livingEntity.addEffect(new MobEffectInstance(AMCompat.exsanguination(), ACExUtils.seconds(3.0F), 0));
                 }
             }
         }
@@ -572,7 +589,7 @@ public class ACExemplifiedEvents {
                 }
                 if (blockState.getValue(GeothermalVentBlock.SMOKE_TYPE) == 3){
                     if(!livingEntity.hasEffect(ACEffectRegistry.IRRADIATED)){
-                        livingEntity.addEffect(new MobEffectInstance(ACEffectRegistry.IRRADIATED, 400, 0));
+                        livingEntity.addEffect(new MobEffectInstance(ACEffectRegistry.IRRADIATED, ACExUtils.seconds(20.0F), 0));
                     }
                 }
             }
@@ -589,14 +606,16 @@ public class ACExemplifiedEvents {
         if (tickingEntity instanceof FrostmintSpearEntity frostmintSpear) {
             if (frostmintSpear.isInFluidType() && AlexsCavesExemplified.COMMON_CONFIG.AMPLIFIED_FROSTMINT_ENABLED.get() && frostmintSpear.isInFluidType(ACFluidRegistry.PURPLE_SODA_FLUID_TYPE.get()) && !level.isClientSide) {
                 FrostmintExplosion explosion = new FrostmintExplosion(level, frostmintSpear, frostmintSpear.getX() + 0.5F, frostmintSpear.getY() + 0.5F, frostmintSpear.getZ() + 0.5F, 4.0F, Explosion.BlockInteraction.DESTROY_WITH_DECAY, false);
+                ACExSugarStaffAbilities.SPEAR_HITTING.set(frostmintSpear.getData(ACExAttachments.STAFF_SPEAR));
                 explosion.explode();
                 explosion.finalizeExplosion(true);
+                ACExSugarStaffAbilities.SPEAR_HITTING.set(false);
                 if (frostmintSpear.getOwner() instanceof Player) {
                     ACAdvancementTriggerRegistry.FROSTMINT_EXPLOSION.get().triggerForEntity(frostmintSpear.getOwner());
                 }
                 frostmintSpear.discard();
             }
-            if (AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get() && frostmintSpear.getPersistentData().getBoolean("FrostRadiant") && frostmintSpear.tickCount > 100){
+            if (AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get() && frostmintSpear.getData(ACExAttachments.FROST_RADIANT) && frostmintSpear.tickCount > ACExUtils.seconds(5.0F)){
                 frostmintSpear.discard();
             }
         }
@@ -614,7 +633,7 @@ public class ACExemplifiedEvents {
                 mob.setNoAi(false);
                 mob.setInvulnerable(false);
                 mob.setSilent(false);
-                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1,false,false));
+                mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(300.0F), 1,false,false));
             }
         }
 
@@ -655,7 +674,7 @@ public class ACExemplifiedEvents {
             int destructTime = notor.getData(ACExAttachments.SELF_DESTRUCT_TIME);
             if (destructTime > 0) {
                 //Thank you Reimnop and ChatGPT for the math, shame im too retarded to know how shit works
-                ACExAttachments.set(notor, ACExAttachments.SELF_DESTRUCT_TIME, destructTime - Math.min((destructTime / 5) + 1, Math.max(1, (int) Math.pow(2, Math.log(200 / destructTime) / Math.log(2)))));
+                ACExAttachments.set(notor, ACExAttachments.SELF_DESTRUCT_TIME, destructTime - Math.min((destructTime / 5) + 1, Math.max(1, (int) Math.pow(2, Math.log(ACExUtils.seconds(10.0F) / destructTime) / Math.log(2)))));
             }
             if (destructTime == 1){
                 ACExUtils.awardAdvancement(notor.getLastHurtByMob(),"self_destruct","explode");
@@ -730,7 +749,7 @@ public class ACExemplifiedEvents {
             boolean respect = (player.getItemBySlot(EquipmentSlot.CHEST).is(ACItemRegistry.CLOAK_OF_DARKNESS.get()) && player.getItemBySlot(EquipmentSlot.HEAD).is(ACItemRegistry.HOOD_OF_DARKNESS.get()));
             for (Mob leashedEntities : level.getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(10))) {
                 boolean lasso = ModList.get().isLoaded("alexsmobs") && AMCompat.isLeashed(leashedEntities,player);
-                if ((leashedEntities.getLeashHolder() == player || lasso)  && leashedEntities instanceof UnderzealotSacrifice && underzealot.getTarget() != player && !leashedEntities.getPersistentData().getBoolean("SacrificeGiven")) {
+                if ((leashedEntities.getLeashHolder() == player || lasso)  && leashedEntities instanceof UnderzealotSacrifice && underzealot.getTarget() != player && !leashedEntities.getData(ACExAttachments.SACRIFICE_GIVEN)) {
                     int tradeDeterminer = 0;
                     if (leashedEntities instanceof GloomothEntity) {
                         tradeDeterminer = 1;
@@ -748,7 +767,7 @@ public class ACExemplifiedEvents {
                     } else {
                         leashedEntities.dropLeash(true,true);
                     }
-                    leashedEntities.getPersistentData().putBoolean("SacrificeGiven", true);
+                    leashedEntities.setData(ACExAttachments.SACRIFICE_GIVEN, true);
                     if (!leashedEntities.level().isClientSide()) {
                         leashedEntities.startRiding(underzealot);
                     }
@@ -780,27 +799,68 @@ public class ACExemplifiedEvents {
     }
 
     @SubscribeEvent
+    public void linkSubmarine(PlayerInteractEvent.EntityInteract event) {
+        ItemStack stack = event.getItemStack();
+        if (event.getTarget() instanceof SubmarineEntity submarine && stack.is(ACItemRegistry.GAME_CONTROLLER.get()) && ACExSubmarineRemote.enabled()) {
+            if (!event.getLevel().isClientSide) {
+                ACExSubmarineRemote.link(stack, submarine);
+                event.getEntity().displayClientMessage(Component.translatable("misc.alexscavesexemplified.submarine_linked"), true);
+                submarine.playSound(SoundEvents.NOTE_BLOCK_BIT.value(), 1.0F, 1.6F);
+            }
+            event.getEntity().swing(event.getHand());
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            event.setCanceled(true);
+        }
+    }
+
+    @SubscribeEvent
+    public void blockDrops(BlockDropsEvent dropsEvent) {
+        BlockState state = dropsEvent.getState();
+        if (!AlexsCavesExemplified.COMMON_CONFIG.IRRADIATED_CROPS_ENABLED.get() || !(state.getBlock() instanceof CropBlock || state.is(BlockTags.CROPS)))
+            return;
+        if (!dropsEvent.getLevel().getBiome(dropsEvent.getPos()).is(ACBiomeRegistry.TOXIC_CAVES))
+            return;
+        for (ItemEntity drop : dropsEvent.getDrops()) {
+            ItemStack stack = drop.getItem();
+            if (stack.has(DataComponents.FOOD)) {
+                stack.set(ACExDataComponents.IRRADIATED, Unit.INSTANCE);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void finishUsingItem(LivingEntityUseItemEvent.Finish useEvent) {
+        if (useEvent.getItem().has(ACExDataComponents.IRRADIATED) && useEvent.getItem().has(DataComponents.FOOD) && !useEvent.getEntity().level().isClientSide) {
+            useEvent.getEntity().addEffect(new MobEffectInstance(ACEffectRegistry.IRRADIATED, IRRADIATED_CROP_TICKS, 0));
+        }
+    }
+
+    @SubscribeEvent
     public void livingIncomingDamage(LivingIncomingDamageEvent incomingDamageEvent) {
         LivingEntity damaged = incomingDamageEvent.getEntity();
         DamageSource source = incomingDamageEvent.getSource();
+
+        if (ACExArmedUnderzealot.armedAttacker(source) != null) {
+            incomingDamageEvent.setAmount(ACExArmedUnderzealot.daggerDamage());
+        }
 
         if (source.getEntity() instanceof LivingEntity && damaged.hasEffect(ACExEffects.SERENED)){
             MobEffectInstance serene = damaged.getEffect(ACExEffects.SERENED);
             if (serene != null) {
                 damaged.removeEffect(serene.getEffect());
-                if (serene.getDuration() > 100) {
-                    damaged.addEffect(new MobEffectInstance(serene.getEffect(), serene.getDuration() - 1000, serene.getAmplifier()));
+                if (serene.getDuration() > ACExUtils.seconds(5.0F)) {
+                    damaged.addEffect(new MobEffectInstance(serene.getEffect(), serene.getDuration() - ACExUtils.seconds(50.0F), serene.getAmplifier()));
                 }
             }
         }
 
         if (damaged instanceof NotorEntity notor && AlexsCavesExemplified.COMMON_CONFIG.SELF_DESTRUCT_ENABLED.get() && notor.getData(ACExAttachments.SELF_DESTRUCT_TIME) <= 0) {
-            ACExAttachments.set(notor, ACExAttachments.SELF_DESTRUCT_TIME, 200);
+            ACExAttachments.set(notor, ACExAttachments.SELF_DESTRUCT_TIME, ACExUtils.seconds(10.0F));
         }
 
         if (damaged instanceof VesperEntity vesper && source.is(DamageTypes.ARROW) && AlexsCavesExemplified.COMMON_CONFIG.VESPER_SHOTDOWN_ENABLED.get()){
             vesper.setHanging(false);
-            vesper.groundedFor = 1000;
+            vesper.groundedFor = ACExUtils.seconds(50.0F);
             ACExUtils.awardAdvancement(source.getEntity(),"shot_down","shot");
         }
     }
@@ -810,6 +870,21 @@ public class ACExemplifiedEvents {
         Player player = event.getEntity();
         Level level = event.getLevel();
         InteractionHand hand = event.getHand();
+
+        if (event.getItemStack().is(ACItemRegistry.RADIANT_ESSENCE.get()) && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_CONSUMPTION_ENABLED.get()) {
+            if (!level.isClientSide) {
+                if (!player.isCreative()) {
+                    event.getItemStack().shrink(1);
+                }
+                player.setData(ACExAttachments.RADIANT_METER, player.getData(ACExAttachments.RADIANT_METER) + 1);
+                level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.AMETHYST_BLOCK_RESONATE, SoundSource.PLAYERS, 1.0F, 1.2F);
+                PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, new ACExRadiantConsumePacket(player.getId()));
+            }
+            player.swing(hand);
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            event.setCanceled(true);
+            return;
+        }
 
 
         if(AlexsCavesExemplified.COMMON_CONFIG.IRRADIATION_WASHOFF_ENABLED.get() && ModList.get().isLoaded("supplementaries")){
@@ -867,9 +942,14 @@ public class ACExemplifiedEvents {
         Entity damager = livingDamageEvent.getSource().getEntity();
         LivingEntity damaged = livingDamageEvent.getEntity();
 
+        UnderzealotEntity armedUnderzealot = ACExArmedUnderzealot.armedAttacker(livingDamageEvent.getSource());
+        if (armedUnderzealot != null && damaged.isAlive()) {
+            ACExArmedUnderzealot.summonBlade(armedUnderzealot, damaged);
+        }
+
 
         if(AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get() && damager instanceof LivingEntity living && living.hasEffect(ACExEffects.RABIAL) && damaged.getType().is(ACExEntityTagGenerator.CAN_RABIES) && !damaged.hasEffect(MobEffects.DAMAGE_RESISTANCE)){
-            damaged.addEffect(new MobEffectInstance(ACExEffects.RABIAL, 72000, 0));
+            damaged.addEffect(new MobEffectInstance(ACExEffects.RABIAL, ACExUtils.seconds(3600.0F), 0));
             ACExUtils.awardAdvancement(damager,"rabial_spread","spread");
         }
 

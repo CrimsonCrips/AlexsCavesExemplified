@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.entity.item.SpinningPeppermintEntity;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
@@ -8,12 +9,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.Pose;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
+import com.github.alexmodguy.alexscaves.server.entity.util.ShakesScreen;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.Shadow;
 
 
 @Mixin(SpinningPeppermintEntity.class)
-public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
+public abstract class ACExSpinningPeppermintEntityMixin extends Entity implements ShakesScreen {
 
     @Shadow public abstract boolean isStraight();
 
@@ -63,7 +69,35 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
         super(pEntityType, pLevel);
     }
 
+    @Unique
+    private static final float GIANT_SHAKE_AMOUNT = 1.0F;
+    @Unique
+    private static final double GIANT_SHAKE_DISTANCE = 24.0D;
+
+    @Override
+    public float getScreenShakeAmount(float partialTicks) {
+        return this.hasData(ACExAttachments.SHAKE_OWNER) ? GIANT_SHAKE_AMOUNT : 0.0F;
+    }
+
+    @Override
+    public boolean canFeelShake(Entity player) {
+        return this.hasData(ACExAttachments.SHAKE_OWNER) && player.getId() != this.getData(ACExAttachments.SHAKE_OWNER) && player.onGround();
+    }
+
+    @Override
+    public double getShakeDistance() {
+        return GIANT_SHAKE_DISTANCE;
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pose) {
+        return super.getDimensions(pose).scale(this.getData(ACExAttachments.PEPPERMINT_SCALE));
+    }
+
     public void tick() {
+        if (Math.abs(this.getBbWidth() - this.getType().getWidth() * this.getData(ACExAttachments.PEPPERMINT_SCALE)) > 0.01F) {
+            this.refreshDimensions();
+        }
         super.tick();
         if (this.despawnsIn == -1) {
             this.despawnsIn = this.getLifespan();
@@ -94,18 +128,17 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
             this.setRot(this.getYRot(), this.getXRot());
             Entity owner = this.getOwner();
 
-            if (owner instanceof Player player && this.getPersistentData().getBoolean("PepperRadiant") && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()){
+            if ((owner instanceof Player || this.getData(ACExAttachments.PEPPER_LOCK)) && this.getData(ACExAttachments.PEPPER_RADIANT) && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()){
                 Entity seeking = this.getSeekingEntityId() == -1 ? null : this.level().getEntity(this.getSeekingEntityId());
-                Vec3 playerPos = player.position().add(0.0F, (player.getBbHeight() * 0.45F), 0.0F);
 
                 if (seeking != null) {
                     Vec3 targetPos = seeking.position().add(0.0F, (seeking.getBbHeight() * 0.45F), 0.0F);
                     this.setSpinAroundPosition(targetPos);
-                    if (this.tickCount == 50){
+                    if (this.tickCount == ACExUtils.seconds(2.5F) && !this.getData(ACExAttachments.PEPPER_LOCK)){
                         this.setSpinRadius(getSpinRadius() / 3);
                     }
-                } else {
-                    this.setSpinAroundPosition(playerPos);
+                } else if (owner != null) {
+                    this.setSpinAroundPosition(owner.position().add(0.0F, (owner.getBbHeight() * 0.45F), 0.0F));
                 }
 
             } else {
@@ -140,7 +173,12 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
 
         }
 
-        if (owner != null && this.getPersistentData().getBoolean("PepperRadiant") && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()) {
+        if (this.getData(ACExAttachments.PEPPER_CHIPPER)) {
+            this.hurtEntities();
+            return;
+        }
+
+        if (owner != null && this.getData(ACExAttachments.PEPPER_RADIANT) && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()) {
             if (this.isStraight()) {
                 if (despawnsIn > 150) {
                     this.setYRot(180 + this.owner.getYHeadRot());
@@ -163,7 +201,7 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
                         if (!this.isNoGravity()) {
                             this.setDeltaMovement(this.getDeltaMovement().scale(0.9F).add(0.0D, -0.08D, 0.0D));
                         }
-                        if (this.verticalCollision) {
+                        if (this.verticalCollision && !this.getData(ACExAttachments.PEPPER_MASSIVE)) {
                             this.setDeltaMovement(this.getDeltaMovement().add(0, 0.9F, 0).multiply(0.4D, 1.0D, 0.4D));
                         }
                         this.move(MoverType.SELF, getDeltaMovement());
@@ -190,7 +228,7 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
                     if (!this.isNoGravity()) {
                         this.setDeltaMovement(this.getDeltaMovement().scale(0.9F).add(0.0D, -0.08D, 0.0D));
                     }
-                    if (this.verticalCollision) {
+                    if (this.verticalCollision && !this.getData(ACExAttachments.PEPPER_MASSIVE)) {
                         this.setDeltaMovement(this.getDeltaMovement().add(0, 0.9F, 0).multiply(0.4D, 1.0D, 0.4D));
                     }
                     this.move(MoverType.SELF, getDeltaMovement());
@@ -210,7 +248,7 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
             }
         }
 
-        if (!this.getPersistentData().contains("PepperRadiant") || this.tickCount > 50){
+        if (!this.getData(ACExAttachments.PEPPER_LOCK) && (!this.hasData(ACExAttachments.PEPPER_RADIANT) || this.tickCount > ACExUtils.seconds(2.5F))){
             this.hurtEntities();
         }
 

@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.entity.item.GuanoEntity;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -19,7 +20,7 @@ public class ACExGuanoProjectileMixin {
     @Inject(method = "onHitEntity", at = @At("HEAD"))
     private void getMaxLoadTime(EntityHitResult hitResult, CallbackInfo ci) {
         if (hitResult.getEntity() instanceof LivingEntity living && AlexsCavesExemplified.COMMON_CONFIG.GUASLOWPOKE_ENABLED.get() && living.getType().is(ACExEntityTagGenerator.GUANO_IMMUNITY)){
-            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0));
+            living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(5.0F), 0));
         }
     }
 

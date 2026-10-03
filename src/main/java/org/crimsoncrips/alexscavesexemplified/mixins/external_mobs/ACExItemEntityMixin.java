@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.external_mobs;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.fluid.ACFluidRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.util.FrostmintExplosion;
@@ -112,7 +113,7 @@ public abstract class ACExItemEntityMixin extends Entity {
             if (level.getBlockState(this.blockPosition()).is(Blocks.WATER_CAULDRON) && item.is(ACExItemTagGenerator.GELATINABLE) && level.getBlockState(this.blockPosition().below()).is(ACExBlockTagGenerator.GELATIN_FIRE)) {
                 for (ItemEntity itemEntity : this.level().getEntitiesOfClass(ItemEntity.class, this.getBoundingBox().inflate(0.2))) {
                     ItemStack nearBone = itemEntity.getItem();
-                    if (nearBone.getItem() instanceof DyeItem && timeToCook >= 50) {
+                    if (nearBone.getItem() instanceof DyeItem && timeToCook >= ACExUtils.seconds(2.5F)) {
                         ItemStack gelatinColor = switch (checkDye(nearBone)) {
                             case 2 -> ACItemRegistry.GELATIN_PINK.get().asItem().getDefaultInstance();
                             case 3 -> ACItemRegistry.GELATIN_GREEN.get().asItem().getDefaultInstance();
@@ -175,7 +176,7 @@ public abstract class ACExItemEntityMixin extends Entity {
     }
 
     public boolean fireImmune() {
-        return super.fireImmune() || this.getPersistentData().getBoolean("DraggedProtection");
+        return super.fireImmune() || this.getData(ACExAttachments.DRAGGED_PROTECTION);
     }
 
     public int checkDye(ItemStack possibleDye){

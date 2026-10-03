@@ -67,7 +67,7 @@ public abstract class ACExPlayerMixin extends LivingEntity {
             }
             if (pFood.is(ACItemRegistry.HOT_CHOCOLATE_BOTTLE.get())) {
                 this.setTicksFrozen(Math.min(this.getTicksRequiredToFreeze(), getTicksFrozen() - 100));
-                this.setRemainingFireTicks(60);
+                this.setRemainingFireTicks(ACExUtils.seconds(3.0F));
             }
         }
 
@@ -76,7 +76,7 @@ public abstract class ACExPlayerMixin extends LivingEntity {
         }
 
         if (pFood.is(ACItemRegistry.SERENE_SALAD.get()) && AlexsCavesExemplified.COMMON_CONFIG.SERENED_ENABLED.get()){
-            this.addEffect(new MobEffectInstance(ACExEffects.SERENED, 1200, 0));
+            this.addEffect(new MobEffectInstance(ACExEffects.SERENED, ACExUtils.seconds(60.0F), 0));
             ACExUtils.awardAdvancement(this,"serened","serened");
         }
     }

@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.compat;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import org.crimsoncrips.alexscavesexemplified.server.goals.ACExFlyToTrap;
 import com.github.alexthe666.alexsmobs.effect.AMEffectRegistry;
 import com.github.alexthe666.alexsmobs.entity.*;
@@ -18,18 +19,29 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
 public class AMCompat {
+    public static Entity multipartHead(Entity entity) {
+        Entity current = entity;
+        for (int i = 0; i < 256; i++) {
+            Entity parent = current instanceof EntityAnacondaPart part ? part.getParent() : current instanceof EntityBoneSerpentPart part ? part.getParent() : current instanceof EntityVoidWormPart part ? part.getParent() : null;
+            if (parent == null || parent == current)
+                return current;
+            current = parent;
+        }
+        return current;
+    }
+
     public static void amberReset(LivingEntity entity) {
         if (entity instanceof EntityCockroach roach && roach.isNoAi()) {
             roach.setNoAi(false);
             roach.setInvulnerable(false);
             roach.setSilent(false);
-            roach.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1, false, false));
+            roach.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(300.0F), 1, false, false));
         }
         if (entity instanceof EntityFly fly && fly.isNoAi()) {
             fly.setNoAi(false);
             fly.setInvulnerable(false);
             fly.setSilent(false);
-            fly.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1, false, false));
+            fly.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(300.0F), 1, false, false));
         }
     }
     public static void vineLassoTo(LivingEntity lassoer,LivingEntity lassoed) {

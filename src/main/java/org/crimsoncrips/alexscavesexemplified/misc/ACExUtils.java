@@ -47,6 +47,14 @@ import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.get
 import static com.github.alexmodguy.alexscaves.server.entity.util.MagnetUtil.setEntityMagneticDelta;
 
 public class ACExUtils {
+    public static int seconds(float seconds) {
+        return Math.round(seconds * 20.0F);
+    }
+
+    public static long secondsInMillis(float seconds) {
+        return Math.round(seconds * 1000.0D);
+    }
+
     public static void sendToast(Player player, Component message) {
         sendToast(player, message, ACExToastPacket.DISPLAY_TIME_MS);
     }
@@ -59,7 +67,7 @@ public class ACExUtils {
 
     public static void dropMagneticItem(Player player, ItemStack item){
         ItemEntity itementity = new ItemEntity(player.level(), player.getX(), player.getEyeY(), player.getZ(), item);
-        itementity.setPickUpDelay(60);
+        itementity.setPickUpDelay(seconds(3.0F));
         itementity.setDeltaMovement(Vec3.ZERO);
         player.level().addFreshEntity(itementity);
         setEntityMagneticDelta(itementity,getEntityMagneticDelta(player));
@@ -229,4 +237,41 @@ public class ACExUtils {
         poseStack.mulPose(new Quaternionf(new AxisAngle4f(value, 0.0F, 0.0F, 1.0F)));
     }
 
+
+    public static boolean hasRadiantCharge(Player player) {
+        return getRadiantCharges(player) > 0;
+    }
+
+    public static int getRadiantCharges(Player player) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.RADIANT_CONSUMPTION_ENABLED.get()) {
+            return player.getData(ACExAttachments.RADIANT_METER);
+        }
+        ItemStack offhand = player.getOffhandItem();
+        return offhand.is(ACItemRegistry.RADIANT_ESSENCE.get()) ? offhand.getCount() : 0;
+    }
+
+    public static void refundRadiantCharge(Player player, int amount) {
+        if (amount <= 0)
+            return;
+        if (AlexsCavesExemplified.COMMON_CONFIG.RADIANT_CONSUMPTION_ENABLED.get()) {
+            player.setData(ACExAttachments.RADIANT_METER, player.getData(ACExAttachments.RADIANT_METER) + amount);
+        } else {
+            ItemStack refund = new ItemStack(ACItemRegistry.RADIANT_ESSENCE.get(), amount);
+            if (!player.getInventory().add(refund)) {
+                player.drop(refund, false);
+            }
+        }
+    }
+
+    public static void useRadiantCharge(Player player) {
+        useRadiantCharges(player, 1);
+    }
+
+    public static void useRadiantCharges(Player player, int amount) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.RADIANT_CONSUMPTION_ENABLED.get()) {
+            player.setData(ACExAttachments.RADIANT_METER, Math.max(0, player.getData(ACExAttachments.RADIANT_METER) - amount));
+        } else {
+            player.getOffhandItem().shrink(amount);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified;
 
 
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExDataComponents;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
@@ -20,9 +21,11 @@ import org.crimsoncrips.alexscavesexemplified.client.ACExSoundRegistry;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACExDatagen;
 import org.crimsoncrips.alexscavesexemplified.loot.ACExLootModifiers;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExScheduler;
 import org.crimsoncrips.alexscavesexemplified.networking.ACExPacketRegistration;
 import org.crimsoncrips.alexscavesexemplified.server.ACExAddTargetsConfig;
 import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
+import org.crimsoncrips.alexscavesexemplified.server.ACExCommands;
 import org.crimsoncrips.alexscavesexemplified.server.ACExServerConfig;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron.ACExCauldronInteraction;
@@ -33,6 +36,7 @@ import org.crimsoncrips.alexscavesexemplified.server.events.ACEAddTargets;
 import org.crimsoncrips.alexscavesexemplified.server.events.ACExModEvents;
 import org.crimsoncrips.alexscavesexemplified.server.events.ACExemplifiedEvents;
 import org.crimsoncrips.alexscavesexemplified.server.item.ACExItemRegistry;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExSugarStaffAbilities;
 
 import java.util.Locale;
 import java.util.function.Supplier;
@@ -75,10 +79,18 @@ public class AlexsCavesExemplified {
         NeoForge.EVENT_BUS.register(new ACExemplifiedEvents());
         NeoForge.EVENT_BUS.register(new ACEAddTargets());
         NeoForge.EVENT_BUS.register(new ACEAddGoals());
+        NeoForge.EVENT_BUS.addListener(ACExSugarStaffAbilities::tickSweetRelease);
+        NeoForge.EVENT_BUS.addListener(ACExSugarStaffAbilities::removeStaleScripted);
+        NeoForge.EVENT_BUS.addListener(ACExSugarStaffAbilities::anchorHex);
+        NeoForge.EVENT_BUS.addListener(ACExSugarStaffAbilities::cancelSpearKnockback);
+        NeoForge.EVENT_BUS.addListener(ACExCommands::register);
+        NeoForge.EVENT_BUS.addListener(ACExScheduler::tick);
+        NeoForge.EVENT_BUS.addListener(ACExScheduler::clear);
         ACExAttachments.DEF_REG.register(modEventBus);
         ACExParticleRegistry.DEF_REG.register(modEventBus);
         ACExBlockRegistry.DEF_REG.register(modEventBus);
         ACExItemRegistry.DEF_REG.register(modEventBus);
+        ACExDataComponents.DEF_REG.register(modEventBus);
         PROXY.init(modEventBus, modContainer);
         ACExEffects.EFFECT_REGISTER.register(modEventBus);
         ACExSoundRegistry.DEF_REG.register(modEventBus);

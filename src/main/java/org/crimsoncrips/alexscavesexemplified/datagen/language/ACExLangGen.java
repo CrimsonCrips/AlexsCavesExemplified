@@ -31,8 +31,66 @@ public class ACExLangGen extends ACExLangProvider {
 		this.addEffect("rabial","Rabial Infection","Deathly Nervous Disease");
 		this.addEffect("sugar_crash","Sugar Crash","Sugar Crashed");
 		this.addEffect("serened","Serened","Serene");
+		this.addEffect("transmutation","Transmutation","Turns small creatures into candy");
+		this.add("item.minecraft.potion.effect.transmutation", "Potion of Transmutation");
+		this.add("item.minecraft.splash_potion.effect.transmutation", "Splash Potion of Transmutation");
+		this.add("item.minecraft.lingering_potion.effect.transmutation", "Lingering Potion of Transmutation");
+		this.add("item.minecraft.tipped_arrow.effect.transmutation", "Arrow of Transmutation");
+		this.addMisc("irradiated_crop", "Irradiated");
+		this.addMisc("sugar_staff_wheel", "Sugar Staff");
+		this.addMisc("sugar_staff_base_peppermints", "Peppermints");
+		this.addMisc("sugar_staff_base_hex", "Hex");
+		this.addMisc("sugar_staff_requires_charges", "Requires %s radiant charges");
+		this.addMisc("sugar_staff_peppernami", "Peppernami");
+		this.addMisc("sugar_staff_radiant_shield", "Radiant Shield");
+		this.addMisc("sugar_staff_frost_barrage", "Frost Barrage");
+		this.addMisc("sugar_staff_pepper_crush", "Pepper Crush");
+		this.addMisc("sugar_staff_hailstorm", "Hailstorm");
+		this.addMisc("sugar_staff_line_of_gum", "Line Of Gum");
+		this.addMisc("sugar_staff_gummy_swarm", "Gummy Swarm");
+		this.addMisc("sugar_staff_sweet_release", "Sweet Release");
+		this.addMisc("wheel_editor_title", "Sugar Staff Wheel Layout");
+		this.addMisc("wheel_editor_hint", "Drag to reorder - Right-click to hide - Click a hidden ability to add it");
+		this.addMisc("wheel_editor_hidden", "Hidden Abilities");
+		this.addMisc("wheel_editor_empty", "Drag abilities here");
+		this.addMisc("wheel_editor_reset", "Reset");
+		this.addMisc("wheel_editor_open", "Edit Layout");
+		this.addMisc("wheel_editor_cost", "Costs %s radiant charges");
+		this.addMisc("max_sugar_staff", "Sugar Staff enchanted with every enchantment at max level");
+		this.addMisc("radiant_charges_set", "Set %s's radiant charges to %s");
+		this.addMisc("sweet_release_started", "Started Sweet Release on %s");
+		this.addMisc("sweet_release_started_multiple", "Started Sweet Release on %s entities");
+		this.addMisc("sweet_release_failed", "No valid targets for Sweet Release");
+		this.addMisc("resistant_warden", "Summoned a Warden with infinite Resistance XI");
+		this.addMisc("radiant_charges_set_multiple", "Set the radiant charges of %s players to %s");
+		this.addMisc("sugar_staff_no_room", "No room to summon");
+		this.addMisc("sugar_staff_no_charge", "No radiant charges");
+		this.addMisc("sugar_staff_no_target", "No target in sight");
+		this.addMisc("sugar_staff_cooldown", "Recharging");
+		this.addMisc("gamma_wheel", "Gamma Tremorzilla");
+		this.addMisc("gamma_waste_spit", "Waste Spit");
+		this.addMisc("gamma_spike_laser", "Spike Laser");
+		this.addMisc("gamma_toxic_barrel", "Toxic Barrel");
+		this.addMisc("gamma_nuke_beam", "Nuke Beam");
+		this.addMisc("gamma_spike_storm", "Spike Storm");
+		this.addMisc("gamma_controlled_laser", "Controlled Laser");
+		this.addMisc("gamma_busy", "Tremorzilla is busy");
+		this.addMisc("gamma_not_charged", "Beam not charged");
+		this.addMisc("sugar_staff_requires_punting", "Requires Peppermint Punting");
+		this.addMisc("sugar_staff_requires_max", "Requires every Sugar Staff enchantment at max level");
+		this.add("config.jade.plugin_alexscavesexemplified.gamma_name", "Gamma Nuclear Bomb Name");
+		this.addMisc("linked_submarine", "Linked to a submarine");
+		this.addMisc("submarine_linked", "Controller linked to the submarine");
+		this.addMisc("submarine_remote_start", "Driving the submarine, press %s to return");
+		this.addMisc("submarine_remote_out_of_range", "The linked submarine is out of range");
 
 		this.addEntityType(ACExEntityRegistry.GAMMA_NUCLEAR_BOMB,"Gamma Nuclear Bomb");
+		this.addEntityType(ACExEntityRegistry.GUMWIRM,"Gumwirm");
+		this.addEntityType(ACExEntityRegistry.GUMWIRM_SEGMENT,"Gumwirm Segment");
+		this.addEntityType(ACExEntityRegistry.SPIKES,"Spikes");
+		this.addEntityType(ACExEntityRegistry.TOXIC_WASTE,"Toxic Waste");
+		this.addEntityType(ACExEntityRegistry.TOXIC_BARREL,"Toxic Barrel");
+		this.add("entity.alexscavesexemplified.gamma_tremorzilla", "Gamma Tremorzilla");
 
 		this.addDeathMessage("rabial_end","%s died to Rabies");
 		this.addDeathMessage("sugar_crash","%s died from a sugar overdose");
@@ -65,6 +123,8 @@ public class ACExLangGen extends ACExLangProvider {
 		this.addLoreBlock(ACExBlockRegistry.GAMMA_NUCLEAR_BOMB.getId().toLanguageKey(), "The Embodiment of Desolation.");
 
 		this.addItem(ACExItemRegistry.ICE_CREAM_CONE, "Ice Cream Cone");
+		this.addItem(ACExItemRegistry.GUMWIRM_SPAWN_EGG, "Gumwirm Spawn Egg");
+		this.addItem(ACExItemRegistry.GAMMA_TREMORZILLA_SPAWN_EGG, "Gamma Tremorzilla Spawn Egg");
 
 
 		this.addEnchantmentDesc("magneticism","Magneticism", "Boosts Magnetic Caves related tools");

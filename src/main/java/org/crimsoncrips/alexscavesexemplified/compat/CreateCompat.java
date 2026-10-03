@@ -26,16 +26,17 @@ public class CreateCompat {
                     BlockState blockState = level.getBlockState(icePos);
                     if (blockState.getFluidState().getFluidType().equals(AllFluids.CHOCOLATE.getType())) {
                         level.setBlock(icePos, ACBlockRegistry.BLOCK_OF_CHOCOLATE.get().defaultBlockState(), 3);
-                        level.scheduleTick(icePos, blockState.getBlock(), 2);
+                        level.scheduleTick(icePos, blockState.getBlock(), ACExUtils.seconds(0.1F));
                         frostmintSpear.discard();
                         explode(level,frostmintSpear);
+                        ACExUtils.awardAdvancement(frostmintSpear.getOwner(),"frostmint_freeze","freeze");
                     } else if (blockState.getFluidState().getFluidType().equals(AllFluids.HONEY.getType())) {
                         level.setBlock(icePos, Blocks.HONEY_BLOCK.defaultBlockState(), 3);
-                        level.scheduleTick(icePos, blockState.getBlock(), 2);
+                        level.scheduleTick(icePos, blockState.getBlock(), ACExUtils.seconds(0.1F));
                         frostmintSpear.discard();
                         explode(level,frostmintSpear);
+                        ACExUtils.awardAdvancement(frostmintSpear.getOwner(),"frostmint_freeze","freeze");
                     }
-                    ACExUtils.awardAdvancement(frostmintSpear.getOwner(),"frostmint_freeze","freeze");
                 }
             }
         }

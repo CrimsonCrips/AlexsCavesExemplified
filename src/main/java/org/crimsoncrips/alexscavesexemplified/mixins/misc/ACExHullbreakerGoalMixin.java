@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.entity.ai.HullbreakerInspectMobGoal;
 import com.github.alexmodguy.alexscaves.server.entity.item.SubmarineEntity;
 import com.github.alexmodguy.alexscaves.server.entity.living.HullbreakerEntity;
@@ -104,7 +105,7 @@ public abstract class ACExHullbreakerGoalMixin extends Goal {
     @Override
     public boolean canUse() {
         LivingEntity target = this.entity.getTarget();
-        long worldTime = this.entity.level().getGameTime() % 10L;
+        long worldTime = this.entity.level().getGameTime() % ACExUtils.seconds(0.5F);
         if (this.entity.getRandom().nextInt(60) == 0 || worldTime == 0L || target != null && target.isAlive()) {
             AABB aabb = this.entity.getBoundingBox().inflate((double)80.0F);
             List<LivingEntity> list = this.entity.level().getEntitiesOfClass(LivingEntity.class, aabb, NEW_TARGETTING);

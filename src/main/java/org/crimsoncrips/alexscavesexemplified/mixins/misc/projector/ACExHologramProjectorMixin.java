@@ -1,6 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc.projector;
 
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 
 import com.github.alexmodguy.alexscaves.server.block.HologramProjectorBlock;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.HologramProjectorBlockEntity;
@@ -36,15 +36,15 @@ public abstract class ACExHologramProjectorMixin extends BaseEntityBlock {
     private void alexsCavesExemplified$useWithoutItem(BlockState state, Level worldIn, BlockPos pos, Player player, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
         if (worldIn.getBlockEntity(pos) instanceof HologramProjectorBlockEntity projectorBlockEntity && AlexsCavesExemplified.COMMON_CONFIG.SCALABLE_HOLOGRAM_ENABLED.get() && !player.isShiftKeyDown()) {
             ItemStack heldItem = player.getMainHandItem();
-            ACExBaseInterface accesor = (ACExBaseInterface)projectorBlockEntity;
+            int scale = projectorBlockEntity.getData(ACExAttachments.PROJECTION_SCALE);
             if (heldItem.is(ACItemRegistry.SCARLET_NEODYMIUM_INGOT.get())) {
                 worldIn.playSound((Player) null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);
-                accesor.setProjectionScale(accesor.getProjectionScale() + 1);
+                projectorBlockEntity.setData(ACExAttachments.PROJECTION_SCALE, scale + 1);
                 ACExUtils.awardAdvancement(player,"resizing","resize");
             }
-            if (heldItem.is(ACItemRegistry.AZURE_NEODYMIUM_INGOT.get()) && ((ACExBaseInterface) projectorBlockEntity).getProjectionScale() > 1) {
+            if (heldItem.is(ACItemRegistry.AZURE_NEODYMIUM_INGOT.get()) && scale > 1) {
                 worldIn.playSound((Player) null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);
-                accesor.setProjectionScale(accesor.getProjectionScale() - 1);
+                projectorBlockEntity.setData(ACExAttachments.PROJECTION_SCALE, scale - 1);
                 ACExUtils.awardAdvancement(player,"resizing","resize");
             }
         }

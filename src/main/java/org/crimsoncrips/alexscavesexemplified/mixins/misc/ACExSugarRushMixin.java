@@ -32,7 +32,7 @@ public class ACExSugarRushMixin extends MobEffect {
     private void alexsCavesExemplified$applyEffectTick(LivingEntity entity, int amplifier, CallbackInfoReturnable<Boolean> cir) {
         if (lastDuration <= 2 && AlexsCavesExemplified.COMMON_CONFIG.SUGAR_CRASH_ENABLED.get() && (entity.getRandom().nextDouble() < 0.3 || amplifier >= 2)) {
             int sugarcrashLevel = amplifier + 1;
-            entity.addEffect(new MobEffectInstance(ACExEffects.SUGAR_CRASH, 400, amplifier));
+            entity.addEffect(new MobEffectInstance(ACExEffects.SUGAR_CRASH, ACExUtils.seconds(20.0F), amplifier));
             entity.hurt(ACExDamageTypes.getDamageSource(entity.level(), ACExDamageTypes.SUGAR_CRASH), sugarcrashLevel * 2);
 
             if (sugarcrashLevel > 3){

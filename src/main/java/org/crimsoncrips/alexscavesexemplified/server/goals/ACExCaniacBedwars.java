@@ -5,6 +5,7 @@
 
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.entity.living.CaniacEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
@@ -25,7 +26,7 @@ public class ACExCaniacBedwars extends MoveToBlockGoal {
     }
 
     protected int nextStartTick(PathfinderMob mob) {
-        return reducedTickDelay(200 + this.caniac.getRandom().nextInt(500));
+        return reducedTickDelay(ACExUtils.seconds(10.0F) + this.caniac.getRandom().nextInt(ACExUtils.seconds(25.0F)));
     }
 
     public double acceptedDistance() {

@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.enchantment.ACEnchantmentHelper;
 import com.github.alexmodguy.alexscaves.server.entity.item.DarkArrowEntity;
 import com.github.alexmodguy.alexscaves.server.item.DreadbowItem;
@@ -36,7 +37,7 @@ public abstract class ACExDreadbowItemMixin extends ProjectileWeaponItem {
 
             darkArrowEntity.setShadowArrowDamage((float) (darkArrowEntity.getShadowArrowDamage() * (power > 0 ? power : 1)));
             if (punch > 0) {
-                darkArrowEntity.getPersistentData().putInt("alexscavesexemplified:knockback", punch);
+                darkArrowEntity.setData(ACExAttachments.DARK_ARROW_KNOCKBACK, punch);
             }
             if (flaming) {
                 darkArrowEntity.igniteForSeconds(100);
@@ -51,7 +52,7 @@ public abstract class ACExDreadbowItemMixin extends ProjectileWeaponItem {
             boolean flaming = ACEnchantmentHelper.getEnchantmentLevelFromStack(Enchantments.FLAME, itemStack) == 1;
 
             if (punch > 0) {
-                darkArrowEntity.getPersistentData().putInt("alexscavesexemplified:knockback", punch);
+                darkArrowEntity.setData(ACExAttachments.DARK_ARROW_KNOCKBACK, punch);
             }
             if (flaming) {
                 darkArrowEntity.igniteForSeconds(100);

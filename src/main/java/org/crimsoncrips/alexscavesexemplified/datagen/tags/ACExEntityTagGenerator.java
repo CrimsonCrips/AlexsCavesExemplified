@@ -23,6 +23,7 @@ public class ACExEntityTagGenerator extends EntityTypeTagsProvider {
 	public static final TagKey<EntityType<?>> LICOWITCH_HATE = create(AlexsCavesExemplified.prefix("licowitch_hate"));
 	public static final TagKey<EntityType<?>> GUANO_IMMUNITY = create(AlexsCavesExemplified.prefix("guano_immunity"));
 	public static final TagKey<EntityType<?>> CRUSH_IMMUNITY = create(AlexsCavesExemplified.prefix("crush_immunity"));
+	public static final TagKey<EntityType<?>> TRANSMUTABLE = create(AlexsCavesExemplified.prefix("transmutable"));
 
 
 	public ACExEntityTagGenerator(PackOutput output, CompletableFuture<HolderLookup.Provider> provider, @Nullable ExistingFileHelper helper) {
@@ -38,6 +39,74 @@ public class ACExEntityTagGenerator extends EntityTypeTagsProvider {
 				ACEntityRegistry.FORSAKEN.get(),
 				ACEntityRegistry.WATCHER.get(),
 				ACEntityRegistry.VESPER.get()
+		);
+
+		tag(TRANSMUTABLE).add(
+				EntityType.ALLAY,
+				EntityType.ARMADILLO,
+				EntityType.AXOLOTL,
+				EntityType.BAT,
+				EntityType.BEE,
+				EntityType.BLAZE,
+				EntityType.BREEZE,
+				EntityType.CAT,
+				EntityType.CAVE_SPIDER,
+				EntityType.CHICKEN,
+				EntityType.COD,
+				EntityType.COW,
+				EntityType.CREEPER,
+				EntityType.DOLPHIN,
+				EntityType.DONKEY,
+				EntityType.DROWNED,
+				EntityType.ENDERMITE,
+				EntityType.EVOKER,
+				EntityType.FOX,
+				EntityType.FROG,
+				EntityType.GLOW_SQUID,
+				EntityType.GOAT,
+				EntityType.GUARDIAN,
+				EntityType.HOGLIN,
+				EntityType.HORSE,
+				EntityType.HUSK,
+				EntityType.ILLUSIONER,
+				EntityType.LLAMA,
+				EntityType.MOOSHROOM,
+				EntityType.MULE,
+				EntityType.OCELOT,
+				EntityType.PANDA,
+				EntityType.PARROT,
+				EntityType.PHANTOM,
+				EntityType.PIG,
+				EntityType.PIGLIN,
+				EntityType.PIGLIN_BRUTE,
+				EntityType.PILLAGER,
+				EntityType.POLAR_BEAR,
+				EntityType.PUFFERFISH,
+				EntityType.RABBIT,
+				EntityType.SALMON,
+				EntityType.SHEEP,
+				EntityType.SHULKER,
+				EntityType.SILVERFISH,
+				EntityType.SKELETON_HORSE,
+				EntityType.SNOW_GOLEM,
+				EntityType.SPIDER,
+				EntityType.SQUID,
+				EntityType.STRIDER,
+				EntityType.TADPOLE,
+				EntityType.TRADER_LLAMA,
+				EntityType.TROPICAL_FISH,
+				EntityType.TURTLE,
+				EntityType.VEX,
+				EntityType.VILLAGER,
+				EntityType.VINDICATOR,
+				EntityType.WANDERING_TRADER,
+				EntityType.WITCH,
+				EntityType.WOLF,
+				EntityType.ZOGLIN,
+				EntityType.ZOMBIE,
+				EntityType.ZOMBIE_HORSE,
+				EntityType.ZOMBIE_VILLAGER,
+				EntityType.ZOMBIFIED_PIGLIN
 		);
 
 		tag(CRUSH_IMMUNITY).add(

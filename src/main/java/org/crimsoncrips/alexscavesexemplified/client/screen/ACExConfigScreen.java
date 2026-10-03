@@ -61,11 +61,9 @@ public class ACExConfigScreen extends Screen {
     private static final int ROW_WIDTH = 340;
     private static final int CONTROL_WIDTH = 130;
     private static final int CONTROL_HEIGHT = 18;
-    //Int ranges up to this size get a cycling button instead of a text box
     private static final int CYCLE_RANGE_LIMIT = 8;
 
     private final Screen parent;
-    //Common configs aren't synced, so on someone else's server the local file isn't what's in effect
     private final boolean remote;
     private Tab tab = Tab.CLIENT;
     private ConfigList list;
@@ -109,7 +107,7 @@ public class ACExConfigScreen extends Screen {
                 this.list.addHeader(Component.literal(prettify(entry.getKey())));
                 populate(section, readOnly);
             } else if (entry.getValue() instanceof ModConfigSpec.ConfigValue<?> value) {
-                AbstractWidget control = control(value);
+                AbstractWidget control = value == AlexsCavesExemplified.CLIENT_CONFIG.WHEEL_LAYOUT ? wheelLayoutButton() : control(value);
                 if (control == null)
                     continue;
                 String comment = value.getSpec().getComment();
@@ -125,6 +123,11 @@ public class ACExConfigScreen extends Screen {
                 this.list.addRow(label(value), comment, control);
             }
         }
+    }
+
+    private Button wheelLayoutButton() {
+        return Button.builder(Component.translatable("misc.alexscavesexemplified.wheel_editor_open"), b -> this.minecraft.setScreen(new ACExWheelEditorScreen(this)))
+                .size(CONTROL_WIDTH, CONTROL_HEIGHT).build();
     }
 
     @SuppressWarnings("unchecked")
@@ -164,7 +167,6 @@ public class ACExConfigScreen extends Screen {
         return Component.literal(prettify(name));
     }
 
-    //SOME_CONFIG_NAME -> Some Config Name
     private static String prettify(String name) {
         return Arrays.stream(name.split("[_\\s]+"))
                 .filter(word -> !word.isEmpty())
