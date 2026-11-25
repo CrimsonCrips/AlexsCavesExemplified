@@ -1,6 +1,173 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "alexscavesexemplified:item/ice_cream_cone"
-  }
+    "layer0": "alexscavesexemplified:item/ice_cream/bottom_sweetberry",
+    "layer1": "alexscavesexemplified:item/ice_cream/middle_chocolate",
+    "layer2": "alexscavesexemplified:item/ice_cream/top_vanilla",
+    "particle": "alexscaves:item/vanilla_ice_cream_scoop"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 1
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_vanilla_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 2
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_vanilla_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 3
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_vanilla_sweetberry"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 4
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_chocolate_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 5
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_chocolate_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 6
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_chocolate_sweetberry"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 7
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_sweetberry_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 8
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_sweetberry_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 9
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/vanilla_sweetberry_sweetberry"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 10
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_vanilla_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 11
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_vanilla_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 12
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_vanilla_sweetberry"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 13
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_chocolate_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 14
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_chocolate_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 15
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_chocolate_sweetberry"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 16
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_sweetberry_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 17
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_sweetberry_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 18
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/chocolate_sweetberry_sweetberry"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 19
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_vanilla_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 20
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_vanilla_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 21
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_vanilla_sweetberry"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 22
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_chocolate_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 23
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_chocolate_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 24
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_chocolate_sweetberry"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 25
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_sweetberry_vanilla"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 26
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_sweetberry_chocolate"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:formation": 27
+      },
+      "model": "alexscavesexemplified:item/ice_cream_cone/sweetberry_sweetberry_sweetberry"
+    }
+  ]
 }

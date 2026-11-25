@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -42,11 +43,11 @@ public class ACExFollowNearestGoal<T extends LivingEntity> extends Goal {
         if (target != null && !mob.isLeashed()) {
             mob.getLookControl().setLookAt(target, 10.0F, (float) this.mob.getMaxHeadXRot());
             if (--timeToRecalcPath <= 0) {
-                timeToRecalcPath = adjustedTickDelay(10);
+                timeToRecalcPath = adjustedTickDelay(ACExUtils.seconds(0.5F));
                 navigation.moveTo(target, speedModifier);
             }
         } else {
-            timeToRecalcPath = adjustedTickDelay(10);
+            timeToRecalcPath = adjustedTickDelay(ACExUtils.seconds(0.5F));
             navigation.stop();
         }
     }

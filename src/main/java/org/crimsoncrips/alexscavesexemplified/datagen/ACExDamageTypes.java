@@ -16,7 +16,6 @@ public class ACExDamageTypes {
     public static final ResourceKey<DamageType> RABIAL_END = create("rabial_end");
     public static final ResourceKey<DamageType> STOMACH_DAMAGE = create("stomach_damage");
     public static final ResourceKey<DamageType> SUGAR_CRASH = create("sugar_crash");
-    public static final ResourceKey<DamageType> SWEET_PUNISH = create("sweet_punish");
 
 
     public static ResourceKey<DamageType> create(String name) {
@@ -40,7 +39,6 @@ public class ACExDamageTypes {
         context.register(DEPTH_CRUSH, new DamageType("depth_crush", 0.0F));
         context.register(RABIAL_END, new DamageType("rabial_end", 0.0F));
         context.register(STOMACH_DAMAGE, new DamageType("stomach_damage", 1F));
-        context.register(SWEET_PUNISH, new DamageType("sweet_punish", 0.0F));
         context.register(SUGAR_CRASH, new DamageType("sugar_crash", 0.0F));
     }
 }

@@ -22,6 +22,9 @@ import org.spongepowered.asm.mixin.injection.At;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
+import net.minecraft.world.phys.Vec2;
+import org.crimsoncrips.alexscavesexemplified.client.magnerip.ACExMagneripClient;
+
 @Mixin(AbstractContainerScreen.class)
 public abstract class ACExAbstractContainerScreenMixin<T extends AbstractContainerMenu> extends Screen implements MenuAccess<T> {
 
@@ -33,7 +36,7 @@ public abstract class ACExAbstractContainerScreenMixin<T extends AbstractContain
     }
 
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/screens/inventory/AbstractContainerScreen;renderSlot(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/inventory/Slot;)V"))
-    private void alexsCavesExemplified$renderHotbar1(AbstractContainerScreen instance, GuiGraphics pGuiGraphics, Slot i1, Operation<Void> original, @Local(ordinal = 4) int k) {
+    private void alexsCavesExemplified$renderHotbar1(AbstractContainerScreen instance, GuiGraphics pGuiGraphics, Slot i1, Operation<Void> original, @Local(ordinal = 4) int k, @Local(argsOnly = true) float partialTick) {
         ItemStack itemStack = this.menu.slots.get(k).getItem();
         if(magneticMove(itemStack)){
             int t = minecraft.player.tickCount;
@@ -45,7 +48,15 @@ public abstract class ACExAbstractContainerScreenMixin<T extends AbstractContain
             double y = cos(speed * t) * cos(0.1 * t + (k + itemStack.getBarWidth()) * 4638.361D + 364.35D) + sin(speed * t);
             pGuiGraphics.pose().translate(x, y, 0);
         }
+        Vec2 shake = ACExMagneripClient.getShake(minecraft.player, itemStack, k, partialTick);
+        if (shake != null) {
+            pGuiGraphics.pose().pushPose();
+            pGuiGraphics.pose().translate(shake.x, shake.y, 0);
+        }
         original.call(instance, pGuiGraphics, i1);
+        if (shake != null) {
+            pGuiGraphics.pose().popPose();
+        }
         if(magneticMove(itemStack)){
             pGuiGraphics.pose().popPose();
         }

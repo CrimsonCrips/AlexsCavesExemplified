@@ -4,6 +4,7 @@ import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.living.*;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.item.Item;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
@@ -15,8 +16,17 @@ public class ACExDinosaurEggAttack<T extends DinosaurEntity> extends NearestAtta
     }
 
     @Override
+    public boolean canUse() {
+        return !isTame() && !mob.isBaby() && super.canUse();
+    }
+
+    @Override
     public boolean canContinueToUse() {
-        return target != null && !mob.isAlliedTo(target) && !mob.isBaby();
+        return super.canContinueToUse() && !isTame() && !mob.isBaby() && !mob.isAlliedTo(target);
+    }
+
+    private boolean isTame() {
+        return mob instanceof TamableAnimal tamable && tamable.isTame();
     }
 
     protected void findTarget() {

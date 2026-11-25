@@ -25,10 +25,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class ACExDinosaurEggBlockMixin {
 
 
-    @Shadow @Final private RegistryObject<EntityType> births;
+    @Shadow @Final private RegistryObject<? extends EntityType<?>> births;
 
     @Inject(method = "playerDestroy", at = @At("TAIL"))
-    private void playerBreak(Level worldIn, Player player, BlockPos pos, BlockState state, BlockEntity te, ItemStack stack, CallbackInfo ci) {
+    private void alexsCavesExemplified$playerDestroy(Level worldIn, Player player, BlockPos pos, BlockState state, BlockEntity te, ItemStack stack, CallbackInfo ci) {
         if (!worldIn.isClientSide && AlexsCavesExemplified.COMMON_CONFIG.EGG_ANGER_ENABLED.get()) {
             AABB bb = (new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1)).inflate(10.0F, 10.0F, 10.0F);
             if (player.isCreative())

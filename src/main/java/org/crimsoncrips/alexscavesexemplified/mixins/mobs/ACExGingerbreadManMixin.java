@@ -26,13 +26,6 @@ public abstract class ACExGingerbreadManMixin extends Monster {
         super(pEntityType, pLevel);
     }
 
-    @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void registerGoals(CallbackInfo ci) {
-        GingerbreadManEntity gingerbreadMan = (GingerbreadManEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.HIVE_MIND_ENABLED.get()) gingerbreadMan.targetSelector.addGoal(1, (new ACExHurtByTargetGoal(gingerbreadMan)).setAlertOthers(new Class[0]));
-    }
-
-
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
@@ -41,9 +34,9 @@ public abstract class ACExGingerbreadManMixin extends Monster {
             if (gingerbread.hasBothLegs()) {
                 gingerbread.hurt(player.damageSources().mobAttack(player), 0.5F);
                 gingerbread.setLostLimb(gingerbread.getRandom().nextBoolean(), false, true);
-                player.swing(player.getUsedItemHand());
+                player.swing(hand);
             } else if (gingerbread.getRandom().nextInt(2) == 0) {
-                player.swing(player.getUsedItemHand());
+                player.swing(hand);
                 gingerbread.hurt(player.damageSources().mobAttack(player), 0.5F);
                 gingerbread.setLostLimb(gingerbread.getRandom().nextBoolean(), true, true);
             }

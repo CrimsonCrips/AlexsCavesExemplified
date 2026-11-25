@@ -1,0 +1,59 @@
+{
+  "parent": "alexscavesexemplified:block/preserved_amber/temperate_frog",
+  "overrides": [
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 1
+      },
+      "model": "alexscavesexemplified:block/preserved_amber/warm_frog"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 2
+      },
+      "model": "alexscavesexemplified:block/preserved_amber/cold_frog"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 3
+      },
+      "model": "alexscavesexemplified:block/preserved_amber/primordial_frog"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 4
+      },
+      "model": "alexscavesexemplified:block/preserved_amber/tadpole"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 5
+      },
+      "model": "alexscavesexemplified:block/preserved_amber/cockroach"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 6
+      },
+      "model": "alexscavesexemplified:block/preserved_amber/baby_cockroach"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 7
+      },
+      "model": "alexscavesexemplified:block/preserved_amber/fly"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 8
+      },
+      "model": "alexscavesexemplified:block/preserved_amber/baby_fly"
+    },
+    {
+      "predicate": {
+        "alexscavesexemplified:creature": 9
+      },
+      "model": "alexscaves:block/amber"
+    }
+  ]
+}

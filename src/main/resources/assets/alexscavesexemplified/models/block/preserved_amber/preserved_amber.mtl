@@ -1,0 +1,5 @@
+newmtl mob
+map_Kd #mob
+
+newmtl amber
+map_Kd #amber

@@ -16,10 +16,10 @@ public class ACExSugarCrash extends MobEffect {
     }
 
     public String getDescriptionId() {
-        if (AlexsCavesExemplified.COMMON_CONFIG.SUGAR_CRASH_ENABLED.get()) {
-            return "alexscavesexemplified.potion.sugar_crash";
+        if (AlexsCavesExemplified.COMMON_CONFIG.GLUTTONY_ENABLED.get()) {
+            return "effect.alexscavesexemplified.sugar_crash.title";
         } else {
-            return "alexscavesexemplified.feature_disabled";
+            return "misc.alexscavesexemplified.feature_disabled";
         }
     }
 

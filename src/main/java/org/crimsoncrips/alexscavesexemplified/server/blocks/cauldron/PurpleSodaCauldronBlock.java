@@ -5,6 +5,7 @@
 
 package org.crimsoncrips.alexscavesexemplified.server.blocks.cauldron;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -30,7 +31,7 @@ public class PurpleSodaCauldronBlock extends ACExCauldron {
 
     public void entityInside(BlockState p_153506_, Level p_153507_, BlockPos p_153508_, Entity entity) {
         if (this.isEntityInsideContent(p_153506_, p_153508_, entity) && AlexsCavesExemplified.COMMON_CONFIG.STICKY_SODA_ENABLED.get() && entity instanceof LivingEntity livingEntity) {
-            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 90, 0));
+            livingEntity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ACExUtils.seconds(4.5F), 0));
         }
 
     }

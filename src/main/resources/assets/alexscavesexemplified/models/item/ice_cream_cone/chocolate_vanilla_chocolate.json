@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "alexscavesexemplified:item/ice_cream/bottom_chocolate",
+    "layer1": "alexscavesexemplified:item/ice_cream/middle_vanilla",
+    "layer2": "alexscavesexemplified:item/ice_cream/top_chocolate",
+    "particle": "alexscaves:item/chocolate_ice_cream_scoop"
+  }
+}

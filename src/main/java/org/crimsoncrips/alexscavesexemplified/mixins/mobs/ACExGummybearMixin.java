@@ -1,5 +1,18 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+
+
+
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExCompat;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import org.crimsoncrips.alexscavesexemplified.backport.ACExData;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
+import net.minecraft.nbt.CompoundTag;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.Unique;
 import com.github.alexmodguy.alexscaves.server.entity.living.GummyBearEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.GummyColors;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
@@ -14,10 +27,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.Level;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
@@ -29,6 +42,9 @@ import org.spongepowered.asm.mixin.injection.*;
 @Mixin(GummyBearEntity.class)
 public abstract class ACExGummybearMixin extends Animal {
 
+
+    @Unique
+    private static final int JELLYBEAN_SLEEP_TICKS = ACExUtils.seconds(400.0F);
 
     @Shadow private int sleepFor;
 
@@ -47,7 +63,9 @@ public abstract class ACExGummybearMixin extends Animal {
 
     @Shadow public abstract boolean isBearSleeping();
 
-    private int setVariable;
+    @Shadow public abstract void setStanding(boolean bool);
+
+    @Shadow public abstract void setSitting(boolean bool);
 
     protected ACExGummybearMixin(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -59,7 +77,7 @@ public abstract class ACExGummybearMixin extends Animal {
         if (AlexsCavesExemplified.COMMON_CONFIG.JELLYBEAN_CHANGES_ENABLED.get()){
             Entity entity = damageSource.getEntity();
             if (entity != null && isBearSleeping()) {
-                this.jellybeansToMake = setVariable / 4000 - sleepFor / 4000;
+                this.jellybeansToMake = Math.max(0, (ACExData.get(this, ACExAttachments.GUMMY_SLEEP_TOTAL) - sleepFor) / JELLYBEAN_SLEEP_TICKS);
                 this.sleepFor = 0;
                 ACExUtils.awardAdvancement(entity,"interrupt","interrupt");
 
@@ -71,21 +89,22 @@ public abstract class ACExGummybearMixin extends Animal {
 
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
-        if (isDigestiblePotion(itemstack) && !isDigesting()) {
+        Potion potion = PotionUtils.getPotion(itemstack);
+        if (isDigestiblePotion(itemstack) && !isDigesting() && potion != Potions.EMPTY) {
             if (AlexsCavesExemplified.COMMON_CONFIG.JELLYBEAN_CHANGES_ENABLED.get()) {
                 this.jellybeansToMake = 0;
             }
             this.setDigesting(true);
-            this.digestEffect(PotionUtils.getPotion(itemstack));
+            this.digestEffect(potion);
             this.usePlayerItem(player, hand, itemstack);
             if (!player.getAbilities().instabuild) {
                 player.addItem(new ItemStack(Items.GLASS_BOTTLE));
             }
 
-            this.sleepFor = 24000 * (2 + this.random.nextInt(2));
+            this.sleepFor = ACExUtils.seconds(1200.0F) * (2 + this.random.nextInt(2));
             if (AlexsCavesExemplified.COMMON_CONFIG.JELLYBEAN_CHANGES_ENABLED.get()) {
-                this.setVariable = sleepFor;
-                this.jellybeansToMake = 1 + setVariable / 8000;
+                ACExData.set(this, ACExAttachments.GUMMY_SLEEP_TOTAL, sleepFor);
+                this.jellybeansToMake = 1 + sleepFor / JELLYBEAN_SLEEP_TICKS;
             } else {
                 this.jellybeansToMake = this.random.nextInt(2) + 3;
             }
@@ -93,46 +112,16 @@ public abstract class ACExGummybearMixin extends Animal {
             return InteractionResult.SUCCESS;
         }
 
-        if (isBearSleeping() && AlexsCavesExemplified.COMMON_CONFIG.SWEETISH_SPEEDUP_ENABLED.get() && this.sleepFor > 0){
-            return switch (this.getGummyColor().toString()) {
-                case "GREEN" -> {
-                    if (itemstack.is(ACItemRegistry.SWEETISH_FISH_GREEN.get())) {
-                        boost(player,itemstack);
-                    }
-                    yield InteractionResult.SUCCESS;
-                }
-                case "BLUE" -> {
-                    if (itemstack.is(ACItemRegistry.SWEETISH_FISH_BLUE.get())) {
-                        boost(player,itemstack);
-                    }
-                    yield InteractionResult.SUCCESS;
-                }
-                case "YELLOW" -> {
-                    if (itemstack.is(ACItemRegistry.SWEETISH_FISH_YELLOW.get())) {
-                        boost(player,itemstack);
-                    }
-                    yield InteractionResult.SUCCESS;
-                }
-                case "PINK" -> {
-                    if (itemstack.is(ACItemRegistry.SWEETISH_FISH_PINK.get())) {
-                        boost(player,itemstack);
-                    }
-                    yield InteractionResult.SUCCESS;
-                }
-                default -> {
-                    if (itemstack.is(ACItemRegistry.SWEETISH_FISH_RED.get())) {
-                        boost(player,itemstack);
-                    }
-                    yield InteractionResult.SUCCESS;
-                }
-            };
+        if (isBearSleeping() && AlexsCavesExemplified.COMMON_CONFIG.SWEETISH_SPEEDUP_ENABLED.get() && this.sleepFor > 0 && itemstack.is(matchingSweetishFish())) {
+            boost(player, itemstack);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
 
         return super.mobInteract(player, hand);
     }
 
     @ModifyConstant(method = "tick",constant = @Constant(intValue = 85))
-    private int modifyAmount(int amount) {
+    private int alexsCavesExemplified$tick(int amount) {
         if (AlexsCavesExemplified.COMMON_CONFIG.JELLYBEAN_CHANGES_ENABLED.get()){
             return 100000000;
         } else {
@@ -140,11 +129,31 @@ public abstract class ACExGummybearMixin extends Animal {
         }
     }
 
-    public void boost(Entity entity,ItemStack itemStack){
-        itemStack.shrink(1);
-        ACExUtils.awardAdvancement(entity,"feed_speedup","feed");
-        if (sleepFor >= 1000) {
-            this.sleepFor = sleepFor - 1000;
+    @Inject(method = "readAdditionalSaveData", at = @At("TAIL"))
+    private void alexsCavesExemplified$readAdditionalSaveData(CompoundTag compound, CallbackInfo ci) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.AC_FIXES_ENABLED.get()) {
+            this.setStanding(false);
+            this.setSitting(compound.getBoolean("BearSitting"));
+        }
+    }
+
+    @Unique
+    private Item matchingSweetishFish() {
+        return switch (this.getGummyColor()) {
+            case GREEN -> ACItemRegistry.SWEETISH_FISH_GREEN.get();
+            case BLUE -> ACItemRegistry.SWEETISH_FISH_BLUE.get();
+            case YELLOW -> ACItemRegistry.SWEETISH_FISH_YELLOW.get();
+            case PINK -> ACItemRegistry.SWEETISH_FISH_PINK.get();
+            default -> ACItemRegistry.SWEETISH_FISH_RED.get();
+        };
+    }
+
+    @Unique
+    private void boost(Player player, ItemStack itemStack){
+        ACExCompat.consume(itemStack, 1, player);
+        ACExUtils.awardAdvancement(player,"feed_speedup","feed");
+        if (sleepFor >= ACExUtils.seconds(50.0F)) {
+            this.sleepFor = sleepFor - ACExUtils.seconds(50.0F);
         } else {
             this.sleepFor = 0;
         }

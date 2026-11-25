@@ -31,7 +31,7 @@ public abstract class ACExPrehistoricItemMixin extends BowlFoodItem {
     private void alexsCavesExemplified$interactLivingEntity(ItemStack itemStack, Player player, LivingEntity livingEntity, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir) {
         if (AlexsCavesExemplified.COMMON_CONFIG.SERENED_ENABLED.get() && itemStack.is(ACItemRegistry.SERENE_SALAD.get()) && livingEntity instanceof Mob mob){
             if ((mob instanceof TamableAnimal tamableAnimal && tamableAnimal.isTame()) || (mob.getRandom().nextInt(1) > 1/mob.getBoundingBox().getSize())){
-                mob.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), 1200, 0));
+                mob.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), ACExUtils.seconds(60.0F), 0));
                 ACExUtils.awardAdvancement(player, "serened", "serened");
             }
 

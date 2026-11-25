@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.client.particle;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.client.particle.ProtonParticle;
 import com.github.alexmodguy.alexscaves.client.particle.TremorzillaProtonParticle;
 import com.github.alexmodguy.alexscaves.client.render.entity.TremorzillaRenderer;
@@ -18,7 +19,7 @@ public class GammaTremorProton extends TremorzillaProtonParticle {
 
     protected GammaTremorProton(ClientLevel world, double x, double y, double z, int entityId) {
         super(world, x, y, z, entityId);
-        this.lifetime = 40;
+        this.lifetime = ACExUtils.seconds(2.0F);
         this.orbitSpeed = 20;
 
     }

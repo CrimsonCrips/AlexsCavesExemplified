@@ -27,22 +27,6 @@ public abstract class ACExCaniacMixin extends Monster {
         super(pEntityType, pLevel);
     }
 
-    @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void registerGoals(CallbackInfo ci) {
-        CaniacEntity caniac = (CaniacEntity)(Object)this;
-
-        if (AlexsCavesExemplified.COMMON_CONFIG.CANIAC_MANIAC_ENABLED.get()){
-            caniac.goalSelector.addGoal(2, new NearestAttackableTargetGoal<>(caniac, LivingEntity.class,5000,false,false, Objects::nonNull){
-                @Override
-                public void start() {
-                    caniac.playSound(ACSoundRegistry.CANIAC_HURT.get(), 2.0F, 0.0F);
-                    super.start();
-                }
-            });
-            caniac.goalSelector.addGoal(2, new ACExCaniacBedwars(caniac, 24));
-            caniac.goalSelector.addGoal(2, new ACExCaniacExplode(caniac, 24));
-        }
-    }
 
     @ModifyExpressionValue(method = "hurtMobsFromArmSwing", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/entity/living/CaniacEntity;getType()Lnet/minecraft/world/entity/EntityType;"))
     private EntityType alexsCavesExemplified$hurtMobsFromArmSwing(EntityType original) {

@@ -1,0 +1,15 @@
+{
+  "type": "alexscavesexemplified:chop_pile",
+  "config": {
+    "bone_chance": 0.5,
+    "count": {
+      "type": "minecraft:uniform",
+      "value": {
+        "max_inclusive": 7,
+        "min_inclusive": 4
+      }
+    },
+    "max_bites": 3,
+    "spread": 2
+  }
+}

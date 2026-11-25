@@ -1,0 +1,15 @@
+
+    §lHIDDEN §lBENEATH §lTHE §lSURFACE §lOF §lTHE §lOVERWORLD §rlies anomalies never before seen in this world, where new behavior has been observed inside these caves, possibly giving access to new features, as if the worlds capabilities has been exemplified, use this compendium to learn of the current discoveries
+    Here are the cave biomes with the observed changes
+
+    • {Magnetic Caves|magnetic_caves/chapter.json}
+    • {Primordial Caves|primordial_caves/chapter.json}
+    • {Toxic Caves|toxic_caves/chapter.json}
+    • {Abyssal Chasm|abyssal_chasm/chapter.json}
+    • {Forlorn Hollows|forlorn_hollows/chapter.json}
+    • {Candy Cavity|candy_cavity/chapter.json}
+
+
+
+
+    {General Features|general.json}

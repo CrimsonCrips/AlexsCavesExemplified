@@ -10,14 +10,12 @@ import com.github.alexmodguy.alexscaves.server.entity.item.NuclearExplosionEntit
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import com.google.common.base.Predicates;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.syncher.EntityDataAccessor;
-import net.minecraft.network.syncher.EntityDataSerializers;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.player.Player;
@@ -28,28 +26,19 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.fml.ModList;
-import net.minecraftforge.network.PlayMessages;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
-import org.crimsoncrips.alexscavesexemplified.compat.ACEnrichedCompat;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.Gammafied;
 import org.crimsoncrips.alexscavesexemplified.server.blocks.ACExBlockRegistry;
 
 import java.util.stream.Stream;
 
 public class GammaNuclearBombEntity extends NuclearBombEntity {
 
-    private static final EntityDataAccessor<Integer> TIME = SynchedEntityData.defineId(GammaNuclearBombEntity.class, EntityDataSerializers.INT);
-    public static final int MAX_TIME = 300;
+    public static final int MAX_TIME = ACExUtils.seconds(22.5F);
     private boolean spawnedExplosion = false;
 
     public GammaNuclearBombEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
-    }
-
-    public GammaNuclearBombEntity(PlayMessages.SpawnEntity spawnEntity, Level level) {
-        this((EntityType) ACExEntityRegistry.GAMMA_NUCLEAR_BOMB.get(), level);
-        this.setBoundingBox(this.makeBoundingBox());
     }
 
     public ItemStack getPickResult() {
@@ -65,7 +54,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
         if (this.onGround()) {
             this.setDeltaMovement(this.getDeltaMovement().multiply(0.7D, -0.7, 0.7D));
         }
-        if((tickCount + this.getId()) % 10 == 0 && level() instanceof ServerLevel serverLevel){
+        if((tickCount + this.getId()) % ACExUtils.seconds(0.5F) == 0 && level() instanceof ServerLevel serverLevel){
             getNearbySirens(serverLevel, (int) (256 * 1.5)).forEach(this::activateSiren);
         }
         int i = this.getTime() + 1;
@@ -78,7 +67,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
         } else {
             this.setTime(i);
             this.updateInWaterStateAndDoFluidPushing();
-            if (this.level().isClientSide && MAX_TIME - i > 10 && random.nextFloat() < 0.3F && this.onGround()) {
+            if (this.level().isClientSide && MAX_TIME - i > ACExUtils.seconds(0.5F) && random.nextFloat() < 0.3F && this.onGround()) {
                 Vec3 center = this.getEyePosition();
                 level().addParticle(ACExParticleRegistry.GAMMA_PROTON.get(), center.x, center.y, center.z, center.x, center.y, center.z);
             }
@@ -86,15 +75,11 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
     }
 
     private void explode() {
-        if (ModList.get().isLoaded("alexscavesenriched") && ACEnrichedCompat.config()){
-            ACEnrichedCompat.summonNuclearExplosion2(level(),this);
-        } else {
-            NuclearExplosionEntity vanillaNuke = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(level());
-            vanillaNuke.setSize(AlexsCaves.COMMON_CONFIG.nukeExplosionSizeModifier.get().floatValue() * 1.5F);
-            ((Gammafied) vanillaNuke).setGamma(true);
-            vanillaNuke.copyPosition(this);
-            level().addFreshEntity(vanillaNuke);
-        }
+        NuclearExplosionEntity vanillaNuke = ACEntityRegistry.NUCLEAR_EXPLOSION.get().create(level());
+        vanillaNuke.setSize(AlexsCaves.COMMON_CONFIG.nukeExplosionSizeModifier.get().floatValue() * 1.5F);
+        ACExUtils.setGamma(vanillaNuke, true);
+        vanillaNuke.copyPosition(this);
+        level().addFreshEntity(vanillaNuke);
     }
 
     public InteractionResult interact(Player player, InteractionHand hand) {
@@ -107,7 +92,7 @@ public class GammaNuclearBombEntity extends NuclearBombEntity {
             this.remove(RemovalReason.KILLED);
             this.spawnAtLocation(new ItemStack((ItemLike) ACExBlockRegistry.GAMMA_NUCLEAR_BOMB.get()));
             if (!player.getAbilities().instabuild) {
-                itemStack.hurtAndBreak(1, player, (e) -> e.broadcastBreakEvent(hand));
+                itemStack.hurtAndBreak(1, player, breaker -> breaker.broadcastBreakEvent(hand));
             }
 
             return InteractionResult.SUCCESS;

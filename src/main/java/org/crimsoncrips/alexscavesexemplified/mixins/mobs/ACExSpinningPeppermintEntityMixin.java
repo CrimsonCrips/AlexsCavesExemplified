@@ -1,5 +1,9 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExData;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExSugarStaffAbilities;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.entity.item.SpinningPeppermintEntity;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
@@ -8,12 +12,17 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.Pose;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
+import com.github.alexmodguy.alexscaves.server.entity.util.ShakesScreen;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.Shadow;
 
 
 @Mixin(SpinningPeppermintEntity.class)
-public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
+public abstract class ACExSpinningPeppermintEntityMixin extends Entity implements ShakesScreen {
 
     @Shadow public abstract boolean isStraight();
 
@@ -26,8 +35,6 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
     @Shadow public abstract float getSpinSpeed();
 
     @Shadow public abstract float getSpinRadius();
-
-    @Shadow public abstract float getStartAngle();
 
     @Shadow public abstract void setSpinRadius(float spinRadius);
 
@@ -57,19 +64,54 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
 
     @Shadow public abstract int getLifespan();
 
+    @Shadow public abstract void setStraight(boolean straight);
+
+    @Shadow public abstract float getStartAngle();
+
     @Shadow @javax.annotation.Nullable private LivingEntity owner;
 
     public ACExSpinningPeppermintEntityMixin(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
 
+    @Unique
+    private static final float GIANT_SHAKE_AMOUNT = 1.0F;
+    @Unique
+    private static final double GIANT_SHAKE_DISTANCE = 24.0D;
+
+    @Override
+    public float getScreenShakeAmount(float partialTicks) {
+        return ACExData.has(this, ACExAttachments.SHAKE_OWNER) ? GIANT_SHAKE_AMOUNT : 0.0F;
+    }
+
+    @Override
+    public boolean canFeelShake(Entity player) {
+        return ACExData.has(this, ACExAttachments.SHAKE_OWNER) && player.getId() != ACExData.get(this, ACExAttachments.SHAKE_OWNER) && player.onGround();
+    }
+
+    @Override
+    public double getShakeDistance() {
+        return GIANT_SHAKE_DISTANCE;
+    }
+
+    @Override
+    public EntityDimensions getDimensions(Pose pose) {
+        return super.getDimensions(pose).scale(ACExData.get(this, ACExAttachments.PEPPERMINT_SCALE));
+    }
+
     public void tick() {
+        if (Math.abs(this.getBbWidth() - this.getType().getWidth() * ACExData.get(this, ACExAttachments.PEPPERMINT_SCALE)) > 0.01F) {
+            this.refreshDimensions();
+        }
         super.tick();
         if (this.despawnsIn == -1) {
             this.despawnsIn = this.getLifespan();
         }
 
         this.prevDespawnsIn = this.despawnsIn;
+        if (!this.level().isClientSide && this.despawnsIn <= 1 && ACExData.get(this, ACExAttachments.SHIELD_BURST) && this.getOwner() != null) {
+            this.burstAway(this.getOwner());
+        }
         if (this.despawnsIn > 0) {
             --this.despawnsIn;
         } else if (!this.level().isClientSide) {
@@ -94,18 +136,17 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
             this.setRot(this.getYRot(), this.getXRot());
             Entity owner = this.getOwner();
 
-            if (owner instanceof Player player && this.getPersistentData().getBoolean("PepperRadiant") && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()){
+            if ((owner instanceof Player || ACExData.get(this, ACExAttachments.PEPPER_LOCK)) && ACExData.get(this, ACExAttachments.PEPPER_RADIANT) && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()){
                 Entity seeking = this.getSeekingEntityId() == -1 ? null : this.level().getEntity(this.getSeekingEntityId());
-                Vec3 playerPos = player.position().add(0.0F, (player.getBbHeight() * 0.45F), 0.0F);
 
                 if (seeking != null) {
                     Vec3 targetPos = seeking.position().add(0.0F, (seeking.getBbHeight() * 0.45F), 0.0F);
                     this.setSpinAroundPosition(targetPos);
-                    if (this.tickCount == 50){
+                    if (this.tickCount == ACExUtils.seconds(2.5F) && !ACExData.get(this, ACExAttachments.PEPPER_LOCK)){
                         this.setSpinRadius(getSpinRadius() / 3);
                     }
-                } else {
-                    this.setSpinAroundPosition(playerPos);
+                } else if (owner != null) {
+                    this.setSpinAroundPosition(owner.position().add(0.0F, (owner.getBbHeight() * 0.45F), 0.0F));
                 }
 
             } else {
@@ -140,7 +181,12 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
 
         }
 
-        if (owner != null && this.getPersistentData().getBoolean("PepperRadiant") && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()) {
+        if (ACExData.get(this, ACExAttachments.PEPPER_CHIPPER)) {
+            this.hurtEntities();
+            return;
+        }
+
+        if (owner != null && ACExData.get(this, ACExAttachments.PEPPER_RADIANT) && AlexsCavesExemplified.COMMON_CONFIG.RADIANT_WRATH_ENABLED.get()) {
             if (this.isStraight()) {
                 if (despawnsIn > 150) {
                     this.setYRot(180 + this.owner.getYHeadRot());
@@ -163,7 +209,7 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
                         if (!this.isNoGravity()) {
                             this.setDeltaMovement(this.getDeltaMovement().scale(0.9F).add(0.0D, -0.08D, 0.0D));
                         }
-                        if (this.verticalCollision) {
+                        if (this.verticalCollision && !ACExData.get(this, ACExAttachments.PEPPER_MASSIVE)) {
                             this.setDeltaMovement(this.getDeltaMovement().add(0, 0.9F, 0).multiply(0.4D, 1.0D, 0.4D));
                         }
                         this.move(MoverType.SELF, getDeltaMovement());
@@ -190,7 +236,7 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
                     if (!this.isNoGravity()) {
                         this.setDeltaMovement(this.getDeltaMovement().scale(0.9F).add(0.0D, -0.08D, 0.0D));
                     }
-                    if (this.verticalCollision) {
+                    if (this.verticalCollision && !ACExData.get(this, ACExAttachments.PEPPER_MASSIVE)) {
                         this.setDeltaMovement(this.getDeltaMovement().add(0, 0.9F, 0).multiply(0.4D, 1.0D, 0.4D));
                     }
                     this.move(MoverType.SELF, getDeltaMovement());
@@ -210,10 +256,25 @@ public abstract class ACExSpinningPeppermintEntityMixin extends Entity {
             }
         }
 
-        if (!this.getPersistentData().contains("PepperRadiant") || this.tickCount > 50){
+        if (!ACExData.get(this, ACExAttachments.PEPPER_LOCK) && (!ACExData.has(this, ACExAttachments.PEPPER_RADIANT) || this.tickCount > ACExUtils.seconds(2.5F))){
             this.hurtEntities();
         }
 
     }
 
+
+    @Unique
+    private void burstAway(LivingEntity owner) {
+        Vec3 away = this.position().subtract(owner.position().add(0.0D, owner.getBbHeight() * 0.45F, 0.0D)).multiply(1.0D, 0.0D, 1.0D);
+        if (away.lengthSqr() < 1.0E-4D) {
+            away = new Vec3(0.0D, 0.0D, 1.0D).yRot((float) Math.toRadians(-this.getStartAngle()));
+        }
+        away = away.normalize();
+        ACExData.set(this, ACExAttachments.SHIELD_BURST, false);
+        this.setStraight(true);
+        this.setNoGravity(true);
+        this.setYRot(180.0F + (float) Math.toDegrees(Mth.atan2(-away.x, away.z)));
+        this.setDeltaMovement(away.scale(ACExSugarStaffAbilities.RADIANT_SHIELD_BURST_SPEED));
+        this.despawnsIn = ACExSugarStaffAbilities.RADIANT_SHIELD_BURST_TIME;
+    }
 }

@@ -6,7 +6,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -21,7 +20,6 @@ public class ACExBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 	public static final TagKey<Block> ABYSSAL_ECOSYSTEM = BlockTags.create(AlexsCavesExemplified.prefix("abyssal_ecosystem"));
 	public static final TagKey<Block> BURST_BLOCKS = BlockTags.create(AlexsCavesExemplified.prefix("burst_blocks"));
 	public static final TagKey<Block> CONSUMABLE_BLOCKS = BlockTags.create(AlexsCavesExemplified.prefix("consumable_blocks"));
-	public static final TagKey<Block> GELATIN_FIRE = BlockTags.create(AlexsCavesExemplified.prefix("gelatin_fire"));
 	public static final TagKey<Block> RADIOACTIVE = BlockTags.create(AlexsCavesExemplified.prefix("radioactive"));
 	public static final TagKey<Block> DINO_SCAVENGE = BlockTags.create(AlexsCavesExemplified.prefix("dino_scavenge"));
 	public static final TagKey<Block> REMINEDING_MATERIAL = BlockTags.create(AlexsCavesExemplified.prefix("remineding_material"));
@@ -54,6 +52,8 @@ public class ACExBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 		);
 
 		tag(BlockTags.MINEABLE_WITH_PICKAXE).add(
+				ACExBlockRegistry.PRESERVED_AMBER.get(),
+				ACExBlockRegistry.DARK_MONOLITH.get(),
 				ACExBlockRegistry.METAL_CAULDRON.get(),
 				ACExBlockRegistry.ACID_CAULDRON.get(),
 				ACExBlockRegistry.PURPLE_SODA_CAULDRON.get(),
@@ -154,14 +154,6 @@ public class ACExBlockTagGenerator extends IntrinsicHolderTagsProvider<Block> {
 				ACBlockRegistry.FROSTED_GINGERBREAD_BRICK_SLAB.get(),
 				ACBlockRegistry.FROSTED_GINGERBREAD_BRICK_WALL.get()
 
-		);
-
-		tag(GELATIN_FIRE).add(
-				Blocks.FIRE,
-				Blocks.SOUL_CAMPFIRE,
-				Blocks.SOUL_FIRE,
-				Blocks.CAMPFIRE,
-				Blocks.MAGMA_BLOCK
 		);
 
 		tag(DINO_SCAVENGE).add(

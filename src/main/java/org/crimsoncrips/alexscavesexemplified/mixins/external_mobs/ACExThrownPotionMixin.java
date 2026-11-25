@@ -21,7 +21,7 @@ public abstract class ACExThrownPotionMixin extends ThrowableItemProjectile {
     }
 
     @Inject(method = "applyWater", at = @At("TAIL"))
-    private void applyWater(CallbackInfo ci) {
+    private void alexsCavesExemplified$applyWater(CallbackInfo ci) {
 
         for (LivingEntity livingentity : this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(4.0D, 2.0D, 4.0D))) {
             double d0 = this.distanceToSqr(livingentity);

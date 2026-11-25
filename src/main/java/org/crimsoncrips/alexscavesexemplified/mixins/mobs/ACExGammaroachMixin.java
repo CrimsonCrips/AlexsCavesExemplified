@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs;
 
+import net.minecraft.world.food.FoodProperties;
 import com.github.alexmodguy.alexscaves.server.entity.ai.MobTargetItemGoal;
 import com.github.alexmodguy.alexscaves.server.entity.living.GammaroachEntity;
 import com.github.alexmodguy.alexscaves.server.entity.util.TargetsDroppedItems;
@@ -32,13 +33,6 @@ public abstract class ACExGammaroachMixin extends PathfinderMob implements Targe
         super(pEntityType, pLevel);
     }
 
-    @Inject(method = "registerGoals", at = @At("TAIL"))
-    private void registerGoals(CallbackInfo ci) {
-        GammaroachEntity gammaroach = (GammaroachEntity)(Object)this;
-        if (AlexsCavesExemplified.COMMON_CONFIG.ROACH_FEEDING_ENABLED.get()) {
-            gammaroach.targetSelector.addGoal(1, new MobTargetItemGoal<>(this, false));
-        }
-    }
 
     @Override
     public boolean canTargetItem(ItemStack itemStack) {

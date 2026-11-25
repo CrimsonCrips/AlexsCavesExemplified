@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.DinosaurChopBlock;
 import com.github.alexmodguy.alexscaves.server.block.ThinBoneBlock;
@@ -8,6 +9,9 @@ import com.github.alexmodguy.alexscaves.server.entity.living.VallumraptorEntity;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.effect.MobEffectInstance;
+import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.server.effect.ACExEffects;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
@@ -18,6 +22,8 @@ import net.minecraft.world.phys.Vec3;
 import static com.github.alexmodguy.alexscaves.server.block.DinosaurChopBlock.BITES;
 
 public class ACExVallumraptorEatBlock extends MoveToBlockGoal {
+    private static final double SERENED_CHANCE = 0.45D;
+    private static final double ELDER_SERENED_CHANCE = 0.7D;
     VallumraptorEntity vallumraptor;
 
     public ACExVallumraptorEatBlock(VallumraptorEntity pMob, double pSpeedModifier, int pSearchRange) {
@@ -29,7 +35,7 @@ public class ACExVallumraptorEatBlock extends MoveToBlockGoal {
     public void tick() {
         super.tick();
 
-        for (TremorsaurusEntity tremorsaurus : vallumraptor.level().getEntitiesOfClass(TremorsaurusEntity.class, new AABB(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)))) {
+        for (TremorsaurusEntity tremorsaurus : vallumraptor.level().getEntitiesOfClass(TremorsaurusEntity.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-5, -5, -5)), Vec3.atLowerCornerOf(blockPos.offset(5, 5, 5))))) {
             stop();
         }
         vallumraptor.lookAt(EntityAnchorArgument.Anchor.EYES, Vec3.atCenterOf(blockPos));
@@ -44,12 +50,13 @@ public class ACExVallumraptorEatBlock extends MoveToBlockGoal {
                 if (isValidTarget(vallumraptor.level(), blockPos)) {
                     BlockState blockState = vallumraptor.level().getBlockState(blockPos);
                     vallumraptor.heal(1);
+                    rollSerened(vallumraptor);
                     int i = blockState.getValue(BITES);
                     vallumraptor.level().destroyBlock(blockPos, false);
                     if (i < 3) {
                         vallumraptor.level().setBlock(blockPos, blockState.setValue(BITES, i + 1), 3);
                     } else {
-                        vallumraptor.level().setBlock(blockPos, (ACBlockRegistry.THIN_BONE.get()).defaultBlockState().setValue(ThinBoneBlock.AXIS, blockState.getValue(DinosaurChopBlock.FACING).getAxis()), 4);
+                        vallumraptor.level().setBlock(blockPos, (ACBlockRegistry.THIN_BONE.get()).defaultBlockState().setValue(ThinBoneBlock.AXIS, blockState.getValue(DinosaurChopBlock.FACING).getAxis()), 3);
                     }
                     vallumraptor.playSound(SoundEvents.GENERIC_EAT, 1F, 1F);
                 }
@@ -57,6 +64,12 @@ public class ACExVallumraptorEatBlock extends MoveToBlockGoal {
             }
         }
     }
+    public static void rollSerened(VallumraptorEntity vallumraptor) {
+        if (AlexsCavesExemplified.COMMON_CONFIG.SERENED_ENABLED.get() && vallumraptor.getRandom().nextDouble() < (vallumraptor.isElder() ? ELDER_SERENED_CHANCE : SERENED_CHANCE)) {
+            vallumraptor.addEffect(new MobEffectInstance(ACExEffects.SERENED.get(), ACExUtils.seconds(120.0F), 0));
+        }
+    }
+
     public void stop() {
         super.stop();
         this.blockPos = BlockPos.ZERO;
@@ -73,6 +86,6 @@ public class ACExVallumraptorEatBlock extends MoveToBlockGoal {
 
     @Override
     protected int nextStartTick(PathfinderMob pCreature) {
-        return reducedTickDelay(100 + vallumraptor.getRandom().nextInt(100));
+        return reducedTickDelay(ACExUtils.seconds(5.0F) + vallumraptor.getRandom().nextInt(ACExUtils.seconds(5.0F)));
     }
 }

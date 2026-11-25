@@ -5,6 +5,7 @@
 
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.entity.living.CaniacEntity;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class ACExCaniacBedwars extends MoveToBlockGoal {
     private final CaniacEntity caniac;
@@ -24,8 +26,13 @@ public class ACExCaniacBedwars extends MoveToBlockGoal {
         this.caniac = caniac;
     }
 
+    @Override
+    public boolean canUse() {
+        return ForgeEventFactory.getMobGriefingEvent(this.caniac.level(), this.caniac) && super.canUse();
+    }
+
     protected int nextStartTick(PathfinderMob mob) {
-        return reducedTickDelay(200 + this.caniac.getRandom().nextInt(500));
+        return reducedTickDelay(ACExUtils.seconds(10.0F) + this.caniac.getRandom().nextInt(ACExUtils.seconds(25.0F)));
     }
 
     public double acceptedDistance() {

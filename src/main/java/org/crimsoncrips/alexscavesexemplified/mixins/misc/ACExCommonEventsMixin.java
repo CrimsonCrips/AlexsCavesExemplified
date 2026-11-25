@@ -1,7 +1,10 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExItemData;
 import com.github.alexmodguy.alexscaves.server.event.CommonEvents;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,14 +24,14 @@ public class ACExCommonEventsMixin {
 
 
     @Inject(method = "checkAndDestroyExploitItem", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;shrink(I)V"), cancellable = true)
-    private static void onStep(Player player, EquipmentSlot slot, CallbackInfo ci, @Local ItemStack itemInHand) {
+    private static void alexsCavesExemplified$checkAndDestroyExploitItem(Player player, EquipmentSlot slot, CallbackInfo ci, @Local ItemStack itemInHand) {
         if(AlexsCavesExemplified.COMMON_CONFIG.POWERED_LOCATORS_ENABLED.get()){
             if(!itemInHand.getOrCreateTag().getBoolean("WitherProtection")){
                 if (slot == EquipmentSlot.MAINHAND) {
                     ItemStack offHand = player.getItemBySlot(EquipmentSlot.OFFHAND);
                     if (offHand.is(Items.NETHER_STAR)) {
                         itemInHand.enchant(Enchantments.UNBREAKING, 10);
-                        itemInHand.getOrCreateTag().putBoolean("WitherProtection", true);
+                        ACExItemData.update(itemInHand, tag -> tag.putBoolean("WitherProtection", true));
 
                         player.playSound(SoundEvents.WITHER_DEATH);
                         player.broadcastBreakEvent(EquipmentSlot.OFFHAND);
@@ -42,13 +45,13 @@ public class ACExCommonEventsMixin {
                     ItemStack mainHand = player.getItemBySlot(EquipmentSlot.MAINHAND);
                     if (mainHand.is(Items.NETHER_STAR)) {
                         itemInHand.enchant(Enchantments.UNBREAKING, 10);
-                        itemInHand.getOrCreateTag().putBoolean("WitherProtection", true);
+                        ACExItemData.update(itemInHand, tag -> tag.putBoolean("WitherProtection", true));
 
                         player.playSound(SoundEvents.WITHER_DEATH);
                         player.broadcastBreakEvent(EquipmentSlot.MAINHAND);
                         mainHand.shrink(1);
                         if (!player.level().isClientSide) {
-                            player.displayClientMessage(Component.translatable("item.alexscavesexemplified.locator_protection"), true);
+                            player.displayClientMessage(Component.translatable("misc.alexscavesexemplified.locator_protection"), true);
                         }
                         ci.cancel();
                     }

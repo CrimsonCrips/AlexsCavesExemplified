@@ -1,72 +1,69 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+
+
+
+import net.minecraft.world.item.alchemy.PotionUtils;
+import com.mojang.datafixers.util.Pair;
+import org.crimsoncrips.alexscavesexemplified.backport.ACExItemData;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import com.github.alexmodguy.alexscaves.server.item.SackOfSatingItem;
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.SlotAccess;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACExItemTagGenerator;
+import net.minecraft.world.food.FoodProperties;
+import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 
 @Mixin(SackOfSatingItem.class)
 public abstract class ACExSackOfSatingMixin extends Item {
 
-
-    
-
-
     public ACExSackOfSatingMixin(Properties pProperties) {
         super(pProperties);
     }
 
-    @Inject(method = "overrideOtherStackedOnMe", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/item/SackOfSatingItem;setHunger(Lnet/minecraft/world/item/ItemStack;I)V"))
+    @Unique
+    private static final int JELLYBEAN_HUNGER_COST = 15;
+    @Unique
+    private static final int JELLYBEAN_DURATION_DIVISOR = 10;
+
+    @Inject(method = "overrideOtherStackedOnMe", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/item/SackOfSatingItem;setHunger(Lnet/minecraft/world/item/ItemStack;I)V", shift = At.Shift.AFTER))
     private void alexsCavesExemplified$overrideOtherStackedOnMe(ItemStack sackStack, ItemStack foodStack, Slot slot, ClickAction clickAction, Player player, SlotAccess slotAccess, CallbackInfoReturnable<Boolean> cir) {
-        for (int stackAmount = 0; stackAmount < foodStack.getCount(); stackAmount++){
-            List<Pair<MobEffectInstance, Float>> test = Objects.requireNonNull(foodStack.getFoodProperties(player)).getEffects();
-            if (!test.isEmpty()) {
-                Inventory inv = player.getInventory();
-                Collection<MobEffectInstance> mobEffects = new ArrayList<>();
-                for (int e = 0; e < test.size(); e++) {
-                    MobEffectInstance original = test.get(e).getFirst();
-                    MobEffectInstance adjustedMobEffect = new MobEffectInstance(original.getEffect(), original.getDuration() / 10, original.getAmplifier());
-                    mobEffects.add(adjustedMobEffect);
-                }
-                ItemStack itemStack1 = PotionUtils.setCustomEffects(new ItemStack(ACItemRegistry.JELLY_BEAN.get()), mobEffects);
-                for (int i = 0; i < inv.getContainerSize(); i++) {
-                    ItemStack current = inv.getItem(i);
-                    if ((current.is(ACExItemTagGenerator.GELATIN) && current.getCount() >= 10) || player.isCreative()) {
-                        itemStack1.getTag().putBoolean("Rainbow", true);
-                        if (!player.isCreative()) {
-                            current.shrink(10);
-                        }
-                        if (!player.addItem(itemStack1)) {
-                            player.drop(itemStack1, false);
-                        }
-                        break;
-                    }
-                }
-
-
+        if (player.level().isClientSide || !AlexsCavesExemplified.COMMON_CONFIG.TUNED_SATING_ENABLED.get())
+            return;
+        FoodProperties food = foodStack.getFoodProperties(player);
+        if (food == null || food.getEffects().isEmpty())
+            return;
+        List<MobEffectInstance> effects = new ArrayList<>();
+        for (Pair<MobEffectInstance, Float> possible : food.getEffects()) {
+            MobEffectInstance original = possible.getFirst();
+            effects.add(new MobEffectInstance(original.getEffect(), original.getDuration() / JELLYBEAN_DURATION_DIVISOR, original.getAmplifier()));
+        }
+        int cost = player.isCreative() ? 0 : JELLYBEAN_HUNGER_COST;
+        for (int i = 0; i < foodStack.getCount(); i++) {
+            int hunger = SackOfSatingItem.getHunger(sackStack);
+            if (hunger < cost)
+                break;
+            SackOfSatingItem.setHunger(sackStack, hunger - cost);
+            ItemStack jellybean = new ItemStack(ACItemRegistry.JELLY_BEAN.get());
+            PotionUtils.setCustomEffects(jellybean, effects);
+            ACExItemData.update(jellybean, tag -> tag.putBoolean("Rainbow", true));
+            if (!player.addItem(jellybean)) {
+                player.drop(jellybean, false);
             }
         }
     }
-
-
-
 }

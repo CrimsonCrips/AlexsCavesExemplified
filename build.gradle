@@ -199,6 +199,7 @@ dependencies {
     runtimeOnly fg.deobf("maven.modrinth:debugutils:Tr2n6OzX")
     runtimeOnly fg.deobf("maven.modrinth:cobweb:RdRlnl4S")
     runtimeOnly fg.deobf("maven.modrinth:radiant-gear:2.1.5+1.20.1")
+    compileOnly fg.deobf("maven.modrinth:jade:11.7.1")
     runtimeOnly fg.deobf("maven.modrinth:jade:11.7.1")
     runtimeOnly fg.deobf("maven.modrinth:bookshelf-lib:20.2.13")
     runtimeOnly fg.deobf("maven.modrinth:enchantment-descriptions:H9lpjTvf")

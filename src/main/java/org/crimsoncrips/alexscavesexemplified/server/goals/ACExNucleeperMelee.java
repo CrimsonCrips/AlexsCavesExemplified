@@ -1,9 +1,11 @@
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExData;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.entity.living.NucleeperEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.NucleeperXtra;
 
 import java.util.EnumSet;
 
@@ -17,7 +19,7 @@ public class ACExNucleeperMelee extends Goal {
 
     public boolean canUse() {
         LivingEntity target = nucleeper.getTarget();
-        return target != null && target.isAlive() && !((NucleeperXtra)nucleeper).isDefused();
+        return target != null && target.isAlive() && !ACExData.get(nucleeper, ACExAttachments.DEFUSED);
     }
 
     public void tick() {

@@ -1,0 +1,32 @@
+{
+  "sources": [
+    {
+      "type": "single",
+      "resource": "alexscaves:entity/primordial_frog"
+    },
+    {
+      "type": "single",
+      "resource": "alexsmobs:entity/cockroach"
+    },
+    {
+      "type": "single",
+      "resource": "alexsmobs:entity/fly"
+    },
+    {
+      "type": "single",
+      "resource": "minecraft:entity/frog/cold_frog"
+    },
+    {
+      "type": "single",
+      "resource": "minecraft:entity/frog/temperate_frog"
+    },
+    {
+      "type": "single",
+      "resource": "minecraft:entity/frog/warm_frog"
+    },
+    {
+      "type": "single",
+      "resource": "minecraft:entity/tadpole/tadpole"
+    }
+  ]
+}

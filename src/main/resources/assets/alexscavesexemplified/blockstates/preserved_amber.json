@@ -1,0 +1,139 @@
+{
+  "variants": {
+    "creature=temperate_frog,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/temperate_frog"
+    },
+    "creature=temperate_frog,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/temperate_frog",
+      "y": 90
+    },
+    "creature=temperate_frog,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/temperate_frog",
+      "y": 180
+    },
+    "creature=temperate_frog,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/temperate_frog",
+      "y": 270
+    },
+    "creature=warm_frog,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/warm_frog"
+    },
+    "creature=warm_frog,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/warm_frog",
+      "y": 90
+    },
+    "creature=warm_frog,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/warm_frog",
+      "y": 180
+    },
+    "creature=warm_frog,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/warm_frog",
+      "y": 270
+    },
+    "creature=cold_frog,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/cold_frog"
+    },
+    "creature=cold_frog,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/cold_frog",
+      "y": 90
+    },
+    "creature=cold_frog,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/cold_frog",
+      "y": 180
+    },
+    "creature=cold_frog,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/cold_frog",
+      "y": 270
+    },
+    "creature=primordial_frog,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/primordial_frog"
+    },
+    "creature=primordial_frog,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/primordial_frog",
+      "y": 90
+    },
+    "creature=primordial_frog,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/primordial_frog",
+      "y": 180
+    },
+    "creature=primordial_frog,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/primordial_frog",
+      "y": 270
+    },
+    "creature=tadpole,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/tadpole"
+    },
+    "creature=tadpole,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/tadpole",
+      "y": 90
+    },
+    "creature=tadpole,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/tadpole",
+      "y": 180
+    },
+    "creature=tadpole,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/tadpole",
+      "y": 270
+    },
+    "creature=cockroach,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/cockroach"
+    },
+    "creature=cockroach,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/cockroach",
+      "y": 90
+    },
+    "creature=cockroach,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/cockroach",
+      "y": 180
+    },
+    "creature=cockroach,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/cockroach",
+      "y": 270
+    },
+    "creature=baby_cockroach,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/baby_cockroach"
+    },
+    "creature=baby_cockroach,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/baby_cockroach",
+      "y": 90
+    },
+    "creature=baby_cockroach,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/baby_cockroach",
+      "y": 180
+    },
+    "creature=baby_cockroach,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/baby_cockroach",
+      "y": 270
+    },
+    "creature=fly,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/fly"
+    },
+    "creature=fly,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/fly",
+      "y": 90
+    },
+    "creature=fly,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/fly",
+      "y": 180
+    },
+    "creature=fly,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/fly",
+      "y": 270
+    },
+    "creature=baby_fly,facing=north": {
+      "model": "alexscavesexemplified:block/preserved_amber/baby_fly"
+    },
+    "creature=baby_fly,facing=east": {
+      "model": "alexscavesexemplified:block/preserved_amber/baby_fly",
+      "y": 90
+    },
+    "creature=baby_fly,facing=south": {
+      "model": "alexscavesexemplified:block/preserved_amber/baby_fly",
+      "y": 180
+    },
+    "creature=baby_fly,facing=west": {
+      "model": "alexscavesexemplified:block/preserved_amber/baby_fly",
+      "y": 270
+    }
+  }
+}

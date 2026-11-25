@@ -1,5 +1,7 @@
 package org.crimsoncrips.alexscavesexemplified.server.effect;
 
+
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -7,7 +9,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.datagen.ACExDamageTypes;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 
 public class ACExRabial extends MobEffect {
@@ -25,27 +26,19 @@ public class ACExRabial extends MobEffect {
         if (AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get()) {
             return "effect.alexscavesexemplified.rabial.title";
         } else {
-            return "alexscavesexemplified.feature_disabled";
+            return "misc.alexscavesexemplified.feature_disabled";
         }
     }
 
-    private int lastDuration = -1;
+    public static final float END_DAMAGE = 10.0F;
+    public static final float WATER_DAMAGE = 3.0F;
 
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
-        if (lastDuration <= 1) {
-            int rabialLevel = amplifier + 1;
-            entity.hurt(ACExDamageTypes.getDamageSource(entity.level(), ACExDamageTypes.RABIAL_END), rabialLevel * 10);
+    @Override
+    public void addAttributeModifiers(LivingEntity entity, AttributeMap attributeMap, int amplifier) {
+        super.addAttributeModifiers(entity, attributeMap, amplifier);
+        if (entity instanceof ServerPlayer serverPlayer) {
+            ACExUtils.awardAdvancement(serverPlayer, "rabial", "has_rabies");
         }
-        if (entity instanceof ServerPlayer serverPlayer){
-            ACExUtils.awardAdvancement(serverPlayer,"rabial","has_rabies");
-        }
-
     }
-
-    public boolean isDurationEffectTick(int duration, int amplifier) {
-        lastDuration = duration;
-        return duration > 0;
-    }
-
 
 }

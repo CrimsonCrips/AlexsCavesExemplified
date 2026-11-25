@@ -1,5 +1,11 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.mobs.tesla_bulb;
 
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExRenderCompat;
+import org.spongepowered.asm.mixin.Unique;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExTeslaShock;
+
+import net.minecraft.util.FastColor;
 import com.github.alexmodguy.alexscaves.client.model.TeslaBulbModel;
 import com.github.alexmodguy.alexscaves.client.render.ACRenderTypes;
 import com.github.alexmodguy.alexscaves.client.render.blockentity.TelsaBulbBlockRenderer;
@@ -10,7 +16,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.resources.ResourceLocation;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -20,11 +25,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(TelsaBulbBlockRenderer.class)
 public abstract class ACExTeslaBulbRenderMixin<T extends TeslaBulbBlockEntity> implements BlockEntityRenderer<T> {
 
+    @Unique
     private static final TeslaBulbModel MODEL = new TeslaBulbModel();
+    @Unique
     private static final ResourceLocation TEXTURE = new ResourceLocation("alexscaves", "textures/entity/tesla_bulb.png");
+    @Unique
     private static final ResourceLocation TEXTURE_CHARGE_1 = new ResourceLocation("alexscavesexemplified", "textures/entity/tesla/tesla_charge_1.png");
+    @Unique
     private static final ResourceLocation TEXTURE_CHARGE_2 = new ResourceLocation("alexscavesexemplified", "textures/entity/tesla/tesla_charge_2.png");
+    @Unique
     private static final ResourceLocation TEXTURE_CHARGE_3 = new ResourceLocation("alexscavesexemplified", "textures/entity/tesla/tesla_charge_3.png");
+    @Unique
     private static final ResourceLocation TEXTURE_CHARGE_4 = new ResourceLocation("alexscavesexemplified", "textures/entity/tesla/tesla_charge_4.png");
 
 
@@ -33,8 +44,14 @@ public abstract class ACExTeslaBulbRenderMixin<T extends TeslaBulbBlockEntity> i
         if(AlexsCavesExemplified.COMMON_CONFIG.SHOCKING_THERAPY_ENABLED.get()){
             ci.cancel();
             MODEL.setupAnim(null, 0.0F, teslaBulb.getExplodeProgress(partialTicks), (float)teslaBulb.age + partialTicks, 0.0F, 0.0F);
-            int charge = ((ACExBaseInterface)teslaBulb).getCharge();
-            MODEL.renderToBuffer(poseStack, bufferIn.getBuffer(ACRenderTypes.getTeslaBulb(charge > 25 ? TEXTURE_CHARGE_4 : charge > 20 ? TEXTURE_CHARGE_3 : charge > 15 ? TEXTURE_CHARGE_2 : charge > 10 ? TEXTURE_CHARGE_1 : TEXTURE)), combinedLightIn, combinedOverlayIn, r, g, b, 1.0F);
+            ResourceLocation texture = switch (ACExTeslaShock.glowStage(teslaBulb, teslaBulb.getLevel())) {
+                case 4 -> TEXTURE_CHARGE_4;
+                case 3 -> TEXTURE_CHARGE_3;
+                case 2 -> TEXTURE_CHARGE_2;
+                case 1 -> TEXTURE_CHARGE_1;
+                default -> TEXTURE;
+            };
+            ACExRenderCompat.renderToBuffer(MODEL, poseStack, bufferIn.getBuffer(ACRenderTypes.getTeslaBulb(texture)), combinedLightIn, combinedOverlayIn, ACExRenderCompat.colorFromFloat(1.0F, r, g, b));
             poseStack.popPose();
         }
     }

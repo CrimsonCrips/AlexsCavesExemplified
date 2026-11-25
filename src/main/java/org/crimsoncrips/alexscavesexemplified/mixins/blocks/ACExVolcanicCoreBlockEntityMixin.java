@@ -1,5 +1,9 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.blocks;
 
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExData;
+import org.spongepowered.asm.mixin.Unique;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.VolcanicCoreBlockEntity;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
@@ -37,13 +41,16 @@ public abstract class ACExVolcanicCoreBlockEntityMixin extends BlockEntity{
         super(pType, pPos, pBlockState);
     }
 
+    @Unique
     private static final Predicate<ItemEntity> recharge = item -> item.getItem().is(ACBlockRegistry.ATLATITAN_EGG.get().asItem());
 
 
 
     @Inject(method = "tick", at = @At("HEAD"),remap = false)
-    private static void tick(Level level, BlockPos blockPos, BlockState state, VolcanicCoreBlockEntity entity, CallbackInfo ci) {
+    private static void alexsCavesExemplified$tick(Level level, BlockPos blockPos, BlockState state, VolcanicCoreBlockEntity entity, CallbackInfo ci) {
 
+        if (level.isClientSide)
+            return;
         int bossCooldown = (int) ACExReflectionUtil.getField(entity, "bossSpawnCooldown");
 
 
@@ -56,7 +63,7 @@ public abstract class ACExVolcanicCoreBlockEntityMixin extends BlockEntity{
 
                 double dist = Mth.sqrt((float) item.distanceToSqr(vec3));
                 if (dist < maxDist) {
-                    item.getPersistentData().putBoolean("DraggedProtection", true);
+                    ACExData.set(item, ACExAttachments.DRAGGED_PROTECTION, true);
                     item.setGlowingTag(true);
                     Vec3 sub = vec3.subtract(item.position()).normalize().scale(0.2F);
                     Vec3 delta = item.getDeltaMovement().scale(0.8F);
@@ -73,7 +80,7 @@ public abstract class ACExVolcanicCoreBlockEntityMixin extends BlockEntity{
             }
 
 
-            for (AtlatitanEntity atlatitan : level.getEntitiesOfClass(AtlatitanEntity.class, new AABB(blockPos.offset(-12, -12, -12), blockPos.offset(12, 32, 12)))) {
+            for (AtlatitanEntity atlatitan : level.getEntitiesOfClass(AtlatitanEntity.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-12, -12, -12)), Vec3.atLowerCornerOf(blockPos.offset(12, 32, 12))))) {
                 if (atlatitan.isBaby()){
                     double dist = Mth.sqrt((float) atlatitan.distanceToSqr(vec3));
                     if (dist < maxDist) {

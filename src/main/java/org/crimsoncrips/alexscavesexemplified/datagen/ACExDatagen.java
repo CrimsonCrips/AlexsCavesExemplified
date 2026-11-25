@@ -10,7 +10,6 @@ import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.advancement.ACExAdvancementProvider;
 import org.crimsoncrips.alexscavesexemplified.datagen.language.ACExLangGen;
 import org.crimsoncrips.alexscavesexemplified.datagen.loottables.ACExLootGenerator;
-import org.crimsoncrips.alexscavesexemplified.datagen.patchouli.ACExBookProvider;
 import org.crimsoncrips.alexscavesexemplified.datagen.recipe.ACExRecipeGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.sounds.ACExSoundGenerator;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACExBlockTagGenerator;
@@ -36,7 +35,7 @@ public class ACExDatagen {
         generator.addProvider(event.includeServer(), new ACExAdvancementProvider(output, provider, helper));
         generator.addProvider(event.includeServer(), new ACExLootGenerator(output));
         generator.addProvider(event.includeServer(), new ACExRecipeGenerator(output));
-        generator.addProvider(event.includeServer(), new ACExBookProvider("alexscavesexemplified",provider,output));
+        generator.addProvider(event.includeServer(), new ACExDataMapGenerator(output, provider));
 
         generator.addProvider(event.includeClient(), new ACExLangGen(output));
 

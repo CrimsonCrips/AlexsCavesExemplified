@@ -1,5 +1,9 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExData;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
+import org.crimsoncrips.alexscavesexemplified.backport.ACEnchantmentHelper;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.enchantment.ACEnchantmentRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
@@ -27,7 +31,6 @@ import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.client.particle.ACExParticleRegistry;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MagnetronMagneticism;
 import org.crimsoncrips.alexscavesexemplified.server.enchantment.ACExEnchants;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -40,6 +43,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ACExGauntletItemMixin extends Item {
 
 
+    @Unique
+    private static final int HEART_RIP_COOLDOWN = ACExUtils.seconds(25.0F);
+
     public ACExGauntletItemMixin(Properties pProperties) {
         super(pProperties);
     }
@@ -48,7 +54,7 @@ public abstract class ACExGauntletItemMixin extends Item {
     private boolean alexsCavesExemplified$use(boolean original, @Local Player player, @Local InteractionHand interactionHand) {
         ItemStack itemstack = player.getItemInHand(interactionHand);
         Entity entityLook = ACExUtils.getLookingAtEntity(player);
-        return original || ((entityLook instanceof ItemEntity item && grabableItems(item.getItem(),itemstack)) || (entityLook instanceof MagnetronEntity || entityLook instanceof MagnetronPartEntity) || (entityLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity)) && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && itemstack.getEnchantmentLevel(ACExEnchants.MAGNETICISM.get()) > 0;
+        return original || ((entityLook instanceof ItemEntity item && grabableItems(item.getItem(),itemstack)) || (entityLook instanceof MagnetronEntity || entityLook instanceof MagnetronPartEntity) || (entityLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity)) && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && ACEnchantmentHelper.getEnchantmentLevelFromStack(ACExEnchants.MAGNETICISM, itemstack) > 0;
     }
 
         @Inject(method = "onUseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;getEnchantmentLevel(Lnet/minecraft/world/item/enchantment/Enchantment;)I"))
@@ -67,7 +73,7 @@ public abstract class ACExGauntletItemMixin extends Item {
         }
 
 
-        if (AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && living instanceof Player player && !otherMagneticWeaponsInUse && stack.getEnchantmentLevel(ACExEnchants.MAGNETICISM.get()) > 0 && !grabableItems(otherStack, stack)) {
+        if (!level.isClientSide && AlexsCavesExemplified.COMMON_CONFIG.MAGNETICISM_ENABLED.get() && living instanceof Player player && !otherMagneticWeaponsInUse && ACEnchantmentHelper.getEnchantmentLevelFromStack(ACExEnchants.MAGNETICISM, stack) > 0 && !grabableItems(otherStack, stack)) {
             if (entityLook instanceof MagneticWeaponEntity magneticWeaponEntity && magneticWeaponEntity.getController() instanceof TeletorEntity teletor) {
                 magneticWeaponEntity.setControllerUUID(player.getUUID());
                 teletor.setWeaponUUID(null);
@@ -100,19 +106,18 @@ public abstract class ACExGauntletItemMixin extends Item {
                 Vec3 armViewExtra = player.getViewVector(partialTicks).normalize().scale(0.75F);
                 Vec3 from = player.getPosition(partialTicks).add(offset).add(armViewExtra);
 
-                if (!level.isClientSide && player.getRandom().nextDouble() < 0.15) {
+                if (player.getRandom().nextDouble() < 0.15) {
                     ((ServerLevel) level).sendParticles(ACExParticleRegistry.AZURE_FOCUSED_LIGHTNING.get(), from.x, from.y, from.z, 0, -vec3.x, -vec3.y + 1, -vec3.z, 0.5D);
                 }
-                    MagnetronMagneticism accesor = (MagnetronMagneticism) magnetronEntity;
-                if (accesor.getRippedHeart() <= 100){
-                    accesor.setRippedHeart(accesor.getRippedHeart() + 1);
+                if (ACExData.get(magnetronEntity, ACExAttachments.RIPPED_HEART) <= ACExUtils.HEART_RIP_TICKS){
+                    ACExUtils.ripMagnetronHeart(magnetronEntity, ACExData.get(magnetronEntity, ACExAttachments.RIPPED_HEART) + 1);
                     if(!player.isCreative()){
                         magnetronEntity.setTarget(player);
                     }
                 } else {
                     if (!player.isCreative()){
-                        stack.hurtAndBreak(80,player,livingEntity -> {});
-                        player.getCooldowns().addCooldown(stack.getItem(),500);
+                        stack.hurtAndBreak(80, player, breaker -> breaker.broadcastBreakEvent(player.getUsedItemHand()));
+                        player.getCooldowns().addCooldown(stack.getItem(), HEART_RIP_COOLDOWN);
                     }
                     MagneticWeaponEntity magneticWeapon = (MagneticWeaponEntity)((EntityType)ACEntityRegistry.MAGNETIC_WEAPON.get()).create(level);
                     magnetronEntity.captureDrops();
@@ -132,7 +137,7 @@ public abstract class ACExGauntletItemMixin extends Item {
 
 
     public boolean grabableItems(ItemStack item, ItemStack gauntlet){
-        boolean crystallization = gauntlet.getEnchantmentLevel(ACEnchantmentRegistry.CRYSTALLIZATION.get()) > 0;
+        boolean crystallization = ACEnchantmentHelper.getEnchantmentLevelFromStack(ACEnchantmentRegistry.CRYSTALLIZATION, gauntlet) > 0;
         return item.is(crystallization ? ACTagRegistry.GALENA_GAUNTLET_CRYSTALLIZATION_ITEMS : (ACTagRegistry.MAGNETIC_ITEMS));
     }
 

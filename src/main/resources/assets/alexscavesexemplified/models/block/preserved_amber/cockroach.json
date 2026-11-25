@@ -1,0 +1,11 @@
+{
+  "parent": "minecraft:block/block",
+  "loader": "forge:obj",
+  "model": "alexscavesexemplified:models/block/preserved_amber/cockroach.obj",
+  "render_type": "minecraft:translucent",
+  "textures": {
+    "particle": "alexscaves:block/amber",
+    "amber": "alexscaves:block/amber",
+    "mob": "alexsmobs:entity/cockroach"
+  }
+}

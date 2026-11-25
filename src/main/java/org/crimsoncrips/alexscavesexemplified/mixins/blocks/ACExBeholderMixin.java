@@ -16,12 +16,10 @@ import org.crimsoncrips.alexscavesexemplified.ACExReflectionUtil;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
 
 
 @Mixin(BeholderBlockEntity.class)
@@ -34,26 +32,25 @@ public class ACExBeholderMixin extends BlockEntity {
         super(pType, pPos, pBlockState);
     }
 
-    @Unique
-    private static Player looking;
-
     @Inject(method = "tick", at = @At(value = "INVOKE_ASSIGN", target = "Lcom/github/alexmodguy/alexscaves/server/block/blockentity/BeholderBlockEntity;getUsingEntity()Lnet/minecraft/world/entity/Entity;"), cancellable = true,remap = false)
     private static void alexsCavesExemplified$tick(Level level, BlockPos blockPos, BlockState state, BeholderBlockEntity entity, CallbackInfo ci) {
 
         if (AlexsCavesExemplified.COMMON_CONFIG.BEHOLDENT_STALKING_ENABLED.get()) {
             ci.cancel();
 
-            List<Player> list = level.getEntitiesOfClass(Player.class, new AABB(blockPos.offset(-5, -5, -5), blockPos.offset(5, 5, 5)));
-            if (!list.isEmpty()) {
-                if (list.size() == 1) {
-                    looking = list.get(0);
+            Vec3 center = Vec3.atCenterOf(blockPos);
+            Player looking = null;
+            for (Player player : level.getEntitiesOfClass(Player.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-5, -5, -5)), Vec3.atLowerCornerOf(blockPos.offset(5, 5, 5))))) {
+                if (looking == null || player.distanceToSqr(center) < looking.distanceToSqr(center)) {
+                    looking = player;
                 }
-            } else {
-                looking = null;
             }
             if(entity.getUsingEntity() == null) {
                 if (looking != null) {
+                    Vec3 toEye = looking.getEyePosition().subtract(center);
+                    float pitch = (float) -Math.toDegrees(Math.atan2(toEye.y, toEye.horizontalDistance()));
                     ACExReflectionUtil.setField(entity, "eyeYRot", (float) (Math.atan2((looking.getZ() - (blockPos.getZ() + 0.5)), (looking.getX() - (blockPos.getX() + 0.5))) * 180 / Math.PI) + 270);
+                    ACExReflectionUtil.setField(entity, "eyeXRot", Mth.approach((float) ACExReflectionUtil.getField(entity, "eyeXRot"), pitch, 10F));
                 } else {
                     ACExReflectionUtil.setField(entity, "eyeXRot", Mth.approach((float) ACExReflectionUtil.getField(entity, "eyeXRot"), 0, 10F));
                     ACExReflectionUtil.setField(entity, "eyeYRot", (float) ACExReflectionUtil.getField(entity, "eyeYRot") + 1);

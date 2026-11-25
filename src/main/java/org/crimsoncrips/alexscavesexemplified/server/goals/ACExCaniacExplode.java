@@ -5,6 +5,7 @@
 
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.server.block.NuclearBombBlock;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
 import com.github.alexmodguy.alexscaves.server.entity.item.NuclearBombEntity;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.TntBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
 
 public class ACExCaniacExplode extends MoveToBlockGoal {
     private final CaniacEntity caniac;
@@ -34,8 +36,13 @@ public class ACExCaniacExplode extends MoveToBlockGoal {
         this.caniac = caniac;
     }
 
+    @Override
+    public boolean canUse() {
+        return ForgeEventFactory.getMobGriefingEvent(this.caniac.level(), this.caniac) && super.canUse();
+    }
+
     protected int nextStartTick(PathfinderMob mob) {
-        return reducedTickDelay(1000 + this.caniac.getRandom().nextInt(500));
+        return reducedTickDelay(ACExUtils.seconds(50.0F) + this.caniac.getRandom().nextInt(ACExUtils.seconds(25.0F)));
     }
 
     public double acceptedDistance() {
@@ -56,7 +63,7 @@ public class ACExCaniacExplode extends MoveToBlockGoal {
             level.addFreshEntity(primedtnt);
             level.playSound((Player)null, primedtnt.getX(), primedtnt.getY(), primedtnt.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.gameEvent(caniac, GameEvent.PRIME_FUSE, blockPos);
-            caniac.level().destroyBlock(blockPos,  true);
+            level.removeBlock(blockPos, false);
             stop();
         } else if (this.isReachedTarget() && blockState.getBlock() instanceof NuclearBombBlock) {
             NuclearBombEntity bomb = (NuclearBombEntity)((EntityType) ACEntityRegistry.NUCLEAR_BOMB.get()).create(level);
@@ -64,7 +71,7 @@ public class ACExCaniacExplode extends MoveToBlockGoal {
             level.addFreshEntity(bomb);
             level.playSound((Player)null, bomb.getX(), bomb.getY(), bomb.getZ(), SoundEvents.TNT_PRIMED, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.gameEvent(caniac, GameEvent.PRIME_FUSE, blockPos);
-            caniac.level().destroyBlock(blockPos,  true);
+            level.removeBlock(blockPos, false);
             stop();
         }
 

@@ -5,18 +5,6 @@
     ],
     "subtitle": "subtitles.alexsmobsinteraction.caramel_eat"
   },
-  "pspspsps": {
-    "sounds": [
-      "alexscavesexemplified:entity/pspspsps"
-    ],
-    "subtitle": "subtitles.alexsmobsinteraction.pspspsps"
-  },
-  "sweet_punished": {
-    "sounds": [
-      "alexscavesexemplified:entity/sweet_punished"
-    ],
-    "subtitle": "subtitles.alexsmobsinteraction.sweet_punished"
-  },
   "tesla_exploding": {
     "sounds": [
       "alexscavesexemplified:block/tesla_exploding"

@@ -1,0 +1,11 @@
+{
+  "type": "forge:add_features",
+  "biomes": "alexscaves:primordial_caves",
+  "features": [
+    "alexscavesexemplified:fresh_chop_pile",
+    "alexscavesexemplified:gnawed_chop_pile",
+    "alexscavesexemplified:scavenged_chop_pile",
+    "alexscavesexemplified:bone_pile"
+  ],
+  "step": "vegetal_decoration"
+}

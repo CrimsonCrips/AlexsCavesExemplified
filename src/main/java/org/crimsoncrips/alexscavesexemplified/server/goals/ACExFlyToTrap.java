@@ -1,7 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.server.goals;
 
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
-import com.github.alexmodguy.alexscaves.server.block.PottedFlytrapBlock;
 import com.github.alexthe666.alexsmobs.entity.EntityFly;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
@@ -11,9 +10,13 @@ import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.Vec3;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 
 public class ACExFlyToTrap extends MoveToBlockGoal {
+
+    private static final int SEARCH_INTERVAL = ACExUtils.seconds(2.0F);
 
     EntityFly fly;
     private boolean reachedTarget;
@@ -37,11 +40,11 @@ public class ACExFlyToTrap extends MoveToBlockGoal {
             this.mob.getNavigation().moveTo((double)((float)blockPos.getX()) + 0.5D, (double)blockPos.getY(), (double)((float)blockPos.getZ()) + 0.5D, this.speedModifier);
         }
 
-        if (this.isReachedTarget() && blockState.is(ACBlockRegistry.FLYTRAP.get()) && blockState.getValue(PottedFlytrapBlock.OPEN)) {
+        if (this.isReachedTarget() && blockState.is(ACBlockRegistry.FLYTRAP.get()) && blockState.getValue(flytrapOpen())) {
             fly.playSound(SoundEvents.GENERIC_EAT, 1.0F, 1.0F);
             fly.captureDrops();
             fly.kill();
-            fly.level().setBlock(blockPos, blockState.setValue(PottedFlytrapBlock.OPEN, false), 2);
+            fly.level().setBlock(blockPos, blockState.setValue(flytrapOpen(), false), 2);
         }
 
     }
@@ -53,14 +56,18 @@ public class ACExFlyToTrap extends MoveToBlockGoal {
     @Override
     protected boolean isValidTarget(LevelReader worldIn, BlockPos pos) {
         BlockState blockState = worldIn.getBlockState(pos);
-        return blockState.is(ACBlockRegistry.FLYTRAP.get()) && blockState.getValue(PottedFlytrapBlock.OPEN);
+        return blockState.is(ACBlockRegistry.FLYTRAP.get()) && blockState.getValue(flytrapOpen());
     }
 
     public double acceptedDistance() {
         return 2F;
     }
 
+    private static BooleanProperty flytrapOpen() {
+        return (BooleanProperty) ACBlockRegistry.FLYTRAP.get().getStateDefinition().getProperty("open");
+    }
+
     protected int nextStartTick(PathfinderMob mob) {
-        return reducedTickDelay(1);
+        return reducedTickDelay(SEARCH_INTERVAL + mob.getRandom().nextInt(SEARCH_INTERVAL));
     }
 }

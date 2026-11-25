@@ -1,0 +1,20 @@
+{
+  "blend": { "func": "add", "srcrgb": "one", "dstrgb": "zero" },
+  "vertex": "sobel",
+  "fragment": "alexscavesexemplified:submarine_sonar",
+  "attributes": ["Position"],
+  "samplers": [
+    { "name": "DiffuseSampler" },
+    { "name": "DepthSampler" }
+  ],
+  "uniforms": [
+    { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] },
+    { "name": "InSize", "type": "float", "count": 2, "values": [1.0, 1.0] },
+    { "name": "OutSize", "type": "float", "count": 2, "values": [1.0, 1.0] },
+    { "name": "InvProjMat", "type": "matrix4x4", "count": 16, "values": [1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0] },
+    { "name": "SonarOrigin", "type": "float", "count": 3, "values": [0.0, 0.0, 0.0] },
+    { "name": "SonarRadius", "type": "float", "count": 1, "values": [0.0] },
+    { "name": "SonarRange", "type": "float", "count": 1, "values": [64.0] },
+    { "name": "SonarFade", "type": "float", "count": 1, "values": [0.0] }
+  ]
+}

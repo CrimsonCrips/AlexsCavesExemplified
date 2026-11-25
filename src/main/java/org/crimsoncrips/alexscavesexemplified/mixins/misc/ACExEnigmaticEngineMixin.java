@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
 import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.EnigmaticEngineBlockEntity;
 import com.github.alexmodguy.alexscaves.server.entity.ACEntityRegistry;
@@ -18,7 +19,6 @@ import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.tags.ACExBlockTagGenerator;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.MineGuardianXtra;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -39,7 +39,7 @@ public abstract class ACExEnigmaticEngineMixin extends BlockEntity {
     }
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/block/blockentity/EnigmaticEngineBlockEntity;attemptAssembly()Z"),remap = false)
-    private static void tick(Level level, BlockPos blockPos, BlockState state, EnigmaticEngineBlockEntity entity, CallbackInfo ci) {
+    private static void alexsCavesExemplified$tick(Level level, BlockPos blockPos, BlockState state, EnigmaticEngineBlockEntity entity, CallbackInfo ci) {
         if (AlexsCavesExemplified.COMMON_CONFIG.REMINEDING_ENABLED.get()){
             attemptMineAssembly(entity);
         }
@@ -71,7 +71,7 @@ public abstract class ACExEnigmaticEngineMixin extends BlockEntity {
                 }
             }
             Player owner = null;
-            for (Player player : level.getEntitiesOfClass(Player.class, new AABB(blockPos.offset(-6, -6, -6), blockPos.offset(6, 6, 6)))) {
+            for (Player player : level.getEntitiesOfClass(Player.class, new AABB(Vec3.atLowerCornerOf(blockPos.offset(-6, -6, -6)), Vec3.atLowerCornerOf(blockPos.offset(6, 6, 6))))) {
                 owner = player;
                 break;
             }
@@ -82,7 +82,7 @@ public abstract class ACExEnigmaticEngineMixin extends BlockEntity {
                 mineGuardian.setPos(vec31.x, vec31.y, vec31.z);
                 if (owner != null) {
                     ACExUtils.awardAdvancement(owner,"mine_ownership","own");
-                    ((MineGuardianXtra) mineGuardian).alexsCavesExemplified$setOwner(owner.getUUID().toString());
+                    ACExAttachments.set(mineGuardian, ACExAttachments.MINE_GUARDIAN_OWNER, owner.getUUID().toString());
                 }
                 level.addFreshEntity(mineGuardian);
             }

@@ -1,5 +1,9 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc.projector;
 
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExData;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
+
 import com.github.alexmodguy.alexscaves.server.block.HologramProjectorBlock;
 import com.github.alexmodguy.alexscaves.server.block.blockentity.HologramProjectorBlockEntity;
 import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
@@ -16,8 +20,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
-import org.crimsoncrips.alexscavesexemplified.misc.interfaces.ACExBaseInterface;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -31,26 +36,33 @@ public abstract class ACExHologramProjectorMixin extends BaseEntityBlock {
         super(pProperties);
     }
 
-    @Inject(method = "use", at = @At(value = "TAIL"))
+    @Unique
+    private static final int MAX_SCALE = 10;
+
+    @Inject(method = "use", at = @At(value = "TAIL"), cancellable = true)
     private void alexsCavesExemplified$use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit, CallbackInfoReturnable<InteractionResult> cir) {
-        if (worldIn.getBlockEntity(pos) instanceof HologramProjectorBlockEntity projectorBlockEntity && AlexsCavesExemplified.COMMON_CONFIG.SCALABLE_HOLOGRAM_ENABLED.get() && !player.isShiftKeyDown()) {
-            ItemStack heldItem = player.getItemInHand(handIn);
-            ACExBaseInterface accesor = (ACExBaseInterface)projectorBlockEntity;
-            if (heldItem.is(ACItemRegistry.SCARLET_NEODYMIUM_INGOT.get())) {
-                worldIn.playSound((Player) null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);
-                accesor.setProjectionScale(accesor.getProjectionScale() + 1);
-                ACExUtils.awardAdvancement(player,"resizing","resize");
-            }
-            if (heldItem.is(ACItemRegistry.AZURE_NEODYMIUM_INGOT.get()) && ((ACExBaseInterface) projectorBlockEntity).getProjectionScale() > 1) {
-                worldIn.playSound((Player) null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);
-                accesor.setProjectionScale(accesor.getProjectionScale() - 1);
-                ACExUtils.awardAdvancement(player,"resizing","resize");
-            }
+        if (!(worldIn.getBlockEntity(pos) instanceof HologramProjectorBlockEntity projectorBlockEntity) || !AlexsCavesExemplified.COMMON_CONFIG.SCALABLE_HOLOGRAM_ENABLED.get() || player.isShiftKeyDown())
+            return;
+        ItemStack heldItem = player.getMainHandItem();
+        int scale = Math.max(1, ACExData.get(projectorBlockEntity, ACExAttachments.PROJECTION_SCALE));
+        int newScale = scale;
+        if (heldItem.is(ACItemRegistry.SCARLET_NEODYMIUM_INGOT.get())) {
+            newScale = Math.min(scale + 1, MAX_SCALE);
+        } else if (heldItem.is(ACItemRegistry.AZURE_NEODYMIUM_INGOT.get())) {
+            newScale = Math.max(scale - 1, 1);
+        } else {
+            return;
         }
+        if (!worldIn.isClientSide) {
+            if (newScale != scale) {
+                ACExData.set(projectorBlockEntity, ACExAttachments.PROJECTION_SCALE, newScale);
+                projectorBlockEntity.setChanged();
+                worldIn.playSound(null, pos, ACSoundRegistry.HOLOGRAM_STOP.get(), SoundSource.BLOCKS);
+                ACExUtils.awardAdvancement(player, "resizing", "resize");
+            }
+            player.displayClientMessage(Component.translatable("misc.alexscavesexemplified.hologram_scale", newScale, MAX_SCALE), true);
+        }
+        cir.setReturnValue(InteractionResult.sidedSuccess(worldIn.isClientSide));
     }
-
-
-
-
 
 }

@@ -44,7 +44,7 @@ public class ACExPickupDroppedBarrels<T extends ItemEntity> extends MobTargetIte
             }
             if (brainiac.getAnimation() == BrainiacEntity.ANIMATION_BITE && brainiac.getAnimationTick() >= 8 && brainiac.getAnimationTick() <= 15) {
                 brainiac.setHasBarrel(true);
-                targetEntity.kill();
+                targetEntity.getItem().shrink(1);
                 this.stop();
             }
         }

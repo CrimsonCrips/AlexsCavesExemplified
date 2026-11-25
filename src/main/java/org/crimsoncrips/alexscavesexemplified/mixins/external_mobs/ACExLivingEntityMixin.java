@@ -1,35 +1,30 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.external_mobs;
 
-import com.github.alexmodguy.alexscaves.server.block.ACBlockRegistry;
-import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
-import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
-import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExData;
+import net.minecraft.world.entity.Mob;
+import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.WaterAnimal;
-import net.minecraft.world.entity.animal.frog.Frog;
-import net.minecraft.world.entity.animal.frog.Tadpole;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.fml.ModList;
-import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
+import net.minecraft.world.effect.MobEffectInstance;
 import org.crimsoncrips.alexscavesexemplified.server.effect.ACExEffects;
+import org.spongepowered.asm.mixin.Unique;
+import org.crimsoncrips.alexscavesexemplified.server.entity.GumwirmEntity;
+import org.crimsoncrips.alexscavesexemplified.server.ACExAttachments;
+import org.crimsoncrips.alexscavesexemplified.server.item.ACExSugarStaffAbilities;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import javax.annotation.Nullable;
 
-import static org.crimsoncrips.alexscavesexemplified.compat.AMCompat.amberReset;
 
 @Mixin(LivingEntity.class)
 public abstract class ACExLivingEntityMixin extends Entity {
@@ -40,73 +35,54 @@ public abstract class ACExLivingEntityMixin extends Entity {
     }
 
 
-    @Inject(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getAirSupply()I"))
-    private void alexsCavesExemplified$baseTick(CallbackInfo ci) {
-        LivingEntity livingEntity = (LivingEntity)(Object)this;
-        Block block = livingEntity.level().getBlockState(livingEntity.blockPosition()).getBlock();
-        if (AlexsCavesExemplified.COMMON_CONFIG.PRESERVED_AMBER_ENABLED.get() && block != ACBlockRegistry.AMBER.get()) {
-            if (ModList.get().isLoaded("alexsmobs")) {
-                amberReset(livingEntity);
-            }
-            if (livingEntity instanceof Frog frog && frog.isNoAi()) {
-                frog.setNoAi(false);
-                frog.setInvulnerable(false);
-                frog.setSilent(false);
-                frog.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1,false,false));
-            }
-            if (livingEntity instanceof Tadpole tadpole && tadpole.isNoAi()) {
-                tadpole.setNoAi(false);
-                tadpole.setInvulnerable(false);
-                tadpole.setSilent(false);
-                tadpole.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1,false,false));
-            }
+    @Inject(method = "onEffectAdded", at = @At("HEAD"))
+    private void alexsCavesExemplified$onEffectAdded(MobEffectInstance effect, Entity source, CallbackInfo ci, @Share("healthRatio") LocalFloatRef healthRatio) {
+        healthRatio.set(this.healthRatio());
+    }
+
+    @Inject(method = "onEffectAdded", at = @At("TAIL"))
+    private void alexsCavesExemplified$onEffectAdded1(MobEffectInstance effect, Entity source, CallbackInfo ci, @Share("healthRatio") LocalFloatRef healthRatio) {
+        this.keepHealthRatio(effect, healthRatio.get());
+    }
+
+    @Inject(method = "onEffectRemoved", at = @At("HEAD"))
+    private void alexsCavesExemplified$onEffectRemoved(MobEffectInstance effect, CallbackInfo ci, @Share("healthRatio") LocalFloatRef healthRatio) {
+        healthRatio.set(this.healthRatio());
+    }
+
+    @Inject(method = "onEffectRemoved", at = @At("TAIL"))
+    private void alexsCavesExemplified$onEffectRemoved1(MobEffectInstance effect, CallbackInfo ci, @Share("healthRatio") LocalFloatRef healthRatio) {
+        this.keepHealthRatio(effect, healthRatio.get());
+    }
+
+    @Unique
+    private float healthRatio() {
+        LivingEntity living = (LivingEntity) (Object) this;
+        return living.getHealth() / living.getMaxHealth();
+    }
+
+    @Unique
+    private void keepHealthRatio(MobEffectInstance effect, float ratio) {
+        LivingEntity living = (LivingEntity) (Object) this;
+        if (!living.level().isClientSide && ratio > 0.0F && effect.getEffect() == ACExEffects.SERENED.get()) {
+            living.setHealth(ratio * living.getMaxHealth());
         }
     }
 
-    @Inject(method = "hurt", at = @At("HEAD"))
-    private void alexsCavesExemplified$hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
-        LivingEntity livingEntity = (LivingEntity)(Object)this;
-        if (pSource.getEntity() instanceof LivingEntity && livingEntity.hasEffect(ACExEffects.SERENED.get())){
-            MobEffectInstance serene = livingEntity.getEffect(ACExEffects.SERENED.get());
-            if (serene != null) {
-                livingEntity.removeEffect(serene.getEffect());
-                if (serene.getDuration() > 100) {
-                    livingEntity.addEffect(new MobEffectInstance(serene.getEffect(), serene.getDuration() - 1000, serene.getAmplifier()));
-                }
-            }
+    @WrapWithCondition(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;aiStep()V"))
+    private boolean alexsCavesExemplified$tick(LivingEntity instance) {
+        return instance.level().isClientSide || !ACExData.has(instance, ACExAttachments.SWEET_RELEASE);
+    }
+
+    @WrapWithCondition(method = "hurt", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;knockback(DDD)V"))
+    private boolean alexsCavesExemplified$hurtKnockback(LivingEntity instance, double strength, double x, double z, @Local(argsOnly = true) DamageSource source) {
+        return !(source.getDirectEntity() instanceof GumwirmEntity) && !(source.getEntity() instanceof GumwirmEntity);
+    }
+
+    @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
+    private void alexsCavesExemplified$hurt(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+        if (ACExSugarStaffAbilities.interceptSweetReleaseHurt((LivingEntity) (Object) this, source, amount)) {
+            cir.setReturnValue(false);
         }
     }
-
-    //Props to Drullkus for assistance
-
-    @Inject(method = "tick", at = @At("TAIL"))
-    private void alexsCavesExemplified$tick(CallbackInfo ci) {
-        LivingEntity livingEntity = (LivingEntity)(Object)this;
-        Block block = livingEntity.level().getBlockState(livingEntity.blockPosition()).getBlock();
-        if (block != ACBlockRegistry.AMBER.get()) {
-            if (ModList.get().isLoaded("alexsmobs")) {
-                amberReset(livingEntity);
-            }
-            if (livingEntity instanceof Frog frog && frog.isNoAi()) {
-                frog.setNoAi(false);
-                frog.setInvulnerable(false);
-                frog.setSilent(false);
-                frog.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1,false,false));
-            }
-            if (livingEntity instanceof Tadpole tadpole && tadpole.isNoAi()) {
-                tadpole.setNoAi(false);
-                tadpole.setInvulnerable(false);
-                tadpole.setSilent(false);
-                tadpole.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 6000, 1,false,false));
-            }
-        }
-    }
-
-    @ModifyReturnValue(method = "isSensitiveToWater", at = @At("RETURN"))
-    private boolean alexsCavesExemplified$isValidSacrifice(boolean original) {
-        LivingEntity livingEntity = (LivingEntity)(Object)this;
-        return original || (!(livingEntity instanceof WaterAnimal) && livingEntity.hasEffect(ACExEffects.RABIAL.get()) && AlexsCavesExemplified.COMMON_CONFIG.RABIES_ENABLED.get());
-    }
-
-
 }

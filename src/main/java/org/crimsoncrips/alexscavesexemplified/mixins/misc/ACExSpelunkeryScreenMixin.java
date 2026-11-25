@@ -1,12 +1,12 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+
 import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.client.gui.SpelunkeryTableScreen;
 import com.github.alexmodguy.alexscaves.client.gui.SpelunkeryTableWordButton;
 import com.github.alexmodguy.alexscaves.server.inventory.SpelunkeryTableMenu;
 import com.github.alexmodguy.alexscaves.server.message.SpelunkeryTableChangeMessage;
 import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.phys.Vec3;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
+import org.crimsoncrips.alexscavesexemplified.backport.PacketDistributor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -65,7 +66,7 @@ public abstract class ACExSpelunkeryScreenMixin extends AbstractContainerScreen<
     }
 
     @Inject(method = "containerTick", at = @At(value = "INVOKE", target = "Lcom/github/alexmodguy/alexscaves/server/inventory/SpelunkeryTableMenu;getHighlightColor(Lnet/minecraft/world/level/Level;)I"), cancellable = true,locals = LocalCapture.CAPTURE_FAILHARD)
-    private void drawOrb(CallbackInfo ci, int targetMagnifyX, int targetMagnifyY, int maxDistance, Vec3 vec3, boolean resetTabletFromWin) {
+    private void alexsCavesExemplified$containerTick(CallbackInfo ci, int targetMagnifyX, int targetMagnifyY, int maxDistance, Vec3 vec3, boolean resetTabletFromWin) {
         ci.cancel();
 
         int currentColor = ((SpelunkeryTableMenu)this.menu).getHighlightColor(Minecraft.getInstance().level);
@@ -113,7 +114,7 @@ public abstract class ACExSpelunkeryScreenMixin extends AbstractContainerScreen<
             this.tutorialStep = 0;
         } else if (!this.hasPaper()) {
             this.tutorialStep = 1;
-        } else if (this.attemptsLeft == 5 && this.level == 0) {
+        } else if (this.attemptsLeft == AlexsCavesExemplified.COMMON_CONFIG.SPELUNKY_ATTEMPTS_AMOUNT.get() && this.level == 0) {
             this.tutorialStep = 2;
         } else if (!this.hasClickedLens) {
             this.tutorialStep = 3;
@@ -124,22 +125,11 @@ public abstract class ACExSpelunkeryScreenMixin extends AbstractContainerScreen<
         }
     }
 
-    @ModifyReturnValue(method = "getRevealWordsAmount", at = @At("RETURN"),remap = false)
-    private float revealWords(float original) {
-        if (AlexsCavesExemplified.COMMON_CONFIG.BRAINDEAD_MODE_ENABLED.get()) {
-            return 1;
-        } else {
-            return original;
-        }
-    }
-
-
-
     @Shadow protected abstract boolean hasClickedAnyWord();
 
 
     @ModifyConstant(method = "generateWords",constant = @Constant(intValue = 5),remap = false)
-    private int modifyAmount(int amount) {
+    private int alexsCavesExemplified$generateWords(int amount) {
         return AlexsCavesExemplified.COMMON_CONFIG.SPELUNKY_ATTEMPTS_AMOUNT.get();
     }
 

@@ -1,5 +1,9 @@
 package org.crimsoncrips.alexscavesexemplified.client.particle;
 
+
+import org.crimsoncrips.alexscavesexemplified.backport.ACExRenderCompat;
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
+import net.minecraft.util.FastColor;
 import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.client.ClientProxy;
 import com.github.alexmodguy.alexscaves.client.model.MushroomCloudModel;
@@ -35,8 +39,8 @@ public class GammaMushroomCloud extends MushroomCloudParticle {
     }
     private final float scale;
     private static final MushroomCloudModel MODEL = new MushroomCloudModel();
-    private static final int BALL_FOR = 10;
-    private static final int FADE_SPEED = 10;
+    private static final int BALL_FOR = ACExUtils.seconds(0.5F);
+    private static final int FADE_SPEED = ACExUtils.seconds(0.5F);
 
     private boolean playedRinging;
     private boolean playedExplosion;
@@ -44,21 +48,21 @@ public class GammaMushroomCloud extends MushroomCloudParticle {
 
 
     public void tick() {
-        ((ClientProxy) AlexsCaves.PROXY).renderNukeSkyDarkFor = 70;
-        ((ClientProxy) AlexsCaves.PROXY).muteNonNukeSoundsFor = 50;
+        ((ClientProxy) AlexsCaves.PROXY).renderNukeSkyDarkFor = ACExUtils.seconds(3.5F);
+        ((ClientProxy) AlexsCaves.PROXY).muteNonNukeSoundsFor = ACExUtils.seconds(2.5F);
         boolean large = this.scale > 2.0F;
-        if(age > BALL_FOR / 2 + 5){
+        if(age > BALL_FOR / 2 + ACExUtils.seconds(0.25F)){
             if(!playedExplosion){
                 playedExplosion = true;
-                playSound(large ? ACSoundRegistry.LARGE_NUCLEAR_EXPLOSION.get() : ACSoundRegistry.NUCLEAR_EXPLOSION.get(), lifetime - 20, lifetime, 0.2F, false);
+                playSound(large ? ACSoundRegistry.LARGE_NUCLEAR_EXPLOSION.get() : ACSoundRegistry.NUCLEAR_EXPLOSION.get(), lifetime - ACExUtils.seconds(1.0F), lifetime, 0.2F, false);
             }
         }
         if (age < BALL_FOR) {
             if(!playedRinging && AlexsCaves.CLIENT_CONFIG.nuclearBombFlash.get()){
                 playedRinging = true;
-                playSound(ACSoundRegistry.NUCLEAR_EXPLOSION_RINGING.get(), 100, 50, 0.05F, true);
+                playSound(ACSoundRegistry.NUCLEAR_EXPLOSION_RINGING.get(), ACExUtils.seconds(5.0F), ACExUtils.seconds(2.5F), 0.05F, true);
             }
-            ((ClientProxy) AlexsCaves.PROXY).renderNukeFlashFor = 16;
+            ((ClientProxy) AlexsCaves.PROXY).renderNukeFlashFor = ACExUtils.seconds(0.8F);
         } else if (age < lifetime - FADE_SPEED) {
             float life = (float) (Math.log(1 + (age - BALL_FOR) / (float) (lifetime - BALL_FOR))) * 2F;
             float explosionSpread = (12 * life + 4F) * scale;
@@ -74,7 +78,7 @@ public class GammaMushroomCloud extends MushroomCloudParticle {
             if(age > BALL_FOR){
                 if(!playedRumble){
                     playedRumble = true;
-                    playSound(ACSoundRegistry.NUCLEAR_EXPLOSION_RUMBLE.get(), lifetime + 100, lifetime, 0.1F, true);
+                    playSound(ACSoundRegistry.NUCLEAR_EXPLOSION_RUMBLE.get(), lifetime + ACExUtils.seconds(5.0F), lifetime, 0.1F, true);
                 }
             }
         }
@@ -92,18 +96,18 @@ public class GammaMushroomCloud extends MushroomCloudParticle {
         posestack.translate(f, f1 - 0.5F, f2);
         posestack.scale(-this.scale, -this.scale, this.scale);
         MultiBufferSource.BufferSource multibuffersource$buffersource = Minecraft.getInstance().renderBuffers().bufferSource();
-        MODEL.hideFireball(this.age >= 10);
-        float life = (float)Math.log((double)(1.0F + ((float)(this.age - 10) + partialTick) / (float)(this.lifetime - 10))) * 2.0F;
+        MODEL.hideFireball(this.age >= BALL_FOR);
+        float life = (float)Math.log((double)(1.0F + ((float)(this.age - BALL_FOR) + partialTick) / (float)(this.lifetime - BALL_FOR))) * 2.0F;
         float glowLife = life < 1.0F ? 1.0F - life : 0.0F;
         int left = this.lifetime - this.age;
-        float alpha = left <= 10 ? (float)left / 10.0F : 1.0F;
+        float alpha = left <= FADE_SPEED ? (float)left / FADE_SPEED : 1.0F;
         MODEL.animateParticle((float)this.age, ACMath.smin(life, 1.0F, 0.5F), partialTick);
         VertexConsumer baseConsumer = multibuffersource$buffersource.getBuffer(RenderType.entityTranslucent(GAMMA));
-        MODEL.renderToBuffer(posestack, baseConsumer, this.getLightColor(partialTick), OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, alpha);
+        ACExRenderCompat.renderToBuffer(MODEL, posestack, baseConsumer, this.getLightColor(partialTick), OverlayTexture.NO_OVERLAY, ACExRenderCompat.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
         VertexConsumer glowConsumer1 = multibuffersource$buffersource.getBuffer(ACRenderTypes.getEyesAlphaEnabled(GAMMA));
-        MODEL.renderToBuffer(posestack, glowConsumer1, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, alpha);
+        ACExRenderCompat.renderToBuffer(MODEL, posestack, glowConsumer1, 240, OverlayTexture.NO_OVERLAY, ACExRenderCompat.colorFromFloat(alpha, 1.0F, 1.0F, 1.0F));
         VertexConsumer glowConsumer2 = multibuffersource$buffersource.getBuffer(ACRenderTypes.getEyesAlphaEnabled(GAMMA_GLOW));
-        MODEL.renderToBuffer(posestack, glowConsumer2, 240, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, glowLife * alpha);
+        ACExRenderCompat.renderToBuffer(MODEL, posestack, glowConsumer2, 240, OverlayTexture.NO_OVERLAY, ACExRenderCompat.colorFromFloat(glowLife * alpha, 1.0F, 1.0F, 1.0F));
         multibuffersource$buffersource.endBatch();
         posestack.popPose();
     }

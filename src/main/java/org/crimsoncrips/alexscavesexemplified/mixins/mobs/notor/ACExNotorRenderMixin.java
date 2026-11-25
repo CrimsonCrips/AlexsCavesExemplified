@@ -20,7 +20,7 @@ public abstract class ACExNotorRenderMixin extends MobRenderer<NotorEntity, Noto
     }
 
     @Inject(method = "<init>", at = @At("TAIL"),remap = false)
-    private void alexsMobsInteraction$getItem(EntityRendererProvider.Context renderManagerIn, CallbackInfo ci) {
+    private void alexsCavesExemplified$init(EntityRendererProvider.Context renderManagerIn, CallbackInfo ci) {
         this.addLayer(new SelfDestructLayer(this));
     }
 }

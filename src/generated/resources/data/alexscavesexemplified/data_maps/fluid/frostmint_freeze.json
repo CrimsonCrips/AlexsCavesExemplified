@@ -1,0 +1,11 @@
+{
+  "values": {
+    "alexscaves:acid": "alexscaves:radrock",
+    "alexscaves:purple_soda": "alexscaves:sugar_glass",
+    "biomesoplenty:blood": "biomesoplenty:flesh",
+    "create:chocolate": "alexscaves:block_of_chocolate",
+    "create:honey": "minecraft:honey_block",
+    "minecraft:lava": "minecraft:basalt",
+    "minecraft:water": "minecraft:ice"
+  }
+}

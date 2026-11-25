@@ -1,5 +1,5 @@
 {
-  "parent": "alexscavesexemplified:breaking_candy",
+  "parent": "alexscavesexemplified:candy",
   "criteria": {
     "overdrived": {
       "trigger": "minecraft:impossible"

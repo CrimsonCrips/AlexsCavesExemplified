@@ -20,9 +20,6 @@ import org.crimsoncrips.alexscavesexemplified.server.item.ACExItemRegistry;
 import java.util.function.Consumer;
 
 public class ACExAdvancements implements ForgeAdvancementProvider.AdvancementGenerator {
-	/**
-	 * test
-	 */
 	@Override
 	public void generate(HolderLookup.Provider registries, Consumer<Advancement> consumer, ExistingFileHelper helper) {
 		Advancement root = Advancement.Builder.advancement().display(
@@ -398,15 +395,7 @@ public class ACExAdvancements implements ForgeAdvancementProvider.AdvancementGen
 				.addCriterion("made", new ImpossibleTrigger.TriggerInstance()))
 				.save(consumer, "alexscavesexemplified:ice_cream");
 
-		Advancement breaking_candy = (Advancement.Builder.advancement().parent(candy).display(
-						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/breaking_candy.png"),
-						Component.translatable("advancement.alexscavesexemplified.breaking_candy"),
-						Component.translatable("advancement.alexscavesexemplified.breaking_candy.desc"),
-						null, FrameType.TASK, true, true, false)
-				.addCriterion("bake", new ImpossibleTrigger.TriggerInstance()))
-				.save(consumer, "alexscavesexemplified:breaking_candy");
-
-		Advancement overdrived_conversion = (Advancement.Builder.advancement().parent(breaking_candy).display(
+		Advancement overdrived_conversion = (Advancement.Builder.advancement().parent(candy).display(
 						createCitadelIcon("alexscavesexemplified:textures/gui/adv_icon/overdrived_conversion.png"),
 						Component.translatable("advancement.alexscavesexemplified.overdrived_conversion"),
 						Component.translatable("advancement.alexscavesexemplified.overdrived_conversion.desc"),

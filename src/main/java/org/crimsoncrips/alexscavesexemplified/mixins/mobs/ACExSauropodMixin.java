@@ -13,11 +13,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ACExSauropodMixin {
 
     @Inject(method = "crushBlocksInRing", at = @At("TAIL"),remap = false)
-    private void crush(int width, int ringStartX, int ringStartZ, float dropChance, CallbackInfo ci) {
+    private void alexsCavesExemplified$crushBlocksInRing(int width, int ringStartX, int ringStartZ, float dropChance, CallbackInfo ci) {
         SauropodBaseEntity sauropodBase = (SauropodBaseEntity)(Object)this;
         if (AlexsCavesExemplified.COMMON_CONFIG.STOMPING_ENABLED.get()){
             for (LivingEntity entity : sauropodBase.level().getEntitiesOfClass(LivingEntity.class, sauropodBase.getBoundingBox().inflate(width))) {
-                if (entity != sauropodBase && entity.getBbHeight() <= 3F) {
+                if (entity != sauropodBase && !sauropodBase.hasIndirectPassenger(entity) && !sauropodBase.isAlliedTo(entity) && entity.getBbHeight() <= 3F) {
                     entity.hurt(sauropodBase.damageSources().mobAttack(sauropodBase), 6.0F);
                 }
             }

@@ -1,5 +1,6 @@
 package org.crimsoncrips.alexscavesexemplified.client.particle;
 
+import org.crimsoncrips.alexscavesexemplified.misc.ACExUtils;
 import com.github.alexmodguy.alexscaves.client.particle.SmallExplosionParticle;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -22,7 +23,7 @@ public class SmallExplosions extends SmallExplosionParticle {
         public Particle createParticle(SimpleParticleType typeIn, ClientLevel worldIn, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             SmallExplosions particle = new SmallExplosions(worldIn, x, y, z, xSpeed, ySpeed, zSpeed, spriteSet, true, 0X03dffc);
             particle.setSpriteFromAge(spriteSet);
-            particle.lifetime = 9 + worldIn.random.nextInt(3);
+            particle.lifetime = ACExUtils.seconds(0.45F) + worldIn.random.nextInt(ACExUtils.seconds(0.15F));
             particle.scale(1.8F + worldIn.random.nextFloat() * 0.9F);
             particle.setFadeColor(0X6df2e3);
             return particle;

@@ -1,0 +1,21 @@
+{
+  "vertex": "alexscavesexemplified:wheel/lockdown_electric",
+  "fragment": "alexscavesexemplified:wheel/lockdown_electric",
+  "attributes": [
+    "Position",
+    "UV0"
+  ],
+  "uniforms": [
+    { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+    { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+    { "name": "iTime", "type": "float", "count": 1, "values": [ 0.0 ] },
+    { "name": "RegionSize", "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
+    { "name": "BoxSize", "type": "float", "count": 2, "values": [ 1.0, 1.0 ] },
+    { "name": "Margin", "type": "float", "count": 1, "values": [ 1.0 ] },
+    { "name": "Dissipation", "type": "float", "count": 1, "values": [ 1.0 ] },
+    { "name": "PatternUnit", "type": "float", "count": 1, "values": [ 1.0 ] },
+    { "name": "Opacity", "type": "float", "count": 1, "values": [ 1.0 ] },
+    { "name": "Tint", "type": "float", "count": 3, "values": [ 1.0, 1.0, 1.0 ] },
+    { "name": "TintStrength", "type": "float", "count": 1, "values": [ 0.0 ] }
+  ]
+}

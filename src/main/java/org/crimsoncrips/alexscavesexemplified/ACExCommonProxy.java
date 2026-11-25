@@ -1,16 +1,17 @@
 package org.crimsoncrips.alexscavesexemplified;
 
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.eventbus.api.IEventBus;
+import org.crimsoncrips.alexscavesexemplified.server.entity.DarkRitualEntity;
 
-import static com.github.alexthe666.alexsmobs.AlexsMobs.MODID;
-
-@Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ACExCommonProxy {
 
     public void clientInit() {
     }
 
-    public void init() {
+    public void init(IEventBus modEventBus) {
+    }
+
+    public void tickDarkRitual(DarkRitualEntity ritual) {
     }
 
 }

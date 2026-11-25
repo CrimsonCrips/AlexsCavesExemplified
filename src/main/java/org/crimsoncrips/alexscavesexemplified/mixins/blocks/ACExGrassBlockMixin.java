@@ -7,9 +7,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.GrassBlock;
-import net.minecraft.world.level.block.SpreadingSnowyDirtBlock;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import org.crimsoncrips.alexscavesexemplified.AlexsCavesExemplified;
 import org.crimsoncrips.alexscavesexemplified.datagen.ACExFeatures;
@@ -22,7 +20,7 @@ import java.util.Optional;
 public abstract class ACExGrassBlockMixin  {
 
     @ModifyVariable(method = "performBonemeal", at = @At(value = "STORE"),remap = true)
-    private Optional<Holder.Reference<PlacedFeature>> alexsMobsInteraction$performBonemeal(Optional<Holder.Reference<PlacedFeature>> value, @Local ServerLevel level,@Local(ordinal = 0) BlockPos blockPos) {
+    private Optional<Holder.Reference<PlacedFeature>> alexsCavesExemplified$performBonemeal(Optional<Holder.Reference<PlacedFeature>> value, @Local ServerLevel level,@Local(ordinal = 0) BlockPos blockPos) {
         if (level.getBiome(blockPos).is(ACBiomeRegistry.PRIMORDIAL_CAVES) && AlexsCavesExemplified.COMMON_CONFIG.CAVIAL_BONEMEAL_ENABLED.get()){
             return level.registryAccess().registryOrThrow(Registries.PLACED_FEATURE).getHolder(ACExFeatures.PLACED_PRIMORDIAL_BONEMEAL);
         }
@@ -30,7 +28,7 @@ public abstract class ACExGrassBlockMixin  {
     }
 
     @ModifyExpressionValue(method = "performBonemeal", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/RandomSource;nextInt(I)I",ordinal = 5),remap = true)
-    private int alexsMobsInteraction$performBonemeal1(int amount, @Local ServerLevel level,@Local(ordinal = 0) BlockPos blockPos) {
+    private int alexsCavesExemplified$performBonemeal1(int amount, @Local ServerLevel level,@Local(ordinal = 0) BlockPos blockPos) {
         if (level.getBiome(blockPos).is(ACBiomeRegistry.PRIMORDIAL_CAVES) && AlexsCavesExemplified.COMMON_CONFIG.CAVIAL_BONEMEAL_ENABLED.get()){
             return 1;
         }

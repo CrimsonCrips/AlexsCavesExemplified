@@ -1,5 +1,11 @@
 package org.crimsoncrips.alexscavesexemplified.mixins.misc;
 
+
+
+
+import org.crimsoncrips.alexscavesexemplified.client.magnerip.ACExMagneripClient;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.entity.player.Inventory;
 import com.github.alexmodguy.alexscaves.server.level.biome.ACBiomeRegistry;
 import com.github.alexmodguy.alexscaves.server.misc.ACTagRegistry;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
@@ -56,7 +62,15 @@ public abstract class ACExGuiMixin {
             double y = cos(speed * t) * cos(0.2 * t + i1 * 4638.361D + 364.35D) + sin(speed * t);
             pGuiGraphics.pose().translate(x, y, 0);
         }
+        Vec2 shake = ACExMagneripClient.getShake(player, player.getInventory().items.get(i1), i1, pX);
+        if (shake != null) {
+            pGuiGraphics.pose().pushPose();
+            pGuiGraphics.pose().translate(shake.x, shake.y, 0);
+        }
         original.call(instance, pGuiGraphics, j1, k1, pX, player, pPartialTick, l);
+        if (shake != null) {
+            pGuiGraphics.pose().popPose();
+        }
         if(magneticMove(player.getInventory().items.get(i1))){
             pGuiGraphics.pose().popPose();
         }
@@ -125,7 +139,15 @@ public abstract class ACExGuiMixin {
             double y = cos(speed * t) * cos(0.2 * t + itemStack.getBarWidth() * 4638.361D + 364.35D) + sin(speed * t);
             pGuiGraphics.pose().translate(x, y, 0);
         }
+        Vec2 shake = ACExMagneripClient.getShake(pY, itemStack, Inventory.SLOT_OFFHAND, pX);
+        if (shake != null) {
+            pGuiGraphics.pose().pushPose();
+            pGuiGraphics.pose().translate(shake.x, shake.y, 0);
+        }
         original.call(instance, pGuiGraphics, i, f, pX, pY, itemStack, pPlayer);
+        if (shake != null) {
+            pGuiGraphics.pose().popPose();
+        }
         if(magneticMove(itemStack)){
             pGuiGraphics.pose().popPose();
         }

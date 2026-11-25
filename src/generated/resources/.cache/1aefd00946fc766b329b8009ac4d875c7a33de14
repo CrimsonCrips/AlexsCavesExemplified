@@ -1,7 +1,11 @@
-// 1.20.1	2026-04-26T08:37:46.130658669	AMI Entity Tags
+// 1.20.1	2026-11-18T22:50:24.179217289	AMI Entity Tags
 32006335522b4dd94152992648e3ff0926136319 data/alexscavesexemplified/tags/entity_types/acid_to_cat.json
 c4ff1898c76268fff00e94d45c275536bead2667 data/alexscavesexemplified/tags/entity_types/acid_to_fish.json
 432773b979e4f43bccacb83e4312e183bd0fc315 data/alexscavesexemplified/tags/entity_types/can_rabies.json
-acaeeb074818b6350d52a7192ae2b36f609e55ea data/alexscavesexemplified/tags/entity_types/guano_immunity.json
+928db1af29e3c096cc0ea2852eb195854db72b5b data/alexscavesexemplified/tags/entity_types/crush_immunity.json
+e4c0eab8b64e3c9e83a0bee933a5ef9301161e52 data/alexscavesexemplified/tags/entity_types/dark_monolith_summons.json
+0b6136ce9726e9612d85ddb311b433af2404ff56 data/alexscavesexemplified/tags/entity_types/forlorn_dark_monolith_summons.json
+4760de73a6eaffccc0d2688303a8ad3bb20ffdf1 data/alexscavesexemplified/tags/entity_types/guano_immunity.json
 243c388ccd3f77483802e9989b8a8e102f56be1d data/alexscavesexemplified/tags/entity_types/licowitch_hate.json
+1119b34ccbc1a99df566fec706fd08240ff0b098 data/alexscavesexemplified/tags/entity_types/transmutable.json
 d53accaa457da906a3aeef8760744567a076206d data/alexscavesexemplified/tags/entity_types/vesper_hunt.json

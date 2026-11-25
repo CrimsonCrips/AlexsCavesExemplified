@@ -1,0 +1,34 @@
+{
+  "values": {
+    "alexscaves:diving_boots": {
+      "depth": 10
+    },
+    "alexscaves:diving_chestplate": {
+      "depth": 18
+    },
+    "alexscaves:diving_helmet": {
+      "depth": 10
+    },
+    "alexscaves:diving_leggings": {
+      "depth": 12
+    },
+    "create:copper_backtank": {
+      "depth": 8
+    },
+    "create:copper_diving_boots": {
+      "depth": 4
+    },
+    "create:copper_diving_helmet": {
+      "depth": 8
+    },
+    "create:netherite_backtank": {
+      "depth": 25
+    },
+    "create:netherite_diving_boots": {
+      "depth": 15
+    },
+    "create:netherite_diving_helmet": {
+      "depth": 15
+    }
+  }
+}
